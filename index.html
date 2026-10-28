@@ -1161,42 +1161,38 @@ document.addEventListener("DOMContentLoaded", function() {
 </div>
     <!-- GARIS PEMBATAS DI BAWAH KOLOM INPUT -->
 <div style="height: 1px !important; width: 100% !important; background-color: #e0e0e0 !important; margin: 14px 0 !important;"></div>
+
 <!-- TOMBOL LANJUT DI BAWAH GARIS (SUDAH DILENGKAPI VALIDASI ANTI-MACET) -->
-<button type="submit" 
-id="btnLanjutFinance" style="width: 100% !important; background-color: #007bff !important; color: #ffffff !important; border: none !important; padding: 14px !important; font-size: 16px !important; font-weight: 600 !important; border-radius: 14px !important; cursor: pointer !important; box-sizing: border-box !important; transition: background-color 0.2s !important;">
-    Lanjut
-</button>
+<button type="button" id="btnLanjutFinance" style="width: 100% !important; background-color: #007bff !important;">Lanjut</button>
 
 <!-- SCRIPT VALIDASI TAMBAHAN KHUSUS TOMBOL LANJUT -->
 <script>
 document.getElementById("btnLanjutFinance").addEventListener("click", function(e) {
     const providerSelect = document.getElementById("financeProvider");
-    
-    // Cari elemen input ID Pelanggan secara dinamis (biasanya bertipe number atau text setelah tombol dropdown)
-    const inputPelanggan = document.querySelector('input[type="number"]') || document.querySelector('input[name="nomor_pelanggan"]') || document.querySelector('input[placeholder*="ID"], input[placeholder*="Pelanggan"]');
+    const inputPelanggan = document.querySelector('input[type="number"]');
 
-    // 1. Validasi Penyedia Finance
+    // 1. Validasi Penyedia Finance / PDAM
     if (!providerSelect || providerSelect.value === "") {
-        e.preventDefault(); // Blokir pengiriman form
         alert("Silakan pilih Penyedia Finance terlebih dahulu!");
-        
-        // Buka kembali bottom sheet kustom secara otomatis jika belum dipilih
-        const sheet = document.getElementById("customBottomSheet");
-        if (sheet) sheet.style.display = "flex";
-        return false;
+        return;
     }
 
     // 2. Validasi ID Pelanggan
     if (!inputPelanggan || inputPelanggan.value.trim() === "") {
-        e.preventDefault(); // Blokir pengiriman form jika ID kosong
-        alert("Silakan masukkan ID Pelanggan Anda!");
-        if (inputPelanggan) inputPelanggan.focus();
-        return false;
+        alert("Silakan masukkan ID Pelanggan terlebih dahulu!");
+        return;
     }
+
+    // 3. LEMPAR TRANSAKSI LANGSUNG KE CHECKOUT BUKAOLSHOP (ANTI-404)
+    // Menggunakan window.top agar jebol keluar dari iframe GitHub
+    const produkUrl = providerSelect.value; 
+    const idPelanggan = inputPelanggan.value;
     
-    // Jika semua validasi di atas lolos, biarkan form memproses checkout secara alami ke BukaOlshop
+    // Alur checkout resmi bawaan BukaOlshop dengan membawa data ID Pelanggan
+    window.top.location.href = produkUrl + "?catatan=" + encodeURIComponent(idPelanggan);
 });
 </script>
+
 
 
 
