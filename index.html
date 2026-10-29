@@ -1197,11 +1197,14 @@ document.getElementById("btnLanjutPDAM").addEventListener("click", function(e) {
     const idPelanggan = inputPelanggan.value.trim();
     const produkPDAM = providerSelect.value; // Nilai value ini harus berupa nama/kode produk bukaOlshop Anda
 
-    // 3. Eksekusi keluar dari iframe langsung ke Halaman Pembayaran (Gambar 4)
-    // Sesuaikan link di bawah ini dengan format link produk PDAM internal bukaOlshop Anda
-    window.top.location.href = "https://pulsachrome.tokoq.net/digital/410253?catatan=" + idPelanggan;
+        // 3. Eksekusi keluar dari iframe menuju panel utama BukaOlshop (Gambar 4)
+    window.parent.postMessage({
+        action: 'checkout_pdam',
+        idPelanggan: idPelanggan
+    }, '*');
 });
 </script>
+
 
 
 
