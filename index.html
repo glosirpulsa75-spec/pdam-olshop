@@ -2095,22 +2095,23 @@ if (selectedProductData) {
     
     // 2. Buat URL Checkout Pascabayar Resmi Bukaolshop secara manual
     // Mengarahkan langsung ke halaman pembayaran dengan parameter nomor pelanggan (catatan)
-    const urlPascabayar = `https://pulsachrome.tokoq.net/buka/produk/${productId}?catatan=${encodeURIComponent(customerId)}`; 
+    const urlPascabayar = `/buka/produk/${productId}?catatan=${encodeURIComponent(customerId)}`;
     
     console.log("Mengalihkan ke checkout pascabayar manual: " + urlPascabayar);
     
     // 3. Eksekusi perpindahan halaman tanpa macet
-    window.top.location.href = urlPascabayar;
+    window.location.href = urlPascabayar;
     return;
 }
 
              
         if (selectedProductData && selectedProductData.id) {
-            const baseUrl = "https://pulsachrome.tokoq.net"; const productSlug = (selectedProductData.name || 'produk-tv')
+            const baseUrl = "https://" + window.location.hostname;
+            const productSlug = (selectedProductData.name || 'produk-tv')
                 .toLowerCase()
                 .replace(/[^a-z0-9]+/g, '-');
-            const url = `${baseUrl}/produk/${productSlug}-${selectedProductData.price}-${selectedProductData.id}`; window.top.location.href = `${url}?catatan=${encodeURIComponent(customerId)}`;
-           
+            const url = `${baseUrl}/produk/${productSlug}-${selectedProductData.price}-${selectedProductData.id}`;
+            window.location.href = `${url}?catatan=${encodeURIComponent(customerId)}`;
             return;
         }
         
@@ -2485,12 +2486,18 @@ function kirimPascabayarBypass() {
     
     // 3. Lempar langsung ke halaman transaksi pascabayar resmi Bukaolshop
      // GANTI DENGAN KODE BARU INI:
-const urlTujuan = 'https://pulsachrome.tokoq.net/buka/produk/' + productId + '?catatan=' + encodeURIComponent(customerId);
+const urlTujuan = window.location.origin + '/produk/' + productId + '?catatan=' + encodeURIComponent(customerId);
    console.log("Bypass ke: " + urlTujuan);
-    window.top.location.href = urlTujuan;
+    window.location.href = urlTujuan;
 }
 
 </script>
+
+
+
+
+
+
 <!-- KODE CSS & JAVASCRIPT FINAL: MELENYAPKAN PRODUK DI BAWAH SECARA MUTLAK -->
 <style>
 /* 1. Menyembunyikan visual pop-up bawaan agar tidak mengedip */
@@ -2989,3 +2996,4 @@ document.addEventListener("DOMContentLoaded", function() {
 </div>
 </body>
 </html>
+
