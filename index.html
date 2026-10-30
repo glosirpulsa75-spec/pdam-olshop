@@ -1170,31 +1170,31 @@ id="btnLanjutFinance" style="width: 100% !important; background-color: #007bff !
 <!-- SCRIPT VALIDASI TAMBAHAN KHUSUS TOMBOL LANJUT -->
 <script>
 document.getElementById("btnLanjutFinance").addEventListener("click", function(e) {
-    const providerSelect = document.getElementById("financeProvider");
-    
-    // Cari elemen input ID Pelanggan secara dinamis (biasanya bertipe number atau text setelah tombol dropdown)
-    const inputPelanggan = document.querySelector('input[type="number"]') || document.querySelector('input[name="nomor_pelanggan"]') || document.querySelector('input[placeholder*="ID"], input[placeholder*="Pelanggan"]');
+    // Amankan pendeteksian elemen agar tidak bikin macet jika kosong
+    const providerSelect = document.getElementById("FinanceProvider") || document.querySelector("select");
+    const inputPelangan = document.getElementById("userId") || document.querySelector('input[type="number"]');
 
-    // 1. Validasi Penyedia Finance
-    if (!providerSelect || providerSelect.value === "") {
-        e.preventDefault(); // Blokir pengiriman form
-        alert("Silakan pilih Penyedia Finance terlebih dahulu!");
+    // 1. Validasi Penyedia Layanan / Daerah PDAM
+    if (providerSelect && providerSelect.value === "") {
+        e.preventDefault();
+        alert("Silakan pilih Penyedia Finance / Daerah terlebih dahulu!");
         
-        // Buka kembali bottom sheet kustom secara otomatis jika belum dipilih
         const sheet = document.getElementById("customBottomSheet");
         if (sheet) sheet.style.display = "flex";
         return false;
     }
 
     // 2. Validasi ID Pelanggan
-    if (!inputPelanggan || inputPelanggan.value.trim() === "") {
-        e.preventDefault(); // Blokir pengiriman form jika ID kosong
-        alert("Silakan masukkan ID Pelanggan Anda!");
-        if (inputPelanggan) inputPelanggan.focus();
+    if (inputPelangan && inputPelangan.value.trim() === "") {
+        e.preventDefault();
+        alert("Silakan masukkan ID Pelangan Anda!");
+        inputPelangan.focus();
         return false;
     }
-    
-    // Jika semua validasi di atas lolos, biarkan form memproses checkout secara alami ke BukaOlshop
+
+    // 3. Eksekusi Checkout Native BukaOlshop jika lolos validasi
+    // Catatan: Jika tombol bertipe "submit" di dalam form kustom BO, 
+    // pastikan form tidak memiliki 'return false;' di tag utamanya agar data terkirim.
 });
 </script>
 
