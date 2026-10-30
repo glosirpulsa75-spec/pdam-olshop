@@ -1162,49 +1162,41 @@ document.addEventListener("DOMContentLoaded", function() {
     <!-- GARIS PEMBATAS DI BAWAH KOLOM INPUT -->
 <div style="height: 1px !important; width: 100% !important; background-color: #e0e0e0 !important; margin: 14px 0 !important;"></div>
 <!-- TOMBOL LANJUT DI BAWAH GARIS (SUDAH DILENGKAPI VALIDASI ANTI-MACET) -->
-<button type="submit"
-id="btnLanjutPDAM" style="width: 100% !important; background-color: #007bff !important; color: #ffffff !important; border: none !important; padding: 14px !important; font-size: 16px !important; font-weight: 600 !important; border-radius: 14px !important; cursor: pointer !important; box-sizing: border-box !important; transition: background-color 0.2s !important;">
+<button type="submit" 
+id="btnLanjutFinance" style="width: 100% !important; background-color: #007bff !important; color: #ffffff !important; border: none !important; padding: 14px !important; font-size: 16px !important; font-weight: 600 !important; border-radius: 14px !important; cursor: pointer !important; box-sizing: border-box !important; transition: background-color 0.2s !important;">
     Lanjut
 </button>
 
-<!-- SCRIPT VALIDASI TAMBAHAN KHUSUS TOMBOL LANJUT PDAM -->
+<!-- SCRIPT VALIDASI TAMBAHAN KHUSUS TOMBOL LANJUT -->
 <script>
-document.getElementById("btnLanjutPDAM").addEventListener("click", function(e) {
-    e.preventDefault(); // Mencegah form reload bawaan HTML biasa
+document.getElementById("btnLanjutFinance").addEventListener("click", function(e) {
+    const providerSelect = document.getElementById("financeProvider");
+    
+    // Cari elemen input ID Pelanggan secara dinamis (biasanya bertipe number atau text setelah tombol dropdown)
+    const inputPelanggan = document.querySelector('input[type="number"]') || document.querySelector('input[name="nomor_pelanggan"]') || document.querySelector('input[placeholder*="ID"], input[placeholder*="Pelanggan"]');
 
-    // 1. Cari elemen dropdown Wilayah/Daerah PDAM secara dinamis
-    const providerSelect = document.querySelector('select') || document.getElementById("pdamProvider");
-
-    // 2. Cari elemen input ID Pelanggan secara dinamis
-    const inputPelanggan = document.querySelector('input[type="number"]') || 
-                           document.querySelector('input[name="nomor_pelanggan"]') || 
-                           document.querySelector('input[placeholder*="ID"]') || 
-                           document.querySelector('input[placeholder*="Pelanggan"]');
-
-    // Validasi 1: Cek apakah Wilayah PDAM sudah dipilih
+    // 1. Validasi Penyedia Finance
     if (!providerSelect || providerSelect.value === "") {
-        alert("Silakan pilih Wilayah/Daerah PDAM terlebih dahulu!");
+        e.preventDefault(); // Blokir pengiriman form
+        alert("Silakan pilih Penyedia Finance terlebih dahulu!");
+        
+        // Buka kembali bottom sheet kustom secara otomatis jika belum dipilih
+        const sheet = document.getElementById("customBottomSheet");
+        if (sheet) sheet.style.display = "flex";
         return false;
     }
 
-    // Validasi 2: Cek apakah ID Pelanggan sudah diisi
+    // 2. Validasi ID Pelanggan
     if (!inputPelanggan || inputPelanggan.value.trim() === "") {
-        alert("Silakan masukkan ID Pelanggan terlebih dahulu!");
+        e.preventDefault(); // Blokir pengiriman form jika ID kosong
+        alert("Silakan masukkan ID Pelanggan Anda!");
+        if (inputPelanggan) inputPelanggan.focus();
         return false;
     }
-
-    // Ambil data input untuk dikirim ke checkout bukaOlshop
-    const idPelanggan = inputPelanggan.value.trim();
-    const produkPDAM = providerSelect.value; // Nilai value ini harus berupa nama/kode produk bukaOlshop Anda
-
-        // 3. Eksekusi keluar dari iframe menuju panel utama BukaOlshop (Gambar 4)
-    window.parent.postMessage({
-        action: 'checkout_pdam',
-        idPelanggan: idPelanggan
-    }, '*');
+    
+    // Jika semua validasi di atas lolos, biarkan form memproses checkout secara alami ke BukaOlshop
 });
 </script>
-
 
 
 
@@ -1218,7 +1210,7 @@ document.getElementById("btnLanjutPDAM").addEventListener("click", function(e) {
 
 <!-- 2. TARUH KODE BARU INI TEPAT DI SINI (DI LUAR BUNGKUS TOMBOL) -->
 <div id="modalInfo" style="display: none; width: 100%; box-sizing: border-box; margin-top: 30px; margin-bottom: 10px; padding: 15px; background-color: #fff; border: 1px solid #e0e0e0; border-radius: 12px; font-family: sans-serif; clear: both;">
-    <div style="display: flex; justify-content: space-between; align-items: center; border-bottomquu: 1px solid #eee; padding-bottom: 6px; margin-bottom: 10px;">
+    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; padding-bottom: 6px; margin-bottom: 10px;">
         <span style="font-weight: bold; color: #333; font-size: 14px;">INFO PRODUK</span>
         <span onclick="aksiBukaTutupInfo()" style="cursor: pointer; color: #aaa; font-weight: bold; font-size: 18px; padding: 0 5px;">×</span>
     </div>
