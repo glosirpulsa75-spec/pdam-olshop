@@ -1659,7 +1659,7 @@ function changeLayout(mode) {
     <div class="popup">
         <div class="drag-line"></div>
         <div class="product-name-large" id="transProductName">-</div>
-        <div class="sub-meta" id="transMeta">PDAM Dki Jakarta</div>
+        <div class="sub-meta" id="transMeta">PDAM Ntt</div>
         <div class="price-row">
             <span class="price-label">Status Tagihan</span>
 
@@ -1751,13 +1751,13 @@ function changeLayout(mode) {
     }
 
     function findTVCategory() {
-        const searchTerms = ["pdam dki jakarta",];
+        const searchTerms = ["pdam ntt",];
         
         for (const category of allCategories) {
             const catNameLower = (category.nama_kategori || '').toLowerCase();
             for (const term of searchTerms) {
                 if (catNameLower.includes(term)) {
-                    category.nama_kategori = "PDAM Dki Jakarta";
+                    category.nama_kategori = "PDAM Ntt";
                     return category;
                 }
             }
@@ -1766,13 +1766,13 @@ function changeLayout(mode) {
         for (const category of allCategories) {
             const catNameLower = (category.nama_kategori || '').toLowerCase(); 
             {
-                category.nama_kategori = "PDAM Dki Jakarta";
+                category.nama_kategori = "PDAM Ntt";
                 return category;
             }
         }
         
         if (allCategories.length > 0) {
-            allCategories[0].nama_kategori = "PDAM Dki Jakarta";
+            allCategories[0].nama_kategori = "PDAM Ntt";
             return allCategories[0];
         }
         
@@ -1804,7 +1804,7 @@ function changeLayout(mode) {
             
             if (allSubCategories.length === 0) {
                 const catId = tvCategory.id_kategori || tvCategory.id;
-                const catName = tvCategory.nama_kategori || tvCategory.name || "PDAM Dki Jakarta";
+                const catName = tvCategory.nama_kategori || tvCategory.name || "PDAM Ntt";
                 allSubCategories.push({
                     id: catId,
                     name: catName
