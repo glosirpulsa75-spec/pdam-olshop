@@ -1,0 +1,3030 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <link rel="stylesheet" href="https://rawcdn.githack.com/flambonskode/Lisensi/main/fontstyle.css">
+    <title>Kembali</title>
+    <style>
+        :root {
+            --subMain: #1976D2;
+        }
+}
+.ribbon {
+    position: absolute !important;
+    top: 0 !important;
+    right: 0 !important;
+    z-index: 99 !important;
+    font-size: 10px !important;
+    font-weight: bold !important;
+    padding: 3px 6px !important;
+}
+.ribbon.gangguan {
+    background-color: #ff4d4f !important;
+    color: white !important;
+}
+.disabled {
+    opacity: 0.55;
+    pointer-events: none;
+    filter: grayscale(40%);
+}
+
+
+.input-box:focus-within {
+  border: 1.5px solid #006aff !important;
+  box-shadow: 0 0 8px rgba(0, 106, 255, 0.2) !important;
+  transition: all 0.2s ease-in-out;
+}
+#subcategoryTabMenu {
+    display: flex !important;
+    overflow-x: auto !important;
+    white-space: nowrap !important;
+    gap: 8px !important;
+    padding: 10px 4px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    -webkit-overflow-scrolling: touch !important;
+}
+
+#subcategoryTabMenu::-webkit-scrollbar {
+    display: none !important;
+}
+#subcategoryTabMenu > div, 
+#subcategoryTabMenu button, 
+#subcategoryTabMenu a {
+    padding: 6px 16px !important;
+    border-radius: 50px !important;
+    font-size: 13px !important;
+    border: none !important;
+    display: inline-block !important;
+}
+
+#subcategoryTabMenu .active,
+#subcategoryTabMenu [class*="active"] {
+    background: #0081ff !important;
+    color: white !important;
+    box-shadow: 0 2px 6px rgba(0, 129, 255, 0.3) !important;
+}
+#subcategoryTabMenu {
+    -webkit-overflow-scrolling: touch !important;
+    scroll-behavior: smooth !important;
+}
+
+     html, body {
+    background-color: #ebeef1;
+    width: 100%;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    
+    /* Paksa spasi seimbang di kiri dan kanan layar */
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    box-sizing: border-box !important;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+   
+/* 1. MENGUBAH CONTAINER UTAMA MENJADI GRID 2 KOLOM KOTAK */
+.subcategory-tab-header {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 12px !important;
+    padding: 16px !important;
+    background: transparent !important;
+    overflow: visible !important;
+    white-space: normal !important;
+    box-sizing: border-box !important;
+}
+
+/* 2. MENGUBAH TOMBOL STRIP LAMA MENJADI KOTAK MEWAH */
+.subcategory-tab-btn {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    background-color: #ffffff !important;
+    color: #2c3e50 !important;
+    padding: 5px 5px !important;
+    border-radius: 14px !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.03) !important;
+    border: none !important;
+    font-size: 13px !important;
+    font-weight: bold !important;
+    cursor: pointer !important;
+    transition: all 0.1s ease !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+/* EFEK SAAT TOMBOL DIKETUK (MEMBAL) */
+.subcategory-tab-btn:active {
+    transform: scale(0.97) !important;
+    background-color: #f5f7f8 !important;
+}
+
+/* KONDISI SAAT TOMBOL SEDANG AKTIF TERPILIH */
+.subcategory-tab-btn.active {
+    background-color: #ffffff !important;
+    border: 2px solid #1976D2 !important; /* Bingkai Biru Fokus */
+    color: #1976D2 !important;
+    box-shadow: 0 4px 8px rgba(25, 118, 210, 0.1) !important;
+}
+
+
+
+
+        .header-2 {
+            background-color: #fff;
+            margin-top: -60px !important;
+
+            padding: 15px;
+            padding-bottom: 35px;
+        }
+
+        .input-wrapper {
+            width: 100%;
+        }
+
+        .input-box {
+            position: relative;
+            width: 100%;
+            z-index: 2;
+        }
+
+        .input-box input {
+            width: 100%;
+            padding: 14px 40px 14px 14px;
+            border-radius: 12px;
+            border: 2px solid #ebeef1;
+            font-size: 16px;
+            outline: none;
+            background: #fff;
+            box-sizing: border-box;
+            font-family: "Lexend Deca", sans-serif;
+        }
+
+        .input-box img {
+            filter: brightness(0) saturate(100%) invert(99%) sepia(72%) saturate(204%) hue-rotate(174deg) brightness(99%) contrast(90%);
+        }
+
+        .icon-x {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 22px;
+            cursor: pointer;
+        }
+
+        .menu-card {
+            background: #ebeef1;
+            border-radius: 15px;
+            padding: 10px !important;
+            padding-top: 25px;
+            border: 1px solid #ebeef1;
+            position: relative;
+            z-index: 1;
+            margin-top: -5px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+        }
+
+        .menu {
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+            gap: 0px;
+        }
+
+        .menu-item {
+            flex: 1;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            padding: 8px 12px;
+            border-radius: 10px;
+            transition: background 0.2s;
+        }
+
+        .menu-item:hover {
+            background: #f0f0f0;
+        }
+
+        .menu-item img {
+            width: 20px;
+            height: 20px;
+        }
+
+        .menu-item div {
+            font-size: 14px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .main-card {
+            background: #ebeef1;
+            border-radius: 20px 20px 0 0;
+            padding: 16px;
+            margin-top: -15px;
+        }
+
+        .subcategory-tab-header {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            padding-bottom: 12px;
+            margin-bottom: 16px;
+            border-bottom: 2px solid #e0e0e0;
+            white-space: nowrap;
+        }
+
+        .subcategory-tab-btn {
+            font-size: 14px;
+            font-weight: 600;
+            padding: 8px 0px;
+            margin: 0 0px;
+            margin-right: 10px;
+            color: #888;
+            cursor: pointer;
+            position: relative;
+            transition: 0.2s;
+            background: transparent;
+            border-radius: 0px;
+            white-space: nowrap;
+        }
+
+        .subcategory-tab-btn.active {
+            color: var(--subMain);
+            background: transparent;
+        }
+
+        .subcategory-tab-btn.active::after {
+            content: "";
+            position: absolute;
+            bottom: -12px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--subMain);
+            border-radius: 3px 3px 0 0;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        .product-card {
+            background: #fff;
+            border-radius: 14px;
+            padding: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            transition: 0.2s;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        
+        .product-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50px;
+            height: 50%;
+            background-image: radial-gradient(circle, rgba(0,0,0,0.15) 2px, transparent 2px);
+            background-size: 6px 6px;
+            background-repeat: repeat;
+            mask-image: linear-gradient(to left, black, rgba(0,0,0,0.2));
+            -webkit-mask-image: linear-gradient(to left, black, rgba(0,0,0,0.2));
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .product-card.disabled {
+            opacity: 0.6;
+            filter: grayscale(0.3);
+            cursor: not-allowed;
+        }
+
+        .product-card-top {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .product-img {
+            width: 30px;
+            height: 30px;
+            object-fit: contain;
+            border-radius: 50%;
+            background: #f8f8f8;
+            padding: 3px;
+        }
+
+        .product-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1a1a1a;
+            line-height: 1.3;
+            flex: 1;
+        }
+
+        .price-strike {
+            font-size: 11px;
+            color: #aaa;
+            text-decoration: line-through;
+        }
+
+        .price-real {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--subMain);
+            margin-bottom: 8px;
+        }
+
+        .product-price-section {
+            margin-top: 6px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .ribbon {
+            position: absolute;
+            bottom: 0px;
+            right: 0px;            
+            font-size: 10px;
+            font-weight: bold;
+            border-radius: 10px 0px 10px 0px;
+            padding: 4px 20px;
+            text-align: right;
+            align-items: right;
+            z-index: 15;
+            white-space: nowrap;
+        }
+
+        .ribbon.discount {
+            background: transparent;
+            color: #e53935;
+        }
+
+        .ribbon.out-of-stock {
+            background: transparent;
+            color: #888;
+        }
+
+        .product-content {
+            display: block;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+            display: none;
+            justify-content: center;
+            align-items: flex-end;
+            z-index: 1000;
+        }
+
+        .popup {
+            width: 100%;
+            max-width: 500px;
+            background: #fff;
+            border-radius: 20px 20px 0 0;
+            padding: 30px 16px 16px;
+            position: relative;
+            transform: translateY(100%);
+            transition: 0.3s;
+        }
+
+        .overlay.active {
+            display: flex;
+        }
+
+        .overlay.active .popup {
+            transform: translateY(0);
+        }
+
+        .drag-line {
+            width: 80px;
+            height: 8px;
+            background: var(--subMain);
+            border-radius: 0px 0px 15px 15px;
+            position: absolute;
+            top: 0px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .favorite-list {
+            max-height: 400px;
+            overflow-y: auto;
+            margin-top: 10px;
+        }
+        .favorite-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+        }
+        .favorite-item:hover {
+            background-color: #f5f5f5;
+        }
+        .favorite-number {
+            font-size: 16px;
+            font-weight: 500;
+            color: #333;
+            flex: 1;
+        }
+        .delete-fav {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: #ff4444;
+            padding: 0 8px;
+            pointer-events: auto;
+        }
+        .empty-favorite {
+            text-align: center;
+            padding: 30px;
+            color: #999;
+        }
+        .close-fav-popup {
+            width: 100%;
+            padding: 12px;
+            background: var(--subMain);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            margin-top: 15px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .ios-toast {
+            position: fixed;
+            bottom: 30px;
+            left: 16px;
+            right: 16px;
+            background: rgba(28, 28, 30, 0.9);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 30px;
+            font-size: 15px;
+            font-weight: 500;
+            text-align: center;
+            z-index: 1200;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.25s ease;
+            pointer-events: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            font-family: system-ui, -apple-system, 'Lexend Deca', sans-serif;
+            letter-spacing: 0.3px;
+            max-width: 350px;
+            margin: 0 auto;
+            width: calc(100% - 32px);
+        }
+        .ios-toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .notification-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1100;
+        }
+        .notification-popup {
+            width: 280px;
+            background: white;
+            border-radius: 20px;
+            padding: 24px 20px 20px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            animation: fadeInUp 0.2s ease;
+        }
+        .notification-popup p {
+            font-size: 16px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .notification-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+        .notif-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .notif-btn-save {
+            background: var(--subMain);
+            color: white;
+        }
+        .notif-btn-view {
+            background: #ebeef1;
+            color: var(--subMain);
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .product-name-large {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 8px;
+            margin-bottom: 8px;
+            color: #1a1a1a;
+        }
+        .sub-meta {
+            font-size: 12px;
+            color: #888;
+            margin-bottom: 20px;
+        }
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 12px;
+            font-size: 15px;
+        }
+        .price-label {
+            color: #666;
+        }
+        .price-value {
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+        .divider-line {
+            height: 1px;
+            background: #eee;
+            margin: 16px 0;
+        }
+        .description-header {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-bottom: 12px;
+        }
+        .desc-icon {
+            width: 20px;
+            height: 20px;
+            object-fit: contain;
+        }
+        .desc-title {
+            font-size: 14px;
+            font-weight: 500;
+            color: #333;
+        }
+        .description-text {
+            background: #f5f7fb;
+            padding: 12px;
+            border-radius: 12px;
+            font-size: 13px;
+            color: #555;
+            line-height: 1.5;
+            text-align: left;
+            margin-bottom: 24px;
+        }
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: space-between;
+            margin-top: 8px;
+        }
+        .btn-later {
+            flex: 1;
+            background: white;
+            border: 1.5px solid var(--subMain);
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--subMain);
+            cursor: pointer;
+            transition: 0.2s;
+            text-align: center;
+        }
+        .btn-buy {
+            flex: 1;
+            background: var(--subMain);
+            border: none;
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+            transition: 0.2s;
+            text-align: center;
+        }
+        .btn-later:hover {
+            background: #f0f4fe;
+        }
+        .btn-buy:hover {
+            background: #1e5cb3;
+        }
+
+        .loading-spinner {
+            grid-column: 1/-1;
+            text-align: center;
+            padding: 40px;
+        }
+        .loading-spinner div {
+            width: 30px;
+            height: 30px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #1976D2;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+ 
+
+@keyframes marqueeBanner {
+    0% { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(-100%, 0, 0); }
+}
+/* STYLING BANNER SLIDER KOTAK GAYA HOME UTAMA */
+.wrapper-slider-tv {
+    padding: 0 15px;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.slider-container-box {
+    width: 100%;
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    border: 1px solid #ebeef1;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Menyembunyikan scrollbar bawah agar bersih seperti aplikasi pro */
+.slider-container-box::-webkit-scrollbar {
+    display: none;
+}
+
+.slider-item-card {
+    flex: 0 0 100%;
+    width: 100%;
+    scroll-snap-align: start;
+    position: relative;
+    box-sizing: border-box;
+    display: block;
+}
+
+.slider-img-content {
+    width: 100%;
+    height: 140px; /* Atur tinggi kotak banner sesuai selera Anda */
+    object-fit: cover;
+    display: block;
+}
+.floating-card {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: none !important;
+
+    border-radius: 10px;
+    padding: 20px;
+    margin: 10px 16px 16px 16px;
+    box-shadow: 0 20px 35px rgba(0, 0, 0, 0.12), 0 4px 10px rgba(0, 0, 0, 0.06) !important;
+
+    position: relative;
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+.floating-card-filter {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 16px;
+    padding: 6px 12px;
+    margin: -10px 16px 16px 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+    position: relative;
+    z-index: 998;
+}
+
+.floating-card-filter .view-toggle-container {
+    background: transparent !important;
+    border-top: none !important;
+    padding: 0 !important;
+}
+.input-group input {
+    width: 100%;
+    padding: 16px 40px 16px 16px;
+    border: 1.5px solid rgba(0, 0, 0, 0.08);
+    border-radius: 14px;
+    font-size: 15px;
+    background: rgba(255, 255, 255, 0.9);
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.input-group input:focus {
+    border-color: #007aff !important;
+    box-shadow: 0 0 12px rgba(0, 122, 255, 0.4) !important;
+}
+
+.header-2 {
+    background: rgba(255, 255, 255, 0.90) !important;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: 12px;
+    margin: 0px 16px 0 16px !important;
+    
+    /* 1. Menghilangkan garis tepi agar efek melayang lebih natural */
+    border: none !important;
+    
+    /* 2. Membuat efek bayangan 3D melayang yang lembut dan dalam */
+    box-shadow: 0 0px 0px rgba(0, 0, 0, 0.5), 
+                0 0px 0px rgba(0, 0, 0, 0.05) !important;     
+position: sticky !important;
+    top: 0px !important;
+    z-index: 9999 !important;
+
+}
+
+div.subcategory-tab-btn.active, 
+.subcategory-tab-btn.active {
+    background-color: #007aff !important;
+    color: #ffffff !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: 0 8px 20px rgba(0, 122, 255, 0.4) !important; justify-content: center !important; text-align: center !important; padding-left: 0 !important; padding-right: 0 !important;
+}
+
+.subcategory-tab-btn.active::after,
+.subcategory-tab-btn.active::before {
+    display: none !important;
+}
+/* Gaya Tombol Info Biru Melayang 3D */
+.info-toggle-btn {
+    background-color: #007aff !important;
+    color: #ffffff !important;
+    border: none !important;
+    outline: none !important;
+    border-radius: 20px !important;
+    padding: 6px 16px !important;
+    font-size: 13px !important;
+    font-weight: bold !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer;
+    box-shadow: 0 8px 16px rgba(0, 122, 255, 0.4) !important;
+    transition: all 0.3s ease;
+}
+
+#info-arrow {
+    margin-left: 6px;
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+/* Gaya Kotak Bar Teks Informasi */
+.info-content-box {
+    display: none; /* Sembunyi saat awal */
+    background: #ffffff !important;
+    border-radius: 12px !important;
+    padding: 12px !important;
+    margin-top: 10px !important;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 13px !important;
+    color: #333333 !important;
+    line-height: 1.5;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Class pemicu untuk menampilkan kotak info */
+.info-content-box.show {
+    display: block !important;
+}
+
+/* Memutar tanda panah menjadi ke bawah ketika dibuka */
+.arrow-rotate {
+    transform: rotate(180deg);
+}
+/* Desain Tombol Info Nempel, Kecil, dan Manis */
+.info-toggle-btn {
+    background: rgba(0, 122, 255, 0.08) !important; /* Latar biru transparan tipis */
+    color: #007aff !important; /* Warna teks biru tegas */
+    border: none !important;
+    outline: none !important;
+    border-radius: 12px !important; /* Lengkungan halus sudut boks */
+    padding: 4px 10px !important; /* Ukuran tombol mini/ramping */
+    font-size: 11px !important; /* Ukuran huruf kecil minimalis */
+    font-weight: 600 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer;
+    width: auto !important;
+    height: auto !important;
+    box-shadow: none !important; /* MENGHAPUS TOTAL EFEK MELAYANG 3D */
+    transition: all 0.2s ease;
+}
+
+/* Efek saat tombol ditekan */
+.info-toggle-btn:active {
+    background: rgba(0, 122, 255, 0.16) !important;
+    transform: scale(0.96);
+}
+
+#panah-info {
+    margin-left: 4px;
+    font-size: 10px !important;
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+/* Gaya Kotak Bar Teks Informasi */
+.info-content-box {
+    display: none; /* Sembunyi di awal halaman */
+    background: #ffffff !important;
+    border-radius: 12px !important;
+    padding: 12px !important;
+    margin-top: 10px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    font-size: 13px !important;
+    color: #333333 !important;
+    line-height: 1.5 !important;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06) !important;
+    clear: both !important;
+}
+
+/* Pemicu untuk memunculkan kotak */
+.info-content-box.buka-kotak {
+    display: block !important;
+}
+
+/* Memutar tanda panah menjadi ke bawah */
+.putar-panah {
+    transform: rotate(180deg);
+}
+
+ </style>
+</head>
+<body>
+<body style=""> <!-- tag pembuka body asli Anda -->
+
+<div class="header-2"
+style="width: calc(100% - 20px) !important;
+padding: 0px 15px !important;
+box-sizing: border-box !important;
+background-color: #ffffff !important;
+border-radius: 0px 0px 12px 12px !important;
+position: fixed !important;
+top: 5px !important;
+left: 10px !important;
+right: 10px !important;
+z-index: 99999 !important;
+margin: 0 auto !important;
+height: 60px !important;
+display: flex !important;
+align-items: center !important;">
+
+
+
+
+
+
+
+<div class="inner-category-box" style="display: flex !important; align-items: center !important; gap: 15px !important; width: 100% !important; box-sizing: border-box !important;">
+
+
+
+        <!-- Ikon Air Jernih -->
+        <img src="https://images.bukaolshop.com/hosting/183991/d96bbff101bd981608.png" alt="Icon" style="width: 50px; height: 75px; object-fit: contain; margin-right: 0px;">
+        <!-- Tulisan Teks Kategori -->
+ <!-- Masukkan kode warna di dalam style seperti ini -->
+<div class="header-btn-KUOTA" style="background: linear-gradient(to right, #00a2ff, #006aff) !important; color: white !important; padding: 6px 18px !important; border-radius: 50px !important; box-shadow: 0 15px 15px rgba(0, 106, 255, 0.3) !important; display: inline-block !important; font-weight: bold !important; font-size: 13px !important; margin: 0 auto !important; transform: translateX(-35px) !important;">PDAM Nusa Tenggara Barat</div>
+
+   </div>
+ 
+</div>
+<div style="margin-top: 90px !important;">
+
+<div class="floating-card" style="border-radius: 0px !important; box-shadow: none !important; background: transparent !important; background-color: transparent !important;">
+
+<div class="input-wrapper"
+style="width: 94% !important;
+margin: 12px auto 0px auto !important;
+box-sizing: border-box !important;
+padding: 0 !important;
+border-radius: 0px !important;
+background: transparent !important;
+background-color: transparent !important;">
+
+<style>
+  *:focus-within {
+    border-color: #e0e0e0 !important;
+    box-shadow: none !important;
+    outline: none !important;
+  }
+  #idPlayer:focus {
+    border-color: #007bff !important;
+    box-shadow: 0 0 4px rgba(0, 123, 255, 0.5) !important;
+    outline: none !important;
+  }  .input-box img, 
+  #btnCekID img, 
+  div[style*="display: flex"] img,
+  img[alt="Kontak"],
+  img[alt="Info"],
+  img[alt="Scan"],
+  img[alt="Favorite"] {
+      filter: none !important;
+      -webkit-filter: grayscale(0%) !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+  }
+
+</style>
+
+<!-- 1. KOTAK UTAMA YANG MEMBUNGKUS INPUT DAN MENU AKSI -->
+<div class="input-box" style="position: relative !important; width: 100% !important; 
+margin-top: -10px !important;
+background-color: #ffffff !important; border: 1px solid #e0e0e0 !important; border-radius: 20px !important; padding: 16px !important; box-sizing: border-box !important; display: flex !important; flex-direction: column !important;">
+
+<!-- KOTAK UTAMA FORM ATAS (KODE FINAL: IKON LENGKAP & RAMPING PRESTISI) -->
+<div id="kotakFormUtama" style="width: 100% !important; background-color: #ffffff !important; border: 1px solid #e0e0e0 !important; border-radius: 24px !important; padding: 14px !important; box-sizing: border-box !important; display: flex !important; flex-direction: column !important; gap: 14px !important; transition: border-color 0.3s ease !important;">
+<style>
+  /* Mengubah tulisan daftar nama daerah menjadi Biru */
+  .finance-item {
+    color: #0088ed !important;
+    /* MENAMBAHKAN GARIS PEMBATAS YANG LEBIH JELAS */
+    border-bottom: 1px solid #cccccc !important; 
+  }
+
+  /* Mengubah tulisan di tombol dropdown utama menjadi Biru */
+  #financeProvider, 
+  #financeProvider option {
+    color: #0088ed !important;
+  }
+</style>
+
+<!-- Pembungkus form utama bawaan BukaOlshop agar posisi input ID Pelanggan tidak rusak -->
+<div class="form-group select-search-wrapper" style="width: 100% !important; margin-bottom: 15px; position: relative;">
+    
+    <!-- 1. KEMBALIKAN ELEMEN SELECT ASLI BAWAAN BUKAOLSHOP UTUH 100% -->
+    <!-- Kita tidak menyembunyikannya dengan display:none atau opacity:0. Kita ubah penampilannya langsung menggunakan gaya CSS agar menyerupai tombol kustom kapsul bulat Gambar 3 -->
+    <select name="tagihan-provider" id="financeProvider" class="form-control" data-live-search="true" required 
+        style="width: 100% !important; height: 46px !important; padding: 12px 14px !important; font-size: 15px !important; color: #333 !important; background-color: #ffffff !important; border: 1px solid #e0e0e0 !important; border-radius: 14px !important; appearance: none !important; -webkit-appearance: none !important; -moz-appearance: none !important; cursor: pointer !important; box-sizing: border-box !important;">
+        <option value="" disabled selected>Pilih Daerah PDAM</option>
+
+  <option value="" disabled selected>Pilih Daerah PDAM</option>
+  <option value="PDAM Kabupaten Belu">PDAM Kabupaten Belu</option>
+  <option value="PDAM Kabupaten Ende">PDAM Kabupaten Ende</option>
+  <option value="PDAM Kabupaten Flores Timur">PDAM Kabupaten Flores Timur</option>
+  <option value="PDAM Kabupaten Kupang">PDAM Kabupaten Kupang</option>
+  <option value="PDAM Kabupaten Lembata">PDAM Kabupaten Lembata</option>
+  <option value="PDAM Kabupaten Manggarai">PDAM Kabupaten Manggarai</option>
+  <option value="PDAM Kabupaten Manggarai Barat">PDAM Kabupaten Manggarai Barat</option>
+  <option value="PDAM Kabupaten Ngada">PDAM Kabupaten Ngada</option>
+  <option value="PDAM Kabupaten Rote Ndao">PDAM Kabupaten Rote Ndao</option>
+  <option value="PDAM Kabupaten Sikka">PDAM Kabupaten Sikka</option>
+  <option value="PDAM Kabupaten Timor Tengah Selatan">PDAM Kabupaten Timor Tengah Selatan</option>
+  <option value="PDAM Kabupaten Timor Tengah Utara">PDAM Kabupaten Timor Tengah Utara</option>
+  <option value="PDAM Kota Kupang">PDAM Kota Kupang</option>
+  <option value="PDAM Sumba Timur Ntt">PDAM Sumba Timur Ntt</option>
+</select>
+
+  <!-- Ikon panah bawah tiruan sebagai pemanis visual di pojok kanan kolom select asli -->
+    <span style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); color: #999; font-size: 12px; pointer-events: none; z-index: 10;">▼</span>
+</div>
+
+<!-- ======================================================= -->
+<!-- BOTTOM SHEET FULL SCREEN KUSTOM (DI LUAR STRUKTUR SELECT)-->
+<!-- ======================================================= -->
+<div id="customBottomSheet" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: #ffffff; z-index: 99999999 !important; flex-direction: column; font-family: sans-serif; box-sizing: border-box;">
+    
+    <!-- HEADER BIRU + KOLOM PENCARIAN -->
+    <div style="background-color: #0088ed; padding: 12px 15px; display: flex; align-items: center; gap: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); box-sizing: border-box; width: 100%;">
+        <div style="position: relative; flex: 1;">
+            <span style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: #888; font-size: 14px;">🔍</span>
+            <input type="text" id="searchFinance" placeholder="Cari Daerah PDAM" style="width: 100%; padding: 10px 10px 10px 35px; border: none; border-radius: 8px; font-size: 14px; outline: none; box-sizing: border-box;">
+        </div>
+        <button type="button" id="closeBottomSheet" style="background: none; border: none; color: #ffffff; font-size: 14px; font-weight: bold; cursor: pointer; padding: 5px 5px; white-space: nowrap;">TUTUP</button>
+    </div>
+
+    <!-- LIST DAFTAR OPSI PILIHAN FINANCE -->
+    <div id="financeListContainer" style="flex: 1; overflow-y: auto; padding: 5px 0; width: 100%;">
+  <div class="finance-item" data-value="PDAM Kabupaten Belu" style="padding: 15px 20px; font-size: 16px; color: #333; border-bottom: 1px solid #f0f0f0; cursor: pointer;">PDAM Kabupaten Belu</div>
+
+<div class="finance-item" data-value="PDAM Kabupaten Ende" style="padding: 15px 20px; font-size: 16px; color: #333; border-bottom: 1px solid #f0f0f0; cursor: pointer;">PDAM Kabupaten Ende</div>
+
+<div class="finance-item" data-value="PDAM Kabupaten Flores Timur" style="padding: 15px 20px; font-size: 16px; color: #333; border-bottom: 1px solid #f0f0f0; cursor: pointer;">PDAM Kabupaten Flores Timur</div>
+
+<div class="finance-item" data-value="PDAM Kabupaten Kupang" style="padding: 15px 20px; font-size: 16px; color: #333; border-bottom: 1px solid #f0f0f0; cursor: pointer;">PDAM Kabupaten Kupang</div>
+
+<div class="finance-item" data-value="PDAM Kabupaten Lembata" style="padding: 15px 20px; font-size: 16px; color: #333; border-bottom: 1px solid #f0f0f0; cursor: pointer;">PDAM Kabupaten Lembata</div>
+
+<div class="finance-item" data-value="PDAM Kabupaten Manggarai" style="padding: 15px 20px; font-size: 16px; color: #333; border-bottom: 1px solid #f0f0f0; cursor: pointer;">PDAM Kabupaten Manggarai</div>
+
+<div class="finance-item" data-value="PDAM Kabupaten Manggarai Barat" style="padding: 15px 20px; font-size: 16px; color: #333; border-bottom: 1px solid #f0f0f0; cursor: pointer;">PDAM Kabupaten Manggarai Barat</div>
+
+<div class="finance-item" data-value="PDAM Kabupaten Ngada" style="padding: 15px 20px; font-size: 16px; color: #333; border-bottom: 1px solid #f0f0f0; cursor: pointer;">PDAM Kabupaten Ngada</div>
+
+<div class="finance-item" data-value="PDAM Kabupaten Rote Ndao" style="padding: 15px 20px; font-size: 16px; color: #333; border-bottom: 1px solid #f0f0f0; cursor: pointer;">PDAM Kabupaten Rote Ndao</div>
+
+<div class="finance-item" data-value="PDAM Kabupaten Sikka" style="padding: 15px 20px; font-size: 16px; color: #333; border-bottom: 1px solid #f0f0f0; cursor: pointer;">PDAM Kabupaten Sikka</div>
+
+<div class="finance-item" data-value="PDAM Kabupaten Timor Tengah Selatan" style="padding: 15px 20px; font-size: 16px; color: #333; border-bottom: 1px solid #f0f0f0; cursor: pointer;">PDAM Kabupaten Timor Tengah Selatan</div>
+
+<div class="finance-item" data-value="PDAM Kabupaten Timor Tengah Utara" style="padding: 15px 20px; font-size: 16px; color: #333; border-bottom: 1px solid #f0f0f0; cursor: pointer;">PDAM Kabupaten Timor Tengah Utara</div>
+
+<div class="finance-item" data-value="PDAM Kota Kupang" style="padding: 15px 20px; font-size: 16px; color: #333; border-bottom: 1px solid #f0f0f0; cursor: pointer;">PDAM Kota Kupang</div>
+
+<div class="finance-item" data-value="PDAM Sumba Timur Ntt" style="padding: 15px 20px; font-size: 16px; color: #333; border-bottom: 1px solid #f0f0f0; cursor: pointer;">PDAM Sumba Timur Ntt</div>
+     
+
+</div>
+</div>
+
+<!-- ======================================================= -->
+<!-- SCRIPT SIMPEL: MENUMPANGKAN AKSI BOTTOM SHEET KUSTOM     -->
+<!-- ======================================================= -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const nativeSelect = document.getElementById("financeProvider");
+    const sheet = document.getElementById("customBottomSheet");
+    const closeBtn = document.getElementById("closeBottomSheet");
+    const searchInput = document.getElementById("searchFinance");
+    const items = document.querySelectorAll(".finance-item");
+
+    // Amankan kontainer pencarian ke elemen body terluar aplikasi
+    if (sheet) {
+        document.body.appendChild(sheet);
+    }
+
+    if (nativeSelect) {
+        // Ketika select asli yang sudah kita percantik diklik, munculkan lembar pencarian full screen
+        nativeSelect.addEventListener("click", function(e) {
+            e.preventDefault();
+            this.blur(); // Mencegah keyboard bawaan HP muncul secara paksa
+            
+            sheet.style.display = "flex";
+            searchInput.value = "";
+            items.forEach(item => item.style.display = "block");
+            setTimeout(() => { searchInput.focus(); }, 120);
+            return false;
+        });
+    }
+
+    // Tombol TUTUP pencarian
+    closeBtn.addEventListener("click", function() {
+        sheet.style.display = "none";
+    });
+
+    // Proses sinkronisasi saat pengguna memilih salah satu item finance
+    items.forEach(item => {
+        item.addEventListener("click", function() {
+            const val = this.getAttribute("data-value");
+            
+            if (nativeSelect) {
+                // Masukkan nilai secara murni ke dalam select asli agar divalidasi sah oleh BukaOlshop
+                nativeSelect.value = val;
+                
+                // Memicu trigger event standard html agar engine BukaOlshop membaca datanya sah
+                nativeSelect.dispatchEvent(new Event('input', { bubbles: true }));
+                nativeSelect.dispatchEvent(new Event('change', { bubbles: true }));
+            }
+            
+            // Sembunyikan lembar pencarian
+            sheet.style.display = "none";
+        });
+    });
+
+    // Fitur Live Search dinamis
+    searchInput.addEventListener("input", function() {
+        const filterText = this.value.toLowerCase();
+        items.forEach(item => {
+            const textValue = item.textContent || item.innerText;
+            if (textValue.toLowerCase().indexOf(filterText) > -1) {
+                item.style.display = "block";
+            } else {
+                item.style.display = "none";
+            }
+        });
+    });
+});
+</script>
+
+
+<div style="position: relative !important; width: 100% !important; display: block !important;">
+    <input type="number"
+    name="scanner-input"
+    id="userId"
+    class="{{hasil_kontak}} scanner-input"
+    placeholder="Masukkan ID Pelanggan"
+    onfocus="document.getElementById('kotakFormUtama').style.setProperty('border-color', '#007bff', 'important'); this.style.setProperty('border-color', '#007bff', 'important');"
+    onblur="document.getElementById('kotakFormUtama').style.setProperty('border-color', '#e0e0e0', 'important'); this.style.setProperty('border-color', '#e0e0e0', 'important');"
+    style="width: 100% !important; padding: 12px 45px 12px 14px !important; border: 1px solid #e0e0e0 !important; border-radius: 14px !important; outline: none !important; transition: border-color 0.3s ease !important; font-size: 15px !important;">
+      
+        <!-- IKON BUKU KONTAK BAWAAN BUKAOLSHOP (DIKEMBALIKAN KE SINI) -->
+                <!-- IKON BUKU KONTAK BAWAAN BUKAOLSHOP (AKTIF LURUS) -->
+        <a href="{{url_website_baru}}/ambil_kontak?catatan={{hasil_kontak}}" style="position: absolute !important; right: 10px !important; top: 50% !important; transform: translateY(-50%) !important; cursor: pointer !important; width: 24px !important; height: 24px !important; display: flex !important; align-items: center !important; justify-content: center !important; text-decoration: none !important;">
+            <img src="https://images.bukaolshop.com/hosting/183991/0d21898001c770894.png" alt="Kontak" style="width: 25px !important; height: 25px !important; display: block !important;" />
+        </a>
+ 
+</div>
+    <!-- GARIS PEMBATAS DI BAWAH KOLOM INPUT -->
+<div style="height: 1px !important; width: 100% !important; background-color: #e0e0e0 !important; margin: 14px 0 !important;"></div>
+<!-- TOMBOL LANJUT DI BAWAH GARIS (SUDAH DILENGKAPI VALIDASI ANTI-MACET) -->
+<button type="submit" 
+id="btnLanjutFinance" style="width: 100% !important; background-color: #007bff !important; color: #ffffff !important; border: none !important; padding: 14px !important; font-size: 16px !important; font-weight: 600 !important; border-radius: 14px !important; cursor: pointer !important; box-sizing: border-box !important; transition: background-color 0.2s !important;">
+    Lanjut
+</button>
+
+<!-- SCRIPT VALIDASI TAMBAHAN KHUSUS TOMBOL LANJUT -->
+<script>
+document.getElementById("btnLanjutFinance").addEventListener("click", function(e) {
+    const providerSelect = document.getElementById("financeProvider");
+    
+    // Cari elemen input ID Pelanggan secara dinamis (biasanya bertipe number atau text setelah tombol dropdown)
+    const inputPelanggan = document.querySelector('input[type="number"]') || document.querySelector('input[name="nomor_pelanggan"]') || document.querySelector('input[placeholder*="ID"], input[placeholder*="Pelanggan"]');
+
+    // 1. Validasi Penyedia Finance
+    if (!providerSelect || providerSelect.value === "") {
+        e.preventDefault(); // Blokir pengiriman form
+        alert("Silakan pilih Penyedia Finance terlebih dahulu!");
+        
+        // Buka kembali bottom sheet kustom secara otomatis jika belum dipilih
+        const sheet = document.getElementById("customBottomSheet");
+        if (sheet) sheet.style.display = "flex";
+        return false;
+    }
+
+    // 2. Validasi ID Pelanggan
+    if (!inputPelanggan || inputPelanggan.value.trim() === "") {
+        e.preventDefault(); // Blokir pengiriman form jika ID kosong
+        alert("Silakan masukkan ID Pelanggan Anda!");
+        if (inputPelanggan) inputPelanggan.focus();
+        return false;
+    }
+    
+    // Jika semua validasi di atas lolos, biarkan form memproses checkout secara alami ke BukaOlshop
+});
+</script>
+
+
+
+    <!-- KAPSUL BARIS TOMBOL (PAS MENYATU DI DALAM KOTAK PUTIH) -->
+   
+    </div>
+
+</div>
+
+
+
+<!-- 2. TARUH KODE BARU INI TEPAT DI SINI (DI LUAR BUNGKUS TOMBOL) -->
+<div id="modalInfo" style="display: none; width: 100%; box-sizing: border-box; margin-top: 30px; margin-bottom: 10px; padding: 15px; background-color: #fff; border: 1px solid #e0e0e0; border-radius: 12px; font-family: sans-serif; clear: both;">
+    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; padding-bottom: 6px; margin-bottom: 10px;">
+        <span style="font-weight: bold; color: #333; font-size: 14px;">INFO PRODUK</span>
+        <span onclick="aksiBukaTutupInfo()" style="cursor: pointer; color: #aaa; font-weight: bold; font-size: 18px; padding: 0 5px;">×</span>
+    </div>
+    <p style="font-size: 13px; color: #555; line-height: 1.6; margin: 0; text-align: left;">
+        • Proses otomatis 1-5 menit.<br>
+        • Pastikan nomor tujuan sudah benar.<br>
+        • Layanan aktif 24 jam.
+    </p>
+</div>
+
+<script>
+function aksiBukaTutupInfo() {
+    var modal = document.getElementById("modalInfo");
+    if (modal.style.display === "none" || modal.style.display === "") {
+        modal.style.display = "block";
+    } else {
+        modal.style.display = "none";
+    }
+}
+</script>
+
+<!-- AREA DAFTAR FAVORIT (DESAIN PRESET SESUAI GAMBAR CONTOH) -->
+<div id="areaDaftarFavorit" style="display: none !important; width: 100% !important; max-width: 100% !important; clear: both !important; box-sizing: border-box !important; margin-top: 15px !important; padding: 15px !important; background-color: #ffffff !important; border-radius: 12px !important; border: 1px solid #f0f0f0 !important; font-family: sans-serif !important;">
+    
+    <!-- Kolom Input Nama -->
+    <div style="margin-bottom: 12px !important; text-align: left !important;">
+        <label style="display: block !important; font-size: 13px !important; color: #333333 !important; margin-bottom: 6px !important; font-weight: 500 !important;">Nama</label>
+        <input type="text" id="inputNamaFav" placeholder="Masukkan Nama" style="width: 100% !important; padding: 12px !important; border: 1px solid #e2e8f0 !important; border-radius: 8px !important; font-size: 14px !important; outline: none !important; box-sizing: border-box !important; background-color: #fcfdfe !important;">
+    </div>
+
+    <!-- Kolom Input Nomor -->
+    <div style="margin-bottom: 12px !important; text-align: left !important;">
+        <label style="display: block !important; font-size: 13px !important; color: #333333 !important; margin-bottom: 6px !important; font-weight: 500 !important;">Nomor</label>
+        <input type="number" id="inputNomorFav" placeholder="Masukkan Nomor" style="width: 100% !important; padding: 12px !important; border: 1px solid #e2e8f0 !important; border-radius: 8px !important; font-size: 14px !important; outline: none !important; box-sizing: border-box !important; background-color: #fcfdfe !important;">
+    </div>
+
+    <!-- Tombol Simpan Biru -->
+    <button type="button" onclick="tambahDataFavoritKeList()" style="width: auto !important; padding: 10px 20px !important; background-color: #007aff !important; color: white !important; border: none !important; border-radius: 6px !important; font-size: 13px !important; font-weight: 500 !important; cursor: pointer !important; display: block !important; margin-bottom: 20px !important;">
+        Simpan ke Favorit
+    </button>
+
+    <!-- Label Sub-Header Daftar -->
+    <div style="font-size: 13px !important; color: #666666 !important; margin-bottom: 10px !important; text-align: left !important;">Daftar Favorit</div>
+
+    <!-- TEMPAT DAFTAR LIST PELANGGAN -->
+    <div id="kontainerListFavorit" style="display: flex !important; flex-direction: column !important; gap: 10px !important; width: 100% !important; box-sizing: border-box !important; margin-bottom: 15px !important;">
+        <!-- Area abu-abu dinamis akan muncul di sini via JavaScript -->
+    </div>
+
+    <!-- Tombol Tutup Merah di Paling Bawah -->
+    <div style="text-align: center !important; margin-top: 15px !important; width: 100% !important;">
+        <button type="button" onclick="aksiBukaTutupFavorit()" style="padding: 8px 30px !important; background-color: #ffffff !important; color: #ef4444 !important; border: 1px solid #ef4444 !important; border-radius: 6px !important; font-size: 13px !important; cursor: pointer !important; font-weight: 500 !important;">
+            Tutup
+        </button>
+    </div>
+</div>
+
+<!-- ENGINE JAVASCRIPT PINTAR -->
+<script>
+// Fungsi otomatis panggil daftar saat halaman terbuka
+document.addEventListener("DOMContentLoaded", function() {
+    muatDataFavoritDariMemori();
+});
+
+// 1. Fungsi Utama Buka Tutup Panel Mandiri (Anti Gagal / Mati Kaku)
+function aksiBukaTutupFavorit() {
+    var area = document.getElementById("areaDaftarFavorit");
+    if (area.style.getPropertyValue('display') === 'none' || area.style.display === 'none') {
+        area.style.setProperty('display', 'block', 'important');
+    } else {
+        area.style.setProperty('display', 'none', 'important');
+    }
+}
+
+// 2. Fungsi Simpan Data Baru ke Memori HP
+function tambahDataFavoritKeList() {
+    var nama = document.getElementById("inputNamaFav").value.trim();
+    var nomor = document.getElementById("inputNomorFav").value.trim();
+
+    if (nama === "" || nomor === "") {
+        alert("Mohon isi Nama dan Nomor HP terlebih dahulu!");
+        return;
+    }
+
+    var dataFavorit = JSON.parse(localStorage.getItem("data_favorit_pulsa")) || [];
+    dataFavorit.push({ nama: nama, nomor: nomor });
+    localStorage.setItem("data_favorit_pulsa", JSON.stringify(dataFavorit));
+
+    muatDataFavoritDariMemori();
+
+    document.getElementById("inputNamaFav").value = "";
+    document.getElementById("inputNomorFav").value = "";
+    
+    alert("Berhasil menyimpan " + nama + " ke daftar favorit!");
+}
+
+// 3. Fungsi Render Data dari Memori ke Kotak Abu-Abu Lembut (Sesuai Contoh Gambar)
+function muatDataFavoritDariMemori() {
+    var kontainer = document.getElementById("kontainerListFavorit");
+    var dataFavorit = JSON.parse(localStorage.getItem("data_favorit_pulsa")) || [];
+    
+    if (dataFavorit.length === 0) {
+        // Tampilan default abu-abu tulisan "Belum ada favorit" sesuai gambar contoh Anda
+        kontainer.innerHTML = `
+            <div style="padding: 20px !important; background-color: #f5f5f5 !important; color: #888888 !important; border-radius: 8px !important; text-align: center !important; font-size: 14px !important;">
+                Belum ada favorit
+            </div>
+        `;
+        return;
+    }
+
+    kontainer.innerHTML = "";
+
+    // Render daftar nama dalam bentuk kotak list interaktif yang bisa diklik langsung
+    dataFavorit.forEach(function(item, index) {
+        var itemHtml = `
+            <div onclick="gunakanNomorFavorit('${item.nomor}')" style="display: flex !important; justify-content: space-between !important; align-items: center !important; padding: 12px 15px !important; background-color: #f7f9fa !important; border-radius: 8px !important; border: 1px solid #edf2f4 !important; cursor: pointer !important; width: 100% !important; box-sizing: border-box !important;">
+                <div style="text-align: left !important;">
+                    <div style="font-size: 14px !important; font-weight: 600 !important; color: #2d3748 !important;">${item.nama}</div>
+                    <div style="font-size: 12px !important; color: #718096 !important; margin-top: 3px !important;">${item.nomor}</div>
+                </div>
+                <!-- Tombol Hapus Kecil Merah Silang -->
+                <span onclick="event.stopPropagation(); hapusDataFavorit(${index});" style="color: #a0aec0 !important; font-size: 18px !important; padding: 0 5px !important; cursor: pointer !important;" onmouseover="this.style.color='#ef4444'" onmouseout="this.style.color='#a0aec0'">×</span>
+            </div>
+        `;
+        kontainer.insertAdjacentHTML('beforeend', itemHtml);
+    });
+}
+
+// 4. Fungsi Mengisi Otomatis ke Kolom Input Nomor Tujuan Utama di Atas
+function gunakanNomorFavorit(nomor) {
+    var inputUtama = document.querySelector('input[placeholder*="Nomor"]') || document.querySelector('input[placeholder*="Tujuan"]') || document.querySelector('input[type="number"]');
+    
+    if (inputUtama) {
+        inputUtama.value = nomor;
+        
+        // Trigger event internal wajib agar aplikasi Bukaolshop membaca perubahan data
+        inputUtama.dispatchEvent(new Event('input', { bubbles: true }));
+        inputUtama.dispatchEvent(new Event('change', { bubbles: true }));
+        
+        alert("Nomor " + nomor + " berhasil diterapkan!");
+        aksiBukaTutupFavorit(); // Otomatis menutup panel setelah nomor terpilih
+    } else {
+        alert("Gagal mendeteksi kolom input utama di atas.");
+    }
+}
+
+// 5. Fungsi Hapus Data Terpilih
+function hapusDataFavorit(index) {
+    if (confirm("Hapus nama ini dari daftar favorit?")) {
+        var dataFavorit = JSON.parse(localStorage.getItem("data_favorit_pulsa")) || [];
+        dataFavorit.splice(index, 1);
+        localStorage.setItem("data_favorit_pulsa", JSON.stringify(dataFavorit));
+        muatDataFavoritDariMemori();
+    }
+}
+  // 1. Pengawas Otomatis: Memonitor & membersihkan angka (Ubah 62 jadi 0, hapus spasi/strip)
+setInterval(function() {
+    var kolomInput = document.getElementById("scanner-input");
+    if (kolomInput && kolomInput.value !== "") {
+        var nomorMentah = kolomInput.value;
+        
+        // Hapus semua karakter selain angka (spasi, strip, tanda tambah dll)
+        var nomorBersih = nomorMentah.replace(/[^0-9]/g, ''); 
+        
+        // Mengubah kode 62 di depan menjadi angka 0
+        if (nomorBersih.startsWith('62')) {
+            nomorBersih = '0' + nomorBersih.slice(2); 
+        }
+
+        // Jika nomor berubah setelah dibersihkan, perbarui isi kolom input utama
+        if (nomorMentah !== nomorBersih) {
+            kolomInput.value = nomorBersih;
+        }
+
+        // Picu sensor sistem agar Bukaolshop membaca angka bersih ini dan memunculkan produk
+        kolomInput.dispatchEvent(new Event('input', { bubbles: true }));
+        kolomInput.dispatchEvent(new Event('change', { bubbles: true }));
+        
+        if (typeof satukanNomorML === "function") {
+            satukanNomorML();
+        }
+    }
+}, 500); // Mengecek secara agresif setiap 0.5 detik
+// 1. Fungsi Resmi Bukaolshop untuk Menangkap Hasil Scanner (Dipaksa Tembus)
+function onScanResult(result) {
+    if (!result) return;
+
+    // Bersihkan hasil scan dari karakter spasi, strip, atau simbol aneh
+    var nomorMentah = result.toString().trim().replace(/[^0-9]/g, '');
+    
+    // Otomatis ubah format jika diawali kode negara 62 menjadi 0
+    if (nomorBersih.startsWith('62')) {
+        nomorBersih = '0' + nomorBersih.slice(2);
+    }
+
+    // PAKSA SUNTIK DATA langsung ke dua target penanda sekaligus (ID & Class)
+    var inputID = document.getElementById("scanner-input") || document.getElementById("idPlayer");
+    var inputClass = document.querySelector(".scanner-input") || document.querySelector(".hasil_kontak");
+
+    // Eksekusi penulisan ke kolom input utama atas
+    if (inputID) {
+        inputID.value = nomorBersih;
+        inputID.dispatchEvent(new Event('input', { bubbles: true }));
+        inputID.dispatchEvent(new Event('change', { bubbles: true }));
+    }
+    if (inputClass) {
+        inputClass.value = nomorBersih;
+        inputClass.dispatchEvent(new Event('input', { bubbles: true }));
+        inputClass.dispatchEvent(new Event('change', { bubbles: true }));
+    }
+
+    // Jalankan paksa fungsi pemrosesan utama agar produk otomatis muncul
+    if (typeof satukanNomorML === "function") {
+        satukanNomorML();
+    }
+    
+    alert("Berhasil memindai nomor: " + nomorBersih);
+}
+
+// 2. Duplikasi fungsi dengan nama alternatif yang sering dicari webview Bukaolshop
+function hasilScan(result) {
+    onScanResult(result);
+}
+
+// JALAN PINTAS: Memaksa Menangkap Nilai Apa Pun dari Webview Scanner
+setInterval(function() {
+    var inputUtama = document.getElementById("scanner-input") || document.getElementById("idPlayer") || document.querySelector(".scanner-input");
+    
+    if (inputUtama) {
+        // Cek apakah ada nomor yang sempat menyenggol halaman via URL catatan
+        var urlParams = new URLSearchParams(window.location.search);
+        var nomorUrl = urlParams.get('catatan');
+        
+        if (nomorUrl && inputUtama.value === "") {
+            inputUtama.value = nomorUrl.replace(/[^0-9]/g, '');
+        }
+
+        // Jalankan penggerak otomatis agar harga produk langsung menggelinding keluar
+        if (inputUtama.value !== "") {
+            inputUtama.dispatchEvent(new Event('input', { bubbles: true }));
+            inputUtama.dispatchEvent(new Event('change', { bubbles: true }));
+            if (typeof satukanNomorML === "function") {
+                satukanNomorML();
+            }
+        }
+    }
+}, 300); // Mengecek kilat setiap 0.3 detik
+
+
+// 4. Fungsi Gunakan Nomor Favorit (Tetap dijaga agar tidak rusak)
+function gunakanNomorFavorit(nomor) {
+    var inputUtama = document.getElementById("scanner-input") || document.getElementById("idPlayer") || document.querySelector(".scanner-input");
+    if (inputUtama) {
+        inputUtama.value = nomor;
+        inputUtama.dispatchEvent(new Event('input', { bubbles: true }));
+        inputUtama.dispatchEvent(new Event('change', { bubbles: true }));
+        alert("Nomor " + nomor + " berhasil diterapkan!");
+        aksiBukaTutupFavorit();
+    }
+}
+
+</script>
+ 
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="floating-card-filter" style="background: transparent !important; box-shadow: none !important; border: none !important;">
+
+
+<!-- KODE TOMBOL GRID TAMBAHAN -->
+   <div class="view-toggle-container" style="display: flex !important; justify-content: space-between !important; align-items: center !important; width: 100% !important; padding: 0 0px !important; margin: 20px auto 0 auto !important; box-sizing: border-box !important; position: relative !important; background: transparent !important;">
+
+    <!-- 1. DROPDOWN KIRI (TERENDAH / TERMAHAL) -->
+    <div style="position: relative;">
+         <div id="text-urut" onclick="document.getElementById('dropdown-menu').style.display = document.getElementById('dropdown-menu').style.display === 'block' ? 'none' : 'block'" style="font-size: 14px; font-weight: bold; color: #333; cursor: pointer; user-select: none;">
+        Terendah <span style="font-size: 10px;">▼</span>
+    </div>
+    <div id="dropdown-menu" style="display: none; position: absolute; top: 22px; left: 0; background: #fff; border: 1px solid #ccc; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); z-index: 99; min-width: 90px;">
+        <!-- Pilihan Terendah -->
+        <div onclick="(() => { 
+            document.getElementById('text-urut').innerHTML = 'Terendah <span style=\'font-size: 10px;\'>▼</span>'; 
+            document.getElementById('dropdown-menu').style.display='none';
+            const container = document.getElementById('productContent').querySelector('.main-card').lastElementChild;
+            const cards = Array.from(container.children);
+            cards.sort((a, b) => {
+                const priceA = parseInt(a.innerText.replace(/[^0-9]/g, '')) || 0;
+                const priceB = parseInt(b.innerText.replace(/[^0-9]/g, '')) || 0;
+                return priceA - priceB;
+            });
+            cards.forEach(card => container.appendChild(card));
+        })()" style="padding: 8px 12px; font-size: 13px; cursor: pointer; color: #333;">Terendah</div>
+        
+        <!-- Pilihan Termahal -->
+        <div onclick="(() => { 
+            document.getElementById('text-urut').innerHTML = 'Termahal <span style=\'font-size: 10px;\'>▼</span>'; 
+            document.getElementById('dropdown-menu').style.display='none';
+            const container = document.getElementById('productContent').querySelector('.main-card').lastElementChild;
+            const cards = Array.from(container.children);
+            cards.sort((a, b) => {
+                const priceA = parseInt(a.innerText.replace(/[^0-9]/g, '')) || 0;
+                const priceB = parseInt(b.innerText.replace(/[^0-9]/g, '')) || 0;
+                return priceB - priceA;
+            });
+            cards.forEach(card => container.appendChild(card));
+        })()" style="padding: 8px 12px; font-size: 13px; cursor: pointer; color: #333; border-top: 1px solid #eee;">Termahal</div>
+    </div>
+</div>
+  
+    <!-- 2. TOMBOL GRID TENGAH & PENCARIAN KANAN -->
+    <div style="display: flex; align-items: center; gap: 10px;">
+        <!-- Tombol List & Grid Asli Anda -->
+        <button id="btn-list-view" class="btn-toggle active-toggle" onclick="changeLayout('list')" style="background: #0076e4; color: #fff; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-weight: bold;">☰</button>
+        <button id="btn-grid-view" class="btn-toggle" onclick="changeLayout('grid')" style="background: #e0e0e0; color: #333; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-weight: bold;">⊞</button>
+        
+        <!-- Tombol Pencarian Kanan -->
+        <div style="display: flex; align-items: center;">
+            <input type="text" id="kolom-cari" onkeyup="(() => { const v = document.getElementById('kolom-cari').value.toLowerCase(); const cards = document.getElementById('productContent').querySelector('.main-card').lastElementChild.children; for(let i=0; i<cards.length; i++) { const t = cards[i].innerText || cards[i].textContent; cards[i].style.setProperty('display', t.toLowerCase().includes(v) ? '' : 'none', 'important'); } })()" placeholder="Cari paket..." style="display: none; width: 100px; padding: 5px; border: 1px solid #ccc; border-radius: 4px; font-size: 12px; margin-right: 5px; outline: none;">
+            <span onclick="const inp = document.getElementById('kolom-cari'); if(inp.style.display==='none'){ inp.style.display='block'; inp.focus(); }else{ inp.style.display='none'; inp.value=''; const cards = document.getElementById('productContent').querySelector('.main-card').lastElementChild.children; for(let i=0; i<cards.length; i++) cards[i].style.setProperty('display', '', 'important'); }" style="font-size: 16px; cursor: pointer; user-select: none; padding: 5px;">🔍</span>
+        </div>
+    </div>
+
+</div>
+
+</div>
+</div>
+
+<style>
+/* CSS untuk mengaktifkan Grid 2 Kolom pada daftar produk */
+.layout-grid-dua {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+    padding: 10px !important;
+}
+/* 1. MENGHILANGKAN SEKAT BAWAAN AGAR KOTAK OTOMATIS MELOROT MENYATU */
+.input-wrapper, .floating-card {
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* 2. MEMBUAT PEMBUNGKUS LUAR MENJADI SATU KOTAK MELAYANG 3D MEWAH */
+.input-wrapper {
+    background: #ffffff !important;
+    border-radius: 20px !important;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04), 0 12px 28px -5px rgba(0, 123, 255, 0.09) !important;
+    border: 1px solid rgba(0, 123, 255, 0.06) !important;
+    margin: 15px 5px !important;
+    padding: 16px 14px !important;
+}
+
+/* 3. LAPISAN KE-2: MEMBUAT KOTAK KONTAK & FAVORIT CEKUNG INDAH DI DALAM */
+.menu {
+    background: #f4f8ff !important;
+    padding: 12px 8px !important;
+    border-radius: 14px !important;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02) !important;
+    border: none !important;
+    margin-top: 14px !important;
+    margin-bottom: 5px !important;
+}
+
+</style>
+
+<script>
+setInterval(function() {
+    const idInput = document.getElementById('idPlayer');
+    const btnCek = document.getElementById('btnCekID');
+    const btnX = document.getElementById('btnHapusX');
+    const titik = document.getElementById('iconMenuTitik');
+    
+    if (idInput && btnCek && btnX && titik) {
+        if (idInput.value.trim().length > 0) {
+            btnCek.style.setProperty('display', 'flex', 'important');
+            btnX.style.setProperty('display', 'flex', 'important');
+            titik.style.setProperty('display', 'none', 'important');
+        } else {
+            btnCek.style.setProperty('display', 'none', 'important');
+            btnX.style.setProperty('display', 'none', 'important');
+            titik.style.setProperty('display', 'flex', 'important');
+        }
+    }
+}, 200);
+
+function changeLayout(mode) {
+    // Menargetkan langsung elemen konten produk Anda
+    const productContent = document.getElementById('productContent');
+    if (!productContent) return;
+    
+    // Mencari elemen pembungkus list paket (biasanya div pertama setelah tab menu di dalam main-card)
+    // Jika struktur produk Anda langsung di dalam main-card, script ini akan otomatis menyesuaikan
+    const mainCard = productContent.querySelector('.main-card');
+    if (!mainCard) return;
+    
+    // Menargetkan elemen terakhir di dalam main-card (tempat daftar paket dirender)
+    const currentContainer = mainCard.lastElementChild;
+    
+    const btnList = document.getElementById('btn-list-view');
+    const btnGrid = document.getElementById('btn-grid-view');
+
+    if (mode === 'grid') {
+        currentContainer.classList.add('layout-grid-dua');
+        btnGrid.style.backgroundColor = '#0076e4';
+        btnGrid.style.color = '#fff';
+        btnList.style.backgroundColor = '#e0e0e0';
+        btnList.style.color = '#333';
+    } else {
+        currentContainer.classList.remove('layout-grid-dua');
+        btnList.style.backgroundColor = '#0076e4';
+        btnList.style.color = '#fff';
+        btnGrid.style.backgroundColor = '#e0e0e0';
+        btnGrid.style.color = '#333';
+    }
+}
+</script>
+<!-- AKHIR KODE TOMBOL GRID TAMBAHAN -->
+
+<div class="product-content" id="productContent">
+    <div class="main-card">
+        <div class="subcategory-tab-header" id="subcategoryTabMenu"></div>
+        <div id="produkContainer" class="product-grid"></div>
+    </div>
+</div>
+
+<div id="transactionOverlay" class="overlay" onclick="closeTransactionPopup(event)">
+    <div class="popup">
+        <div class="drag-line"></div>
+        <div class="product-name-large" id="transProductName">-</div>
+        <div class="sub-meta" id="transMeta">PDAM Ntt</div>
+        <div class="price-row">
+            <span class="price-label">Status Tagihan</span>
+
+            <span class="price-value" id="transNominal">-</span>
+        </div>
+        <div class="divider-line"></div>
+        <div class="description-header">
+            <img id="transIcon" class="desc-icon" src="https://cdn-icons-png.flaticon.com/128/9554/9554529.png" alt="icon produk">
+            <div class="desc-title">Deskripsi Produk</div>
+        </div>
+        <div class="description-text" id="transDescription">-</div>
+        <div class="action-buttons">
+            <button class="btn-later" onclick="closeTransactionPopupManual()">Nanti</button>
+         <button class="btn-buy" onclick="kirimPascabayarBypass()">Lanjutkan</button>
+   
+
+        </div>
+    </div>
+</div>
+
+<div id="favoritOverlay" class="overlay" onclick="closeFavoritPopup(event)">
+    <div class="popup">
+        <div class="drag-line"></div>
+        <div class="title">Daftar ID Pelanggan Favorit</div>
+        <div id="favoriteListContainer" class="favorite-list"></div>
+        <button class="close-fav-popup" onclick="closeFavoritPopupManual()">Tutup</button>
+    </div>
+</div>
+
+<div id="notifOverlay" class="notification-overlay">
+    <div class="notification-popup">
+        <p>📞 ID Pelanggan: <strong id="currentNumberDisplay"></strong></p>
+        <div class="notification-buttons">
+            <button class="notif-btn notif-btn-save" id="notifSaveBtn">Simpan</button>
+            <button class="notif-btn notif-btn-view" id="notifViewBtn">Lihat Daftar</button>
+        </div>
+    </div>
+</div>
+
+<div id="iosToast" class="ios-toast"></div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    const token = "eyJhcHAiOiIxODM5OTEiLCJhdXRoIjoiMjAyNjA0MTIiLCJzaWduIjoiNFwvUkF2WVhZRGx3XC9vUnk3dFZwUFVBPT0ifQ==";
+
+    let allCategories = [];
+    let currentSubCategories = [];
+    let currentProducts = [];
+    let productCache = {};
+    let currentCategoryId = null;
+    let currentCategoryName = "";
+    let selectedProductData = null;
+
+    async function fetchCategoriesFromAPI() {
+        const produkContainer = document.getElementById('produkContainer');
+        const tabMenu = document.getElementById('subcategoryTabMenu');
+        
+        if (produkContainer) {
+            produkContainer.innerHTML = `<div class="loading-spinner"><div></div><p style="margin-top: 20px; color: #999;">Memuat data KUOTA...</p></div>`;
+        }
+        if (tabMenu) {
+            tabMenu.innerHTML = `<div style="padding: 10px; text-align: center; color: #999;"><div class="loading-spinner" style="padding: 20px;"><div></div><p style="margin-top: 10px;">Loading kategori KUOTA...</p></div></div>`;
+        }
+        
+        if (!token || token.trim() === '') {
+            return false;
+        }
+        
+        try {
+            const response = await fetch(`https://openapi.bukaolshop.net/v1/app/kategori?token=${token}`);
+            
+            if (!response.ok) {
+                return false;
+            }
+            
+            const data = await response.json();
+            
+            if (!data || !data.data || data.data.length === 0) {
+                return false;
+            }
+            
+            allCategories = data.data;
+            return true;
+            
+        } catch (error) {
+            return false;
+        }
+    }
+
+    function findTVCategory() {
+        const searchTerms = ["pdam ntt",];
+        
+        for (const category of allCategories) {
+            const catNameLower = (category.nama_kategori || '').toLowerCase();
+            for (const term of searchTerms) {
+                if (catNameLower.includes(term)) {
+                    category.nama_kategori = "PDAM Ntt";
+                    return category;
+                }
+            }
+        }
+        
+        for (const category of allCategories) {
+            const catNameLower = (category.nama_kategori || '').toLowerCase(); 
+            {
+                category.nama_kategori = "PDAM Ntt";
+                return category;
+            }
+        }
+        
+        if (allCategories.length > 0) {
+            allCategories[0].nama_kategori = "PDAM Ntt";
+            return allCategories[0];
+        }
+        
+        return null;
+    }
+
+    function getAllSubCategories() {
+        let allSubCategories = [];
+        
+        const tvCategory = findTVCategory();
+        
+        if (tvCategory) {
+            if (tvCategory.sub_kategori && tvCategory.sub_kategori.length > 0) {
+                for (const sub of tvCategory.sub_kategori) {
+                    const subId = sub.id_kategori || sub.id_sub_kategori || sub.id;
+                    let subName = sub.nama_sub_kategori || 
+                                  sub.nama_kategori || 
+                                  sub.name || 
+                                  sub.nama ||
+                                  sub.sub_kategori_nama ||
+                                  `Sub Kategori ${subId}`;
+                    
+                    allSubCategories.push({
+                        id: subId,
+                        name: subName
+                    });
+                }
+            }
+            
+            if (allSubCategories.length === 0) {
+                const catId = tvCategory.id_kategori || tvCategory.id;
+                const catName = tvCategory.nama_kategori || tvCategory.name || "PDAM Ntt";
+                allSubCategories.push({
+                    id: catId,
+                    name: catName
+                });
+            }
+        }
+        
+        return allSubCategories;
+    }
+
+    function renderSubCategoryTabs(subCategories) {
+        const tabMenu = document.getElementById('subcategoryTabMenu');
+        if (!tabMenu) return;
+        if (subCategories.length === 0) {
+    tabMenu.style.display = 'none';
+    tabMenu.innerHTML = `<div style="padding: 10px; text-align: center; color: #999;">Tidak ada sub kategori</div>`;
+    const container = document.getElementById('produkContainer');
+    if (container) {
+        container.innerHTML = `<div style="text-align: center; padding: 40px; color: #999;">Tidak ada produk TV tersedia</div>`;
+    }
+    return;
+}
+
+if (subCategories.length === 1) {
+    tabMenu.style.setProperty('display', 'none', 'important');
+} else {
+    tabMenu.style.setProperty('display', 'flex', 'important');
+}
+
+
+               
+        let html = '';
+        subCategories.forEach((sub, index) => {
+            const activeClass = index === 0 ? 'active' : '';
+            html += `<div class="subcategory-tab-btn ${activeClass}" data-category-id="${sub.id}" data-category-name="${sub.name}">${escapeHtml(sub.name)}</div>`;
+        });
+        
+        tabMenu.innerHTML = html;
+        
+        const firstSub = subCategories[0];
+        if (firstSub) {
+            currentCategoryId = firstSub.id;
+            currentCategoryName = firstSub.name;
+            loadProducts(firstSub.id);
+        }
+        
+        const tabBtns = document.querySelectorAll('#subcategoryTabMenu .subcategory-tab-btn');
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                tabBtns.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                const categoryId = this.getAttribute('data-category-id');
+                currentCategoryId = categoryId;
+                currentCategoryName = this.getAttribute('data-category-name');
+                
+                loadProducts(categoryId);
+            });
+        });
+    }
+
+    function hitungDiskon(hargaAsli, hargaPromo) {
+        if (!hargaAsli || hargaAsli <= hargaPromo || hargaAsli === 0) return null;
+        return Math.round(((hargaAsli - hargaPromo) / hargaAsli) * 100);
+    }
+
+    function sortProductsByPriceAsc(products) {
+        return [...products].sort((a, b) => (a.harga_produk || 0) - (b.harga_produk || 0));
+    }
+
+    async function loadProducts(categoryId) {
+        if (!categoryId) {
+            const container = document.getElementById('produkContainer');
+            if (container) {
+                container.innerHTML = `<div style="text-align: center; padding: 40px; color: #999;">Kategori TV tidak tersedia</div>`;
+            }
+            return;
+        }
+        
+        if (productCache[categoryId]) {
+            currentProducts = productCache[categoryId];
+            const sortedProducts = sortProductsByPriceAsc(currentProducts);
+            renderProductsToGrid(sortedProducts);
+            return;
+        }
+
+        const container = document.getElementById('produkContainer');
+        if (container) {
+            container.innerHTML = `<div class="loading-spinner"><div></div><p style="margin-top: 20px; color: #999;">Memuat Produk KUOTA....</p></div>`;
+        }
+
+        try {
+            let page = 1;
+            let allProducts = [];
+
+            async function fetchPage() {
+                const response = await fetch(`https://openapi.bukaolshop.net/v1/app/produk?token=${token}&id_kategori=${categoryId}&page=${page}`);
+                const data = await response.json();
+                
+                if (data.data && data.data.length > 0) {
+                    allProducts = allProducts.concat(data.data);
+                    if (data.data.length === 10) {
+                        page++;
+                        await fetchPage();
+                    }
+                }
+                return allProducts;
+            }
+
+            await fetchPage();
+            
+            currentProducts = allProducts;
+            productCache[categoryId] = allProducts;
+            
+            const sortedProducts = sortProductsByPriceAsc(currentProducts);
+            renderProductsToGrid(sortedProducts);
+        } catch (error) {
+            if (container) {
+                container.innerHTML = `<div style="text-align: center; padding: 40px; color: #999;">Gagal memuat paket TV</div>`;
+            }
+        }
+    }
+
+    function renderProductsToGrid(products) {
+        const container = document.getElementById('produkContainer');
+        if (!container) return;
+        
+        if (!products || products.length === 0) {
+            container.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 40px; color: #999; font-size: 12px;">
+                    <img src="https://cdn-icons-png.flaticon.com/128/7023/7023038.png" style="width: 80px; margin-bottom:10px;">
+                    <p>Produk KUOTA belum tersedia</p>
+                </div>`;
+            return;
+        }
+        
+        let html = '';
+        
+        products.forEach(product => {
+            const productName = product.nama_produk || 'Produk TV';
+            const productPrice = product.harga_produk || 0;
+            const productOriginalPrice = product.harga_produk_asli || 0;
+            const productImg = product.url_gambar_produk || 'https://cdn-icons-png.flaticon.com/128/6165/6165611.png';
+            const productDesc = product.deskripsi_produk || product.deskripsi_panjang || 'Tidak ada deskripsi';
+            const productUrl = product.url_produk || '';
+            const stok = product.stok ?? 1;
+            const isOutOfStock = stok <= 0;
+ const isGangguan = product.status_produk === 'gangguan' || product.status === 'gangguan' || product.status === '0' || product.status === 0 || product.status === false || product.multi === '0' || product.server_status === '0';
+const statusBadge = isGangguan ? '<span class="status-gangguan">⚠️ GANGGUAN</span>' : '';
+   
+
+  
+     const diskonPersen = hitungDiskon(productOriginalPrice, productPrice);
+            const isPromo = diskonPersen !== null && !isOutOfStock;
+            const formattedPrice = '<span style="color: #007bff; font-weight: bold;">Cek Bayar</span>';
+
+   const formattedOriginalPrice = '';
+       let ribbonHtml = '';
+if (isGangguan) {
+    ribbonHtml = `<div class="ribbon gangguan">GANGGUAN</div>`;
+} else if (isOutOfStock) {
+    ribbonHtml = `<div class="ribbon out-of-stock">STOK KOSONG</div>`;
+} else if (isPromo) {
+    ribbonHtml = `<div class="ribbon discount">DISKON ${diskonPersen}%</div>`;
+}
+    
+                        
+            let clickableClass = (!isOutOfStock && !isGangguan) ? '' : 'disabled';
+let disabledAttr = (isOutOfStock || isGangguan) ? 'disabled' : '';
+
+            
+            let priceSectionHtml = `
+                ${isPromo ? `<div class="price-strike">${formattedOriginalPrice}</div>` : ''}
+                <div class="price-real">${formattedPrice}</div>
+            `;
+            
+            html += `
+                <div class="product-card ${clickableClass}" 
+                     data-product-name="${escapeHtml(productName)}" 
+                     data-product-price="${productPrice}" 
+                     data-product-desc="${escapeHtml(productDesc)}" 
+                     data-product-img="${productImg}" 
+                     data-product-original-price="${productOriginalPrice}" 
+                     data-out-of-stock="${isOutOfStock}" 
+                     data-product-id="${product.id_produk || ''}"
+                     data-product-url="${escapeHtml(productUrl)}"
+                     ${disabledAttr}>
+                    ${ribbonHtml}
+                    <div class="product-card-top">
+                        <img class="product-img" src="${productImg}" alt="produk" onerror="this.src='https://cdn-icons-png.flaticon.com/128/6165/6165611.png'">
+                        <div class="product-title">${escapeHtml(productName)}</div>
+                    </div>
+                    <div class="product-price-section">
+                        ${priceSectionHtml}
+                    </div>
+                </div>
+            `;
+        });
+        
+        container.innerHTML = html;
+        
+        document.querySelectorAll('#produkContainer .product-card:not(.disabled)').forEach(card => {
+            card.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                const isOutOfStock = this.getAttribute('data-out-of-stock') === 'true';
+                
+                if (isOutOfStock) return;
+                
+      const customerId = "BYPASS";
+
+           
+                selectedProductData = {
+                    id: this.getAttribute('data-product-id'),
+                    name: this.getAttribute('data-product-name'),
+                    price: parseInt(this.getAttribute('data-product-price')),
+                    originalPrice: parseInt(this.getAttribute('data-product-original-price')),
+                    desc: this.getAttribute('data-product-desc'),
+                    img: this.getAttribute('data-product-img'),
+                    url_produk: this.getAttribute('data-product-url')
+                };
+                showTransactionPopup(this);
+            });
+        });
+    }
+
+    async function loadTVData() {
+        const subCategories = getAllSubCategories();
+        currentSubCategories = subCategories;
+        renderSubCategoryTabs(subCategories);
+    }
+
+    function escapeHtml(str) {
+        if (!str) return '';
+        return str.replace(/[&<>]/g, function(m) {
+            if (m === '&') return '&';
+            if (m === '<') return '<';
+            if (m === '>') return '>';
+            return m;
+        });
+    }
+
+    function showToast(message, duration = 2500) {
+        const toast = document.getElementById('iosToast');
+        toast.textContent = message;
+        toast.classList.add('show');
+        setTimeout(() => {
+            toast.classList.remove('show');
+        }, duration);
+    }
+
+    function clearCustomerInput() {
+        const customerInput = document.getElementById('userId');
+        customerInput.value = '';
+    }
+
+    function showTransactionPopup(productCard) {
+    const customerId = "BYPASS";
+
+        if (!customerId) {
+            showToast('Masukkan ID Pelanggan terlebih dahulu!', 2000);
+            return;
+        }
+        
+        const name = productCard.getAttribute('data-product-name');
+        const price = productCard.getAttribute('data-product-price');
+        const desc = productCard.getAttribute('data-product-desc');
+        
+        const formattedPrice = 'Cek & Bayar';
+
+        
+        document.getElementById('transProductName').innerText = name;
+        document.getElementById('transNominal').innerText = formattedPrice;
+        document.getElementById('transDescription').innerHTML = desc;
+        document.getElementById('transIcon').src = "https://cdn-icons-png.flaticon.com/128/9554/9554529.png";
+        
+        
+    }
+
+    function closeTransactionPopup(e) {
+        if (e && e.target && e.target.id === "transactionOverlay") {
+            document.getElementById('transactionOverlay').classList.remove('active');
+        }
+    }
+
+    function closeTransactionPopupManual() {
+        document.getElementById('transactionOverlay').classList.remove('active');
+    }
+
+    function buyProduct() {
+         const customerId = (document.getElementById('userId') || document.querySelector('.scanner-input') || {value:''}).value.trim();
+
+       
+        if (!customerId) {
+            showToast('Masukkan ID Pelanggan terlebih dahulu!', 2000);
+            return;
+        }
+if (selectedProductData) {
+    // 1. Ambil ID Produk Bukaolshop secara langsung
+    const productId = selectedProductData.id;
+    
+    // 2. Buat URL Checkout Pascabayar Resmi Bukaolshop secara manual
+    // Mengarahkan langsung ke halaman pembayaran dengan parameter nomor pelanggan (catatan)
+    const urlPascabayar = `/buka/produk/${productId}?catatan=${encodeURIComponent(customerId)}`;
+    
+    console.log("Mengalihkan ke checkout pascabayar manual: " + urlPascabayar);
+    
+    // 3. Eksekusi perpindahan halaman tanpa macet
+    window.location.href = urlPascabayar;
+    return;
+}
+
+             
+        if (selectedProductData && selectedProductData.id) {
+            const baseUrl = "https://" + window.location.hostname;
+            const productSlug = (selectedProductData.name || 'produk-tv')
+                .toLowerCase()
+                .replace(/[^a-z0-9]+/g, '-');
+            const url = `${baseUrl}/produk/${productSlug}-${selectedProductData.price}-${selectedProductData.id}`;
+            window.location.href = `${url}?catatan=${encodeURIComponent(customerId)}`;
+            return;
+        }
+        
+        showToast('Terjadi kesalahan: URL produk tidak ditemukan', 2000);
+    }
+
+    function saveFavoriteNumber(number) {
+        if (!number || number.trim() === '') {
+            showToast('Masukkan ID Pelanggan terlebih dahulu!', 2000);
+            return false;
+        }
+        let favorites = JSON.parse(localStorage.getItem('favoriteNumbers')) || [];
+        if (favorites.includes(number)) {
+            showToast(`ID ${number} sudah ada di daftar favorit!`, 2500);
+            return false;
+        }
+        favorites.push(number);
+        localStorage.setItem('favoriteNumbers', JSON.stringify(favorites));
+        showToast(`✓ ID ${number} berhasil disimpan ke favorit!`, 2500);
+        return true;
+    }
+
+    function removeFavoriteNumber(number) {
+        let favorites = JSON.parse(localStorage.getItem('favoriteNumbers')) || [];
+        const newFavorites = favorites.filter(fav => fav !== number);
+        localStorage.setItem('favoriteNumbers', JSON.stringify(newFavorites));
+        showToast(`ID ${number} dihapus dari favorit`, 2000);
+        if (document.getElementById('favoritOverlay').classList.contains('active')) {
+            displayFavoriteList();
+        }
+    }
+
+    function selectFavoriteNumber(number) {
+        const customerInput = document.getElementById('userId');
+        customerInput.value = number;
+        closeFavoritPopupManual();
+        showToast(`ID ${number} dipilih`, 1500);
+    }
+
+    function displayFavoriteList() {
+        const container = document.getElementById('favoriteListContainer');
+        const favorites = JSON.parse(localStorage.getItem('favoriteNumbers')) || [];
+        if (favorites.length === 0) {
+            container.innerHTML = '<div class="empty-favorite">Belum ada ID favorit. Simpan ID dari halaman utama.</div>';
+            return;
+        }
+        let html = '';
+        favorites.forEach(number => {
+            html += `<div class="favorite-item" onclick="selectFavoriteNumber('${escapeHtml(number)}')"><span class="favorite-number">📞 ${escapeHtml(number)}</span><button class="delete-fav" onclick="event.stopPropagation(); removeFavoriteNumber('${escapeHtml(number)}')">✖</button></div>`;
+        });
+        container.innerHTML = html;
+    }
+
+    function openFavoritePopup() {
+        displayFavoriteList();
+        document.getElementById('favoritOverlay').classList.add('active');
+    }
+
+    function closeFavoritPopup(e) {
+        if (e && e.target && e.target.id === "favoritOverlay") {
+            document.getElementById('favoritOverlay').classList.remove('active');
+        }
+    }
+
+    function closeFavoritPopupManual() {
+        document.getElementById('favoritOverlay').classList.remove('active');
+    }
+
+    function handleFavoriteClick() {
+        const currentNumber = document.getElementById('userId').value.trim();
+        if (currentNumber === '') {
+            openFavoritePopup();
+        } else {
+            showFavoriteNotification(currentNumber);
+        }
+    }
+
+    function showFavoriteNotification(number) {
+        const numberDisplay = document.getElementById('currentNumberDisplay');
+        numberDisplay.textContent = number;
+        document.getElementById('notifOverlay').style.display = 'flex';
+    }
+
+    function closeNotification() {
+        document.getElementById('notifOverlay').style.display = 'none';
+    }
+
+    function handleNotifSave() {
+        const currentNumber = document.getElementById('userId').value.trim();
+        if (currentNumber !== '') {
+            saveFavoriteNumber(currentNumber);
+        }
+        closeNotification();
+    }
+
+    function handleNotifView() {
+        closeNotification();
+        openFavoritePopup();
+    }
+
+    window.addEventListener('DOMContentLoaded', async function() {
+        await fetchCategoriesFromAPI();
+        
+        const favoritMenuItem = document.getElementById('favoritBtn');
+        if (favoritMenuItem) {
+            favoritMenuItem.addEventListener('click', function(e) {
+                e.preventDefault();
+                handleFavoriteClick();
+            });
+        }
+        
+        document.getElementById('notifSaveBtn').addEventListener('click', handleNotifSave);
+        document.getElementById('notifViewBtn').addEventListener('click', handleNotifView);
+        
+        const notifOverlayElem = document.getElementById('notifOverlay');
+        notifOverlayElem.addEventListener('click', function(e) {
+            if (e.target === notifOverlayElem) {
+                closeNotification();
+            }
+        });
+        
+        loadTVData();
+    });
+
+function toggleInfoBaru() {
+    var boks = document.getElementById("kotak-info-baru");
+    var panah = document.getElementById("panah-info");
+    
+    if (boks.classList.contains("buka-kotak")) {
+        boks.classList.remove("buka-kotak");
+        panah.classList.remove("putar-panah");
+    } else {
+        boks.classList.add("buka-kotak");
+        panah.classList.add("putar-panah");
+    }
+}
+
+    const kotakInputBukaolshop = document.querySelector('.input-box');
+    const kolomTeksIdPlayer = document.getElementById('idPlayer');
+
+    if (kotakInputBukaolshop && kolomTeksIdPlayer) {
+        kolomTeksIdPlayer.addEventListener('focus', function() {
+            kotakInputBukaolshop.style.setProperty('border', '1.5px solid #006aff', 'important');
+            kotakInputBukaolshop.style.setProperty('box-shadow', '0 0 8px rgba(0, 106, 255, 0.2)', 'important');
+        });
+
+        kolomTeksIdPlayer.addEventListener('blur', function() {
+            kotakInputBukaolshop.style.setProperty('border', '1px solid #e0e0e0', 'important');
+            kotakInputBukaolshop.style.setProperty('box-shadow', 'none', 'important');
+        });
+    }
+// ==========================================
+// KODE AKTIVASI CEK ID & KOTAK INFO DINAMIS
+// ==========================================
+(function() {
+    const inputId = document.getElementById('idPlayer');
+    const tombolCek = document.getElementById('btnCekID');
+    const inputBox = document.querySelector('.input-box');
+
+    if (!inputId || !tombolCek || !inputBox) return;
+
+    // 1. BUAT KOTAK INFO PELANGGAN SECARA OTOMATIS (Aman, tidak merusak HTML asli)
+    const kotakInfo = document.createElement('div');
+    kotakInfo.id = 'kotakResponDinamis';
+    kotakInfo.style.cssText = 'display: none !important; background: #ffffff !important; border: 1px solid #e0e0e0 !important; border-radius: 12px !important; padding: 12px !important; margin: 12px auto !important; width: 100% !important; box-sizing: border-box !important; box-shadow: 0 4px 12px rgba(0,0,0,0.05) !important;';
+    kotakInfo.innerHTML = `
+        <div style="font-weight: bold !important; font-size: 13px !important; color: #333333 !important; margin-bottom: 8px !important; border-bottom: 1px dashed #e0e0e0 !important; padding-bottom: 4px !important;">ℹ️ Info Pelanggan</div>
+        <table style="width: 100% !important; font-size: 13px !important; border-collapse: collapse !important;">
+            <tr>
+                <td style="color: #666666 !important; padding: 4px 0 !important; width: 35% !important;">Respon</td>
+                <td id="teksResponDinamis" style="font-weight: bold !important; color: #0081ff !important; padding: 4px 0 !important;">-</td>
+            </tr>
+        </table>
+    `;
+    // Memasukkan kotak info tepat di bawah kotak input nomor tujuan
+    inputBox.parentNode.insertBefore(kotakInfo, inputBox.nextSibling);
+
+    // 2. KONTROL MUNCUL & SEMBUNYI SAAT MENGETIK ATAU MENGHAPUS
+    inputId.addEventListener('input', function() {
+        if (inputId.value.trim().length > 0) {
+            tombolCek.style.setProperty('display', 'flex', 'important');
+        } else {
+            // Jika kolom kosong/dihapus bersih, tombol dan kotak info ikut hilang seketika
+            tombolCek.style.setProperty('display', 'none', 'important');
+            kotakInfo.style.setProperty('display', 'none', 'important');
+        }
+    });
+
+    // 3. MENYAMBUNGKAN TOMBOL CEK ID KE OPEN API KUOTA (Sudah Dilengkapi Proteksi Huruf)
+    window.cekIDPlayer = function() {
+        const idUser = inputId.value.trim();
+        const kolomRespon = document.getElementById('teksResponDinamis');
+
+        if (!idUser) {
+            alert('Silakan masukkan ID Player terlebih dahulu!');
+            return;
+        }
+
+        // Tampilkan kotak info pelanggan
+        kotakInfo.style.setProperty('display', 'block', 'important');
+
+        // PROTEKSI: Jika inputan berisi huruf (bukan angka), stop agar server API tidak crash
+        if (isNaN(idUser)) {
+            if (kolomRespon) kolomRespon.innerHTML = '<span style="color: red !important;">Format ID harus berupa angka!</span>';
+            return;
+        }
+
+        // Animasi loading pada tombol dan kotak info
+        const teksAsliTombol = tombolCek.innerHTML;
+        tombolCek.innerHTML = 'Memeriksa...';
+        tombolCek.disabled = true;
+        if (kolomRespon) kolomRespon.innerHTML = '<span style="color: #666666 !important;">Sedang memeriksa id...</span>';
+
+        // INTEGRASI OPEN API (Menggunakan API Jombloapi sebagai jembatan tes gratis)
+        // Di kemudian hari, Anda tinggal mengganti URL di bawah ini sesuai dengan Open API berbayar Anda
+        fetch(`https://jombloapi.xyz{idUser}`)
+            .then(res => res.json())
+            .then(hasil => {
+                tombolCek.innerHTML = teksAsliTombol;
+                tombolCek.disabled = false;
+
+                if (hasil && hasil.data && hasil.data.username) {
+                    // JIKA BERHASIL: Nickname muncul di kotak info pelanggan
+                    if (kolomRespon) kolomRespon.innerHTML = hasil.data.username;
+                    
+                    // Otomatis salin nickname ke kolom catatan pesanan Bukaolshop
+                    const catatan = document.getElementById('catatan');
+                    if (catatan) catatan.value = `Nick: ${hasil.data.username}`;
+                } else {
+                    if (kolomRespon) kolomRespon.innerHTML = '<span style="color: red !important;">ID Tidak Ditemukan!</span>';
+                }
+            })
+            .catch(() => {
+                tombolCek.innerHTML = teksAsliTombol;
+                tombolCek.disabled = false;
+                // Jika API gangguan, halaman produk bawah dijamin tetap AMAN dan TIDAK AKAN HILANG
+                if (kolomRespon) kolomRespon.innerHTML = '<span style="color: red !important;">Server API Gangguan!</span>';
+            });
+    };
+})();
+</script>
+
+<script>
+setInterval(function() {
+    const inputId = document.getElementById("idPlayer");
+    if (inputId) {
+        let nomor = inputId.value;
+        let sudahBerubah = false;
+
+        if (nomor.startsWith("+62")) {
+            inputId.value = "0" + nomor.slice(3);
+            sudahBerubah = true;
+        } else if (nomor.startsWith("62")) {
+            inputId.value = "0" + nomor.slice(2);
+            sudahBerubah = true;
+        }
+
+        // Kuncinya di sini: Pemicu input hanyakan berjalan SATU KALI saat nomor diganti ke 0
+        if (sudahBerubah) {
+            inputId.dispatchEvent(new Event('input', { bubbles: true }));
+            inputId.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+    }
+}, 500);
+</script>
+
+
+<script>
+var kotakBesar = document.querySelector('.input-box');
+var inputKecil = document.getElementById('idPlayer');
+if (kotakBesar && inputKecil) {
+  inputKecil.addEventListener('focus', function() {
+    setTimeout(function() {
+      kotakBesar.style.setProperty('border-color', '#e0e0e0', 'important');
+      kotakBesar.style.setProperty('box-shadow', 'none', 'important');
+    }, 10);
+  });
+}
+
+});
+
+// Fungsi Sakelar Buka Tutup Menu Info (Anti Gagal Sistem Bukaolshop)
+function aksiBukaTutupInfo() {
+    var area = document.getElementById("areaInfoTransaksi");
+    if (area.style.getPropertyValue('display') === 'none' || area.style.display === 'none') {
+        area.style.setProperty('display', 'block', 'important');
+        
+        // Otomatis menutup panel favorit jika sedang terbuka agar tidak tumpang tindih
+        var areaFav = document.getElementById("areaDaftarFavorit");
+        if (areaFav) areaFav.style.setProperty('display', 'none', 'important');
+    } else {
+        area.style.setProperty('display', 'none', 'important');
+    }
+}
+
+
+</script>
+<script>
+// Fungsi otomatis berjalan berulang untuk memaksa nomor hasil scan masuk kolom
+var cekHasilScan = setInterval(function() {
+    var kolomInput = document.getElementById('scanner-input');
+    
+    if (kolomInput) {
+        // 1. Cek parameter URL bawaan webview aplikasi
+        const urlParams = new URLSearchParams(window.location.search);
+        let nomorFinal = urlParams.get('catatan') || urlParams.get('nomor') || urlParams.get('scan') || '';
+        
+        // 2. Jika URL kosong, cek langsung shortcode teks bawaan aplikasi BukaOlshop
+        if (!nomorFinal || nomorFinal === 'null') {
+            nomorFinal = "{{hasil_kontak}}";
+        }
+        
+        // Bersihkan teks saringan template kosong bawaan sistem
+        if (nomorFinal && nomorFinal !== '{{hasil_kontak}}' && nomorFinal !== '[nomor_hp]' && nomorFinal !== 'null') {
+            // Hilangkan semua spasi di antara nomor meteran (contoh: 14 3601 8991 5 menjadi 14360189915)
+            var nomorBersih = nomorFinal.replace(/[^0-9]/g, '');
+            
+            if (nomorBersih !== "" && kolomInput.value !== nomorBersih) {
+                // Tulis paksa nomor ke dalam kolom input utama Anda
+                kolomInput.value = nomorBersih;
+                
+                // Hentikan pengecekan berulang karena nomor sudah berhasil masuk
+                clearInterval(cekHasilScan);
+                
+                // Memicu otomatis kemunculan daftar harga di bawahnya
+                if (typeof satukkanNomorML === "function") {
+                    satukkanNomorML();
+                }
+            }
+        }
+    }
+}, 300); // Mengecek otomatis setiap 0,3 detik secara agresif
+
+// Pengaman otomatis: Matikan fungsi setelah 5 detik agar baterai HP user tidak boros
+setTimeout(function() {
+    clearInterval(cekHasilScan);
+}, 5000);
+
+function kirimPascabayarBypass() {
+    // 1. Ambil nomor ID Pelanggan dari kolom input
+    const inputUser = document.getElementById('userId') || document.querySelector('.scanner-input');
+    const customerId = inputUser ? inputUser.value.trim() : '';
+    
+    // Validasi jika belum diisi
+    if (!customerId) {
+        alert("Silakan masukkan ID Pelanggan terlebih dahulu!");
+        return;
+    }
+    
+    // 2. Ambil ID Produk Bukaolshop yang sedang aktif di pop-up secara aman
+    let productId = '';
+    if (typeof selectedProductData !== 'undefined' && selectedProductData && selectedProductData.id) {
+        productId = selectedProductData.id;
+    } else {
+        // Jika variabel template eror, kita cari ID dari elemen kartu produk yang diklik
+        const activeCard = document.querySelector('.product-card.active') || document.querySelector('.selected-product');
+        if (activeCard) {
+            productId = activeCard.getAttribute('data-id') || activeCard.id;
+        }
+    }
+    
+    // Jika ID Produk tidak ketemu sama sekali, gunakan fungsi submit form bawaan tema
+    if (!productId) {
+        const formUtama = document.getElementById('kotakFormUtama') || document.querySelector('form');
+        if (formUtama) {
+            formUtama.submit();
+        } else {
+            alert("Sistem sedang memuat produk, silakan klik ulang produk.");
+        }
+        return;
+    }
+    
+    // 3. Lempar langsung ke halaman transaksi pascabayar resmi Bukaolshop
+     // GANTI DENGAN KODE BARU INI:
+const urlTujuan = window.location.origin + '/produk/' + productId + '?catatan=' + encodeURIComponent(customerId);
+   console.log("Bypass ke: " + urlTujuan);
+    window.location.href = urlTujuan;
+}
+
+</script>
+
+
+
+
+
+
+<!-- KODE CSS & JAVASCRIPT FINAL: MELENYAPKAN PRODUK DI BAWAH SECARA MUTLAK -->
+<style>
+/* 1. Menyembunyikan visual pop-up bawaan agar tidak mengedip */
+.action-buttons, [class*="bottom-sheet"], [class*="modal"] {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    display: none !important;
+    pointer-events: none !important;
+}
+
+/* 2. Dinding pertahanan CSS darurat untuk menyembunyikan elemen bawah */
+#kotakFormUtama ~ div,
+#kotakFormUtama ~ *,
+.row.mb-3,
+div[class*="product"],
+div[class*="filter"] {
+    display: none !important;
+    opacity: 0 !important;
+    height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+</style>
+
+<script>
+// Fungsi Khusus untuk Melenyapkan Barisan Produk Bawah Secara Paksa via JavaScript
+function lenyapkanProdukBawah() {
+    var kotakUtama = document.getElementById('kotakFormUtama');
+    if (kotakUtama) {
+        var elemenBerikutnya = kotakUtama.nextElementSibling;
+        while (elemenBerikutnya) {
+            elemenBerikutnya.style.setProperty('display', 'none', 'important');
+            elemenBerikutnya.style.setProperty('visibility', 'hidden', 'important');
+            elemenBerikutnya.style.setProperty('height', '0', 'important');
+            elemenBerikutnya.style.setProperty('padding', '0', 'important');
+            elemenBerikutnya.style.setProperty('margin', '0', 'important');
+            elemenBerikutnya = elemenBerikutnya.nextElementSibling;
+        }
+    }
+    
+    var elemenTambahan = document.querySelectorAll('.row.mb-3, [class*="filter"], [class*="sorting"], [class*="product-list"], .card-product, .list-group');
+    elemenTambahan.forEach(function(el) {
+        el.style.setProperty('display', 'none', 'important');
+        el.style.setProperty('visibility', 'hidden', 'important');
+    });
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    // Jalankan pembersihan berkala saat halaman dimuat
+    lenyapkanProdukBawah();
+    
+    setTimeout(lenyapkanProdukBawah, 100);
+    setTimeout(lenyapkanProdukBawah, 300);
+    setTimeout(lenyapkanProdukBawah, 600);
+    setTimeout(lenyapkanProdukBawah, 1000);
+
+    var btnLanjut = document.getElementById('btnLanjutFinance');
+    if (btnLanjut) {
+        btnLanjut.addEventListener('click', function(e) {
+            e.preventDefault(); 
+
+            var providerPilihan = document.getElementById('financeProvider').value;
+            var idPelanggan = document.getElementById('userId').value.trim();
+
+            if (!providerPilihan) {
+                alert('Silakan pilih Penyedia Finance terlebih dahulu!');
+                return;
+            }
+            if (!idPelanggan) {
+                alert('Silakan masukkan ID Pelanggan Anda!');
+                return;
+            }
+
+            var inputUser = document.getElementById('userId');
+            if (inputUser) {
+                inputUser.value = idPelanggan;
+                inputUser.dispatchEvent(new Event('input', { bubbles: true }));
+            }
+
+            var namaPilihanClean = providerPilihan.toLowerCase().replace(/\s+/g, '');
+            var semuaElemenTeks = document.querySelectorAll('h3, div, span, p, a');
+            var targetProduk = null;
+
+            for (var i = 0; i < semuaElemenTeks.length; i++) {
+                if (semuaElemenTeks[i].textContent.trim().toLowerCase() === providerPilihan.toLowerCase()) {
+                    targetProduk = semuaElemenTeks[i].closest('a') || semuaElemenTeks[i].parentElement;
+                    break;
+                }
+            }
+
+            if (targetProduk) {
+                var tombolProdukBawah = targetProduk.querySelector('a') || targetProduk;
+                tombolProdukBawah.click();
+
+                setTimeout(function() {
+                    if (typeof kirimPascabayarBypass === 'function') {
+                        kirimPascabayarBypass();
+                    } else {
+                        var btnBeliAsli = document.querySelector('.btn-buy');
+                        if (btnBeliAsli) btnBeliAsli.click();
+                    }
+                    
+                    if (typeof closeTransactionPopupManual === 'function') {
+                        closeTransactionPopupManual();
+                    }
+                }, 80); 
+
+            } else {
+                alert('Sistem: Menghubungkan ke produk "' + providerPilihan + '"... Pastikan daftar produk di bawah sudah muncul di layar.');
+            }
+        });
+    }
+});
+// // Fungsi Buka Tutup Pop-up Modal (Versi Pintar & Lengkap)
+function bukaMenuSimpanNasabah() {
+    var modal = document.getElementById('modalSimpanNasabah');
+    if (modal) {
+        modal.style.display = 'block';
+    }
+
+    // OTOMATIS AMBIL NOMOR HP DARI FORM ATAS
+    var inputNomorUtama = document.getElementById('userId');
+    var inputNomorDiPopUp = document.getElementById('inputNomorLokal');
+
+    if (inputNomorUtama && inputNomorDiPopUp) {
+        if (inputNomorUtama.value.trim() !== "") {
+            inputNomorDiPopUp.value = inputNomorUtama.value;
+        }
+    }
+}
+
+function tutupMenuSimpanNasabah() {
+    var modal = document.getElementById('modalSimpanNasabah');
+    if (modal) {
+        modal.style.display = 'none';
+    }
+}
+
+
+// Fungsi me-render / menampilkan list data dari LocalStorage ke Layar
+function renderNasabahEwallet() {
+    const dataLokal = JSON.parse(localStorage.getItem('nasabah_ewallet')) || [];
+    const wadahList = document.getElementById('tempatDaftarNasabahKustom');
+    const teksKosong = document.getElementById('teksPanduanKosong');
+
+    wadahList.innerHTML = ''; // Kosongkan container sebelum diisi data terupdate
+
+    if (dataLokal.length === 0) {
+        teksKosong.style.display = 'block';
+        return;
+    }
+
+    teksKosong.style.display = 'none';
+
+    dataLokal.forEach((item, index) => {
+        const itemCard = document.createElement('div');
+        itemCard.style.cssText = "border: 1px solid #f1f5f9; border-radius: 12px; padding: 14px; display: flex; justify-content: space-between; align-items: center; background: #f8fafc; cursor: pointer;";
+        
+        // Fitur: Ketika kartu diklik, nomor HP otomatis terisi ke form input utama (id='userId')
+        itemCard.setAttribute('onclick', `isiOtomatisNomor('${item.nomor}')`);
+
+        itemCard.innerHTML = `
+            <div>
+                <div style="font-weight: bold; color: #334155; font-size: 14px; margin-bottom: 2px;">👤 ${item.nama}</div>
+                <div style="color: #64748b; font-size: 13px; font-family: monospace;">${item.nomor}</div>
+            </div>
+            <button onclick="hapusNasabahEwallet(event, ${index})" style="background: none; border: none; color: #94a3b8; font-size: 18px; cursor: pointer; padding: 0 4px;">×</button>
+        `;
+        wadahList.appendChild(itemCard);
+    });
+}
+
+// // Fungsi Simpan Data Baru Utuh (Anti Lompat ke Home)
+if (document.getElementById('formNasabahEwallet')) {
+    document.getElementById('formNasabahEwallet').addEventListener('submit', function(e) {
+        // KUNCI DARURAT: Menahan halaman agar tidak reload/kembali ke home
+        e.preventDefault(); 
+
+        const inputNama = document.getElementById('inputNamaLokal');
+        const inputNomor = document.getElementById('inputNomorLokal');
+
+        if (!inputNama || !inputNomor) return;
+
+        const nama = inputNama.value.trim();
+        const nomor = inputNomor.value.trim();
+
+        if (nama === "" || nomor === "") {
+            alert("Mohon isi Nama dan Nomor HP terlebih dahulu!");
+            return;
+        }
+
+        // Simpan data ke penyimpanan lokal HP
+        let dataLokal = JSON.parse(localStorage.getItem('nasabah_ewallet')) || [];
+        dataLokal.push({ nama: nama, nomor: nomor });
+        localStorage.setItem('nasabah_ewallet', JSON.stringify(dataLokal));
+
+        // Tutup pop-up modal dan reset form
+        tutupMenuSimpanNasabah();
+        document.getElementById('formNasabahEwallet').reset();
+
+        // Refresh daftar list di bawah agar nama langsung muncul
+        if (typeof renderNasabahEwallet === "function") {
+            renderNasabahEwallet();
+        }
+
+        alert("Nomor e-wallet berhasil disimpan ke favorit!");
+    });
+}
+
+
+// Fungsi Hapus Data Terpilih
+function hapusNasabahEwallet(event, index) {
+    event.stopPropagation(); // Mencegah form utama terisi saat klik tombol hapus
+    let dataLokal = JSON.parse(localStorage.getItem('nasabah_ewallet')) || [];
+    dataLokal.splice(index, 1);
+    localStorage.setItem('nasabah_ewallet', JSON.stringify(dataLokal));
+    renderNasabahEwallet(); // Refresh Tampilan
+}
+
+// Fungsi Mengisi otomatis kolom input nomor HP di atas
+function isiOtomatisNomor(nomorHP) {
+    // Menyesuaikan dengan target input id='userId' dari script bawaan Anda sebelumnya
+    const inputUtama = document.getElementById('userId'); 
+    if(inputUtama) {
+        inputUtama.value = nomorHP;
+        alert("Nomor berhasil diterapkan!");
+    }
+}
+
+// Jalankan fungsi tampilkan data saat halaman pertama kali dimuat
+document.addEventListener("DOMContentLoaded", function() {
+    renderNasabahEwallet();
+});
+// ========================================================
+// FUNGSI MANDIRI: MENYIMPAN DATA TANPA RELOAD/SUBMIT FORM
+// ========================================================
+function prosesSimpanManualEwallet() {
+    var inputNama = document.getElementById('inputNamaLokal');
+    var inputNomor = document.getElementById('inputNomorLokal');
+
+    if (!inputNama || !inputNomor) {
+        alert("Sistem gagal mendeteksi kolom input.");
+        return;
+    }
+
+    var nama = inputNama.value.trim();
+    var nomor = inputNomor.value.trim();
+
+    if (nama === "" || nomor === "") {
+        alert("Mohon isi Nama dan Nomor HP terlebih dahulu!");
+        return;
+    }
+
+    // Proses Simpan ke memori HP (LocalStorage)
+    var dataLokal = JSON.parse(localStorage.getItem('nasabah_ewallet')) || [];
+    dataLokal.push({ nama: nama, nomor: nomor });
+    localStorage.setItem('nasabah_ewallet', JSON.stringify(dataLokal));
+
+    // Bersihkan formulir agar kosong kembali
+    inputNama.value = "";
+    inputNomor.value = "";
+
+    // Tutup Pop-up Modal secara paksa
+    tutupMenuSimpanNasabah();
+
+    // Refresh daftar list di bawah agar nama langsung muncul di layar utama
+    if (typeof renderNasabahEwallet === "function") {
+        renderNasabahEwallet();
+    }
+
+    alert("Nomor e-wallet berhasil disimpan ke favorit!");
+}
+
+</script>
+<!-- BOTTOM SHEET POP-UP TAMBAH NASABAH -->
+<div id="modalSimpanNasabah" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 9999; font-family: sans-serif;">
+    <div style="position: absolute; bottom: 0; left: 0; right: 0; background: #ffffff; border-top-left-radius: 20px; border-top-right-radius: 20px; padding: 24px; box-shadow: 0px -4px 10px rgba(0,0,0,0.1);">
+        <div style="width: 40px; height: 4px; background: #e2e8f0; border-radius: 2px; margin: 0 auto 16px auto;"></div>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <h3 style="margin: 0; font-size: 16px; font-weight: bold; color: #1e293b;">Simpan Nomor E-Wallet</h3>
+            <button onclick="tutupMenuSimpanNasabah()" style="background: none; border: none; font-size: 22px; color: #94a3b8; cursor: pointer;">×</button>
+        </div>
+        <form id="formNasabahEwallet">
+            <div style="margin-bottom: 14px;">
+                <label style="display: block; margin-bottom: 6px; color: #64748b; font-size: 13px;">Nama Pemilik / Singkatan</label>
+                <input type="text" id="inputNamaLokal" placeholder="Contoh: Dana Ibu, Gopay Adek" required style="width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; box-sizing: border-box; font-size: 14px; outline: none;">
+            </div>
+            <div style="margin-bottom: 20px;">
+                <label style="display: block; margin-bottom: 6px; color: #64748b; font-size: 13px;">Nomor HP E-Wallet</label>
+                <input type="number" id="inputNomorLokal" placeholder="Masukkan Nomor HP" required style="width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; box-sizing: border-box; font-size: 14px; outline: none;">
+            </div>
+            <button type="submit" style="width: 100%; background: #0080ff; color: #ffffff; border: none; padding: 14px; border-radius: 24px; font-weight: bold; font-size: 14px; cursor: pointer;">Simpan ke Favorit</button>
+        </form>
+    </div>
+</div>
+
+<! -- ======================================================== --!>
+<!-- APLIKASI MANDIRI: PELANGGAN TERSIMPAN E-WALLET (1 UTUH) -->
+<!-- ======================================================== --!>
+
+<div style="margin-top: 25px !important;">
+
+<div class="floating-card" style="border-radius: 0px !important; box-shadow: none !important; background: transparent !important; background-color: transparent !important;">
+
+<div class="input-wrapper"
+style="width: 94% !important;
+margin: 12px auto 0px auto !important;
+box-sizing: border-box !important;
+padding: 0 !important;
+border-radius: 0px !important;
+background: transparent !important;
+background-color: transparent !important;">
+
+<style>
+  *:focus-within {
+    border-color: #e0e0e0 !important;
+    box-shadow: none !important;
+    outline: none !important;
+  }
+  #idPlayer:focus {
+    border-color: #007bff !important;
+    box-shadow: 0 0 4px rgba(0, 123, 255, 0.5) !important;
+    outline: none !important;
+  }  .input-box img, 
+  #btnCekID img, 
+  div[style*="display: flex"] img,
+  img[alt="Kontak"],
+  img[alt="Info"],
+  img[alt="Scan"],
+  img[alt="Favorite"] {
+      filter: none !important;
+      -webkit-filter: grayscale(0%) !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+  }
+
+</style>
+
+<!-- 1. KOTAK UTAMA YANG MEMBUNGKUS INPUT DAN MENU AKSI -->
+<div class="input-box" style="position: relative !important; width: 100% !important; 
+margin-top: -10px !important;
+background-color: #ffffff !important; border: 1px solid #e0e0e0 !important; border-radius: 20px !important; padding: 16px !important; box-sizing: border-box !important; display: flex !important; flex-direction: column !important;">
+
+<!-- KOTAK UTAMA FORM ATAS (KODE FINAL: IKON LENGKAP & RAMPING PRESTISI) -->
+<div id="kotakFormUtama" style="width: 100% !important; background-color: #ffffff !important; border: 1px solid #e0e0e0 !important; border-radius: 24px !important; padding: 14px !important; box-sizing: border-box !important; display: flex !important; flex-direction: column !important; gap: 14px !important; transition: border-color 0.3s ease !important;">
+
+
+
+
+<!-- KODE PENGGANTI: Menggeser tulisan ke atas & memperbaiki potongan bawah -->
+<div id="ewalletContainerUtama" style="background: #ffffff !important; border: 1px solid #e2e8f0 !important; border-radius: 20px !important; padding: 10px 24px 24px 24px; margin: 20px 0 35px 0; font-family: sans-serif; box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.03); display: block; clear: both;">
+
+    
+    <!-- Judul & Tombol Tambah Kebal Submit -->
+    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 24px; position: relative; z-index: 10;">
+        <span style="font-weight: bold; font-size: 15px; color: #333333;">Pelanggan Tersimpan</span>
+        <button type="button" 
+                onclick="ewallet_x_bukaModal();" 
+                style="display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; background: #0077ff !important; color: #ffffff !important; border-radius: 50%; font-size: 13px; font-weight: bold; cursor: pointer; border: none; padding: 0; box-shadow: 0 2px 4px rgba(0,119,255,0.3); position: relative; z-index: 9999;">
+            +
+        </button>
+    </div>
+
+    <!-- Kotak Konten Pembungkus List -->
+    <div style="text-align: center; padding: 10px; background: #ffffff; border-radius: 12px;">
+        <!-- Wadah Tempat Nama Muncul -->
+        <div id="ewallet_x_tempatDaftar" style="display: flex; flex-direction: column; gap: 8px; text-align: left;"></div>
+
+        <!-- Teks Panduan Jika Kosong -->
+        <div id="ewallet_x_teksKosong" style="text-align: center; color: #94a3b8; font-size: 13px; padding: 10px 0;">
+            Belum punya pelanggan tersimpan?<br>Yuk, mulai simpan nomor tujuan favoritmu!
+        </div>
+    </div>
+</div>
+
+<!-- BOTTOM SHEET POP-UP MANDIRI -->
+<div id="ewallet_x_modal" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); z-index: 999999; font-family: sans-serif;">
+    <div style="position: absolute; bottom: 0; left: 0; right: 0; background: #ffffff; border-top-left-radius: 20px; border-top-right-radius: 20px; padding: 24px; box-shadow: 0px -4px 10px rgba(0,0,0,0.2);">
+        <div style="width: 40px; height: 4px; background: #cbd5e1; border-radius: 2px; margin: 0 auto 16px auto;"></div>
+        
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <h3 style="margin: 0; font-size: 16px; font-weight: bold; color: #1e293b;">Simpan Nomor E-Wallet</h3>
+            <button type="button" onclick="ewallet_x_tutupModal();" style="background: none; border: none; font-size: 24px; color: #94a3b8; cursor: pointer;">×</button>
+        </div>
+
+        <!-- Menggunakan button type="button" agar 100% terkunci tidak bisa lari ke Home -->
+        <form onsubmit="event.preventDefault(); return false;">
+            <div style="margin-bottom: 14px;">
+                <label style="display: block; margin-bottom: 6px; color: #64748b; font-size: 13px; text-align: left;">Nama Pemilik / Singkatan</label>
+                <input type="text" id="ewallet_x_inputNama" placeholder="Contoh: Dana Ibu, Gopay Adek" required style="width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; box-sizing: border-box; font-size: 14px; outline: none;">
+            </div>
+            <div style="margin-bottom: 24px;">
+                <label style="display: block; margin-bottom: 6px; color: #64748b; font-size: 13px; text-align: left;">Nomor HP E-Wallet</label>
+                <input type="number" id="ewallet_x_inputNomor" placeholder="Masukkan Nomor HP" required style="width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; box-sizing: border-box; font-size: 14px; outline: none;">
+            </div>
+            
+            <button type="button" 
+                    onclick="ewallet_x_prosesSimpan();" 
+                    style="width: 100%; background: #0080ff; color: #ffffff; border: none; padding: 14px; border-radius: 24px; font-weight: bold; font-size: 14px; cursor: pointer; box-shadow: 0 4px 6px rgba(0,128,255,0.2);">
+                Simpan ke Favorit
+            </button>
+        </form>
+    </div>
+</div>
+
+<script>
+// ========================================================
+// JAVASCRIPT LOGIK MANDIRI ISOLASI (ANTI-BENTROK & LOMPAT)
+// ========================================================
+function ewallet_x_bukaModal() {
+    var modal = document.getElementById('ewallet_x_modal');
+    if (modal) modal.style.display = 'block';
+
+    // Otomatis intip dan salin nomor HP dari form atas jika ada (id='userId')
+    var inputAtas = document.getElementById('userId');
+    var inputBawah = document.getElementById('ewallet_x_inputNomor');
+    if (inputAtas && inputBawah && inputAtas.value.trim() !== "") {
+        inputBawah.value = inputAtas.value;
+    }
+}
+
+function ewallet_x_tutupModal() {
+    var modal = document.getElementById('ewallet_x_modal');
+    if (modal) modal.style.display = 'none';
+}
+
+function ewallet_x_prosesSimpan() {
+    var inNama = document.getElementById('ewallet_x_inputNama');
+    var inNomor = document.getElementById('ewallet_x_inputNomor');
+    if (!inNama || !inNomor) return;
+
+    var nama = inNama.value.trim();
+    var nomor = inNomor.value.trim();
+
+    if (nama === "" || nomor === "") {
+        alert("Mohon isi Nama dan Nomor HP terlebih dahulu!");
+        return;
+    }
+
+    // Simpan ke database lokal memory HP internal
+    var database = JSON.parse(localStorage.getItem('db_ewallet_aman')) || [];
+    database.push({ nama: nama, nomor: nomor });
+    localStorage.setItem('db_ewallet_aman', JSON.stringify(database));
+
+    inNama.value = "";
+    inNomor.value = "";
+    ewallet_x_tutupModal();
+    ewallet_x_render();
+    alert("Berhasil disimpan ke daftar favorit!");
+}
+
+function ewallet_x_render() {
+    var database = JSON.parse(localStorage.getItem('db_ewallet_aman')) || [];
+    var wadah = document.getElementById('ewallet_x_tempatDaftar');
+    var teksKosong = document.getElementById('ewallet_x_teksKosong');
+    
+    if (!wadah) return;
+    wadah.innerHTML = ''; 
+
+    if (database.length === 0) {
+        if (teksKosong) teksKosong.style.display = 'block';
+        return;
+    }
+
+    if (teksKosong) teksKosong.style.display = 'none';
+
+    database.forEach(function(item, index) {
+        var card = document.createElement('div');
+        card.style.cssText = "border: 1px solid #f1f5f9; border-radius: 12px; padding: 14px; display: flex; justify-content: space-between; align-items: center; background: #f8fafc; cursor: pointer; margin-bottom: 8px;";
+        
+        // Klik nama langsung isi otomatis form input HP atas Anda (id='userId')
+        card.setAttribute('onclick', "var inputAtas = document.getElementById('userId'); if(inputAtas){ inputAtas.value='" + item.nomor + "'; }");
+        card.innerHTML = "<div>" +
+            "<div style='font-weight: bold; color: #334155; font-size: 14px; margin-bottom: 2px;'>👤 " + item.nama + "</div>" +
+            "<div style='color: #64748b; font-size: 13px; font-family: monospace;'>" + item.nomor + "</div>" +
+            "</div>" +
+            "<span onclick='ewallet_x_hapus(event, " + index + ")' style='color: #94a3b8; font-size: 18px; cursor: pointer; padding: 0 4px;'>×</span>";
+        
+        wadah.appendChild(card);
+    });
+}
+
+function ewallet_x_hapus(event, index) {
+    event.stopPropagation(); // Amankan agar tidak ikut memicu klik form atas
+    var database = JSON.parse(localStorage.getItem('db_ewallet_aman')) || [];
+    database.splice(index, 1);
+    localStorage.setItem('db_ewallet_aman', JSON.stringify(database));
+    ewallet_x_render();
+}
+
+// Jalankan pembaca data saat halaman siap
+document.addEventListener("DOMContentLoaded", function() {
+    ewallet_x_render();
+});
+</script>
+</div>
+</body>
+</html>
