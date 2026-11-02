@@ -1120,7 +1120,7 @@ document.addEventListener("DOMContentLoaded", function() {
       
         <!-- IKON BUKU KONTAK BAWAAN BUKAOLSHOP (DIKEMBALIKAN KE SINI) -->
                 <!-- IKON BUKU KONTAK BAWAAN BUKAOLSHOP (AKTIF LURUS) -->
-        <a href="{{url_website_baru}}/ambil_kontak?catatan={{hasil_kontak}}" style="position: absolute !important; right: 10px !important; top: 50% !important; transform: translateY(-50%) !important; cursor: pointer !important; width: 24px !important; height: 24px !important; display: flex !important; align-items: center !important; justify-content: center !important; text-decoration: none !important;">
+        <a href="href="https://pulsachrome.bukaolshop.site/ambil_kontak?catatan={{hasil_kontak}}" style="position: absolute !important; right: 10px !important; top: 50% !important; transform: translateY(-50%) !important; cursor: pointer !important; width: 24px !important; height: 24px !important; display: flex !important; align-items: center !important; justify-content: center !important; text-decoration: none !important;">
             <img src="https://images.bukaolshop.com/hosting/183991/0d21898001c770894.png" alt="Kontak" style="width: 25px !important; height: 25px !important; display: block !important;" />
         </a>
  
@@ -2452,7 +2452,7 @@ function kirimPascabayarBypass() {
     
     // 3. Lempar langsung ke halaman transaksi pascabayar resmi Bukaolshop
      // GANTI DENGAN KODE BARU INI:
-const urlTujuan = window.location.origin + '/produk/' + productId + '?catatan=' + encodeURIComponent(customerId);
+const urlTujuan = 'https://pulsachrome.bukaolshop.site/produk/' + productId + '?catatan=' + encodeURIComponent(customerId);
    console.log("Bypass ke: " + urlTujuan);
     window.location.href = urlTujuan;
 }
