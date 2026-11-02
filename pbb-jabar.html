@@ -2370,7 +2370,8 @@ function kirimPascabayarBypass() {
     
     // 3. Lempar langsung ke halaman transaksi pascabayar resmi Bukaolshop
      // GANTI DENGAN KODE BARU INI:
-const urlTujuan = window.location.origin + '/produk/' + productId + '?catatan=' + encodeURIComponent(customerId);
+const urlTujuan = 'https://pulsachrome.bukaolshop.site/produk/' + productId + '?catatan=' + encodeURIComponent(customerId);
+
    console.log("Bypass ke: " + urlTujuan);
     window.location.href = urlTujuan;
 }
