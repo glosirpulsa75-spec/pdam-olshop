@@ -1538,7 +1538,7 @@ function changeLayout(mode) {
     <div class="popup">
         <div class="drag-line"></div>
         <div class="product-name-large" id="transProductName">-</div>
-        <div class="sub-meta" id="transMeta">Pbb Kalimantan</div>
+        <div class="sub-meta" id="transMeta">PBB Kalimantan</div>
         <div class="price-row">
             <span class="price-label">Status Tagihan</span>
 
@@ -1636,7 +1636,7 @@ function changeLayout(mode) {
             const catNameLower = (category.nama_kategori || '').toLowerCase();
             for (const term of searchTerms) {
                 if (catNameLower.includes(term)) {
-                    category.nama_kategori = "Pbb Kalimantan";
+                    category.nama_kategori = "PBB Kalimantan";
                     return category;
                 }
             }
@@ -1645,13 +1645,13 @@ function changeLayout(mode) {
         for (const category of allCategories) {
             const catNameLower = (category.nama_kategori || '').toLowerCase(); 
             {
-                category.nama_kategori = "Pbb Kalimantan";
+                category.nama_kategori = "PBB Kalimantan";
                 return category;
             }
         }
         
         if (allCategories.length > 0) {
-            allCategories[0].nama_kategori = "Pbb Kalimantan";
+            allCategories[0].nama_kategori = "PBB Kalimantan";
             return allCategories[0];
         }
         
@@ -1683,7 +1683,7 @@ function changeLayout(mode) {
             
             if (allSubCategories.length === 0) {
                 const catId = tvCategory.id_kategori || tvCategory.id;
-                const catName = tvCategory.nama_kategori || tvCategory.name || "Pbb Kalimantan";
+                const catName = tvCategory.nama_kategori || tvCategory.name || "PBB Kalimantan";
                 allSubCategories.push({
                     id: catId,
                     name: catName
