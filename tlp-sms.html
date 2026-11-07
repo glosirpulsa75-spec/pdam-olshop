@@ -1,0 +1,861 @@
+<!DOCTYPE html>    
+<html lang="id">    
+<head>    
+<meta charset="UTF-8">    
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">    
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>    
+<link rel="stylesheet" href="https://rawcdn.githack.com/NeroKode-id/Nkey/803f95cdffda7967decb1096127615b783cff4a6/fontstyle.css">    
+<title>Paket Tlp & Sms</title>    
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>    
+
+<style>    
+    
+:root {    
+    --subMain: #1565C0;    
+}    
+    
+html, body {    
+    background-color: #f5f5f5;    
+    width: 100%;    
+    outline: none;    
+    -webkit-tap-highlight-color: transparent;    
+    touch-action: manipulation;    
+}    
+      
+* {    
+    margin: 0;    
+    padding: 0;    
+    box-sizing: border-box;    
+}    
+    
+/* ================= HEADER ================= */    
+.header {    
+    background: var(--subMain);    
+    color: white;    
+    padding: 25px 20px 70px;    
+    border-bottom-left-radius: 40px;    
+    border-bottom-right-radius: 40px;    
+    position: relative;    
+    overflow: hidden;    
+}    
+    
+/* Animasi tetap di tempat */    
+@keyframes pulseCircle {    
+    0% {    
+        transform: scale(1);    
+        opacity: 0.3;    
+    }    
+    50% {    
+        transform: scale(1.15);    
+        opacity: 0.5;    
+    }    
+    100% {    
+        transform: scale(1);    
+        opacity: 0.3;    
+    }    
+}    
+    
+/* Lingkaran atas */    
+.header::before {    
+    content: "";    
+    position: absolute;    
+    width: 120px;    
+    height: 120px;    
+    background: rgba(255,255,255,0.4);    
+    border-radius: 50%;    
+    top: -30px;    
+    left: -30px;    
+    animation: pulseCircle 4s ease-in-out infinite;    
+}    
+    
+/* Lingkaran bawah */    
+.header::after {    
+    content: "";    
+    position: absolute;    
+    width: 90px;    
+    height: 90px;    
+    background: rgba(255,255,255,0.4);    
+    border-radius: 50%;    
+    bottom: 20px;    
+    left: -50px;    
+    animation: pulseCircle 5s ease-in-out infinite;    
+}    
+    
+/* Base lingkaran kanan */    
+.circle {    
+    position: absolute;    
+    border-radius: 50%;    
+    background: rgba(255,255,255,0.4);    
+    animation: pulseCircle 5s ease-in-out infinite;    
+}    
+    
+/* Lingkaran kanan bawah 1 */    
+.circle-right-1 {    
+    width: 120px;    
+    height: 120px;    
+    bottom: -30px;    
+    right: -50px;    
+}    
+    
+/* Lingkaran kanan bawah 2 */    
+.circle-right-2 {    
+    width: 90px;    
+    height: 90px;    
+    bottom: 40px;    
+    right: -50px;    
+    animation-duration: 5s;    
+}    
+    
+/* ================= FLOAT CARD ================= */    
+.float-card {    
+    position: relative;    
+    margin: -60px 15px 0;    
+    background: #fff;    
+    border-radius: 25px;    
+    padding: 15px;    
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);    
+    z-index: 2;    
+}
+
+.flamkode-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* LEFT HEADER */
+.flamkode-header-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.flamkode-header-left img {
+    width: 35px;
+    height: 35px;
+}
+
+/* TITLE */
+.flamkode-title {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* TOGGLE */
+.flamkode-toggle img {
+    width: 28px;
+    height: 28px;
+    cursor: pointer;
+}
+
+/* SEARCH BOX */
+.flamkode-search-box {
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px 10px;
+    background: #fafafa;
+}
+
+.flamkode-search-box img {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    filter: brightness(0) saturate(100%) invert(98%) sepia(0%) saturate(76%) hue-rotate(221deg) brightness(106%) contrast(73%);
+}
+
+.flamkode-search-box input {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 18px;
+    font-family: "Lexend Deca", sans-serif;
+    background: transparent;
+}
+
+.flamkode-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 0px auto;
+    padding: 15px;
+    transition: all 0.3s ease;
+}
+
+/* Mode list (1 kolom) */
+.flamkode-container.list-mode {
+    grid-template-columns: 1fr;
+}
+
+.flamkode-container.list-mode .flamkode-card {
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+/* CARD KATEGORI */
+.flamkode-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff;
+    border-radius: 12px;
+    padding: 18px 8px;
+    text-decoration: none;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+/* BAGIAN KIRI (ICON + TEXT) */
+.flamkode-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* ICON */
+.flamkode-icon {
+    width: 35px;
+    height: 35px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+/* TEXT */
+.flamkode-text {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+}
+
+/* ICON ARROW */
+.flamkode-arrow {
+    width: 15px;
+    height: 15px;
+}
+
+/* ================= CARD FULL WIDTH UNTUK DATA SPECIAL ================= */
+.flamkode-card-full {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff;
+    border-radius: 12px;
+    padding: 18px 16px;
+    text-decoration: none;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    margin-bottom: 0px;
+    width: 100%;
+    transition: all 0.2s ease;
+}
+
+.flamkode-card-full .flamkode-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.flamkode-card-full .flamkode-icon {
+    width: 35px;
+    height: 35px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.flamkode-card-full .flamkode-text {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+}
+
+.flamkode-card-full .flamkode-arrow {
+    width: 15px;
+    height: 15px;
+}
+
+/* Container khusus untuk full-width card */
+.full-width-container {
+    padding: 0px 15px 0 15px;
+}
+
+/* Pembatas / divider */
+.section-divider {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 15px 0 15px;
+    margin-top: 5px;
+}
+
+.section-divider span:first-child {
+    font-size: 12px;
+    color: #888;
+    font-weight: 500;
+}
+
+.section-divider .line {
+    flex: 1;
+    height: 1px;
+    background: #e0e0e0;
+    margin-left: 12px;
+}
+
+.no-results {
+    text-align: center;
+    padding: 5px;
+    color: #666;
+    font-size: 15px;
+    grid-column: 1 / -1;
+}
+        
+.no-results2 {
+    text-align: center;
+    padding: 0px;
+    grid-column: 1 / -1;
+}
+        
+.no-results img {
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    align-items: center;
+}
+
+.container {
+    margin : 0px auto;
+    padding : 15px;
+}
+
+/* ================= SLIDER BANNER ================= */
+.flamkode-card-banner {
+    width: 100%;
+    background: #fff;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,.08);
+}
+
+/* WRAPPER - Auto height berdasarkan gambar */
+.slider-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    margin-top: -10px;
+}
+
+/* CONTAINER - Flex untuk menampung slide */
+.slider-container {
+    display: flex;
+    width: 100%;
+    transition: transform .4s ease;
+}
+
+/* SLIDE - Auto height dari gambar */
+.slide {
+    flex: 0 0 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* IMAGE - Auto height, width 100% */
+.slide img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+}
+
+/* Tombol */
+.slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(0,0,0,.45);
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.slider-btn.prev {
+    left: 10px;
+}
+
+.slider-btn.next {
+    right: 10px;
+}
+
+/* Indicator */
+.slider-indicators {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px;
+    background: #fff;
+}
+
+.slider-indicators .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #ccc;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.slider-indicators .dot.active {
+    background: var(--subMain);
+}
+
+/* Content */
+.flamkode-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background: #fff;
+}
+
+.flamkode-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.flamkode-text-top {
+    font-size: 10px;
+    color: #666;
+}
+
+.flamkode-text-bottom {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.flamkode-label {
+    display: flex;
+    align-items: center;
+    background: var(--subMain);
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+}
+
+.flamkode-label img {
+    width: 16px;
+    margin-right: 6px;
+    filter: brightness(0) saturate(100%) invert(100%);
+}
+</style>    
+    
+</head>    
+<body>    
+    
+<!-- HEADER -->    
+<div class="header">    
+   <span class="circle circle-right-1"></span>    
+   <span class="circle circle-right-2"></span> 
+</div>    
+    
+<!-- FLOATING CARD -->    
+<div class="float-card">    
+  <div class="flamkode-header">
+        <div class="flamkode-header-left">
+            <img src="https://images.bukaolshop.com/hosting/183991/5eed0a26afd7677211.png" alt="icon">
+            <div class="flamkode-title">Paket Tlp & Sms</div>
+        </div>
+
+        <div class="flamkode-toggle">
+            <img src="https://cdn-icons-png.flaticon.com/128/168/168214.png" alt="toggle">
+        </div>
+    </div>
+
+    <!-- SEARCH -->
+    <div class="flamkode-search-box">
+        <img src="https://cdn-icons-png.flaticon.com/128/3031/3031293.png" alt="search">
+        <input type="text" id="searchInput" placeholder="Cari di Paket Tlp & Sms...">
+    </div>
+</div>
+
+<div class="container">
+<div class="flamkode-card-banner" id="flamkode-card-banner">
+
+    <!-- SLIDER BANNER -->
+    <div class="slider-wrapper" id="sliderWrapper">
+        <div class="slider-container" id="sliderContainer">
+            <!-- Slide 1 -->
+            <div class="slide">
+                <img src="https://images.bukaolshop.com/hosting/167577/3de9900b6d16616171.png" alt="Banner 1" class="banner-img">
+            </div>
+            <!-- Slide 2 -->
+            <div class="slide">
+                <img src="https://images.bukaolshop.com/hosting/167577/ffde9fbccbb8499580.png" alt="Banner 2" class="banner-img">
+            </div>
+            <!-- Slide 3 -->
+            <div class="slide">
+                <img src="https://images.bukaolshop.com/hosting/167577/aeb3e7acf3f4121957.png" alt="Banner 3" class="banner-img">
+            </div>
+            <!-- Slide 4 -->
+            <div class="slide">
+                <img src="https://images.bukaolshop.com/hosting/167577/2a0f8ec51cf2960650.png" alt="Banner 4" class="banner-img">
+            </div>
+        </div>
+        
+        <!-- Tombol Prev/Next -->
+        <button class="slider-btn prev" onclick="changeSlide(-1)">❮</button>
+        <button class="slider-btn next" onclick="changeSlide(1)">❯</button>
+    </div>
+    
+    <!-- Indicators -->
+    <div class="slider-indicators" id="sliderIndicators">
+        <span class="dot active" onclick="goToSlide(0)"></span>
+        <span class="dot" onclick="goToSlide(1)"></span>
+        <span class="dot" onclick="goToSlide(2)"></span>
+        <span class="dot" onclick="goToSlide(3)"></span>
+    </div>
+
+    <!-- Content -->
+    <div class="flamkode-content">
+
+        <!-- Text Kiri -->
+        <div class="flamkode-text">
+            <div class="flamkode-text-top">
+                Lengkapi Kebutuhan Transaksimu di
+            </div>
+            <div class="flamkode-text-bottom">
+               Aplikasi {{nama_aplikasi}}
+            </div>
+        </div>
+
+        <!-- Label Kanan -->
+        <div class="flamkode-label">
+            <img src="https://cdn-icons-png.flaticon.com/128/5258/5258506.png" alt="icon">
+            100% Aman
+        </div>
+      </div>
+   </div>
+</div>
+
+<!-- Container untuk card full width (Data Special) -->
+<div class="full-width-container" id="fullWidthContainer"></div>
+
+<!-- Pembatas / divider -->
+<div class="section-divider" id="sectionDivider" style="display: none;">
+    <span>Paket Tlp & Sms Lainnya</span>
+    <div class="line"></div>
+</div>
+
+<div class="flamkode-container" id="flamkode-container">
+    <!-- Card lain akan diisi otomatis dari API -->
+</div>
+
+<script>
+    // ================= SLIDER FUNCTIONS =================
+    let currentSlide = 0;
+    const totalSlides = 4;
+
+    function updateSlider() {
+        const container = document.getElementById('sliderContainer');
+        const dots = document.querySelectorAll('.dot');
+        
+        container.style.transform = `translateX(-${currentSlide * 100}%)`;
+        
+        dots.forEach((dot, index) => {
+            dot.classList.toggle('active', index === currentSlide);
+        });
+    }
+
+    function changeSlide(direction) {
+        currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
+        updateSlider();
+    }
+
+    function goToSlide(index) {
+        currentSlide = index;
+        updateSlider();
+    }
+
+    // Auto slide setiap 5 detik
+    let autoSlideInterval = setInterval(() => {
+        changeSlide(1);
+    }, 5000);
+
+    // Pause auto slide saat hover
+    const banner = document.getElementById('flamkode-card-banner');
+    banner.addEventListener('mouseenter', () => {
+        clearInterval(autoSlideInterval);
+    });
+    banner.addEventListener('mouseleave', () => {
+        autoSlideInterval = setInterval(() => {
+            changeSlide(1);
+        }, 5000);
+    });
+
+    // ================= POPUP FUNCTIONS =================
+    function shouldShowPopup() {
+        let lastClosed = localStorage.getItem("popupClosedTime");
+        let now = Date.now();
+        let oneDay = 24 * 60 * 60 * 1000;
+
+        return !lastClosed || now - lastClosed > oneDay;
+    }
+
+    window.onload = function () {
+        if (shouldShowPopup()) {
+            let popup = document.getElementById("popup");
+            if (popup) popup.style.display = "flex";
+        }
+    };
+
+    function closePopup() {
+        let popup = document.getElementById("popup");
+        if (popup) popup.style.display = "none";
+
+        localStorage.setItem("popupClosedTime", Date.now());
+
+        let sound = document.getElementById("popupSound");
+        if (sound) sound.play();
+
+        let infoSetuju = document.createElement("div");
+        infoSetuju.className = "infosetuju";
+        infoSetuju.innerHTML = "Ketentuan Telah Disetujui oleh {{nama_user}}";
+        document.body.appendChild(infoSetuju);
+
+        setTimeout(() => {
+            infoSetuju.remove();
+        }, 2000);
+    }
+
+    // ================= API & DATA FUNCTIONS =================
+    const TokenOpenApi = "eyJhcHAiOiIxODM5OTEiLCJhdXRoIjoiMjAyNjA0MTIiLCJzaWduIjoiNFwvUkF2WVhZRGx3XC9vUnk3dFZwUFVBPT0ifQ==";
+    var kostumData = [];
+    
+    // Daftar menu yang akan ditampilkan di grid
+    const daftaMenu = [
+        "Paket Tsel", 
+        "Paket Xl", 
+        "Paket Isat",  
+        "Paket Tri",
+        "Paket Byu",
+        "Paket Axis",               
+        "Paket Smart"
+    ];
+
+    // Mode grid: 'grid' = 2 kolom, 'list' = 1 kolom
+    let currentMode = 'grid';
+
+    // Menampilkan card Data special (full width di paling atas)
+    function displayCetakVoucher(cetakVoucherItem) {
+        const fullContainer = document.getElementById('fullWidthContainer');
+        if (!fullContainer) return;
+        
+        if (cetakVoucherItem) {
+            const cardHTML = `
+            <a href="${cetakVoucherItem.url_kostum_page || '#'}" class="flamkode-card-full">
+                <div class="flamkode-left">
+                    <img src="${cetakVoucherItem.icon_page}" class="flamkode-icon" onerror="this.src='https://cdn-icons-png.flaticon.com/128/17110/17110591.png'">
+                    <div class="flamkode-text">${cetakVoucherItem.nama_page}</div>
+                </div>
+                <img src="https://cdn-icons-png.flaticon.com/128/318/318476.png" class="flamkode-arrow">
+            </a>
+            `;
+            fullContainer.innerHTML = cardHTML;
+        } else {
+            fullContainer.innerHTML = '';
+        }
+    }
+
+    function displayKostum(data) {
+        const container = document.getElementById('flamkode-container');
+        container.innerHTML = '';
+
+        if (data.length === 0) {
+            container.innerHTML = '<div class="no-results2"><img src="https://cdn-icons-png.flaticon.com/128/6665/6665325.png"/></div> <div class="no-results">Tidak ada hasil yang ditemukan</div>';
+            return;
+        }
+
+        // Urutkan berdasarkan urutan di daftaMenu
+        data.sort((a, b) => {
+            let indexA = daftaMenu.indexOf(a.nama_page);
+            let indexB = daftaMenu.indexOf(b.nama_page);
+            if (indexA === -1) indexA = daftaMenu.length;
+            if (indexB === -1) indexB = daftaMenu.length;
+            return indexA - indexB;
+        });
+
+        data.forEach(item => {
+            const cardHTML = `
+            <a href="${item.url_kostum_page || '#'}" class="flamkode-card">
+                <div class="flamkode-left">
+                    <img src="${item.icon_page}" class="flamkode-icon" onerror="this.src='https://cdn-icons-png.flaticon.com/128/17110/17110591.png'">
+                    <div class="flamkode-text">${item.nama_page}</div>
+                </div>
+                <img src="https://cdn-icons-png.flaticon.com/128/318/318476.png" class="flamkode-arrow">
+            </a>
+            `;
+            container.innerHTML += cardHTML;
+        });
+        
+        applyMode();
+    }
+
+    function applyMode() {
+        const container = document.getElementById('flamkode-container');
+        const toggleIcon = document.querySelector('.flamkode-toggle img');
+        
+        if (currentMode === 'list') {
+            container.classList.add('list-mode');
+            toggleIcon.src = 'https://cdn-icons-png.flaticon.com/128/8979/8979038.png';
+            toggleIcon.alt = 'grid mode';
+        } else {
+            container.classList.remove('list-mode');
+            toggleIcon.src = 'https://cdn-icons-png.flaticon.com/128/168/168214.png';
+            toggleIcon.alt = 'list mode';
+        }
+    }
+
+    function toggleMode() {
+        if (currentMode === 'grid') {
+            currentMode = 'list';
+        } else {
+            currentMode = 'grid';
+        }
+        applyMode();
+    }
+
+    function filterKostum() {
+        const searchValue = document.getElementById('searchInput').value.toLowerCase();
+        const banner = document.getElementById('flamkode-card-banner');
+        const fullContainer = document.getElementById('fullWidthContainer');
+        const sectionDivider = document.getElementById('sectionDivider');
+        
+        // CARI DATA "DATA SPECIAL" DARI DATA ASLI
+        const cetakVoucherData = kostumData.find(item => 
+            item.nama_page.toLowerCase() === "data special"
+        );
+        
+        // Filter data selain Data Special (yang ada di daftaMenu)
+        const filteredData = kostumData.filter(item => 
+            item.nama_page.toLowerCase().includes(searchValue) &&
+            daftaMenu.includes(item.nama_page) &&
+            item.nama_page.toLowerCase() !== "data special"
+        );
+        
+        // Filter untuk Data Special (pencarian)
+        const isSearchingCetakVoucher = searchValue.trim() !== '' && 
+            (cetakVoucherData && cetakVoucherData.nama_page.toLowerCase().includes(searchValue));
+        
+        // Sembunyikan atau tampilkan banner
+        if (searchValue.trim() !== '') {
+            if (banner) banner.style.display = 'none';
+        } else {
+            if (banner) banner.style.display = 'block';
+        }
+        
+        // Tampilkan Data Special di full-width container jika sesuai pencarian
+        if (cetakVoucherData && (searchValue.trim() === '' || isSearchingCetakVoucher)) {
+            displayCetakVoucher(cetakVoucherData);
+            if (fullContainer) fullContainer.style.display = 'block';
+        } else {
+            displayCetakVoucher(null);
+            if (fullContainer) fullContainer.style.display = 'none';
+        }
+        
+        // Tampilkan/sembunyikan divider dan container berdasarkan hasil filter
+        const hasOtherResults = filteredData.length > 0;
+        const showDivider = (searchValue.trim() === '' || isSearchingCetakVoucher) && hasOtherResults;
+        
+        if (sectionDivider) {
+            sectionDivider.style.display = showDivider ? 'flex' : 'none';
+        }
+        
+        // Urutkan filteredData
+        filteredData.sort((a, b) => {
+            let indexA = daftaMenu.indexOf(a.nama_page);
+            let indexB = daftaMenu.indexOf(b.nama_page);
+            if (indexA === -1) indexA = daftaMenu.length;
+            if (indexB === -1) indexB = daftaMenu.length;
+            return indexA - indexB;
+        });
+        
+        displayKostum(filteredData);
+    }
+
+    // Pasang event listener untuk tombol toggle
+    document.addEventListener('DOMContentLoaded', function() {
+        const toggleBtn = document.querySelector('.flamkode-toggle');
+        if (toggleBtn) {
+            toggleBtn.addEventListener('click', toggleMode);
+        }
+    });
+
+    // Fetch data dari API
+    fetch("https://openapi.bukaolshop.net/v1/app/kostumpage?token=" + TokenOpenApi)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.code == 200 && data.status == "ok") {
+                kostumData = data.data;
+                console.log("Data dari API:", kostumData);
+                
+                // Ambil data CetakVoucher
+                const cetakVoucherData = kostumData.find(item => 
+                    item.nama_page.toLowerCase() === "data special"
+                );
+                console.log("Data Data special:", cetakVoucherData);
+                
+                // Tampilkan Data Special di full width (paling atas)
+                displayCetakVoucher(cetakVoucherData);
+                
+                // Filter data selain Data Special
+                let filteredOther = kostumData.filter(item => 
+                    daftaMenu.includes(item.nama_page) && 
+                    item.nama_page.toLowerCase() !== "data special"
+                );
+                filteredOther.sort((a, b) => {
+                    let indexA = daftaMenu.indexOf(a.nama_page);
+                    let indexB = daftaMenu.indexOf(b.nama_page);
+                    return indexA - indexB;
+                });
+                
+                displayKostum(filteredOther);
+                
+                // Tampilkan divider jika ada Data Special dan ada menu lain
+                const sectionDivider = document.getElementById('sectionDivider');
+                if (sectionDivider && cetakVoucherData && filteredOther.length > 0) {
+                    sectionDivider.style.display = 'flex';
+                } else if (sectionDivider) {
+                    sectionDivider.style.display = 'none';
+                }
+                
+                // Pasang event listener search
+                const searchInput = document.getElementById('searchInput');
+                if (searchInput) {
+                    searchInput.addEventListener('keyup', filterKostum);
+                }
+            } else {
+                console.log("Data tidak valid");
+                document.getElementById('flamkode-container').innerHTML = '<div style="grid-column: span 2; text-align: center; padding: 20px;">Gagal memuat data</div>';
+            }
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+            document.getElementById('flamkode-container').innerHTML = '<div style="grid-column: span 2; text-align: center; padding: 20px;">Gagal memuat data</div>';
+        });
+</script>
+
+</body>    
+</html>
