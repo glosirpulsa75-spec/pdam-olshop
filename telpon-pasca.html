@@ -689,248 +689,9 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
- 
-
-@keyframes marqueeBanner {
-    0% { transform: translate3d(0, 0, 0); }
-    100% { transform: translate3d(-100%, 0, 0); }
-}
-/* STYLING BANNER SLIDER KOTAK GAYA HOME UTAMA */
-.wrapper-slider-tv {
-    padding: 0 15px;
-    margin-top: 15px;
-    margin-bottom: 5px;
-    box-sizing: border-box;
-    width: 100%;
-}
-
-.slider-container-box {
-    width: 100%;
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-    border-radius: 16px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-    border: 1px solid #ebeef1;
-    -webkit-overflow-scrolling: touch;
-}
-
-/* Menyembunyikan scrollbar bawah agar bersih seperti aplikasi pro */
-.slider-container-box::-webkit-scrollbar {
-    display: none;
-}
-
-.slider-item-card {
-    flex: 0 0 100%;
-    width: 100%;
-    scroll-snap-align: start;
-    position: relative;
-    box-sizing: border-box;
-    display: block;
-}
-
-.slider-img-content {
-    width: 100%;
-    height: 140px; /* Atur tinggi kotak banner sesuai selera Anda */
-    object-fit: cover;
-    display: block;
-}
-.floating-card {
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border: none !important;
-
-    border-radius: 10px;
-    padding: 20px;
-    margin: 10px 16px 16px 16px;
-    box-shadow: 0 20px 35px rgba(0, 0, 0, 0.12), 0 4px 10px rgba(0, 0, 0, 0.06) !important;
-
-    position: relative;
-    z-index: 999;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-.floating-card-filter {
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.6);
-    border-radius: 16px;
-    padding: 6px 12px;
-    margin: -10px 16px 16px 16px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
-    position: relative;
-    z-index: 998;
-}
-
-.floating-card-filter .view-toggle-container {
-    background: transparent !important;
-    border-top: none !important;
-    padding: 0 !important;
-}
-.input-group input {
-    width: 100%;
-    padding: 16px 40px 16px 16px;
-    border: 1.5px solid rgba(0, 0, 0, 0.08);
-    border-radius: 14px;
-    font-size: 15px;
-    background: rgba(255, 255, 255, 0.9);
-    outline: none;
-    transition: all 0.3s ease;
-}
-
-.input-group input:focus {
-    border-color: #007aff !important;
-    box-shadow: 0 0 12px rgba(0, 122, 255, 0.4) !important;
-}
-
-.header-2 {
-    background: rgba(255, 255, 255, 0.90) !important;
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border-radius: 12px;
-    margin: 10px 16px 0 16px !important;
-    
-    /* 1. Menghilangkan garis tepi agar efek melayang lebih natural */
-    border: none !important;
-    
-    /* 2. Membuat efek bayangan 3D melayang yang lembut dan dalam */
-    box-shadow: 0 20px 35px rgba(0, 0, 0, 0.15), 
-                0 4px 10px rgba(0, 0, 0, 0.08) !important;     
-position: sticky !important;
-    top: 10px !important;
-    z-index: 1000 !important;
-
-}
-
-div.subcategory-tab-btn.active, 
-.subcategory-tab-btn.active {
-    background-color: #007aff !important;
-    color: #ffffff !important;
-    border: none !important;
-    outline: none !important;
-    box-shadow: 0 8px 20px rgba(0, 122, 255, 0.4) !important; justify-content: center !important; text-align: center !important; padding-left: 0 !important; padding-right: 0 !important;
-}
-
-.subcategory-tab-btn.active::after,
-.subcategory-tab-btn.active::before {
-    display: none !important;
-}
-/* Gaya Tombol Info Biru Melayang 3D */
-.info-toggle-btn {
-    background-color: #007aff !important;
-    color: #ffffff !important;
-    border: none !important;
-    outline: none !important;
-    border-radius: 20px !important;
-    padding: 6px 16px !important;
-    font-size: 13px !important;
-    font-weight: bold !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    cursor: pointer;
-    box-shadow: 0 8px 16px rgba(0, 122, 255, 0.4) !important;
-    transition: all 0.3s ease;
-}
-
-#info-arrow {
-    margin-left: 6px;
-    display: inline-block;
-    transition: transform 0.3s ease;
-}
-
-/* Gaya Kotak Bar Teks Informasi */
-.info-content-box {
-    display: none; /* Sembunyi saat awal */
-    background: #ffffff !important;
-    border-radius: 12px !important;
-    padding: 12px !important;
-    margin-top: 10px !important;
-    width: 100%;
-    box-sizing: border-box;
-    font-size: 13px !important;
-    color: #333333 !important;
-    line-height: 1.5;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08) !important;
-}
-
-/* Class pemicu untuk menampilkan kotak info */
-.info-content-box.show {
-    display: block !important;
-}
-
-/* Memutar tanda panah menjadi ke bawah ketika dibuka */
-.arrow-rotate {
-    transform: rotate(180deg);
-}
-/* Desain Tombol Info Nempel, Kecil, dan Manis */
-.info-toggle-btn {
-    background: rgba(0, 122, 255, 0.08) !important; /* Latar biru transparan tipis */
-    color: #007aff !important; /* Warna teks biru tegas */
-    border: none !important;
-    outline: none !important;
-    border-radius: 12px !important; /* Lengkungan halus sudut boks */
-    padding: 4px 10px !important; /* Ukuran tombol mini/ramping */
-    font-size: 11px !important; /* Ukuran huruf kecil minimalis */
-    font-weight: 600 !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    cursor: pointer;
-    width: auto !important;
-    height: auto !important;
-    box-shadow: none !important; /* MENGHAPUS TOTAL EFEK MELAYANG 3D */
-    transition: all 0.2s ease;
-}
-
-/* Efek saat tombol ditekan */
-.info-toggle-btn:active {
-    background: rgba(0, 122, 255, 0.16) !important;
-    transform: scale(0.96);
-}
-
-#panah-info {
-    margin-left: 4px;
-    font-size: 10px !important;
-    display: inline-block;
-    transition: transform 0.3s ease;
-}
-
-/* Gaya Kotak Bar Teks Informasi */
-.info-content-box {
-    display: none; /* Sembunyi di awal halaman */
-    background: #ffffff !important;
-    border-radius: 12px !important;
-    padding: 12px !important;
-    margin-top: 10px !important;
-    width: 100% !important;
-    box-sizing: border-box !important;
-    font-size: 13px !important;
-    color: #333333 !important;
-    line-height: 1.5 !important;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06) !important;
-    clear: both !important;
-}
-
-/* Pemicu untuk memunculkan kotak */
-.info-content-box.buka-kotak {
-    display: block !important;
-}
-
-/* Memutar tanda panah menjadi ke bawah */
-.putar-panah {
-    transform: rotate(180deg);
-}
-
  </style>
 </head>
 <body>
-<body style=""> <!-- tag pembuka body asli Anda -->
-
 <div class="header-2"
 style="width: calc(100% - 20px) !important;
 padding: 0px 15px !important;
@@ -946,26 +707,14 @@ margin: 0 auto !important;
 height: 60px !important;
 display: flex !important;
 align-items: center !important;">
-
-
-
-
-
-
-
 <div class="inner-category-box" style="display: flex !important; align-items: center !important; gap: 15px !important; width: 100% !important; box-sizing: border-box !important;">
-
-
-
-        <!-- Ikon Air Jernih -->
-        <img src="https://images.bukaolshop.com/hosting/183991/80c65c73fd81768885.png" alt="Icon" style="width: 50px; height: 75px; object-fit: contain; margin-right: 0px;">
+<!-- Ikon Air Jernih -->
+        <img src="https://images.bukaolshop.com/hosting/183991/d96bbff101bd981608.png" alt="Icon" style="width: 50px; height: 75px; object-fit: contain; margin-right: 0px;">
         <!-- Tulisan Teks Kategori -->
  <!-- Masukkan kode warna di dalam style seperti ini -->
-<div class="header-btn-KUOTA" style="background: linear-gradient(to right, #00a2ff, #006aff) !important; color: white !important; padding: 6px 18px !important; border-radius: 50px !important; box-shadow: 0 15px 15px rgba(0, 106, 255, 0.3) !important; display: inline-block !important; font-weight: bold !important; font-size: 13px !important; margin: 0 auto !important; transform: translateX(-35px) !important;">Paket Telkomsel</div>
-
-   </div>
- 
+<div class="header-btn-KUOTA" style="background: linear-gradient(to right, #00a2ff, #006aff) !important; color: white !important; padding: 6px 18px !important; border-radius: 50px !important; box-shadow: 0 15px 15px rgba(0, 106, 255, 0.3) !important; display: inline-block !important; font-weight: bold !important; font-size: 13px !important; margin: 0 auto !important; transform: translateX(-35px) !important;">Telpon Pascabayar</div>
 </div>
+ </div>
 <div style="margin-top: 90px !important;">
 
 <div class="floating-card" style="border-radius: 0px !important; box-shadow: none !important; background: transparent !important; background-color: transparent !important;">
@@ -1011,9 +760,143 @@ background-color: #ffffff !important; border: 1px solid #e0e0e0 !important; bord
 
 <!-- KOTAK UTAMA FORM ATAS (KODE FINAL: IKON LENGKAP & RAMPING PRESTISI) -->
 <div id="kotakFormUtama" style="width: 100% !important; background-color: #ffffff !important; border: 1px solid #e0e0e0 !important; border-radius: 24px !important; padding: 14px !important; box-sizing: border-box !important; display: flex !important; flex-direction: column !important; gap: 14px !important; transition: border-color 0.3s ease !important;">
+<style>
+  /* Mengubah tulisan daftar nama daerah menjadi Biru */
+  .finance-item {
+    color: #0088ed !important;
+    /* MENAMBAHKAN GARIS PEMBATAS YANG LEBIH JELAS */
+    border-bottom: 1px solid #cccccc !important; 
+  }
 
-    <!-- KOLOM INPUT NOMOR UTAMA + IKON BUKU KONTAK -->
-     <!-- KOLOM INPUT NOMOR UTAMA + IKON BUKU KONTAK (VERSI PASCABAYAR) -->
+  /* Mengubah tulisan di tombol dropdown utama menjadi Biru */
+  #financeProvider, 
+  #financeProvider option {
+    color: #0088ed !important;
+  }
+</style>
+
+<!-- Pembungkus form utama bawaan BukaOlshop agar posisi input ID Pelanggan tidak rusak -->
+<div class="form-group select-search-wrapper" style="width: 100% !important; margin-bottom: 15px; position: relative;">
+    
+    <!-- 1. KEMBALIKAN ELEMEN SELECT ASLI BAWAAN BUKAOLSHOP UTUH 100% -->
+    <!-- Kita tidak menyembunyikannya dengan display:none atau opacity:0. Kita ubah penampilannya langsung menggunakan gaya CSS agar menyerupai tombol kustom kapsul bulat Gambar 3 -->
+    <select name="tagihan-provider" id="financeProvider" class="form-control" data-live-search="true" required 
+        style="width: 100% !important; height: 46px !important; padding: 12px 14px !important; font-size: 15px !important; color: #333 !important; background-color: #ffffff !important; border: 1px solid #e0e0e0 !important; border-radius: 14px !important; appearance: none !important; -webkit-appearance: none !important; -moz-appearance: none !important; cursor: pointer !important; box-sizing: border-box !important;">
+        <option value="" disabled selected>Pilih jenis layanan</option>
+ <option value="Pascabayar Indosat">Pascabayar Indosat</option>
+<option value="Pascabayar Smartfren">Pascabayar Smartfren</option>
+<option value="Pascabayar Telkomsel">Pascabayar Telkomsel</option>
+<option value="Pascabayar Tri">Pascabayar Tri</option>
+<option value="Pascabayar XL">Pascabayar XL</option>
+<option value="Tagihan Fren">Tagihan Fren</option>
+
+</select>
+
+  <!-- Ikon panah bawah tiruan sebagai pemanis visual di pojok kanan kolom select asli -->
+    <span style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); color: #999; font-size: 12px; pointer-events: none; z-index: 10;">▼</span>
+</div>
+
+<!-- ======================================================= -->
+<!-- BOTTOM SHEET FULL SCREEN KUSTOM (DI LUAR STRUKTUR SELECT)-->
+<!-- ======================================================= -->
+<div id="customBottomSheet" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: #ffffff; z-index: 99999999 !important; flex-direction: column; font-family: sans-serif; box-sizing: border-box;">
+    
+    <!-- HEADER BIRU + KOLOM PENCARIAN -->
+    <div style="background-color: #0088ed; padding: 12px 15px; display: flex; align-items: center; gap: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); box-sizing: border-box; width: 100%;">
+        <div style="position: relative; flex: 1;">
+            <span style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: #888; font-size: 14px;">🔍</span>
+            <input type="text" id="searchFinance" placeholder="Cari Jenis Layanan" style="width: 100%; padding: 10px 10px 10px 35px; border: none; border-radius: 8px; font-size: 14px; outline: none; box-sizing: border-box;">
+        </div>
+        <button type="button" id="closeBottomSheet" style="background: none; border: none; color: #ffffff; font-size: 14px; font-weight: bold; cursor: pointer; padding: 5px 5px; white-space: nowrap;">TUTUP</button>
+    </div>
+
+    <!-- LIST DAFTAR OPSI PILIHAN FINANCE -->
+    <div id="financeListContainer" style="flex: 1; overflow-y: auto; padding: 5px 0; width: 100%;">
+<div class="finance-item" data-value="Pascabayar Indosat" style="padding: 15px 20px; font-size: 16px; color: #333; border-bottom: 1px solid #f0f0f0; cursor: pointer;">Pascabayar Indosat</div>
+
+<div class="finance-item" data-value="Pascabayar Smartfren" style="padding: 15px 20px; font-size: 16px; color: #333; border-bottom: 1px solid #f0f0f0; cursor: pointer;">Pascabayar Smartfren</div>
+
+<div class="finance-item" data-value="Pascabayar Telkomsel" style="padding: 15px 20px; font-size: 16px; color: #333; border-bottom: 1px solid #f0f0f0; cursor: pointer;">Pascabayar Telkomsel</div>
+
+<div class="finance-item" data-value="Pascabayar Tri" style="padding: 15px 20px; font-size: 16px; color: #333; border-bottom: 1px solid #f0f0f0; cursor: pointer;">Pascabayar Tri</div>
+
+<div class="finance-item" data-value="Pascabayar XL" style="padding: 15px 20px; font-size: 16px; color: #333; border-bottom: 1px solid #f0f0f0; cursor: pointer;">Pascabayar XL</div>
+
+<div class="finance-item" data-value="Tagihan Fren" style="padding: 15px 20px; font-size: 16px; color: #333; border-bottom: 1px solid #f0f0f0; cursor: pointer;">Tagihan Fren</div>
+
+</div>
+</div>
+
+<!-- ======================================================= -->
+<!-- SCRIPT SIMPEL: MENUMPANGKAN AKSI BOTTOM SHEET KUSTOM     -->
+<!-- ======================================================= -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const nativeSelect = document.getElementById("financeProvider");
+    const sheet = document.getElementById("customBottomSheet");
+    const closeBtn = document.getElementById("closeBottomSheet");
+    const searchInput = document.getElementById("searchFinance");
+    const items = document.querySelectorAll(".finance-item");
+
+    // Amankan kontainer pencarian ke elemen body terluar aplikasi
+    if (sheet) {
+        document.body.appendChild(sheet);
+    }
+
+    if (nativeSelect) {
+        // Ketika select asli yang sudah kita percantik diklik, munculkan lembar pencarian full screen
+        nativeSelect.addEventListener("click", function(e) {
+            e.preventDefault();
+            this.blur(); // Mencegah keyboard bawaan HP muncul secara paksa
+            
+            sheet.style.display = "flex";
+            searchInput.value = "";
+            items.forEach(item => item.style.display = "block");
+            setTimeout(() => { searchInput.focus(); }, 120);
+            return false;
+        });
+    }
+
+    // Tombol TUTUP pencarian
+    closeBtn.addEventListener("click", function() {
+        sheet.style.display = "none";
+    });
+
+    // Proses sinkronisasi saat pengguna memilih salah satu item finance
+    items.forEach(item => {
+        item.addEventListener("click", function() {
+            const val = this.getAttribute("data-value");
+            
+            if (nativeSelect) {
+                // Masukkan nilai secara murni ke dalam select asli agar divalidasi sah oleh BukaOlshop
+                nativeSelect.value = val;
+                
+                // Memicu trigger event standard html agar engine BukaOlshop membaca datanya sah
+                nativeSelect.dispatchEvent(new Event('input', { bubbles: true }));
+                nativeSelect.dispatchEvent(new Event('change', { bubbles: true }));
+            }
+            
+            // Sembunyikan lembar pencarian
+            sheet.style.display = "none";
+        });
+    });
+
+    // Fitur Live Search dinamis
+    searchInput.addEventListener("input", function() {
+        const filterText = this.value.toLowerCase();
+        items.forEach(item => {
+            const textValue = item.textContent || item.innerText;
+            if (textValue.toLowerCase().indexOf(filterText) > -1) {
+                item.style.display = "block";
+            } else {
+                item.style.display = "none";
+            }
+        });
+    });
+});
+</script>
+
+
 <div style="position: relative !important; width: 100% !important; display: block !important;">
     <input type="number"
     name="scanner-input"
@@ -1026,40 +909,54 @@ background-color: #ffffff !important; border: 1px solid #e0e0e0 !important; bord
       
         <!-- IKON BUKU KONTAK BAWAAN BUKAOLSHOP (DIKEMBALIKAN KE SINI) -->
                 <!-- IKON BUKU KONTAK BAWAAN BUKAOLSHOP (AKTIF LURUS) -->
-        <a href="{{url_website_baru}}/ambil_kontak?catatan={{hasil_kontak}}" style="position: absolute !important; right: 10px !important; top: 50% !important; transform: translateY(-50%) !important; cursor: pointer !important; width: 24px !important; height: 24px !important; display: flex !important; align-items: center !important; justify-content: center !important; text-decoration: none !important;">
+        <a href="https://pulsachrome.bukaolshop.site/ambil_kontak?catatan={{hasil_kontak}}" style="position: absolute !important; right: 10px !important; top: 50% !important; transform: translateY(-50%) !important; cursor: pointer !important; width: 24px !important; height: 24px !important; display: flex !important; align-items: center !important; justify-content: center !important; text-decoration: none !important;">
             <img src="https://images.bukaolshop.com/hosting/183991/0d21898001c770894.png" alt="Kontak" style="width: 25px !important; height: 25px !important; display: block !important;" />
         </a>
  
 </div>
+    <!-- GARIS PEMBATAS DI BAWAH KOLOM INPUT -->
+<div style="height: 1px !important; width: 100% !important; background-color: #e0e0e0 !important; margin: 14px 0 !important;"></div>
+<!-- TOMBOL LANJUT DI BAWAH GARIS (SUDAH DILENGKAPI VALIDASI ANTI-MACET) -->
+<button type="submit" 
+id="btnLanjutFinance" style="width: 100% !important; background-color: #007bff !important; color: #ffffff !important; border: none !important; padding: 14px !important; font-size: 16px !important; font-weight: 600 !important; border-radius: 14px !important; cursor: pointer !important; box-sizing: border-box !important; transition: background-color 0.2s !important;">
+    Lanjut
+</button>
+
+<!-- SCRIPT VALIDASI TAMBAHAN KHUSUS TOMBOL LANJUT -->
+<script>
+document.getElementById("btnLanjutFinance").addEventListener("click", function(e) {
+    const providerSelect = document.getElementById("financeProvider");
     
+    // Cari elemen input ID Pelanggan secara dinamis (biasanya bertipe number atau text setelah tombol dropdown)
+    const inputPelanggan = document.querySelector('input[type="number"]') || document.querySelector('input[name="nomor_pelanggan"]') || document.querySelector('input[placeholder*="ID"], input[placeholder*="Pelanggan"]');
+
+    // 1. Validasi Penyedia Finance
+    if (!providerSelect || providerSelect.value === "") {
+        e.preventDefault(); // Blokir pengiriman form
+        alert("Silakan pilih Penyedia Finance terlebih dahulu!");
+        
+        // Buka kembali bottom sheet kustom secara otomatis jika belum dipilih
+        const sheet = document.getElementById("customBottomSheet");
+        if (sheet) sheet.style.display = "flex";
+        return false;
+    }
+
+    // 2. Validasi ID Pelanggan
+    if (!inputPelanggan || inputPelanggan.value.trim() === "") {
+        e.preventDefault(); // Blokir pengiriman form jika ID kosong
+        alert("Silakan masukkan ID Pelanggan Anda!");
+        if (inputPelanggan) inputPelanggan.focus();
+        return false;
+    }
+    
+    // Jika semua validasi di atas lolos, biarkan form memproses checkout secara alami ke BukaOlshop
+});
+</script>
+
+
 
     <!-- KAPSUL BARIS TOMBOL (PAS MENYATU DI DALAM KOTAK PUTIH) -->
-    <div style="width: 100% !important; background-color: #f1f3f5 !important; border-radius: 16px !important; padding: 10px !important; box-sizing: border-box !important; display: flex !important; align-items: center !important; justify-content: space-around !important;">
-        
-        <!-- 1. Tombol Info -->
-        <div onclick="aksiBukaTutupInfo()" style="display: flex !important; align-items: center !important; justify-content: center !important; cursor: pointer !important; flex: 1 !important; gap: 6px !important;">
-            <img src="https://images.bukaolshop.com/hosting/183991/e70aaebff47a662105.png" alt="Info" style="width: 16px !important; height: 16px !important; display: block !important;" />
-            <span style="font-size: 13px !important; color: #000000 !important; font-weight: bold !important; font-family: sans-serif !important;">Info</span>
-        </div>
-        
-        <!-- Garis Pembatas Vertikal Kiri -->
-        <div style="width: 1px !important; height: 14px !important; background-color: #ced4da !important;"></div>
-        
-        <!-- 2. Tombol Scan -->
-        <a href="{{url_website_baru}}/scan_all" id="btnScanID" style="display: flex !important; align-items: center !important; justify-content: center !important; text-decoration: none !important; cursor: pointer !important; flex: 1 !important; gap: 6px !important;">
-            <img src="https://images.bukaolshop.com/hosting/183991/203d42a9cfb3540740.png" alt="Scan" style="width: 16px !important; height: 16px !important; display: block !important;" />
-            <span style="font-size: 13px !important; color: #000000 !important; font-weight: bold !important; font-family: sans-serif !important;">Scan</span>
-        </a>
-        
-        <!-- Garis Pembatas Vertikal Kanan -->
-        <div style="width: 1px !important; height: 14px !important; background-color: #ced4da !important;"></div>
-        
-        <!-- 3. Tombol Favorite -->
-        <div onclick="aksiBukaTutupFavorit()" style="display: flex !important; align-items: center !important; justify-content: center !important; cursor: pointer !important; flex: 1 !important; gap: 6px !important;">
-            <img src="https://images.bukaolshop.com/hosting/183991/6ce2ce008723802442.png" alt="Favorite" style="width: 16px !important; height: 16px !important; display: block !important;" />
-            <span style="font-size: 13px !important; color: #000000 !important; font-weight: bold !important; font-family: sans-serif !important;">Favorite</span>
-        </div>
-
+   
     </div>
 
 </div>
@@ -1503,7 +1400,7 @@ function changeLayout(mode) {
     <div class="popup">
         <div class="drag-line"></div>
         <div class="product-name-large" id="transProductName">-</div>
-        <div class="sub-meta" id="transMeta">Tlp Tsel</div>
+        <div class="sub-meta" id="transMeta">Telpon Pascabayar</div>
         <div class="price-row">
             <span class="price-label">Status Tagihan</span>
 
@@ -1595,13 +1492,13 @@ function changeLayout(mode) {
     }
 
     function findTVCategory() {
-        const searchTerms = ["tlp tsel",];
+        const searchTerms = ["telpon pascabayar",];
         
         for (const category of allCategories) {
             const catNameLower = (category.nama_kategori || '').toLowerCase();
             for (const term of searchTerms) {
                 if (catNameLower.includes(term)) {
-                    category.nama_kategori = "Tlp Tsel";
+                    category.nama_kategori = "Telpon Pascabayar";
                     return category;
                 }
             }
@@ -1610,13 +1507,13 @@ function changeLayout(mode) {
         for (const category of allCategories) {
             const catNameLower = (category.nama_kategori || '').toLowerCase(); 
             {
-                category.nama_kategori = "Tlp Tsel";
+                category.nama_kategori = "Telpon Pascabayar";
                 return category;
             }
         }
         
         if (allCategories.length > 0) {
-            allCategories[0].nama_kategori = "Tlp Tsel";
+            allCategories[0].nama_kategori = "Telpon Pascabayar";
             return allCategories[0];
         }
         
@@ -1648,7 +1545,7 @@ function changeLayout(mode) {
             
             if (allSubCategories.length === 0) {
                 const catId = tvCategory.id_kategori || tvCategory.id;
-                const catName = tvCategory.nama_kategori || tvCategory.name || "Tlp Tsel";
+                const catName = tvCategory.nama_kategori || tvCategory.name || "Telpon Pascabayar";
                 allSubCategories.push({
                     id: catId,
                     name: catName
@@ -1926,7 +1823,7 @@ let disabledAttr = (isOutOfStock || isGangguan) ? 'disabled' : '';
         document.getElementById('transDescription').innerHTML = desc;
         document.getElementById('transIcon').src = "https://cdn-icons-png.flaticon.com/128/9554/9554529.png";
         
-        document.getElementById('transactionOverlay').classList.add('active');
+        
     }
 
     function closeTransactionPopup(e) {
@@ -2344,15 +2241,514 @@ function kirimPascabayarBypass() {
     
     // 3. Lempar langsung ke halaman transaksi pascabayar resmi Bukaolshop
      // GANTI DENGAN KODE BARU INI:
-const urlTujuan = window.location.origin + '/produk/' + productId + '?catatan=' + encodeURIComponent(customerId);
+const urlTujuan = 'https://pulsachrome.bukaolshop.site/produk/' + productId + '?catatan=' + encodeURIComponent(customerId);
+
    console.log("Bypass ke: " + urlTujuan);
     window.location.href = urlTujuan;
 }
 
 </script>
+
+
+
+
+
+
+<!-- KODE CSS & JAVASCRIPT FINAL: MELENYAPKAN PRODUK DI BAWAH SECARA MUTLAK -->
+<style>
+/* 1. Menyembunyikan visual pop-up bawaan agar tidak mengedip */
+.action-buttons, [class*="bottom-sheet"], [class*="modal"] {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    display: none !important;
+    pointer-events: none !important;
+}
+
+/* 2. Dinding pertahanan CSS darurat untuk menyembunyikan elemen bawah */
+#kotakFormUtama ~ div,
+#kotakFormUtama ~ *,
+.row.mb-3,
+div[class*="product"],
+div[class*="filter"] {
+    display: none !important;
+    opacity: 0 !important;
+    height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+</style>
+
+<script>
+// Fungsi Khusus untuk Melenyapkan Barisan Produk Bawah Secara Paksa via JavaScript
+function lenyapkanProdukBawah() {
+    var kotakUtama = document.getElementById('kotakFormUtama');
+    if (kotakUtama) {
+        var elemenBerikutnya = kotakUtama.nextElementSibling;
+        while (elemenBerikutnya) {
+            elemenBerikutnya.style.setProperty('display', 'none', 'important');
+            elemenBerikutnya.style.setProperty('visibility', 'hidden', 'important');
+            elemenBerikutnya.style.setProperty('height', '0', 'important');
+            elemenBerikutnya.style.setProperty('padding', '0', 'important');
+            elemenBerikutnya.style.setProperty('margin', '0', 'important');
+            elemenBerikutnya = elemenBerikutnya.nextElementSibling;
+        }
+    }
+    
+    var elemenTambahan = document.querySelectorAll('.row.mb-3, [class*="filter"], [class*="sorting"], [class*="product-list"], .card-product, .list-group');
+    elemenTambahan.forEach(function(el) {
+        el.style.setProperty('display', 'none', 'important');
+        el.style.setProperty('visibility', 'hidden', 'important');
+    });
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    // Jalankan pembersihan berkala saat halaman dimuat
+    lenyapkanProdukBawah();
+    
+    setTimeout(lenyapkanProdukBawah, 100);
+    setTimeout(lenyapkanProdukBawah, 300);
+    setTimeout(lenyapkanProdukBawah, 600);
+    setTimeout(lenyapkanProdukBawah, 1000);
+
+    var btnLanjut = document.getElementById('btnLanjutFinance');
+    if (btnLanjut) {
+        btnLanjut.addEventListener('click', function(e) {
+            e.preventDefault(); 
+
+            var providerPilihan = document.getElementById('financeProvider').value;
+            var idPelanggan = document.getElementById('userId').value.trim();
+
+            if (!providerPilihan) {
+                alert('Silakan pilih Penyedia Finance terlebih dahulu!');
+                return;
+            }
+            if (!idPelanggan) {
+                alert('Silakan masukkan ID Pelanggan Anda!');
+                return;
+            }
+
+            var inputUser = document.getElementById('userId');
+            if (inputUser) {
+                inputUser.value = idPelanggan;
+                inputUser.dispatchEvent(new Event('input', { bubbles: true }));
+            }
+
+            var namaPilihanClean = providerPilihan.toLowerCase().replace(/\s+/g, '');
+            var semuaElemenTeks = document.querySelectorAll('h3, div, span, p, a');
+            var targetProduk = null;
+
+            for (var i = 0; i < semuaElemenTeks.length; i++) {
+                if (semuaElemenTeks[i].textContent.trim().toLowerCase() === providerPilihan.toLowerCase()) {
+                    targetProduk = semuaElemenTeks[i].closest('a') || semuaElemenTeks[i].parentElement;
+                    break;
+                }
+            }
+
+            if (targetProduk) {
+                var tombolProdukBawah = targetProduk.querySelector('a') || targetProduk;
+                tombolProdukBawah.click();
+
+                setTimeout(function() {
+                    if (typeof kirimPascabayarBypass === 'function') {
+                        kirimPascabayarBypass();
+                    } else {
+                        var btnBeliAsli = document.querySelector('.btn-buy');
+                        if (btnBeliAsli) btnBeliAsli.click();
+                    }
+                    
+                    if (typeof closeTransactionPopupManual === 'function') {
+                        closeTransactionPopupManual();
+                    }
+                }, 80); 
+
+            } else {
+                alert('Sistem: Menghubungkan ke produk "' + providerPilihan + '"... Pastikan daftar produk di bawah sudah muncul di layar.');
+            }
+        });
+    }
+});
+// // Fungsi Buka Tutup Pop-up Modal (Versi Pintar & Lengkap)
+function bukaMenuSimpanNasabah() {
+    var modal = document.getElementById('modalSimpanNasabah');
+    if (modal) {
+        modal.style.display = 'block';
+    }
+
+    // OTOMATIS AMBIL NOMOR HP DARI FORM ATAS
+    var inputNomorUtama = document.getElementById('userId');
+    var inputNomorDiPopUp = document.getElementById('inputNomorLokal');
+
+    if (inputNomorUtama && inputNomorDiPopUp) {
+        if (inputNomorUtama.value.trim() !== "") {
+            inputNomorDiPopUp.value = inputNomorUtama.value;
+        }
+    }
+}
+
+function tutupMenuSimpanNasabah() {
+    var modal = document.getElementById('modalSimpanNasabah');
+    if (modal) {
+        modal.style.display = 'none';
+    }
+}
+
+
+// Fungsi me-render / menampilkan list data dari LocalStorage ke Layar
+function renderNasabahEwallet() {
+    const dataLokal = JSON.parse(localStorage.getItem('nasabah_ewallet')) || [];
+    const wadahList = document.getElementById('tempatDaftarNasabahKustom');
+    const teksKosong = document.getElementById('teksPanduanKosong');
+
+    wadahList.innerHTML = ''; // Kosongkan container sebelum diisi data terupdate
+
+    if (dataLokal.length === 0) {
+        teksKosong.style.display = 'block';
+        return;
+    }
+
+    teksKosong.style.display = 'none';
+
+    dataLokal.forEach((item, index) => {
+        const itemCard = document.createElement('div');
+        itemCard.style.cssText = "border: 1px solid #f1f5f9; border-radius: 12px; padding: 14px; display: flex; justify-content: space-between; align-items: center; background: #f8fafc; cursor: pointer;";
+        
+        // Fitur: Ketika kartu diklik, nomor HP otomatis terisi ke form input utama (id='userId')
+        itemCard.setAttribute('onclick', `isiOtomatisNomor('${item.nomor}')`);
+
+        itemCard.innerHTML = `
+            <div>
+                <div style="font-weight: bold; color: #334155; font-size: 14px; margin-bottom: 2px;">👤 ${item.nama}</div>
+                <div style="color: #64748b; font-size: 13px; font-family: monospace;">${item.nomor}</div>
+            </div>
+            <button onclick="hapusNasabahEwallet(event, ${index})" style="background: none; border: none; color: #94a3b8; font-size: 18px; cursor: pointer; padding: 0 4px;">×</button>
+        `;
+        wadahList.appendChild(itemCard);
+    });
+}
+
+// // Fungsi Simpan Data Baru Utuh (Anti Lompat ke Home)
+if (document.getElementById('formNasabahEwallet')) {
+    document.getElementById('formNasabahEwallet').addEventListener('submit', function(e) {
+        // KUNCI DARURAT: Menahan halaman agar tidak reload/kembali ke home
+        e.preventDefault(); 
+
+        const inputNama = document.getElementById('inputNamaLokal');
+        const inputNomor = document.getElementById('inputNomorLokal');
+
+        if (!inputNama || !inputNomor) return;
+
+        const nama = inputNama.value.trim();
+        const nomor = inputNomor.value.trim();
+
+        if (nama === "" || nomor === "") {
+            alert("Mohon isi Nama dan Nomor HP terlebih dahulu!");
+            return;
+        }
+
+        // Simpan data ke penyimpanan lokal HP
+        let dataLokal = JSON.parse(localStorage.getItem('nasabah_ewallet')) || [];
+        dataLokal.push({ nama: nama, nomor: nomor });
+        localStorage.setItem('nasabah_ewallet', JSON.stringify(dataLokal));
+
+        // Tutup pop-up modal dan reset form
+        tutupMenuSimpanNasabah();
+        document.getElementById('formNasabahEwallet').reset();
+
+        // Refresh daftar list di bawah agar nama langsung muncul
+        if (typeof renderNasabahEwallet === "function") {
+            renderNasabahEwallet();
+        }
+
+        alert("Nomor e-wallet berhasil disimpan ke favorit!");
+    });
+}
+
+
+// Fungsi Hapus Data Terpilih
+function hapusNasabahEwallet(event, index) {
+    event.stopPropagation(); // Mencegah form utama terisi saat klik tombol hapus
+    let dataLokal = JSON.parse(localStorage.getItem('nasabah_ewallet')) || [];
+    dataLokal.splice(index, 1);
+    localStorage.setItem('nasabah_ewallet', JSON.stringify(dataLokal));
+    renderNasabahEwallet(); // Refresh Tampilan
+}
+
+// Fungsi Mengisi otomatis kolom input nomor HP di atas
+function isiOtomatisNomor(nomorHP) {
+    // Menyesuaikan dengan target input id='userId' dari script bawaan Anda sebelumnya
+    const inputUtama = document.getElementById('userId'); 
+    if(inputUtama) {
+        inputUtama.value = nomorHP;
+        alert("Nomor berhasil diterapkan!");
+    }
+}
+
+// Jalankan fungsi tampilkan data saat halaman pertama kali dimuat
+document.addEventListener("DOMContentLoaded", function() {
+    renderNasabahEwallet();
+});
+// ========================================================
+// FUNGSI MANDIRI: MENYIMPAN DATA TANPA RELOAD/SUBMIT FORM
+// ========================================================
+function prosesSimpanManualEwallet() {
+    var inputNama = document.getElementById('inputNamaLokal');
+    var inputNomor = document.getElementById('inputNomorLokal');
+
+    if (!inputNama || !inputNomor) {
+        alert("Sistem gagal mendeteksi kolom input.");
+        return;
+    }
+
+    var nama = inputNama.value.trim();
+    var nomor = inputNomor.value.trim();
+
+    if (nama === "" || nomor === "") {
+        alert("Mohon isi Nama dan Nomor HP terlebih dahulu!");
+        return;
+    }
+
+    // Proses Simpan ke memori HP (LocalStorage)
+    var dataLokal = JSON.parse(localStorage.getItem('nasabah_ewallet')) || [];
+    dataLokal.push({ nama: nama, nomor: nomor });
+    localStorage.setItem('nasabah_ewallet', JSON.stringify(dataLokal));
+
+    // Bersihkan formulir agar kosong kembali
+    inputNama.value = "";
+    inputNomor.value = "";
+
+    // Tutup Pop-up Modal secara paksa
+    tutupMenuSimpanNasabah();
+
+    // Refresh daftar list di bawah agar nama langsung muncul di layar utama
+    if (typeof renderNasabahEwallet === "function") {
+        renderNasabahEwallet();
+    }
+
+    alert("Nomor e-wallet berhasil disimpan ke favorit!");
+}
+
+</script>
+<!-- BOTTOM SHEET POP-UP TAMBAH NASABAH -->
+<div id="modalSimpanNasabah" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 9999; font-family: sans-serif;">
+    <div style="position: absolute; bottom: 0; left: 0; right: 0; background: #ffffff; border-top-left-radius: 20px; border-top-right-radius: 20px; padding: 24px; box-shadow: 0px -4px 10px rgba(0,0,0,0.1);">
+        <div style="width: 40px; height: 4px; background: #e2e8f0; border-radius: 2px; margin: 0 auto 16px auto;"></div>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <h3 style="margin: 0; font-size: 16px; font-weight: bold; color: #1e293b;">Simpan Nomor E-Wallet</h3>
+            <button onclick="tutupMenuSimpanNasabah()" style="background: none; border: none; font-size: 22px; color: #94a3b8; cursor: pointer;">×</button>
+        </div>
+        <form id="formNasabahEwallet">
+            <div style="margin-bottom: 14px;">
+                <label style="display: block; margin-bottom: 6px; color: #64748b; font-size: 13px;">Nama Pemilik / Singkatan</label>
+                <input type="text" id="inputNamaLokal" placeholder="Contoh: Dana Ibu, Gopay Adek" required style="width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; box-sizing: border-box; font-size: 14px; outline: none;">
+            </div>
+            <div style="margin-bottom: 20px;">
+                <label style="display: block; margin-bottom: 6px; color: #64748b; font-size: 13px;">Nomor HP E-Wallet</label>
+                <input type="number" id="inputNomorLokal" placeholder="Masukkan Nomor HP" required style="width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; box-sizing: border-box; font-size: 14px; outline: none;">
+            </div>
+            <button type="submit" style="width: 100%; background: #0080ff; color: #ffffff; border: none; padding: 14px; border-radius: 24px; font-weight: bold; font-size: 14px; cursor: pointer;">Simpan ke Favorit</button>
+        </form>
+    </div>
+</div>
+
+<! -- ======================================================== --!>
+<!-- APLIKASI MANDIRI: PELANGGAN TERSIMPAN E-WALLET (1 UTUH) -->
+<!-- ======================================================== --!>
+
+<div style="margin-top: 25px !important;">
+
+<div class="floating-card" style="border-radius: 0px !important; box-shadow: none !important; background: transparent !important; background-color: transparent !important;">
+
+<div class="input-wrapper"
+style="width: 94% !important;
+margin: 12px auto 0px auto !important;
+box-sizing: border-box !important;
+padding: 0 !important;
+border-radius: 0px !important;
+background: transparent !important;
+background-color: transparent !important;">
+
+<style>
+  *:focus-within {
+    border-color: #e0e0e0 !important;
+    box-shadow: none !important;
+    outline: none !important;
+  }
+  #idPlayer:focus {
+    border-color: #007bff !important;
+    box-shadow: 0 0 4px rgba(0, 123, 255, 0.5) !important;
+    outline: none !important;
+  }  .input-box img, 
+  #btnCekID img, 
+  div[style*="display: flex"] img,
+  img[alt="Kontak"],
+  img[alt="Info"],
+  img[alt="Scan"],
+  img[alt="Favorite"] {
+      filter: none !important;
+      -webkit-filter: grayscale(0%) !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+  }
+
+</style>
+
+<!-- 1. KOTAK UTAMA YANG MEMBUNGKUS INPUT DAN MENU AKSI -->
+<div class="input-box" style="position: relative !important; width: 100% !important; 
+margin-top: -10px !important;
+background-color: #ffffff !important; border: 1px solid #e0e0e0 !important; border-radius: 20px !important; padding: 16px !important; box-sizing: border-box !important; display: flex !important; flex-direction: column !important;">
+
+<!-- KOTAK UTAMA FORM ATAS (KODE FINAL: IKON LENGKAP & RAMPING PRESTISI) -->
+<div id="kotakFormUtama" style="width: 100% !important; background-color: #ffffff !important; border: 1px solid #e0e0e0 !important; border-radius: 24px !important; padding: 14px !important; box-sizing: border-box !important; display: flex !important; flex-direction: column !important; gap: 14px !important; transition: border-color 0.3s ease !important;">
+
+
+
+
+<!-- KODE PENGGANTI: Menggeser tulisan ke atas & memperbaiki potongan bawah -->
+<div id="ewalletContainerUtama" style="background: #ffffff !important; border: 1px solid #e2e8f0 !important; border-radius: 20px !important; padding: 10px 24px 24px 24px; margin: 20px 0 35px 0; font-family: sans-serif; box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.03); display: block; clear: both;">
+
+    
+    <!-- Judul & Tombol Tambah Kebal Submit -->
+    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 24px; position: relative; z-index: 10;">
+        <span style="font-weight: bold; font-size: 15px; color: #333333;">Pelanggan Tersimpan</span>
+        <button type="button" 
+                onclick="ewallet_x_bukaModal();" 
+                style="display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; background: #0077ff !important; color: #ffffff !important; border-radius: 50%; font-size: 13px; font-weight: bold; cursor: pointer; border: none; padding: 0; box-shadow: 0 2px 4px rgba(0,119,255,0.3); position: relative; z-index: 9999;">
+            +
+        </button>
+    </div>
+
+    <!-- Kotak Konten Pembungkus List -->
+    <div style="text-align: center; padding: 10px; background: #ffffff; border-radius: 12px;">
+        <!-- Wadah Tempat Nama Muncul -->
+        <div id="ewallet_x_tempatDaftar" style="display: flex; flex-direction: column; gap: 8px; text-align: left;"></div>
+
+        <!-- Teks Panduan Jika Kosong -->
+        <div id="ewallet_x_teksKosong" style="text-align: center; color: #94a3b8; font-size: 13px; padding: 10px 0;">
+            Belum punya pelanggan tersimpan?<br>Yuk, mulai simpan nomor tujuan favoritmu!
+        </div>
+    </div>
+</div>
+
+<!-- BOTTOM SHEET POP-UP MANDIRI -->
+<div id="ewallet_x_modal" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); z-index: 999999; font-family: sans-serif;">
+    <div style="position: absolute; bottom: 0; left: 0; right: 0; background: #ffffff; border-top-left-radius: 20px; border-top-right-radius: 20px; padding: 24px; box-shadow: 0px -4px 10px rgba(0,0,0,0.2);">
+        <div style="width: 40px; height: 4px; background: #cbd5e1; border-radius: 2px; margin: 0 auto 16px auto;"></div>
+        
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <h3 style="margin: 0; font-size: 16px; font-weight: bold; color: #1e293b;">Simpan Nomor E-Wallet</h3>
+            <button type="button" onclick="ewallet_x_tutupModal();" style="background: none; border: none; font-size: 24px; color: #94a3b8; cursor: pointer;">×</button>
+        </div>
+
+        <!-- Menggunakan button type="button" agar 100% terkunci tidak bisa lari ke Home -->
+        <form onsubmit="event.preventDefault(); return false;">
+            <div style="margin-bottom: 14px;">
+                <label style="display: block; margin-bottom: 6px; color: #64748b; font-size: 13px; text-align: left;">Nama Pemilik / Singkatan</label>
+                <input type="text" id="ewallet_x_inputNama" placeholder="Contoh: Dana Ibu, Gopay Adek" required style="width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; box-sizing: border-box; font-size: 14px; outline: none;">
+            </div>
+            <div style="margin-bottom: 24px;">
+                <label style="display: block; margin-bottom: 6px; color: #64748b; font-size: 13px; text-align: left;">Nomor HP E-Wallet</label>
+                <input type="number" id="ewallet_x_inputNomor" placeholder="Masukkan Nomor HP" required style="width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; box-sizing: border-box; font-size: 14px; outline: none;">
+            </div>
+            
+            <button type="button" 
+                    onclick="ewallet_x_prosesSimpan();" 
+                    style="width: 100%; background: #0080ff; color: #ffffff; border: none; padding: 14px; border-radius: 24px; font-weight: bold; font-size: 14px; cursor: pointer; box-shadow: 0 4px 6px rgba(0,128,255,0.2);">
+                Simpan ke Favorit
+            </button>
+        </form>
+    </div>
+</div>
+
+<script>
+// ========================================================
+// JAVASCRIPT LOGIK MANDIRI ISOLASI (ANTI-BENTROK & LOMPAT)
+// ========================================================
+function ewallet_x_bukaModal() {
+    var modal = document.getElementById('ewallet_x_modal');
+    if (modal) modal.style.display = 'block';
+
+    // Otomatis intip dan salin nomor HP dari form atas jika ada (id='userId')
+    var inputAtas = document.getElementById('userId');
+    var inputBawah = document.getElementById('ewallet_x_inputNomor');
+    if (inputAtas && inputBawah && inputAtas.value.trim() !== "") {
+        inputBawah.value = inputAtas.value;
+    }
+}
+
+function ewallet_x_tutupModal() {
+    var modal = document.getElementById('ewallet_x_modal');
+    if (modal) modal.style.display = 'none';
+}
+
+function ewallet_x_prosesSimpan() {
+    var inNama = document.getElementById('ewallet_x_inputNama');
+    var inNomor = document.getElementById('ewallet_x_inputNomor');
+    if (!inNama || !inNomor) return;
+
+    var nama = inNama.value.trim();
+    var nomor = inNomor.value.trim();
+
+    if (nama === "" || nomor === "") {
+        alert("Mohon isi Nama dan Nomor HP terlebih dahulu!");
+        return;
+    }
+
+    // Simpan ke database lokal memory HP internal
+    var database = JSON.parse(localStorage.getItem('db_ewallet_aman')) || [];
+    database.push({ nama: nama, nomor: nomor });
+    localStorage.setItem('db_ewallet_aman', JSON.stringify(database));
+
+    inNama.value = "";
+    inNomor.value = "";
+    ewallet_x_tutupModal();
+    ewallet_x_render();
+    alert("Berhasil disimpan ke daftar favorit!");
+}
+
+function ewallet_x_render() {
+    var database = JSON.parse(localStorage.getItem('db_ewallet_aman')) || [];
+    var wadah = document.getElementById('ewallet_x_tempatDaftar');
+    var teksKosong = document.getElementById('ewallet_x_teksKosong');
+    
+    if (!wadah) return;
+    wadah.innerHTML = ''; 
+
+    if (database.length === 0) {
+        if (teksKosong) teksKosong.style.display = 'block';
+        return;
+    }
+
+    if (teksKosong) teksKosong.style.display = 'none';
+
+    database.forEach(function(item, index) {
+        var card = document.createElement('div');
+        card.style.cssText = "border: 1px solid #f1f5f9; border-radius: 12px; padding: 14px; display: flex; justify-content: space-between; align-items: center; background: #f8fafc; cursor: pointer; margin-bottom: 8px;";
+        
+        // Klik nama langsung isi otomatis form input HP atas Anda (id='userId')
+        card.setAttribute('onclick', "var inputAtas = document.getElementById('userId'); if(inputAtas){ inputAtas.value='" + item.nomor + "'; }");
+        card.innerHTML = "<div>" +
+            "<div style='font-weight: bold; color: #334155; font-size: 14px; margin-bottom: 2px;'>👤 " + item.nama + "</div>" +
+            "<div style='color: #64748b; font-size: 13px; font-family: monospace;'>" + item.nomor + "</div>" +
+            "</div>" +
+            "<span onclick='ewallet_x_hapus(event, " + index + ")' style='color: #94a3b8; font-size: 18px; cursor: pointer; padding: 0 4px;'>×</span>";
+        
+        wadah.appendChild(card);
+    });
+}
+
+function ewallet_x_hapus(event, index) {
+    event.stopPropagation(); // Amankan agar tidak ikut memicu klik form atas
+    var database = JSON.parse(localStorage.getItem('db_ewallet_aman')) || [];
+    database.splice(index, 1);
+    localStorage.setItem('db_ewallet_aman', JSON.stringify(database));
+    ewallet_x_render();
+}
+
+// Jalankan pembaca data saat halaman siap
+document.addEventListener("DOMContentLoaded", function() {
+    ewallet_x_render();
+});
+</script>
 </div>
 </body>
 </html>
-
-
-
