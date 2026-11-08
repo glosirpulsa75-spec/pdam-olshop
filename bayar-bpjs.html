@@ -2970,29 +2970,47 @@ function pilihMenuBPJS(teks, nilai) {
     // 1. Ubah teks tampilan pada dropdown kustom atas
     document.getElementById('teksBPJSTerpilih').innerText = teks;
     
-    // 2. Sinkronisasi Fisik ke Elemen <select> Asli Bawaan Aplikasi
+    // 2. Ambil elemen <select> asli bawaan platform
     const selectAsli = document.getElementById('financeProvider');
     if (selectAsli) {
-        selectAsli.value = nilai;
-        
-        // Paksa sistem memilih indeks opsi yang sesuai secara berurutan
+        // Trik: Munculkan instan di layar agar WebView Android mengizinkan interaksi sistem murni
+        selectAsli.style.setProperty('display', 'block', 'important');
+        selectAsli.style.setProperty('opacity', '1', 'important');
+        selectAsli.style.setProperty('z-index', '99999', 'important');
+        selectAsli.focus();
+
+        // Cari opsi yang cocok dan ubah nilai secara sistem fisik
         for (let i = 0; i < selectAsli.options.length; i++) {
-            if (selectAsli.options[i].value.toLowerCase() === nilai.toLowerCase()) {
+            if (selectAsli.options[i].value.toLowerCase().trim() === nilai.toLowerCase().trim()) {
                 selectAsli.selectedIndex = i;
                 selectAsli.options[i].selected = true;
                 break;
             }
         }
         
-        // Pemicu Event Standar Browser & WebView Android
-        selectAsli.dispatchEvent(new Event('change', { bubbles: true }));
-        selectAsli.dispatchEvent(new Event('input', { bubbles: true }));
+        // Pemicu simulasi interaksi manusia (Native Event dispatch)
+        const evtClick = new MouseEvent('click', { bubbles: true, cancelable: true, view: window });
+        selectAsli.dispatchEvent(evtClick);
+        
+        const evtChange = new Event('change', { bubbles: true });
+        selectAsli.dispatchEvent(evtChange);
+        
+        const evtInput = new Event('input', { bubbles: true });
+        selectAsli.dispatchEvent(evtInput);
+
+        // Kembalikan selektor asli ke mode tersembunyi setelah data terkunci aman
+        setTimeout(function() {
+            selectAsli.style.setProperty('position', 'absolute', 'important');
+            selectAsli.style.setProperty('opacity', '0', 'important');
+            selectAsli.style.setProperty('pointer-events', 'none', 'important');
+            selectAsli.style.setProperty('z-index', '-1', 'important');
+        }, 50);
     }
     
     // 3. Sinkronisasikan centang radio button di dalam sheet
     const opsiRadio = document.getElementsByName('rad_bpjs_pilihan');
     for (let i = 0; i < opsiRadio.length; i++) {
-        if (opsiRadio[i].value.toLowerCase() === nilai.toLowerCase()) {
+        if (opsiRadio[i].value.toLowerCase().trim() === nilai.toLowerCase().trim()) {
             opsiRadio[i].checked = true;
             break;
         }
@@ -3002,7 +3020,6 @@ function pilihMenuBPJS(teks, nilai) {
     tutupSheetBPJS();
 }
 </script>
-
 
 </div>
 </body>
