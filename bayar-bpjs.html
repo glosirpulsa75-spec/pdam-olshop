@@ -2963,29 +2963,52 @@ function bukaSheetBPJS() {
 function tutupSheetBPJS() {
     document.getElementById('wrapperSheetBPJS').style.display = 'none';
 }
-
 function pilihMenuBPJS(teks, nilai) {
-    // 1. Ubah teks visual dropdown kustom di atas form
-    document.getElementById('teksBPJSTerpilih').innerText = teks;
+    // 1. Perbarui teks pada dropdown kustom di form atas
+    const teksTampil = document.getElementById('teksBPJSTerpilih');
+    if (teksTampil) teksTampil.innerText = teks;
     
-    // 2. Kunci nilai ke dalam elemen select asli bawaan bukaOlshop
+    // 2. Isi nilai ke elemen select asli agar lolos dari cek '!providerPilihan'
     const selectAsli = document.getElementById('financeProvider');
     if (selectAsli) {
         selectAsli.value = nilai;
         
-        // Atur index pilihan agar sinkron di dalam sistem Android WebView
+        // Cek apakah nilai pilihan sudah ada di dalam daftar select asli
+        let opsiDitemukan = false;
         for (let i = 0; i < selectAsli.options.length; i++) {
             if (selectAsli.options[i].value.trim() === nilai.trim()) {
                 selectAsli.selectedIndex = i;
                 selectAsli.options[i].selected = true;
+                opsiDitemukan = true;
                 break;
             }
         }
         
-        // Pemicu Native Event standar browser agar dibaca tombol Lanjut asli Anda
+        // JALAN PINTAS: Jika tidak cocok/tidak ketemu, buat opsi baru secara paksa agar tombol Lanjut lolos validasi
+        if (!opsiDitemukan) {
+            const opsiBayangan = new Option(nilai, nilai, true, true);
+            selectAsli.add(opsiBayangan);
+            selectAsli.value = nilai;
+        }
+        
+        // Memicu trigger event tiruan agar fungsi listener tombol Lanjut membaca data baru
         selectAsli.dispatchEvent(new Event('change', { bubbles: true }));
         selectAsli.dispatchEvent(new Event('input', { bubbles: true }));
     }
+    
+    // 3. Sinkronisasikan tanda centang pada tombol radio di dalam sheet
+    const opsiRadio = document.getElementsByName('rad_bpjs_pilihan');
+    for (let i = 0; i < opsiRadio.length; i++) {
+        if (opsiRadio[i].value.trim() === nilai.trim()) {
+            opsiRadio[i].checked = true;
+            break;
+        }
+    }
+    
+    // 4. Tutup bottom sheet
+    tutupSheetBPJS();
+}
+
     
     // 3. Sinkronisasikan centang aktif pada tombol radio kustom di dalam sheet
     const opsiRadio = document.getElementsByName('rad_bpjs_pilihan');
