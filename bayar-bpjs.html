@@ -2924,22 +2924,44 @@ document.addEventListener("DOMContentLoaded", function() {
     transform: translate(-50%, -50%) !important;
 }
 </style>
-
 <script>
 function bukaSheetBPJS() {
-    document.getElementById('wrapperSheetBPJS').style.display = 'block';
+    // 1. Tampilkan kontainer kustom kita terlebih dahulu
+    const wrapper = document.getElementById('wrapperSheetBPJS');
+    if (wrapper) wrapper.style.display = 'block';
+
+    // 2. Cari kontainer bottom sheet bawaan bukaOlshop yang ada di halaman utama
+    // Kita pancing menggunakan class umum yang sering digunakan platform
+    const btmSheetBawaan = document.querySelector('.bottom-sheet, .modal-bottom, [class*="sheet"], [class*="modal"]');
+    
+    if (btmSheetBawaan) {
+        btmSheetBawaan.style.display = 'block';
+        btmSheetBawaan.style.bottom = '0';
+        btmSheetBawaan.style.transform = 'translateY(0)';
+    }
+
+    // 3. Jalankan fungsi bawaan aplikasi Anda jika terdeteksi sistem
     if (typeof openBtmSheet === 'function') { openBtmSheet(); }
+    if (typeof openBottomSheet === 'function') { openBottomSheet(); }
 }
 
 function tutupSheetBPJS() {
-    document.getElementById('wrapperSheetBPJS').style.display = 'none';
+    // 1. Sembunyikan kembali kontainer kustom kita
+    const wrapper = document.getElementById('wrapperSheetBPJS');
+    if (wrapper) wrapper.style.display = 'none';
+
+    // 2. Jalankan fungsi penutup bawaan aplikasi Anda jika ada
     if (typeof closeBtmSheet === 'function') { closeBtmSheet(); }
+    if (typeof closeBottomSheet === 'function') { closeBottomSheet(); }
 }
 
 function pilihMenuBPJS(teks, nilai) {
+    // Set teks pada tombol dropdown utama agar berubah sesuai pilihan
     document.getElementById('teksBPJSTerpilih').innerText = teks;
+    // Masukkan nilainya ke input hidden transaksi agar terbaca oleh sistem bukaOlshop
     document.getElementById('financeProvider').value = nilai;
     
+    // Sinkronisasi status tanda centang bulat radio button kustom
     const opsiRadio = document.getElementsByName('rad_bpjs_pilihan');
     for (let i = 0; i < opsiRadio.length; i++) {
         if (opsiRadio[i].value === nilai) {
@@ -2947,9 +2969,12 @@ function pilihMenuBPJS(teks, nilai) {
             break;
         }
     }
-    setTimeout(tutupSheetBPJS, 200);
+    
+    // Beri jeda sedikit agar efek sentuhan terasa sebelum popup menutup otomatis
+    setTimeout(tutupSheetBPJS, 250);
 }
 </script>
+
 
 </div>
 </body>
