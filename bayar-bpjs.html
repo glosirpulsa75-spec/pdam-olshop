@@ -1013,24 +1013,26 @@ background-color: #ffffff !important; border: 1px solid #e0e0e0 !important; bord
 <div id="kotakFormUtama" style="width: 100% !important; background-color: #ffffff !important; border: 1px solid #e0e0e0 !important; border-radius: 24px !important; padding: 14px !important; box-sizing: border-box !important; display: flex !important; flex-direction: column !important; gap: 14px !important; transition: border-color 0.3s ease !important;">
 
   <!-- KOLOM PILIHAN VENDOR (DROPDOWN DI ATAS INPUT) -->
-<!-- Pemicu Jenis Layanan BPJS Kustom -->
+<!-- Pemicu Jenis Layanan BPJS Kustom Sesuai Validasi BukaOlshop -->
 <div style="width: 100% !important; margin-bottom: 14px !important; position: relative !important;">
     <label style="font-size: 14px; color: #666; display: block; margin-bottom: 5px; font-weight: bold;">Jenis BPJS</label>
     
-    <!-- Tampilan Dropdown Cantik yang Dilihat Pengguna -->
+    <!-- Tampilan Dropdown Cantik untuk Pengguna -->
     <div id="pemicuLayananBPJS" onclick="bukaSheetBPJS()" style="width: 100%; padding: 14px 12px; border: 1px solid #e0e0e0; border-radius: 14px; font-size: 15px; background: white; cursor: pointer; display: flex; justify-content: space-between; align-items: center; box-sizing: border-box;">
         <span id="teksBPJSTerpilih" style="color: #333;">Pilih Jenis BPJS</span>
         <span style="color: #666; font-size: 12px;">▼</span>
     </div>
 
-    <!-- ELEMEN SELECT ASLI (Nilai Value Disamakan Persis dengan Sistem Asli Anda) -->
-    <select name="bpjs-provider" id="financeProvider" required style="position: absolute !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 100% !important; opacity: 0 !important; pointer-events: none !important; z-index: -1 !important;">
-        <option value="" disabled selected>Pilih Jenis BPJS</option>
-        <option value="BPJS Kesehatan">BPJS Kesehatan</option>
-        <option value="Bayar Denda BPJS">Bayar Denda BPJS</option>
-        <option value="BPJS ketenagakerjaan Bpu">BPJS ketenagakerjaan Bpu</option>
-        <option value="BPJS Ketenagakerjaan pu">BPJS Ketenagakerjaan pu</option>
-    </select>
+    <!-- KONTROL STRUKTUR SELECT ASLI (Dipasang Transparan Ukuran Mini agar Lolos Validasi Tombol Lanjut) -->
+    <div style="position: absolute !important; bottom: 0 !important; left: 0 !important; width: 1px !important; height: 1px !important; overflow: hidden !important; opacity: 0.01 !important;">
+        <select name="bpjs-provider" id="financeProvider" required onchange="if(typeof isi_otomatis === 'function') { isi_otomatis(); }">
+            <option value="" disabled selected>Pilih Jenis BPJS</option>
+            <option value="BPJS Kesehatan">BPJS Kesehatan</option>
+            <option value="Bayar Denda BPJS">Bayar Denda BPJS</option>
+            <option value="BPJS ketenagakerjaan Bpu">BPJS ketenagakerjaan Bpu</option>
+            <option value="BPJS Ketenagakerjaan pu">BPJS Ketenagakerjaan pu</option>
+        </select>
+    </div>
 </div>
 
 <!-- Input Hidden Bawaan untuk Mengirim Data Transaksi ke Sistem bukaOlshop -->
@@ -2943,7 +2945,7 @@ document.addEventListener("DOMContentLoaded", function() {
 }
 </style>
 <script>
-// Pindahkan elemen secara paksa ke luar kontainer form saat halaman dimuat
+// Memindahkan elemen bottom sheet ke root body halaman agar tampil melayang sempurna
 (function() {
     function pindahElementKeRoot() {
         const elBPJS = document.getElementById('wrapperSheetBPJS');
@@ -2967,19 +2969,15 @@ function tutupSheetBPJS() {
 }
 
 function pilihMenuBPJS(teks, nilai) {
-    // 1. Ubah teks tampilan pada dropdown kustom atas
+    // 1. Ubah teks visual pada dropdown utama di dalam form
     document.getElementById('teksBPJSTerpilih').innerText = teks;
     
-    // 2. Ambil elemen <select> asli bawaan platform
+    // 2. Kunci nilai ke dalam elemen select asli bawaan bukaOlshop
     const selectAsli = document.getElementById('financeProvider');
     if (selectAsli) {
-        // Trik: Munculkan instan di layar agar WebView Android mengizinkan interaksi sistem murni
-        selectAsli.style.setProperty('display', 'block', 'important');
-        selectAsli.style.setProperty('opacity', '1', 'important');
-        selectAsli.style.setProperty('z-index', '99999', 'important');
-        selectAsli.focus();
-
-        // Cari opsi yang cocok dan ubah nilai secara sistem fisik
+        selectAsli.value = nilai;
+        
+        // Atur index pilihan agar sinkron secara native di Android WebView
         for (let i = 0; i < selectAsli.options.length; i++) {
             if (selectAsli.options[i].value.toLowerCase().trim() === nilai.toLowerCase().trim()) {
                 selectAsli.selectedIndex = i;
@@ -2988,26 +2986,17 @@ function pilihMenuBPJS(teks, nilai) {
             }
         }
         
-        // Pemicu simulasi interaksi manusia (Native Event dispatch)
-        const evtClick = new MouseEvent('click', { bubbles: true, cancelable: true, view: window });
-        selectAsli.dispatchEvent(evtClick);
+        // Pemicu event simulasi input fisik manusia agar dibaca oleh skrip internal aplikasi Anda
+        selectAsli.dispatchEvent(new Event('change', { bubbles: true }));
+        selectAsli.dispatchEvent(new Event('input', { bubbles: true }));
         
-        const evtChange = new Event('change', { bubbles: true });
-        selectAsli.dispatchEvent(evtChange);
-        
-        const evtInput = new Event('input', { bubbles: true });
-        selectAsli.dispatchEvent(evtInput);
-
-        // Kembalikan selektor asli ke mode tersembunyi setelah data terkunci aman
-        setTimeout(function() {
-            selectAsli.style.setProperty('position', 'absolute', 'important');
-            selectAsli.style.setProperty('opacity', '0', 'important');
-            selectAsli.style.setProperty('pointer-events', 'none', 'important');
-            selectAsli.style.setProperty('z-index', '-1', 'important');
-        }, 50);
+        // Eksekusi fungsi onchange bawaan platform jika terdeteksi di form
+        if (typeof selectAsli.onchange === 'function') {
+            selectAsli.onchange();
+        }
     }
     
-    // 3. Sinkronisasikan centang radio button di dalam sheet
+    // 3. Sinkronisasikan centang aktif pada tombol radio kustom di dalam sheet
     const opsiRadio = document.getElementsByName('rad_bpjs_pilihan');
     for (let i = 0; i < opsiRadio.length; i++) {
         if (opsiRadio[i].value.toLowerCase().trim() === nilai.toLowerCase().trim()) {
