@@ -2846,53 +2846,59 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 </script>
-<!-- Perbaikan Kontainer: Dipaksa Menjadi Bottom Sheet Melayang Lapisan Teratas -->
-<div id="wrapperSheetBPJS" style="display: none; position: fixed !important; bottom: 0 !important; left: 0 !important; right: 0 !important; width: 100% !important; background: #ffffff !important; border-top-left-radius: 24px !important; border-top-right-radius: 24px !important; box-shadow: 0 -5px 20px rgba(0,0,0,0.15) !important; padding: 20px 20px 34px 20px !important; box-sizing: border-box !important; z-index: 999999999 !important; font-family: sans-serif;">
+<!-- Kontainer Utama Pilihan BPJS -->
+<div id="wrapperSheetBPJS" style="display: none;">
+    <!-- Tabir Hitam Transparan Latar Belakang -->
+    <div id="overlayGelapBPJS" onclick="tutupSheetBPJS()" style="position: fixed !important; top: 0 !important; left: 0 !important; right: 0 !important; bottom: 0 !important; width: 100% !important; height: 100% !important; background: rgba(0, 0, 0, 0.5) !important; z-index: 99999998 !important;"></div>
     
-    <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 15px; border-bottom: 1px solid #f2f2f2;">
-        <h3 style="margin: 0; font-size: 16px; color: #333; font-weight: bold;">Pilih Jenis BPJS</h3>
-        <span onclick="tutupSheetBPJS()" style="cursor: pointer; font-size: 24px; color: #999; font-weight: bold; padding: 0 5px;">×</span>
-    </div>
-
-    <div style="padding: 10px 0; max-height: 45vh; overflow-y: auto;">
-        <!-- Pilihan 1 -->
-        <div class="opsi-bpjs-row" onclick="pilihMenuBPJS('BPJS Kesehatan', 'BPJS Kesehatan')">
-            <div style="display: flex; align-items: center; gap: 12px;">
-                <img src="https://link-toko-anda.com" class="img-ikon-bpjs" onerror="this.style.backgroundColor='#007bff'">
-                <span class="lbl-bpjs">BPJS Kesehatan</span>
-            </div>
-            <input type="radio" name="rad_bpjs_pilihan" value="BPJS Kesehatan">
-            <span class="bulat-radio"></span>
+    <!-- Fisik Lembar Menu Melayang Melengkung -->
+    <div style="position: fixed !important; bottom: 0 !important; left: 0 !important; right: 0 !important; width: 100% !important; background: #ffffff !important; border-top-left-radius: 24px !important; border-top-right-radius: 24px !important; box-shadow: 0 -5px 25px rgba(0,0,0,0.2) !important; padding: 20px 20px 34px 20px !important; box-sizing: border-box !important; z-index: 99999999 !important; font-family: sans-serif !important;">
+        
+        <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 15px; border-bottom: 1px solid #f2f2f2;">
+            <h3 style="margin: 0; font-size: 16px; color: #333; font-weight: bold;">Pilih Jenis BPJS</h3>
+            <span onclick="tutupSheetBPJS()" style="cursor: pointer; font-size: 24px; color: #999; font-weight: bold; padding: 0 5px;">×</span>
         </div>
 
-        <!-- Pilihan 2 -->
-        <div class="opsi-bpjs-row" onclick="pilihMenuBPJS('Bayar Denda BPJS', 'Bayar Denda BPJS')">
-            <div style="display: flex; align-items: center; gap: 12px;">
-                <img src="https://link-toko-anda.com" class="img-ikon-bpjs" onerror="this.style.backgroundColor='#007bff'">
-                <span class="lbl-bpjs">Bayar Denda BPJS</span>
+        <div style="padding: 10px 0; max-height: 45vh; overflow-y: auto;">
+            <!-- Pilihan 1 -->
+            <div class="opsi-bpjs-row" onclick="pilihMenuBPJS('BPJS Kesehatan', 'BPJS Kesehatan')">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <img src="https://link-toko-anda.com" class="img-ikon-bpjs" onerror="this.style.backgroundColor='#007bff'">
+                    <span class="lbl-bpjs">BPJS Kesehatan</span>
+                </div>
+                <input type="radio" name="rad_bpjs_pilihan" value="BPJS Kesehatan">
+                <span class="bulat-radio"></span>
             </div>
-            <input type="radio" name="rad_bpjs_pilihan" value="Bayar Denda BPJS">
-            <span class="bulat-radio"></span>
-        </div>
 
-        <!-- Pilihan 3 -->
-        <div class="opsi-bpjs-row" onclick="pilihMenuBPJS('BPJS ketenagakerjaan Bpu', 'BPJS ketenagakerjaan Bpu')">
-            <div style="display: flex; align-items: center; gap: 12px;">
-                <img src="https://link-toko-anda.com" class="img-ikon-bpjs" onerror="this.style.backgroundColor='#007bff'">
-                <span class="lbl-bpjs">BPJS ketenagakerjaan Bpu</span>
+            <!-- Pilihan 2 -->
+            <div class="opsi-bpjs-row" onclick="pilihMenuBPJS('Bayar Denda BPJS', 'Bayar Denda BPJS')">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <img src="https://link-toko-anda.com" class="img-ikon-bpjs" onerror="this.style.backgroundColor='#007bff'">
+                    <span class="lbl-bpjs">Bayar Denda BPJS</span>
+                </div>
+                <input type="radio" name="rad_bpjs_pilihan" value="Bayar Denda BPJS">
+                <span class="bulat-radio"></span>
             </div>
-            <input type="radio" name="rad_bpjs_pilihan" value="BPJS ketenagakerjaan Bpu">
-            <span class="bulat-radio"></span>
-        </div>
 
-        <!-- Pilihan 4 -->
-        <div class="opsi-bpjs-row" onclick="pilihMenuBPJS('BPJS Ketenagakerjaan pu', 'BPJS Ketenagakerjaan Pu')">
-            <div style="display: flex; align-items: center; gap: 12px;">
-                <img src="https://link-toko-anda.com" class="img-ikon-bpjs" onerror="this.style.backgroundColor='#007bff'">
-                <span class="lbl-bpjs">BPJS Ketenagakerjaan pu</span>
+            <!-- Pilihan 3 -->
+            <div class="opsi-bpjs-row" onclick="pilihMenuBPJS('BPJS ketenagakerjaan Bpu', 'BPJS ketenagakerjaan Bpu')">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <img src="https://link-toko-anda.com" class="img-ikon-bpjs" onerror="this.style.backgroundColor='#007bff'">
+                    <span class="lbl-bpjs">BPJS ketenagakerjaan Bpu</span>
+                </div>
+                <input type="radio" name="rad_bpjs_pilihan" value="BPJS ketenagakerjaan Bpu">
+                <span class="bulat-radio"></span>
             </div>
-            <input type="radio" name="rad_bpjs_pilihan" value="BPJS Ketenagakerjaan Pu">
-            <span class="bulat-radio"></span>
+
+            <!-- Pilihan 4 -->
+            <div class="opsi-bpjs-row" onclick="pilihMenuBPJS('BPJS Ketenagakerjaan pu', 'BPJS Ketenagakerjaan Pu')">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <img src="https://link-toko-anda.com" class="img-ikon-bpjs" onerror="this.style.backgroundColor='#007bff'">
+                    <span class="lbl-bpjs">BPJS Ketenagakerjaan pu</span>
+                </div>
+                <input type="radio" name="rad_bpjs_pilihan" value="BPJS Ketenagakerjaan Pu">
+                <span class="bulat-radio"></span>
+            </div>
         </div>
     </div>
 </div>
@@ -2927,43 +2933,33 @@ document.addEventListener("DOMContentLoaded", function() {
 </style>
 
 <script>
-function bukaSheetBPJS() {
-    // 1. Tampilkan kontainer kustom kita terlebih dahulu
-    const wrapper = document.getElementById('wrapperSheetBPJS');
-    if (wrapper) wrapper.style.display = 'block';
-
-    // 2. Cari kontainer bottom sheet bawaan bukaOlshop yang ada di halaman utama
-    // Kita pancing menggunakan class umum yang sering digunakan platform
-    const btmSheetBawaan = document.querySelector('.bottom-sheet, .modal-bottom, [class*="sheet"], [class*="modal"]');
-    
-    if (btmSheetBawaan) {
-        btmSheetBawaan.style.display = 'block';
-        btmSheetBawaan.style.bottom = '0';
-        btmSheetBawaan.style.transform = 'translateY(0)';
+// Trik Utama: Pindahkan elemen secara paksa ke luar form agar terbebas dari overflow hidden
+(function() {
+    function pindahElementKeRoot() {
+        const elBPJS = document.getElementById('wrapperSheetBPJS');
+        if (elBPJS && elBPJS.parentElement !== document.body) {
+            document.body.appendChild(elBPJS);
+        }
     }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', pindahElementKeRoot);
+    } else {
+        pindahElementKeRoot();
+    }
+})();
 
-    // 3. Jalankan fungsi bawaan aplikasi Anda jika terdeteksi sistem
-    if (typeof openBtmSheet === 'function') { openBtmSheet(); }
-    if (typeof openBottomSheet === 'function') { openBottomSheet(); }
+function bukaSheetBPJS() {
+    document.getElementById('wrapperSheetBPJS').style.display = 'block';
 }
 
 function tutupSheetBPJS() {
-    // 1. Sembunyikan kembali kontainer kustom kita
-    const wrapper = document.getElementById('wrapperSheetBPJS');
-    if (wrapper) wrapper.style.display = 'none';
-
-    // 2. Jalankan fungsi penutup bawaan aplikasi Anda jika ada
-    if (typeof closeBtmSheet === 'function') { closeBtmSheet(); }
-    if (typeof closeBottomSheet === 'function') { closeBottomSheet(); }
+    document.getElementById('wrapperSheetBPJS').style.display = 'none';
 }
 
 function pilihMenuBPJS(teks, nilai) {
-    // Set teks pada tombol dropdown utama agar berubah sesuai pilihan
     document.getElementById('teksBPJSTerpilih').innerText = teks;
-    // Masukkan nilainya ke input hidden transaksi agar terbaca oleh sistem bukaOlshop
     document.getElementById('financeProvider').value = nilai;
     
-    // Sinkronisasi status tanda centang bulat radio button kustom
     const opsiRadio = document.getElementsByName('rad_bpjs_pilihan');
     for (let i = 0; i < opsiRadio.length; i++) {
         if (opsiRadio[i].value === nilai) {
@@ -2971,12 +2967,9 @@ function pilihMenuBPJS(teks, nilai) {
             break;
         }
     }
-    
-    // Beri jeda sedikit agar efek sentuhan terasa sebelum popup menutup otomatis
-    setTimeout(tutupSheetBPJS, 250);
+    setTimeout(tutupSheetBPJS, 200);
 }
 </script>
-
 
 </div>
 </body>
