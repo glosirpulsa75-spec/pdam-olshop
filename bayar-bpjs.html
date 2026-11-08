@@ -1014,12 +1014,24 @@ background-color: #ffffff !important; border: 1px solid #e0e0e0 !important; bord
 
   <!-- KOLOM PILIHAN VENDOR (DROPDOWN DI ATAS INPUT) -->
 <!-- Pemicu Jenis Layanan BPJS (Gaya Meniru Dropdown Sukses) -->
+<!-- Pemicu Jenis Layanan BPJS Kustom -->
 <div style="width: 100% !important; margin-bottom: 14px !important; position: relative !important;">
     <label style="font-size: 14px; color: #666; display: block; margin-bottom: 5px; font-weight: bold;">Jenis BPJS</label>
+    
+    <!-- Tampilan Dropdown Cantik yang Dilihat Pengguna -->
     <div id="pemicuLayananBPJS" onclick="bukaSheetBPJS()" style="width: 100%; padding: 14px 12px; border: 1px solid #e0e0e0; border-radius: 14px; font-size: 15px; background: white; cursor: pointer; display: flex; justify-content: space-between; align-items: center; box-sizing: border-box;">
         <span id="teksBPJSTerpilih" style="color: #333;">Pilih Jenis BPJS</span>
         <span style="color: #666; font-size: 12px;">▼</span>
     </div>
+
+    <!-- ELEMEN SELECT ASLI BUKAOLSHOP (Disembunyikan tapi Wajib Ada untuk Validasi Sistem) -->
+    <select name="bpjs-provider" id="financeProvider" required style="position: absolute !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 100% !important; opacity: 0 !important; pointer-events: none !important; z-index: -1 !important;">
+        <option value="" disabled selected>Pilih Jenis BPJS</option>
+        <option value="BPJS Kesehatan">BPJS Kesehatan</option>
+        <option value="Bayar Denda BPJS">Bayar Denda BPJS</option>
+        <option value="BPJS ketenagakerjaan Bpu">BPJS ketenagakerjaan Bpu</option>
+        <option value="BPJS Ketenagakerjaan pu">BPJS Ketenagakerjaan pu</option>
+    </select>
 </div>
 
 <!-- Input Hidden Bawaan untuk Mengirim Data Transaksi ke Sistem bukaOlshop -->
@@ -2956,17 +2968,17 @@ function tutupSheetBPJS() {
 }
 
 function pilihMenuBPJS(teks, nilai) {
-    // 1. Update teks visual pada kotak dropdown utama
+    // 1. Ubah teks tampilan pada dropdown kustom
     document.getElementById('teksBPJSTerpilih').innerText = teks;
     
-    // 2. Ambil elemen input hidden transaksi asli bukaOlshop
-    const hiddenInput = document.getElementById('financeProvider');
-    if (hiddenInput) {
-        hiddenInput.value = nilai;
+    // 2. Isi nilai secara otomatis ke elemen <select> asli bawaan bukaOlshop
+    const selectAsli = document.getElementById('financeProvider');
+    if (selectAsli) {
+        selectAsli.value = nilai;
         
-        // Memicu trigger event tiruan agar sistem validasi form bukaOlshop peka terhadap perubahan nilai
-        const eventBaru = new Event('change', { bubbles: true });
-        hiddenInput.dispatchEvent(eventBaru);
+        // Picu event perubahan agar sistem internal bukaOlshop mendeteksi input yang valid
+        const eventChange = new Event('change', { bubbles: true });
+        selectAsli.dispatchEvent(eventChange);
     }
     
     // 3. Sinkronisasikan centang aktif pada tombol radio kustom di dalam sheet
@@ -2981,20 +2993,6 @@ function pilihMenuBPJS(teks, nilai) {
     // 4. Tutup sheet dengan jeda animasi yang mulus
     setTimeout(tutupSheetBPJS, 200);
 }
-
-// Mencegah form mengalami bentrokan trigger saat pengguna menekan tombol "Lanjut"
-document.addEventListener('DOMContentLoaded', function() {
-    const tombolLanjutBawaan = document.querySelector('button[type="submit"], .btn-lanjut, .button-lanjut, #submit-button');
-    if (tombolLanjutBawaan) {
-        tombolLanjutBawaan.addEventListener('click', function(e) {
-            // Jika sheet dalam posisi terbuka saat tombol diklik, tutup dulu agar proses checkout tidak terhambat popup
-            const wrapper = document.getElementById('wrapperSheetBPJS');
-            if (wrapper && wrapper.style.display === 'block') {
-                tutupSheetBPJS();
-            }
-        });
-    }
-});
 </script>
 
 
