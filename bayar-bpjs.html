@@ -1014,72 +1014,19 @@ background-color: #ffffff !important; border: 1px solid #e0e0e0 !important; bord
 
 <!-- KOLOM PILIHAN VENDOR (DROPDOWN DI ATAS INPUT) -->
 <div style="width: 100% !important; margin-bottom: 14px !important; position: relative !important;">
-<!-- Pemicu Tampilan Pilihan Kustom -->
-<div class="custom-select-trigger-bpjs" onclick="openBpjsSheet()">
+<!-- Tombol Tampilan Pemicu Utama (Tetap Berada di Dalam Form) -->
+<div class="custom-select-trigger-bpjs" onclick="handleOpenBpjsSheet()">
     <span id="selectedBpjsText" style="color: #333 !important; font-weight: normal !important;">Pilih Jenis BPJS</span>
     <span class="arrow-down-bpjs" style="display: flex !important; align-items: center !important;">
         <svg xmlns="http://w3.org" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#666666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
     </span>
 </div>
 
-<!-- Input Tersembunyi untuk Menyimpan Nilai Transaksi bukaOlshop -->
+<!-- Input Tersembunyi untuk Menyimpan Nilai Transaksi Ke Sistem bukaOlshop -->
 <input type="hidden" name="bpjs-provider" id="financeProvider" required value="">
 
-<!-- Overlay Latar Belakang Gelap -->
-<div id="bpjsOverlay" class="bpjs-bs-overlay" onclick="closeBpjsSheet()"></div>
-
-<!-- Kontainer Popup Modal Tengah (Pasti Muncul) -->
-<div id="bpjsBottomSheet" class="bpjs-modal-center">
-    <div class="bpjs-bs-header">
-        <h3 style="margin: 0 !important; font-size: 16px !important; color: #333 !important; font-weight: bold !important; font-family: sans-serif !important;">Pilih Jenis BPJS</h3>
-        <button type="button" class="bpjs-close-btn" onclick="closeBpjsSheet()">×</button>
-    </div>
-    
-    <div class="bpjs-bs-content">
-        <!-- Opsi 1 -->
-        <div class="bpjs-option-item" onclick="selectBpjsOption('BPJS Kesehatan', 'BPJS Kesehatan')">
-            <div class="bpjs-item-left">
-                <img src="https://link-toko-anda.com" alt="BPJS" class="bpjs-icon">
-                <span class="bpjs-text-label">BPJS Kesehatan</span>
-            </div>
-            <input type="radio" name="bpjs_radio_opt" value="BPJS Kesehatan" id="rad_kesehatan">
-            <span class="bpjs-radio-checkmark"></span>
-        </div>
-        
-        <!-- Opsi 2 -->
-        <div class="bpjs-option-item" onclick="selectBpjsOption('Bayar Denda BPJS', 'Bayar Denda BPJS')">
-            <div class="bpjs-item-left">
-                <img src="https://link-toko-anda.com" alt="BPJS" class="bpjs-icon">
-                <span class="bpjs-text-label">Bayar Denda BPJS</span>
-            </div>
-            <input type="radio" name="bpjs_radio_opt" value="Bayar Denda BPJS" id="rad_denda">
-            <span class="bpjs-radio-checkmark"></span>
-        </div>
-        
-        <!-- Opsi 3 -->
-        <div class="bpjs-option-item" onclick="selectBpjsOption('BPJS ketenagakerjaan Bpu', 'BPJS ketenagakerjaan Bpu')">
-            <div class="bpjs-item-left">
-                <img src="https://link-toko-anda.com" alt="BPJS" class="bpjs-icon">
-                <span class="bpjs-text-label">BPJS ketenagakerjaan Bpu</span>
-            </div>
-            <input type="radio" name="bpjs_radio_opt" value="BPJS ketenagakerjaan Bpu" id="rad_bpu">
-            <span class="bpjs-radio-checkmark"></span>
-        </div>
-        
-        <!-- Opsi 4 -->
-        <div class="bpjs-option-item" onclick="selectBpjsOption('BPJS Ketenagakerjaan pu', 'BPJS Ketenagakerjaan Pu')">
-            <div class="bpjs-item-left">
-                <img src="https://link-toko-anda.com" alt="BPJS" class="bpjs-icon">
-                <span class="bpjs-text-label">BPJS Ketenagakerjaan pu</span>
-            </div>
-            <input type="radio" name="bpjs_radio_opt" value="BPJS Ketenagakerjaan Pu" id="rad_pu">
-            <span class="bpjs-radio-checkmark"></span>
-        </div>
-    </div>
-</div>
-
 <style>
-/* Desain Tombol Pemicu Utama */
+/* CSS untuk Tombol Pemicu Utama */
 .custom-select-trigger-bpjs {
     width: 100% !important;
     padding: 14px 16px !important;
@@ -1094,105 +1041,100 @@ background-color: #ffffff !important; border: 1px solid #e0e0e0 !important; bord
     align-items: center !important;
     cursor: pointer !important;
 }
-
-/* Background Gelap Transparan */
-.bpjs-bs-overlay {
-    display: none !important;
-    position: fixed !important;
-    top: 0 !important; left: 0 !important; width: 100% !important; height: 100% !important;
-    background: rgba(0, 0, 0, 0.5) !important;
-    z-index: 99999999 !important;
-}
-
-/* Kontainer Model Tengah Mengambang (Solusi Anti Terpotong) */
-.bpjs-modal-center {
-    display: none !important;
-    position: fixed !important;
-    top: 50% !important;
-    left: 50% !important;
-    transform: translate(-50%, -50%) !important;
-    width: 85% !important;
-    max-width: 340px !important;
-    background: #ffffff !important;
-    border-radius: 20px !important;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2) !important;
-    box-sizing: border-box !important;
-    z-index: 100000000 !important;
-    overflow: hidden !important;
-}
-
-/* Tampilkan Elemen ketika Aktif */
-.bpjs-bs-overlay.active-sheet, .bpjs-modal-center.active-sheet { 
-    display: block !important; 
-}
-
-/* Bagian Header Pop-up */
-.bpjs-bs-header {
-    display: flex !important;
-    justify-content: space-between !important;
-    align-items: center !important;
-    padding: 16px 18px !important;
-    border-bottom: 1px solid #f2f2f2 !important;
-}
-.bpjs-close-btn { background: #f0f0f0 !important; border: none !important; font-size: 20px !important; border-radius: 50% !important; width: 28px !important; height: 28px !important; cursor: pointer !important; display: flex !important; align-items: center !important; justify-content: center !important; color: #666 !important; padding: 0 !important; }
-
-/* Struktur List Menu Pilihan */
-.bpjs-bs-content { padding: 4px 0 !important; max-height: 40vh !important; overflow-y: auto !important; }
-.bpjs-option-item {
-    display: flex !important;
-    justify-content: space-between !important;
-    align-items: center !important;
-    padding: 14px 18px !important;
-    border-bottom: 1px solid #fbfbfb !important;
-    cursor: pointer !important;
-}
-.bpjs-item-left { display: flex !important; align-items: center !important; gap: 12px !important; }
-.bpjs-text-label { font-size: 14px !important; color: #333333 !important; font-family: sans-serif !important; }
-
-/* Ukuran Ikon Gambar Kustom */
-.bpjs-icon { width: 24px !important; height: 24px !important; object-fit: contain !important; background-color: #f5f5f5; border-radius: 4px; }
-
-/* Tombol Radio Bulat Kanan */
-.bpjs-option-item input[type="radio"] { display: none !important; }
-.bpjs-radio-checkmark {
-    width: 18px !important;
-    height: 18px !important;
-    border: 2px solid #cccccc !important;
-    border-radius: 50% !important;
-    display: inline-block !important;
-    position: relative !important;
-    box-sizing: border-box !important;
-}
-.bpjs-option-item input[type="radio"]:checked + .bpjs-radio-checkmark { border-color: #007bff !important; }
-.bpjs-option-item input[type="radio"]:checked + .bpjs-radio-checkmark::after {
-    content: '' !important;
-    width: 8px !important;
-    height: 8px !important;
-    background: #007bff !important;
-    border-radius: 50% !important;
-    position: absolute !important;
-    top: 50% !important; left: 50% !important;
-    transform: translate(-50%, -50%) !important;
-}
 </style>
 
 <script>
-function openBpjsSheet() {
-    document.getElementById('bpjsBottomSheet').classList.add('active-sheet');
-    document.getElementById('bpjsOverlay').classList.add('active-sheet');
+(function() {
+    // Buat ID unik agar tidak terjadi duplikasi saat halaman dimuat ulang
+    if (document.getElementById('bpjsInjectContainer')) return;
+
+    // Susun Struktur HTML Popup Secara Mandiri agar Terlepas dari Form BukaOlshop
+    const injectDiv = document.createElement('div');
+    injectDiv.id = 'bpjsInjectContainer';
+    injectDiv.innerHTML = `
+        <div id="bpjsOverlay" class="inj-bpjs-overlay" onclick="handleCloseBpjsSheet()"></div>
+        <div id="bpjsBottomSheet" class="inj-bpjs-modal">
+            <div class="inj-bpjs-header">
+                <h3>Pilih Jenis BPJS</h3>
+                <button type="button" class="inj-bpjs-close" onclick="handleCloseBpjsSheet()">×</button>
+            </div>
+            <div class="inj-bpjs-content">
+                <div class="inj-bpjs-item" onclick="handleSelectBpjs('BPJS Kesehatan')">
+                    <div class="inj-bpjs-left">
+                        <img src="https://link-toko-anda.com" class="inj-bpjs-img" onerror="this.style.backgroundColor='#007bff'">
+                        <span>BPJS Kesehatan</span>
+                    </div>
+                    <input type="radio" name="inj_bpjs_rad" value="BPJS Kesehatan" id="inj_rad_1">
+                    <span class="inj-bpjs-check"></span>
+                </div>
+                <div class="inj-bpjs-item" onclick="handleSelectBpjs('Bayar Denda BPJS')">
+                    <div class="inj-bpjs-left">
+                        <img src="https://link-toko-anda.com" class="inj-bpjs-img" onerror="this.style.backgroundColor='#007bff'">
+                        <span>Bayar Denda BPJS</span>
+                    </div>
+                    <input type="radio" name="inj_bpjs_rad" value="Bayar Denda BPJS" id="inj_rad_2">
+                    <span class="inj-bpjs-check"></span>
+                </div>
+                <div class="inj-bpjs-item" onclick="handleSelectBpjs('BPJS ketenagakerjaan Bpu')">
+                    <div class="inj-bpjs-left">
+                        <img src="https://link-toko-anda.com" class="inj-bpjs-img" onerror="this.style.backgroundColor='#007bff'">
+                        <span>BPJS ketenagakerjaan Bpu</span>
+                    </div>
+                    <input type="radio" name="inj_bpjs_rad" value="BPJS ketenagakerjaan Bpu" id="inj_rad_3">
+                    <span class="inj-bpjs-check"></span>
+                </div>
+                <div class="inj-bpjs-item" onclick="handleSelectBpjs('BPJS Ketenagakerjaan pu')">
+                    <div class="inj-bpjs-left">
+                        <img src="https://link-toko-anda.com" class="inj-bpjs-img" onerror="this.style.backgroundColor='#007bff'">
+                        <span>BPJS Ketenagakerjaan pu</span>
+                    </div>
+                    <input type="radio" name="inj_bpjs_rad" value="BPJS Ketenagakerjaan pu" id="inj_rad_4">
+                    <span class="inj-bpjs-check"></span>
+                </div>
+            </div>
+        </div>
+        <style>
+        .inj-bpjs-overlay { display: none; position: fixed !important; top: 0!important; left: 0!important; right: 0!important; bottom: 0!important; background: rgba(0,0,0,0.55)!important; z-index: 99999999!important; }
+        .inj-bpjs-modal { display: none; position: fixed !important; bottom: 0 !important; left: 0 !important; right: 0 !important; width: 100% !important; background: #ffffff !important; border-top-left-radius: 24px !important; border-top-right-radius: 24px !important; box-sizing: border-box !important; z-index: 100000000 !important; padding-bottom: 34px !important; transform: translateY(100%) !important; transition: transform 0.25s ease-out !important; }
+        .inj-bpjs-overlay.inj-active { display: block !important; }
+        .inj-bpjs-modal.inj-active { display: block !important; transform: translateY(0) !important; }
+        .inj-bpjs-header { display: flex !important; justify-content: space-between !important; align-items: center !important; padding: 18px 20px !important; border-bottom: 1px solid #f5f5f5 !important; }
+        .inj-bpjs-header h3 { margin: 0 !important; font-size: 16px !important; color: #333 !important; font-family: sans-serif !important; font-weight: bold !important; }
+        .inj-bpjs-close { background: #f0f0f0 !important; border: none !important; font-size: 22px !important; border-radius: 50% !important; width: 32px !important; height: 32px !important; cursor: pointer !important; display: flex !important; align-items: center !important; justify-content: center !important; color: #555 !important; padding: 0 !important; }
+        .inj-bpjs-content { padding: 8px 0 !important; max-height: 50vh !important; overflow-y: auto !important; }
+        .inj-bpjs-item { display: flex !important; justify-content: space-between !important; align-items: center !important; padding: 16px 20px !important; border-bottom: 1px solid #fafafa !important; cursor: pointer !important; }
+        .inj-bpjs-left { display: flex !important; align-items: center !important; gap: 14px !important; }
+        .inj-bpjs-left span { font-size: 15px !important; color: #333333 !important; font-family: sans-serif !important; }
+        .inj-bpjs-img { width: 24px !important; height: 24px !important; object-fit: contain !important; border-radius: 4px !important; }
+        .inj-bpjs-item input[type="radio"] { display: none !important; }
+        .inj-bpjs-check { width: 20px !important; height: 20px !important; border: 2px solid #cccccc !important; border-radius: 50% !important; display: inline-block !important; position: relative !important; box-sizing: border-box !important; }
+        .inj-bpjs-item input[type="radio"]:checked + .inj-bpjs-check { border-color: #007bff !important; }
+        .inj-bpjs-item input[type="radio"]:checked + .inj-bpjs-check::after { content: '' !important; width: 10px !important; height: 10px !important; background: #007bff !important; border-radius: 50% !important; position: absolute !important; top: 50% !important; left: 50% !important; transform: translate(-50%, -50%) !important; }
+        </style>
+    `;
+    
+    // Paksa Masukkan ke Element Paling Luar Dokumen (Akar Body Aplikasi)
+    document.body.appendChild(injectDiv);
+})();
+
+// Fungsi Navigasi Pengendali dari Tombol Form Utama
+function handleOpenBpjsSheet() {
+    document.getElementById('bpjsBottomSheet').classList.add('inj-active');
+    document.getElementById('bpjsOverlay').classList.add('inj-active');
 }
 
-function closeBpjsSheet() {
-    document.getElementById('bpjsBottomSheet').classList.remove('active-sheet');
-    document.getElementById('bpjsOverlay').classList.remove('active-sheet');
+function handleCloseBpjsSheet() {
+    document.getElementById('bpjsBottomSheet').classList.remove('inj-active');
+    document.getElementById('bpjsOverlay').classList.remove('inj-active');
 }
 
-function selectBpjsOption(text, value) {
-    document.getElementById('selectedBpjsText').innerText = text;
+function handleSelectBpjs(value) {
+    // Sinkronisasi teks tampilan tombol dan nilai form transaksi asli
+    document.getElementById('selectedBpjsText').innerText = value;
     document.getElementById('financeProvider').value = value;
     
-    // Sinkronisasi status centang radio button
-    const radios = document.getElementsByName('bpjs_radio_opt');
+    // Aktifkan tanda centang radio button di dalam popup kustom
+    const radios = document.getElementsByName('inj_bpjs_rad');
     for (let i = 0; i < radios.length; i++) {
         if (radios[i].value === value) {
             radios[i].checked = true;
@@ -1200,7 +1142,7 @@ function selectBpjsOption(text, value) {
         }
     }
     
-    setTimeout(closeBpjsSheet, 200);
+    setTimeout(handleCloseBpjsSheet, 200);
 }
 </script>
 
