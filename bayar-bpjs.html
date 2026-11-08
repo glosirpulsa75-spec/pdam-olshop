@@ -2931,9 +2931,8 @@ document.addEventListener("DOMContentLoaded", function() {
     transform: translate(-50%, -50%) !important;
 }
 </style>
-
 <script>
-// Trik Utama: Pindahkan elemen secara paksa ke luar form agar terbebas dari overflow hidden
+// Pindahkan elemen secara paksa ke luar kontainer form (Akar DOM Dokumen) saat dimuat
 (function() {
     function pindahElementKeRoot() {
         const elBPJS = document.getElementById('wrapperSheetBPJS');
@@ -2957,9 +2956,20 @@ function tutupSheetBPJS() {
 }
 
 function pilihMenuBPJS(teks, nilai) {
+    // 1. Update teks visual pada kotak dropdown utama
     document.getElementById('teksBPJSTerpilih').innerText = teks;
-    document.getElementById('financeProvider').value = nilai;
     
+    // 2. Ambil elemen input hidden transaksi asli bukaOlshop
+    const hiddenInput = document.getElementById('financeProvider');
+    if (hiddenInput) {
+        hiddenInput.value = nilai;
+        
+        // Memicu trigger event tiruan agar sistem validasi form bukaOlshop peka terhadap perubahan nilai
+        const eventBaru = new Event('change', { bubbles: true });
+        hiddenInput.dispatchEvent(eventBaru);
+    }
+    
+    // 3. Sinkronisasikan centang aktif pada tombol radio kustom di dalam sheet
     const opsiRadio = document.getElementsByName('rad_bpjs_pilihan');
     for (let i = 0; i < opsiRadio.length; i++) {
         if (opsiRadio[i].value === nilai) {
@@ -2967,9 +2977,26 @@ function pilihMenuBPJS(teks, nilai) {
             break;
         }
     }
+    
+    // 4. Tutup sheet dengan jeda animasi yang mulus
     setTimeout(tutupSheetBPJS, 200);
 }
+
+// Mencegah form mengalami bentrokan trigger saat pengguna menekan tombol "Lanjut"
+document.addEventListener('DOMContentLoaded', function() {
+    const tombolLanjutBawaan = document.querySelector('button[type="submit"], .btn-lanjut, .button-lanjut, #submit-button');
+    if (tombolLanjutBawaan) {
+        tombolLanjutBawaan.addEventListener('click', function(e) {
+            // Jika sheet dalam posisi terbuka saat tombol diklik, tutup dulu agar proses checkout tidak terhambat popup
+            const wrapper = document.getElementById('wrapperSheetBPJS');
+            if (wrapper && wrapper.style.display === 'block') {
+                tutupSheetBPJS();
+            }
+        });
+    }
+});
 </script>
+
 
 </div>
 </body>
