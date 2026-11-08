@@ -2944,7 +2944,7 @@ document.addEventListener("DOMContentLoaded", function() {
 }
 </style>
 <script>
-// Pindahkan elemen secara paksa ke luar kontainer form (Akar DOM Dokumen) saat dimuat
+// Pindahkan elemen kustom secara paksa ke luar kontainer form (Akar DOM Dokumen) saat halaman dimuat
 (function() {
     function pindahElementKeRoot() {
         const elBPJS = document.getElementById('wrapperSheetBPJS');
@@ -2968,20 +2968,29 @@ function tutupSheetBPJS() {
 }
 
 function pilihMenuBPJS(teks, nilai) {
-    // 1. Ubah teks tampilan pada dropdown kustom
+    // 1. Ubah teks tampilan pada tombol dropdown kustom di form atas
     document.getElementById('teksBPJSTerpilih').innerText = teks;
     
-    // 2. Isi nilai secara otomatis ke elemen <select> asli bawaan bukaOlshop
+    // 2. Isi nilai secara paksa ke elemen <select> asli bawaan bukaOlshop
     const selectAsli = document.getElementById('financeProvider');
     if (selectAsli) {
         selectAsli.value = nilai;
         
-        // Picu event perubahan agar sistem internal bukaOlshop mendeteksi input yang valid
-        const eventChange = new Event('change', { bubbles: true });
-        selectAsli.dispatchEvent(eventChange);
+        // Cari opsi yang cocok dan tandai sebagai terpilih secara sistem
+        for (let i = 0; i < selectAsli.options.length; i++) {
+            if (selectAsli.options[i].value === nilai) {
+                selectAsli.selectedIndex = i;
+                selectAsli.options[i].selected = true;
+                break;
+            }
+        }
+        
+        // Picu multievent agar sistem internal platform peka
+        selectAsli.dispatchEvent(new Event('change', { bubbles: true }));
+        selectAsli.dispatchEvent(new Event('input', { bubbles: true }));
     }
     
-    // 3. Sinkronisasikan centang aktif pada tombol radio kustom di dalam sheet
+    // 3. Sinkronisasikan tanda centang bulat radio button di dalam sheet
     const opsiRadio = document.getElementsByName('rad_bpjs_pilihan');
     for (let i = 0; i < opsiRadio.length; i++) {
         if (opsiRadio[i].value === nilai) {
@@ -2990,8 +2999,23 @@ function pilihMenuBPJS(teks, nilai) {
         }
     }
     
-    // 4. Tutup sheet dengan jeda animasi yang mulus
-    setTimeout(tutupSheetBPJS, 200);
+    // 4. Tutup lembar bottom sheet terlebih dahulu
+    tutupSheetBPJS();
+    
+    // 5. EKSEKUSI JALAN PINTAS AUTO-SUBMIT CHECKOUT
+    // Trik ini memaksa form langsung memproses checkout tanpa terhambat klik manual
+    setTimeout(function() {
+        const formUtama = selectAsli ? selectAsli.closest('form') : null;
+        if (formUtama) {
+            formUtama.submit();
+        } else {
+            // Jika elemen form tidak terdeteksi langsung, cari tombol Lanjut bawaan dan klik otomatis
+            const tombolLanjut = document.querySelector('button[type="submit"], .btn-lanjut, .button-lanjut, #submit-button') || document.querySelector('button:not([onclick])');
+            if (tombolLanjut) {
+                tombolLanjut.click();
+            }
+        }
+    }, 150);
 }
 </script>
 
