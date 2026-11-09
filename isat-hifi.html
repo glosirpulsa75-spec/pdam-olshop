@@ -1502,7 +1502,7 @@ document.addEventListener("DOMContentLoaded", () => {
     <div class="popup">
         <div class="drag-line"></div>
         <div class="product-name-large" id="transProductName">-</div>
-        <div class="sub-meta" id="transMeta">Modem Hifi Air</div>
+        <div class="sub-meta" id="transMeta">Isat Hifi</div>
         <div class="price-row">
             <span class="price-label">Nominal Harga</span>
             <span class="price-value" id="transNominal">-</span>
@@ -1591,13 +1591,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function findTVCategory() {
-        const searchTerms = ["modem hifi air",];
+        const searchTerms = ["isat hifi",];
         
         for (const category of allCategories) {
             const catNameLower = (category.nama_kategori || '').toLowerCase();
             for (const term of searchTerms) {
                 if (catNameLower.includes(term)) {
-                    category.nama_kategori = "Modem Hifi Air";
+                    category.nama_kategori = "isat Hifi";
                     return category;
                 }
             }
@@ -1606,13 +1606,13 @@ document.addEventListener("DOMContentLoaded", () => {
         for (const category of allCategories) {
             const catNameLower = (category.nama_kategori || '').toLowerCase(); 
             {
-                category.nama_kategori = "Modem Hifi Air";
+                category.nama_kategori = "Isat Hifi";
                 return category;
             }
         }
         
         if (allCategories.length > 0) {
-            allCategories[0].nama_kategori = "Modem Hifi Air";
+            allCategories[0].nama_kategori = "Isat Hifi";
             return allCategories[0];
         }
         
@@ -1644,7 +1644,7 @@ document.addEventListener("DOMContentLoaded", () => {
             
             if (allSubCategories.length === 0) {
                 const catId = tvCategory.id_kategori || tvCategory.id;
-                const catName = tvCategory.nama_kategori || tvCategory.name || "Modem Hifi Air";
+                const catName = tvCategory.nama_kategori || tvCategory.name || "Isat Hifi";
                 allSubCategories.push({
                     id: catId,
                     name: catName
