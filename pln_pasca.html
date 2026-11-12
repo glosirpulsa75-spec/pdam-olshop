@@ -1190,15 +1190,37 @@ semuaKartuProduk.forEach(function(prod) {
         return;
     }
 
-    // JIKA TRANSAKSI TAGIHAN LISTRIK (PASCABAYAR)
-    if (nilaiLayananAktif === "pascabayar") {
+            return;
+    }
 
+    // JIKA TRANSAKSI TAGIHAN GAS (PASCABAYAR & PGN)
+    if (nilaiLayananAktif === "pascabayar" || nilaiLayananAktif === "non-taglis") {
+        var kataKunciTagihan = (nilaiLayananAktif === "non-taglis") ? "tagihan gas pgn" : "tagihan pertagas";
+        var semuaKartuProduk = document.querySelectorAll('.product-card, .card-produk, [onclick*="selectProduct"], [data-product-id], .item-produk');
+        var produkTagihanKetemu = null;
 
+        semuaKartuProduk.forEach(function(kartu) {
+            var teksKartu = (kartu.innerText || kartu.textContent || "").toLowerCase();
+            if (teksKartu.includes(kataKunciTagihan)) {
+                produkTagihanKetemu = kartu;
+            }
+        });
+
+        if (produkTagihanKetemu) {
+            produkTagihanKetemu.click();
+            setTimeout(function() {
+                if (typeof buyProduct === 'function') {
+                    buyProduct();
+                }
+            }, 150);
+        } else {
+            alert("Produk " + kataKunciTagihan.toUpperCase() + " tidak ditemukan di sistem bawah toko Anda!");
+        }
+        return;
+    }
+});
 
 </script>
-
-
-
  </div>
 </div>
 
