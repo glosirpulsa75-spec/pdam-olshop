@@ -1799,6 +1799,26 @@ const productPrice = currentPriceRaw === 1500 ? "Cek Bayar" : "Rp " + currentPri
             showToast('Masukkan ID Pelanggan terlebih dahulu!', 2000);
             return;
         }
+    // Otomatis ambil data produk pascabayar dari API jika layanan adalah Tagihan Pertagas / PGN
+    if (!selectedProductData && typeof nilaiLayananAktif !== 'undefined' && (nilaiLayananAktif === 'pascabayar' || nilaiLayananAktif === 'non-taglis')) {
+        const targetNama = (nilaiLayananAktif === 'non-taglis') ? 'tagihan gas pgn' : 'tagihan pertagas';
+        const semuaProdukKategori = (typeof tvCategory !== 'undefined' && tvCategory && tvCategory.produk) 
+            ? tvCategory.produk 
+            : (typeof currentProducts !== 'undefined' ? currentProducts : []);
+
+        const produkKetemu = semuaProdukKategori.find(p => 
+            (p.nama_produk || p.name || '').toLowerCase().includes(targetNama)
+        );
+
+        if (produkKetemu) {
+            selectedProductData = {
+                id: produkKetemu.id_produk || produkKetemu.id || '',
+                name: produkKetemu.nama_produk || produkKetemu.name || 'Tagihan Gas',
+                price: parseInt(produkKetemu.harga || produkKetemu.price || 0),
+                url_produk: produkKetemu.url_produk || produkKetemu.url || ''
+            };
+        }
+    }
 
         if (selectedProductData && selectedProductData.url_produk) {
             let url = selectedProductData.url_produk;
