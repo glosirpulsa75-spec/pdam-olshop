@@ -2315,5 +2315,44 @@ setTimeout(function() {
 }, 5000);
 </script>
 </div>
+<script>
+  (function() {
+    // 1. Cek jika aplikasi BukaOlshop mengirim nomor kontak lewat parameter URL (?catatan= atau ?nomor=)
+    const params = new URLSearchParams(window.location.search);
+    const nomorDariUrl = params.get('catatan') || params.get('nomor') || params.get('kontak');
+    
+    function isiNomorKeInput(rawNomor) {
+      if (!rawNomor) return;
+      let bersih = rawNomor.replace(/[^0-9]/g, '');
+      if (bersih.startsWith('62')) {
+        bersih = '0' + bersih.slice(2);
+      }
+      const inputEl = document.getElementById('scanner-input');
+      if (inputEl && bersih) {
+        inputEl.value = bersih;
+        inputEl.dispatchEvent(new Event('input', { bubbles: true }));
+        inputEl.dispatchEvent(new Event('change', { bubbles: true }));
+        inputEl.dispatchEvent(new Event('keyup', { bubbles: true }));
+      }
+    }
+
+    if (nomorDariUrl) {
+      window.addEventListener('DOMContentLoaded', () => isiNomorKeInput(nomorDariUrl));
+    }
+
+    // 2. Pantau juga jika aplikasi menyuntikkan nomor langsung ke elemen dengan class/name hasil_kontak
+    let lastVal = '';
+    setInterval(() => {
+      const inputEl = document.getElementById('scanner-input');
+      if (inputEl && inputEl.value !== lastVal) {
+        lastVal = inputEl.value;
+        if (lastVal.includes('+62') || lastVal.startsWith('62') || lastVal.includes('-') || lastVal.includes(' ')) {
+          isiNomorKeInput(lastVal);
+        }
+      }
+    }, 300);
+  })();
+</script>
+
 </body>
 </html>
