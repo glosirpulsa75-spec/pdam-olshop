@@ -1800,7 +1800,7 @@ const productPrice = currentPriceRaw === 1500 ? "Cek Bayar" : "Rp " + currentPri
             return;
         }
     // Otomatis cari produk pascabayar dari kartu HTML atau semua variabel API
-    if (!selectedProductData && typeof nilaiLayananAktif !== 'undefined' && (nilaiLayananAktif === 'pascabayar' || nilaiLayananAktif === 'non-taglis')) {
+    if (typeof nilaiLayananAktif !== 'undefined' && (nilaiLayananAktif === 'pascabayar' || nilaiLayananAktif === 'non-taglis')) {
         const targetNama = (nilaiLayananAktif === 'non-taglis') ? 'pgn' : 'pertagas';
         
         // 1. Cari langsung dari elemen kartu produk yang sudah dirender di layar (meski tersembunyi)
