@@ -1016,9 +1016,7 @@ background-color: #ffffff !important; border: 1px solid #e0e0e0 !important; bord
 
     <!-- KOLOM INPUT NOMOR UTAMA + IKON BUKU KONTAK -->
     <div style="position: relative !important; width: 100% !important; display: block !important;">
-        <input type="tel" name="scanner-input" id="scanner-input" class="{{hasil_kontak} scanner-input" placeholder="Masukkan Nomor Tujuan" oninput="satukkanNomorML()" onfocus="document.getElementById('kotakFormUtama').style.setProperty('border-color', '#007bff', 'important'); this.style.setProperty('border-color', '#007bff', 'important');" onblur="document.getElementById('kotakFormUtama').style.setProperty('border-color', '#e0e0e0', 'important'); this.style.setProperty('border-color', '#e0e0e0', 'important');" style="width: 100% !important; padding: 12px 45px 12px 14px !important; border: 1px solid #e0e0e0 !important; border-radius: 14px !important; outline: none !important; transition: border-color 0.3s ease !important; font-size: 15px !important;">
-<input type="text" id="penangkap-scan-khusus" class="{{hasil_scan}}" style="position:fixed; top:0; left:0; width:1px; height:1px; opacity:0.01; pointer-events:none; z-index:-1;">
-
+        <input type="tel" name="scanner-input" id="scanner-input" class="{{hasil_kontak} {{hasil_scan}} scanner-input" placeholder="Masukkan Nomor Tujuan" oninput="satukkanNomorML()" onfocus="document.getElementById('kotakFormUtama').style.setProperty('border-color', '#007bff', 'important'); this.style.setProperty('border-color', '#007bff', 'important');" onblur="document.getElementById('kotakFormUtama').style.setProperty('border-color', '#e0e0e0', 'important'); this.style.setProperty('border-color', '#e0e0e0', 'important');" style="width: 100% !important; padding: 12px 45px 12px 14px !important; border: 1px solid #e0e0e0 !important; border-radius: 14px !important; outline: none !important; transition: border-color 0.3s ease !important; font-size: 15px !important;">
         
                        <!-- IKON BUKU KONTAK BAWAAN BUKAOLSHOP (AKTIF LURUS) -->
         <a href="https://pulsachrome.bukaolshop.site/ambil_kontak?catatan={{hasil_kontak}}" style="position: absolute !important; right: 10px !important; top: 50% !important; transform: translateY(-50%) !important; cursor: pointer !important; width: 24px !important; height: 24px !important; display: flex !important; align-items: center !important; justify-content: center !important; text-decoration: none !important;">
@@ -2312,26 +2310,5 @@ setTimeout(function() {
 }, 5000);
 </script>
 </div>
-<script>
-  setInterval(function() {
-    const kotakScan = document.getElementById('penangkap-scan-khusus');
-    const kotakUtama = document.getElementById('scanner-input');
-    
-    if (kotakScan && kotakUtama && kotakScan.value !== '') {
-      let bersih = kotakScan.value.replace(/[^0-9]/g, '');
-      if (bersih.startsWith('62')) {
-        bersih = '0' + bersih.slice(2);
-      }
-      kotakUtama.value = bersih;
-      kotakScan.value = '';
-      
-      if (typeof satukkanNomorML === 'function') {
-        satukkanNomorML();
-      }
-      kotakUtama.dispatchEvent(new Event('input', { bubbles: true }));
-    }
-  }, 300);
-</script>
-
 </body>
 </html>
