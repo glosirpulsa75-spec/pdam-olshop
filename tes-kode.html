@@ -1195,8 +1195,6 @@ semuaKartuProduk.forEach(function(prod) {
         }
         return;
     }
-return;
-    }
 
   
 
@@ -1883,7 +1881,7 @@ const productPrice = currentPriceRaw === 1500 ? "Cek Bayar" : "Rp " + currentPri
             if (produkApi) {
                 selectedProductData = {
                     id: produkApi.id_produk || produkApi.id || '',
-                    name: produkApi.nama_produk || produkApi.name || 'BPJS',
+                    name: produkApi.nama_produk || produkApi.name || 'Bayar BPJS',
                     price: parseInt(produkApi.harga || produkApi.price || 0),
                     url_produk: produkApi.url_produk || produkApi.url || ''
                 };
