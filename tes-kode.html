@@ -931,7 +931,7 @@ div.subcategory-tab-btn.active,
         
         <!-- Grid Tombol Nominal -->
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
-   <div class="btn-nominal-token" data-value="5000" style="background: white; padding: 16px; text-align: center; border-radius: 8px; border: 1px solid #ddd; font-weight: bold; cursor: pointer; color: #333; transition: 0.2s;">Rp 5000</div>
+   <div class="btn-nominal-token" data-value="5000" style="background: white; padding: 16px; text-align: center; border-radius: 8px;y6 border: 1px solid #ddd; font-weight: bold; cursor: pointer; color: #333; transition: 0.2s;">Rp 5000</div>
 
 
  <div class="btn-nominal-token" data-value="10.000" style="background: white; padding: 16px; text-align: center; border-radius: 8px; border: 1px solid #ddd; font-weight: bold; cursor: pointer; color: #333; transition: 0.2s;">Rp 10.000</div>
@@ -1049,16 +1049,26 @@ div.subcategory-tab-btn.active,
     Token Gas
   </div>
 
-  <!-- Opsi 2: Tagihan Listrik -->
-  <div class="opsi-layanan" onclick="pilihLayananKustom('Tagihan Pertagas', 'pascabayar')" style="padding: 16px 5px; border-bottom: 1px solid #eee; font-size: 15px; color: #333; cursor: pointer; font-weight: 500; display: flex; align-items: center;">
+  <!-- Opsi 2: BPJS kesehatan -->
+  <div class="opsi-layanan" onclick="pilihLayananKustom('BPJS Kesehatan', 'pascabayar')" style="padding: 16px 5px; border-bottom: 1px solid #eee; font-size: 15px; color: #333; cursor: pointer; font-weight: 500; display: flex; align-items: center;">
     <img src="https://images.bukaolshop.com/hosting/183991/0ccab71e7bd6771363.png" style="width: 20px; height: 20px; margin-right: 12px;" alt="Tagihan">
-    Tagihan Pertagas
+    BPJS lesehatan
+  </div>
+<!-- Opsi 3: Bayar Denda BPJS -->
+  <div class="opsi-layanan" onclick="pilihLayananKustom('Bayar Denda BPJS', 'pascabayar')" style="padding: 16px 5px; border-bottom: 1px solid #eee; font-size: 15px; color: #333; cursor: pointer; font-weight: 500; display: flex; align-items: center;">
+    <img src="https://images.bukaolshop.com/hosting/183991/0ccab71e7bd6771363.png" style="width: 20px; height: 20px; margin-right: 12px;" alt="Tagihan">
+    Bayar Denda BPJS
+  </div>
+<!-- Opsi 4: BPJS Ketenagakerjaan Pu -->
+  <div class="opsi-layanan" onclick="pilihLayananKustom('BPJS Ketenagakerjaan Pu', 'pascabayar')" style="padding: 16px 5px; border-bottom: 1px solid #eee; font-size: 15px; color: #333; cursor: pointer; font-weight: 500; display: flex; align-items: center;">
+    <img src="https://images.bukaolshop.com/hosting/183991/0ccab71e7bd6771363.png" style="width: 20px; height: 20px; margin-right: 12px;" alt="Tagihan">
+    BPJS Ketenagakerjaan Pu
   </div>
 
-  <!-- Opsi 3: Non Tagihan Listrik -->
-  <div class="opsi-layanan" onclick="pilihLayananKustom('Tagihan Gas Pgn', 'non-taglis')" style="padding: 16px 5px; border-bottom: 1px solid #eee; font-size: 15px; color: #333; cursor: pointer; font-weight: 500; display: flex; align-items: center;">
+  <!-- Opsi 5: BPJS Ketenagakerjaa Bpu -->
+  <div class="opsi-layanan" onclick="pilihLayananKustom('BPJS ketenagakerjaa Bpu', 'non-taglis')" style="padding: 16px 5px; border-bottom: 1px solid #eee; font-size: 15px; color: #333; cursor: pointer; font-weight: 500; display: flex; align-items: center;">
     <img src="https://images.bukaolshop.com/hosting/183991/0ccab71e7bd6771363.png" style="width: 20px; height: 20px; margin-right: 12px;" alt="Non Taglis">
-    Tagihan Gas Pgn
+    BPJS Ketenagakerjaan Bpu
   </div>
 
 </div>
@@ -1200,9 +1210,9 @@ semuaKartuProduk.forEach(function(prod) {
             return;
     }
 
-    // JIKA TRANSAKSI TAGIHAN GAS (PASCABAYAR & PGN)
+    // JIKA TRANSAKSI BAYAR BPJS (PASCABAYAR & BPJS)
     if (nilaiLayananAktif === "pascabayar" || nilaiLayananAktif === "non-taglis") {
-        var kataKunciTagihan = (nilaiLayananAktif === "non-taglis") ? "tagihan gas pgn" : "tagihan pertagas";
+        var kataKunciTagihan = (nilaiLayananAktif === "non-taglis") ? "bpjs kesehatan" : "bayar denda bpjs"; : "bpjs ketenagakerjaan bpu"; : "bpjs ketenagakerjaan pu";
         var semuaKartuProduk = document.querySelectorAll('.product-card, .card-produk, [onclick*="selectProduct"], [data-product-id], .item-produk');
         var produkTagihanKetemu = null;
 
@@ -1374,7 +1384,7 @@ function changeLayout(mode) {
     <div class="popup">
         <div class="drag-line"></div>
         <div class="product-name-large" id="transProductName">-</div>
-        <div class="sub-meta" id="transMeta">Tagihan Gas</div>
+        <div class="sub-meta" id="transMeta">Bayar BPJS</div>
         <div class="price-row">
             <span class="price-label">Nominal Harga</span>
            <span class="price-value" id="transNominal" style="font-weight: bold; color: #1a1a1a; display: inline-block;">Cek Bayar</span>
@@ -1438,10 +1448,10 @@ function changeLayout(mode) {
         const tabMenu = document.getElementById('subcategoryTabMenu');
         
         if (produkContainer) {
-            produkContainer.innerHTML = `<div class="loading-spinner"><div></div><p style="margin-top: 20px; color: #999;">Memuat data Tagihan Gas...</p></div>`;
+            produkContainer.innerHTML = `<div class="loading-spinner"><div></div><p style="margin-top: 20px; color: #999;">Memuat data Bauar Bpjs...</p></div>`;
         }
         if (tabMenu) {
-            tabMenu.innerHTML = `<div style="padding: 10px; text-align: center; color: #999;"><div class="loading-spinner" style="padding: 20px;"><div></div><p style="margin-top: 10px;">Loading kategori Tagihan Gas...</p></div></div>`;
+            tabMenu.innerHTML = `<div style="padding: 10px; text-align: center; color: #999;"><div class="loading-spinner" style="padding: 20px;"><div></div><p style="margin-top: 10px;">Loading kategori Bayar BPJS...</p></div></div>`;
         }
         
         if (!token || token.trim() === '') {
@@ -1470,13 +1480,13 @@ function changeLayout(mode) {
     }
 
     function findTVCategory() {
-        const searchTerms = ["tagihan gas",];
+        const searchTerms = ["bayar bpjs",];
         
         for (const category of allCategories) {
             const catNameLower = (category.nama_kategori || '').toLowerCase();
             for (const term of searchTerms) {
                 if (catNameLower.includes(term)) {
-                    category.nama_kategori = "Tagihan Gas";
+                    category.nama_kategori = "Bayar BPJS";
                     return category;
                 }
             }
@@ -1485,13 +1495,13 @@ function changeLayout(mode) {
         for (const category of allCategories) {
             const catNameLower = (category.nama_kategori || '').toLowerCase(); 
             {
-                category.nama_kategori = "Tagihan Gas";
+                category.nama_kategori = "Bayar BPJS";
                 return category;
             }
         }
         
         if (allCategories.length > 0) {
-            allCategories[0].nama_kategori = "Tagihan Gas";
+            allCategories[0].nama_kategori = "Bayar BPJS";
             return allCategories[0];
         }
         
@@ -1523,7 +1533,7 @@ function changeLayout(mode) {
             
             if (allSubCategories.length === 0) {
                 const catId = tvCategory.id_kategori || tvCategory.id;
-                const catName = tvCategory.nama_kategori || tvCategory.name || "Tagihan Gas";
+                const catName = tvCategory.nama_kategori || tvCategory.name || "Bayar BPJS";
                 allSubCategories.push({
                     id: catId,
                     name: catName
@@ -1604,7 +1614,7 @@ function changeLayout(mode) {
 
         const container = document.getElementById('produkContainer');
         if (container) {
-            container.innerHTML = `<div class="loading-spinner"><div></div><p style="margin-top: 20px; color: #999;">Memuat Produk Tagihan Gas....</p></div>`;
+            container.innerHTML = `<div class="loading-spinner"><div></div><p style="margin-top: 20px; color: #999;">Memuat Produk Bayar BPJS....</p></div>`;
         }
 
         try {
@@ -1820,7 +1830,7 @@ const productPrice = currentPriceRaw === 1500 ? "Cek Bayar" : "Rp " + currentPri
         if (kartuCocok) {
             selectedProductData = {
                 id: kartuCocok.getAttribute('data-product-id') || '',
-                name: kartuCocok.getAttribute('data-product-name') || 'Tagihan Gas',
+                name: kartuCocok.getAttribute('data-product-name') || 'Bayar BPJS',
                 price: parseInt(kartuCocok.getAttribute('data-product-price') || 0),
                 url_produk: kartuCocok.getAttribute('data-product-url') || ''
             };
@@ -1846,7 +1856,7 @@ const productPrice = currentPriceRaw === 1500 ? "Cek Bayar" : "Rp " + currentPri
             if (produkApi) {
                 selectedProductData = {
                     id: produkApi.id_produk || produkApi.id || '',
-                    name: produkApi.nama_produk || produkApi.name || 'Tagihan Gas',
+                    name: produkApi.nama_produk || produkApi.name || 'Bayar BPJS',
                     price: parseInt(produkApi.harga || produkApi.price || 0),
                     url_produk: produkApi.url_produk || produkApi.url || ''
                 };
