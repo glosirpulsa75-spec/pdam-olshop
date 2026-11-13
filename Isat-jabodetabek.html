@@ -961,7 +961,7 @@ align-items: center !important;">
         <img src="https://images.bukaolshop.com/hosting/183991/179074b08453380970.png" alt="Icon" style="width: 50px; height: 75px; object-fit: contain; margin-right: 0px;">
         <!-- Tulisan Teks Kategori -->
  <!-- Masukkan kode warna di dalam style seperti ini -->
-<div class="header-btn-KUOTA" style="background: linear-gradient(to right, #00a2ff, #006aff) !important; color: white !important; padding: 6px 18px !important; border-radius: 50px !important; box-shadow: 0 15px 15px rgba(0, 106, 255, 0.3) !important; display: inline-block !important; font-weight: bold !important; font-size: 13px !important; margin: 0 auto !important; transform: translateX(-35px) !important;">Data Jabodetabek</div>
+<div class="header-btn-KUOTA" style="background: linear-gradient(to right, #00a2ff, #006aff) !important; color: white !important; padding: 6px 18px !important; border-radius: 50px !important; box-shadow: 0 15px 15px rgba(0, 106, 255, 0.3) !important; display: inline-block !important; font-weight: bold !important; font-size: 13px !important; margin: 0 auto !important; transform: translateX(-35px) !important;">Freedom Jabar</div>
 
    </div>
  
@@ -1502,7 +1502,7 @@ document.addEventListener("DOMContentLoaded", () => {
     <div class="popup">
         <div class="drag-line"></div>
         <div class="product-name-large" id="transProductName">-</div>
-        <div class="sub-meta" id="transMeta">Jabodetabek</div>
+        <div class="sub-meta" id="transMeta">Freedom Jabar</div>
         <div class="price-row">
             <span class="price-label">Nominal Harga</span>
             <span class="price-value" id="transNominal">-</span>
@@ -1591,13 +1591,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function findTVCategory() {
-        const searchTerms = ["jabodetabek",];
+        const searchTerms = ["freedom jabar",];
         
         for (const category of allCategories) {
             const catNameLower = (category.nama_kategori || '').toLowerCase();
             for (const term of searchTerms) {
                 if (catNameLower.includes(term)) {
-                    category.nama_kategori = "Jabodetabek";
+                    category.nama_kategori = "Freedom Jabar";
                     return category;
                 }
             }
@@ -1606,13 +1606,13 @@ document.addEventListener("DOMContentLoaded", () => {
         for (const category of allCategories) {
             const catNameLower = (category.nama_kategori || '').toLowerCase(); 
             {
-                category.nama_kategori = "Jabodetabek";
+                category.nama_kategori = "Freedom Jabar";
                 return category;
             }
         }
         
         if (allCategories.length > 0) {
-            allCategories[0].nama_kategori = "Jabodetabek";
+            allCategories[0].nama_kategori = "Freedom Jabar";
             return allCategories[0];
         }
         
@@ -1644,7 +1644,7 @@ document.addEventListener("DOMContentLoaded", () => {
             
             if (allSubCategories.length === 0) {
                 const catId = tvCategory.id_kategori || tvCategory.id;
-                const catName = tvCategory.nama_kategori || tvCategory.name || "Jabodetabek";
+                const catName = tvCategory.nama_kategori || tvCategory.name || "Freedom Jabar";
                 allSubCategories.push({
                     id: catId,
                     name: catName
