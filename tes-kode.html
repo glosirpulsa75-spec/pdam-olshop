@@ -874,7 +874,7 @@ div.subcategory-tab-btn.active,
         <img src="https://images.bukaolshop.com/hosting/183991/731ca4938d3e674839.png" alt="Icon" style="width: 40px; height: 40px; object-fit: contain; margin-right: 0px;">
         <!-- Tulisan Teks Kategori -->
  <!-- Masukkan kode warna di dalam style seperti ini -->
-<div class="header-btn-KUOTA" style="background: linear-gradient(to right, #00a2ff, #006aff) !important; color: white !important; padding: 6px 18px !important; border-radius: 50px !important; box-shadow: 0 15px 15px rgba(0, 106, 255, 0.3) !important; display: inline-block !important; font-weight: bold !important; font-size: 13px !important; margin: 0 auto !important; transform: translateX(-15px) !important;">Tagihan BPJS</div>
+<div class="header-btn-KUOTA" style="background: linear-gradient(to right, #00a2ff, #006aff) !important; color: white !important; padding: 6px 18px !important; border-radius: 50px !important; box-shadow: 0 15px 15px rgba(0, 106, 255, 0.3) !important; display: inline-block !important; font-weight: bold !important; font-size: 13px !important; margin: 0 auto !important; transform: translateX(-15px) !important;">Gas Negara</div>
 
 
    
@@ -1032,22 +1032,27 @@ div.subcategory-tab-btn.active,
       <!-- Daftar Lengkap & Bisa Diklik Langsung -->
 <div style="max-height: 300px; overflow-y: auto;">
 
-  <!-- Opsi 1: Token Listrik -->
-  <div class="opsi-layanan" onclick="pilihLayananKustom('Token Gas', 'token')" style="padding: 16px 5px; border-bottom: 1px solid #eee; font-size: 15px; color: #333; cursor: pointer; font-weight: 500; display: flex; align-items: center;">
-    <img src="https://images.bukaolshop.com/hosting/183991/f130e1d0319f649241.png" style="width: 20px; height: 20px; margin-right: 12px;" alt="Token">
-    Token Gas
-  </div>
-
-  <!-- Opsi 2: Tagihan Listrik -->
+  <!-- Opsi 1: Bpjs Kesehatan -->
   <div class="opsi-layanan" onclick="pilihLayananKustom('BPJS Kesehatan', 'pascabayar')" style="padding: 16px 5px; border-bottom: 1px solid #eee; font-size: 15px; color: #333; cursor: pointer; font-weight: 500; display: flex; align-items: center;">
-    <img src="https://images.bukaolshop.com/hosting/183991/0ccab71e7bd6771363.png" style="width: 20px; height: 20px; margin-right: 12px;" alt="Tagihan">
+    <img src="https://images.bukaolshop.com/hosting/183991/f130e1d0319f649241.png" style="width: 20px; height: 20px; margin-right: 12px;" alt="Token">
     BPJS Kesehatan
   </div>
 
-  <!-- Opsi 3: Non Tagihan Listrik -->
-  <div class="opsi-layanan" onclick="pilihLayananKustom('BPJS Bayar Denda', 'non-taglis')" style="padding: 16px 5px; border-bottom: 1px solid #eee; font-size: 15px; color: #333; cursor: pointer; font-weight: 500; display: flex; align-items: center;">
-    <img src="https://images.bukaolshop.com/hosting/183991/0ccab71e7bd6771363.png" style="width: 20px; height: 20px; margin-right: 12px;" alt="Non Taglis">
+  <!-- Opsi 2: BPJS Bayar Denda -->
+  <div class="opsi-layanan" onclick="pilihLayananKustom('BPJS Bayar Denda', 'pascabayar')" style="padding: 16px 5px; border-bottom: 1px solid #eee; font-size: 15px; color: #333; cursor: pointer; font-weight: 500; display: flex; align-items: center;">
+    <img src="https://images.bukaolshop.com/hosting/183991/0ccab71e7bd6771363.png" style="width: 20px; height: 20px; margin-right: 12px;" alt="Tagihan">
     BPJS Bayar Denda
+  </div>
+ <!-- Opsi 3: Bjs Bpu -->
+  <div class="opsi-layanan" onclick="pilihLayananKustom('BPJS Ketenagakerjaan Pu', 'non-taglis')" style="padding: 16px 5px; border-bottom: 1px solid #eee; font-size: 15px; color: #333; cursor: pointer; font-weight: 500; display: flex; align-items: center;">
+    <img src="https://images.bukaolshop.com/hosting/183991/0ccab71e7bd6771363.png" style="width: 20px; height: 20px; margin-right: 12px;" alt="Non Taglis">
+    BPJS Ketenagakerjaan Pu
+  </div>
+
+  <!-- Opsi 4: Bjs Bpu -->
+  <div class="opsi-layanan" onclick="pilihLayananKustom('BPJS Ketenagakerjaan Bpu', 'non-taglis')" style="padding: 16px 5px; border-bottom: 1px solid #eee; font-size: 15px; color: #333; cursor: pointer; font-weight: 500; display: flex; align-items: center;">
+    <img src="https://images.bukaolshop.com/hosting/183991/0ccab71e7bd6771363.png" style="width: 20px; height: 20px; margin-right: 12px;" alt="Non Taglis">
+    BPJS Ketenagakerjaan Bpu
   </div>
 
 </div>
@@ -1189,9 +1194,9 @@ semuaKartuProduk.forEach(function(prod) {
             return;
     }
 
-    // JIKA TRANSAKSI TAGIHAN GAS (PASCABAYAR & PGN)
+    // JIKA TRANSAKSI TAGIHAN BPJS (PASCABAYAR & BPJS)
     if (nilaiLayananAktif === "pascabayar" || nilaiLayananAktif === "non-taglis") {
-        var kataKunciTagihan = (nilaiLayananAktif === "non-taglis") ? "bpjs bayar denda" : "bpjs kesehatan";
+        var kataKunciTagihan = (nilaiLayananAktif === "non-taglis") ? "tagihan gas pgn" : "Bayar BPJS";
         var semuaKartuProduk = document.querySelectorAll('.product-card, .card-produk, [onclick*="selectProduct"], [data-product-id], .item-produk');
         var produkTagihanKetemu = null;
 
@@ -1797,7 +1802,7 @@ const productPrice = currentPriceRaw === 1500 ? "Cek Bayar" : "Rp " + currentPri
         }
     // Otomatis cari produk pascabayar dari kartu HTML atau semua variabel API
     if (typeof nilaiLayananAktif !== 'undefined' && (nilaiLayananAktif === 'pascabayar' || nilaiLayananAktif === 'non-taglis')) {
-        const targetNama = (nilaiLayananAktif === 'non-taglis') ? "bpjs kesejatan', : 'bpjs bayar denda';
+        const targetNama = (nilaiLayananAktif === 'non-taglis') ? 'pgn' : 'pertagas';
         
         // 1. Cari langsung dari elemen kartu produk yang sudah dirender di layar (meski tersembunyi)
         const semuaKartu = Array.from(document.querySelectorAll('.product-card'));
