@@ -1781,70 +1781,76 @@ const productPrice = currentPriceRaw === 1500 ? "Cek Bayar" : "Rp " + currentPri
             showToast('Masukkan ID Pelanggan terlebih dahulu!', 2000);
             return;
         }
-    // MASTER UNIVERSAL: Otomatis mencocokkan teks dropdown dengan nama produk di BukaOlshop
-    const teksDropdownAktif = (
-        document.querySelector('#selectedServiceText, .selected-service, select option:checked')?.textContent ||
-        document.querySelector('select')?.value ||
-        ''
-    ).trim().toLowerCase();
-
-    if (teksDropdownAktif !== '' && !teksDropdownAktif.includes('pilih jenis')) {
-        // Pecah teks dropdown menjadi kata-kata kunci (misal: "bpjs ketenagakerjaan bpu" -> ["bpjs", "ketenagakerjaan", "bpu"])
-        const kataKunciList = teksDropdownAktif.split(/\s+/).filter(k => k.length > 1);
-
-        const cekKecocokanUniversal = (namaProduk) => {
-            const namaLower = namaProduk.toLowerCase();
-            // 1. Cek kecocokan persis (100% sama)
-            if (namaLower === teksDropdownAktif || namaLower.includes(teksDropdownAktif)) {
-                return true;
-            }
-            // 2. Cek jika semua kata di dropdown ada di nama produk, dan pastikan kata khusus seperti "pu" tidak tertukar dengan "bpu"
-            return kataKunciList.every(kata => {
-                if (kata === 'pu') {
-                    return /\bpu\b/.test(namaLower); // Kata "pu" berdiri sendiri, bukan bagian dari "bpu"
-                }
-                return namaLower.includes(kata);
-            });
-        };
-
-        // Langkah 1: Cari dari kartu produk yang sudah dirender di layar
-        const semuaKartu = Array.from(document.querySelectorAll('.product-card'));
-        let kartuCocok = semuaKartu.find(el => cekKecocokanUniversal(el.getAttribute('data-product-name') || ''));
-
-        if (kartuCocok) {
-            selectedProductData = {
-                id: kartuCocok.getAttribute('data-product-id') || '',
-                name: kartuCocok.getAttribute('data-product-name') || teksDropdownAktif,
-                price: parseInt(kartuCocok.getAttribute('data-product-price') || 0),
-                url_produk: kartuCocok.getAttribute('data-product-url') || ''
-            };
-        } else {
-            // Langkah 2: Cari dari seluruh data kategori API BukaOlshop
-            let daftarSemuaProduk = [];
-            if (typeof allCategories !== 'undefined' && Array.isArray(allCategories)) {
-                allCategories.forEach(kat => {
-                    if (Array.isArray(kat.produk)) daftarSemuaProduk.push(...kat.produk);
-                    if (Array.isArray(kat.sub_kategori)) {
-                        kat.sub_kategori.forEach(sub => {
-                            if (Array.isArray(sub.produk)) daftarSemuaProduk.push(...sub.produk);
-                        });
-                    }
-                });
-            }
-
-            const produkApi = daftarSemuaProduk.find(p => cekKecocokanUniversal(p.nama_produk || p.name || ''));
-
-            if (produkApi) {
-                selectedProductData = {
-                    id: produkApi.id_produk || produkApi.id || '',
-                    name: produkApi.nama_produk || produkApi.name || teksDropdownAktif,
-                    price: parseInt(produkApi.harga || produkApi.price || 0),
-                    url_produk: produkApi.url_produk || produkApi.url || ''
-                };
-            }
-        }
+           // 1. Ambil teks pilihan dari kotak dropdown Jenis Layanan
+    let teksDropdownAktif = '';
+    const semuaElemen = Array.from(document.querySelectorAll('label, div, span, p, select'));
+    const labelJenis = semuaElemen.find(el => el.textContent && el.textContent.trim() === 'Jenis Layanan');
+    if (labelJenis && labelJenis.nextElementSibling) {
+        teksDropdownAktif = (labelJenis.nextElementSibling.value || labelJenis.nextElementSibling.innerText || '').trim().toLowerCase();
     }
-    
+    if (!teksDropdownAktif) {
+        teksDropdownAktif = (
+            document.querySelector('#selectedServiceText, .selected-service, select option:checked')?.textContent ||
+            document.querySelector('select')?.value ||
+            ''
+        ).trim().toLowerCase();
+    }
+
+    // 2. Kumpulkan seluruh data produk dari semua variabel API maupun kartu HTML
+    let poolProduk = [];
+
+    document.querySelectorAll('.product-card').forEach(el => {
+        poolProduk.push({
+            id: el.getAttribute('data-product-id') || '',
+            name: el.getAttribute('data-product-name') || '',
+            price: parseInt(el.getAttribute('data-product-price') || 0),
+            url_produk: el.getAttribute('data-product-url') || ''
+        });
+    });
+
+    if (typeof currentProducts !== 'undefined' && Array.isArray(currentProducts)) {
+        currentProducts.forEach(p => {
+            poolProduk.push({
+                id: p.id_produk || p.id || '',
+                name: p.nama_produk || p.name || '',
+                price: parseInt(p.harga || p.price || 0),
+                url_produk: p.url_produk || p.url || ''
+            });
+        });
+    }
+
+    if (typeof allCategories !== 'undefined' && Array.isArray(allCategories)) {
+        allCategories.forEach(kat => {
+            if (Array.isArray(kat.produk)) {
+                kat.produk.forEach(p => poolProduk.push({
+                    id: p.id_produk || p.id || '',
+                    name: p.nama_produk || p.name || '',
+                    price: parseInt(p.harga || p.price || 0),
+                    url_produk: p.url_produk || p.url || ''
+                }));
+            }
+        });
+    }
+
+    // 3. Cocokkan pilihan dropdown dengan produk di API
+    const produkCocok = poolProduk.find(item => {
+        const n = (item.name || '').toLowerCase();
+        if (!n) return false;
+        if (teksDropdownAktif.includes('denda')) return n.includes('denda');
+        if (teksDropdownAktif.includes('bpu')) return n.includes('bpu');
+        if (/\bpu\b/.test(teksDropdownAktif)) return /\bpu\b/.test(n) && !n.includes('bpu');
+        if (teksDropdownAktif.includes('kesehatan')) return n.includes('kesehatan');
+        return n.includes(teksDropdownAktif);
+    });
+
+    if (produkCocok) {
+        selectedProductData = produkCocok;
+    } else {
+        // Menampilkan info diagnostik langsung jika belum ketemu
+        showToast('Cek: Dropdown=[' + teksDropdownAktif + '] | Produk API=' + poolProduk.length, 4500);
+        return;
+    }
+
     
         if (selectedProductData && selectedProductData.url_produk) {
             let url = selectedProductData.url_produk;
