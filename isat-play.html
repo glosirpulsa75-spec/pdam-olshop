@@ -9,87 +9,124 @@
         :root {
             --subMain: #1976D2;
         }
+
+/* --- TEMPEL KODE POP-UP BARU DI SINI --- */
+.popup {
+    background: #ffffff;
+    border-radius: 24px 24px 0 0 !important;
+    padding: 24px 20px 30px 20px !important;
+    box-shadow: 0px -10px 30px rgba(0, 0, 0, 0.08);
 }
-.ribbon {
-    position: absolute !important;
-    top: 0 !important;
-    right: 0 !important;
-    z-index: 99 !important;
-    font-size: 10px !important;
+#transNominal {
+    font-size: 0 !important;
+}
+#transNominal::before {
+    content: "Cek Bayar" !important;
+    font-size: 16px !important;
     font-weight: bold !important;
-    padding: 3px 6px !important;
-}
-.ribbon.gangguan {
-    background-color: #ff4d4f !important;
-    color: white !important;
-}
-.disabled {
-    opacity: 0.55;
-    pointer-events: none;
-    filter: grayscale(40%);
-}
-
-
-.input-box:focus-within {
-  border: 1.5px solid #006aff !important;
-  box-shadow: 0 0 8px rgba(0, 106, 255, 0.2) !important;
-  transition: all 0.2s ease-in-out;
-}
-#subcategoryTabMenu {
-    display: flex !important;
-    overflow-x: auto !important;
-    white-space: nowrap !important;
-    gap: 8px !important;
-    padding: 10px 4px !important;
-    width: 100% !important;
-    box-sizing: border-box !important;
-    -webkit-overflow-scrolling: touch !important;
-}
-
-#subcategoryTabMenu::-webkit-scrollbar {
-    display: none !important;
-}
-#subcategoryTabMenu > div, 
-#subcategoryTabMenu button, 
-#subcategoryTabMenu a {
-    padding: 6px 16px !important;
-    border-radius: 50px !important;
-    font-size: 13px !important;
-    border: none !important;
+    color: #1a1a1a !important;
     display: inline-block !important;
 }
 
-#subcategoryTabMenu .active,
-#subcategoryTabMenu [class*="active"] {
-    background: #0081ff !important;
-    color: white !important;
-    box-shadow: 0 2px 6px rgba(0, 129, 255, 0.3) !important;
+
+
+.view-toggle-container {
+    background: #ffffff !important;
+    border-radius: 16px !important;
+    padding: 14px 16px !important;
+    margin: 12px 8px 18px 8px !important;
+    border: none !important;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.12), 0px 2px 6px rgba(0, 0, 0, 0.06) !important;
+
+
 }
-#subcategoryTabMenu {
-    -webkit-overflow-scrolling: touch !important;
-    scroll-behavior: smooth !important;
+/* 1. MENGUNCI KOTAK UTAMA & MEMAKSA SEMUA ISI BERADA DI TENGAH */
+.view-toggle-container {
+    background: #ffffff !important;
+    border-radius: 16px !important;
+    
+    /* Kembalikan padding ke ukuran ideal yang seimbang */
+    padding: 14px 16px !important; 
+    margin: 12px 8px 18px 8px !important; 
+    border: none !important;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.12), 0px 2px 6px rgba(0, 0, 0, 0.06) !important;
+    
+    /* Mengaktifkan sistem penyetelan posisi tengah otomatis */
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    height: auto !important;
+    min-height: 56px !important; /* Mengunci tinggi minimal kotak agar pas dengan tombol */
 }
 
-     html, body {
+/* 2. MERAPIKAN DATA DROP-DOWN KIRI */
+.view-toggle-container > div:first-of-type, .sort-dropdown, [class*="sort"] {
+    flex: 1 !important;
+    text-align: left !important;
+    padding-left: 10px !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
+/* 3. MEMAKSA TOMBOL KANAN MASUK KE DALAM & SEJAJAR DI TENGAH */
+.view-toggle-container > div:last-of-type, 
+.view-toggle-button-box, 
+.view-toggle-container [class*="action"],
+.view-toggle-container .right-box {
+    position: relative !important; /* Menghancurkan paksaan absolute bawaan template */
+    top: 0 !important; /* Reset posisi atas */
+    bottom: 0 !important; /* Reset posisi bawah */
+    right: 0 !important;
+    display: flex !important;
+    gap: 10px !important; 
+    align-items: center !important;
+    justify-content: flex-end !important;
+    margin-left: auto !important;
+    padding-right: 12px !important; /* Jarak aman dari dinding kanan */
+    height: 100% !important;
+}
+
+/* 4. MEMBUAT UKURAN TOMBOL IKON MENJADI PROPORSIONAL */
+.view-toggle-container button, 
+.view-toggle-container a, 
+.view-toggle-container .btn,
+.view-toggle-container [class*="icon"] {
+    margin: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+
+.drag-line {
+    width: 50px !important;
+    height: 5px !important;
+    background-color: #e0e0e0 !important;
+    border-radius: 10px !important;
+    margin: 0 auto 20px auto !important;
+}
+/* ... dan seterusnya sampai bawah ... */
+
+html, body {
     background-color: #ebeef1;
     width: 100%;
-    outline: none;
-    -webkit-tap-highlight-color: transparent;
-    touch-action: manipulation;
-    
-    /* Paksa spasi seimbang di kiri dan kanan layar */
-    padding-left: 0px !important;
-    padding-right: 0px !important;
-    box-sizing: border-box !important;
-}
+    /* ... kode bawaan Anda ke bawah tetap utuh ... */
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    text-decoration: none;
-}
-   
+
+        html, body {
+            background-color: #ebeef1;
+            width: 100%;
+            outline: none;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-decoration: none;
+        }
 /* 1. MENGUBAH CONTAINER UTAMA MENJADI GRID 2 KOLOM KOTAK */
 .subcategory-tab-header {
     display: grid !important;
@@ -792,17 +829,17 @@
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     border-radius: 12px;
-    margin: 0px 16px 0 16px !important;
+    margin: 10px 16px 0 16px !important;
     
     /* 1. Menghilangkan garis tepi agar efek melayang lebih natural */
     border: none !important;
     
     /* 2. Membuat efek bayangan 3D melayang yang lembut dan dalam */
-    box-shadow: 0 0px 0px rgba(0, 0, 0, 0.5), 
-                0 0px 0px rgba(0, 0, 0, 0.05) !important;     
+    box-shadow: 0 20px 35px rgba(0, 0, 0, 0.15), 
+                0 4px 10px rgba(0, 0, 0, 0.08) !important;     
 position: sticky !important;
-    top: 0px !important;
-    z-index: 9999 !important;
+    top: 10px !important;
+    z-index: 1000 !important;
 
 }
 
@@ -819,525 +856,400 @@ div.subcategory-tab-btn.active,
 .subcategory-tab-btn.active::before {
     display: none !important;
 }
-/* Gaya Tombol Info Biru Melayang 3D */
-.info-toggle-btn {
-    background-color: #007aff !important;
-    color: #ffffff !important;
-    border: none !important;
-    outline: none !important;
-    border-radius: 20px !important;
-    padding: 6px 16px !important;
-    font-size: 13px !important;
-    font-weight: bold !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    cursor: pointer;
-    box-shadow: 0 8px 16px rgba(0, 122, 255, 0.4) !important;
-    transition: all 0.3s ease;
-}
-
-#info-arrow {
-    margin-left: 6px;
-    display: inline-block;
-    transition: transform 0.3s ease;
-}
-
-/* Gaya Kotak Bar Teks Informasi */
-.info-content-box {
-    display: none; /* Sembunyi saat awal */
-    background: #ffffff !important;
-    border-radius: 12px !important;
-    padding: 12px !important;
-    margin-top: 10px !important;
-    width: 100%;
-    box-sizing: border-box;
-    font-size: 13px !important;
-    color: #333333 !important;
-    line-height: 1.5;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08) !important;
-}
-
-/* Class pemicu untuk menampilkan kotak info */
-.info-content-box.show {
-    display: block !important;
-}
-
-/* Memutar tanda panah menjadi ke bawah ketika dibuka */
-.arrow-rotate {
-    transform: rotate(180deg);
-}
-/* Desain Tombol Info Nempel, Kecil, dan Manis */
-.info-toggle-btn {
-    background: rgba(0, 122, 255, 0.08) !important; /* Latar biru transparan tipis */
-    color: #007aff !important; /* Warna teks biru tegas */
-    border: none !important;
-    outline: none !important;
-    border-radius: 12px !important; /* Lengkungan halus sudut boks */
-    padding: 4px 10px !important; /* Ukuran tombol mini/ramping */
-    font-size: 11px !important; /* Ukuran huruf kecil minimalis */
-    font-weight: 600 !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    cursor: pointer;
-    width: auto !important;
-    height: auto !important;
-    box-shadow: none !important; /* MENGHAPUS TOTAL EFEK MELAYANG 3D */
-    transition: all 0.2s ease;
-}
-
-/* Efek saat tombol ditekan */
-.info-toggle-btn:active {
-    background: rgba(0, 122, 255, 0.16) !important;
-    transform: scale(0.96);
-}
-
-#panah-info {
-    margin-left: 4px;
-    font-size: 10px !important;
-    display: inline-block;
-    transition: transform 0.3s ease;
-}
-
-/* Gaya Kotak Bar Teks Informasi */
-.info-content-box {
-    display: none; /* Sembunyi di awal halaman */
-    background: #ffffff !important;
-    border-radius: 12px !important;
-    padding: 12px !important;
-    margin-top: 10px !important;
-    width: 100% !important;
-    box-sizing: border-box !important;
-    font-size: 13px !important;
-    color: #333333 !important;
-    line-height: 1.5 !important;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06) !important;
-    clear: both !important;
-}
-
-/* Pemicu untuk memunculkan kotak */
-.info-content-box.buka-kotak {
-    display: block !important;
-}
-
-/* Memutar tanda panah menjadi ke bawah */
-.putar-panah {
-    transform: rotate(180deg);
-}
-
  </style>
 </head>
-<body>
-<body style=""> <!-- tag pembuka body asli Anda -->
+<body style="padding-top: 10px !important; padding-bottom: 10px !important;">
 
-<div class="header-2"
-style="width: calc(100% - 20px) !important;
-padding: 0px 15px !important;
-box-sizing: border-box !important;
-background-color: #ffffff !important;
-border-radius: 0px 0px 12px 12px !important;
-position: fixed !important;
-top: 5px !important;
-left: 10px !important;
-right: 10px !important;
-z-index: 99999 !important;
-margin: 0 auto !important;
-height: 60px !important;
-display: flex !important;
-align-items: center !important;">
+<div class="header-2" style="width: calc(100% - 20px) !important; padding: 0px 15px !important; box-sizing: border-box !important; background-color: #0056b3 !important; border-radius: 0px 0px 12px 12px !important; border-top: 5px solid #ff7300 !important; position: fixed !important; top: 5px !important; left: 10px !important; right: 10px !important; z-index: 99999 !important; margin: 0 auto !important; height: 60px !important; display: flex !important; align-items: center !important; box-shadow: 0px 4px 8px rgba(0,0,0,0.15) !important; overflow: hidden !important;">
 
 
 
 
+        <div class="inner-category-box" style="display: flex !important; align-items: center !important; gap: 15px !important; width: 100% !important; box-sizing: border-box !important; background-color: #0056b3 !important; padding: 10px !important; margin: 0 -15px !important; height: 100% !important;">
 
-
-
-<div class="inner-category-box" style="display: flex !important; align-items: center !important; gap: 15px !important; width: 100% !important; box-sizing: border-box !important;">
 
 
 
         <!-- Ikon Air Jernih -->
-        <img src="https://images.bukaolshop.com/hosting/183991/856fc5cef694485358.png" alt="Icon" style="width: 50px; height: 75px; object-fit: contain; margin-right: 0px;">
+        <img src="https://images.bukaolshop.com/hosting/183991/bfbe6765e8b1727020.png" alt="Icon" style="width: 40px; height: 40px; object-fit: contain; margin-right: 0px;">
         <!-- Tulisan Teks Kategori -->
  <!-- Masukkan kode warna di dalam style seperti ini -->
-<div class="header-btn-KUOTA" style="background: linear-gradient(to right, #00a2ff, #006aff) !important; color: white !important; padding: 6px 18px !important; border-radius: 50px !important; box-shadow: 0 15px 15px rgba(0, 106, 255, 0.3) !important; display: inline-block !important; font-weight: bold !important; font-size: 13px !important; margin: 0 auto !important; transform: translateX(-35px) !important;">Freedom Play</div>
+<div class="header-btn-KUOTA" style="background: linear-gradient(to right, #00a2ff, #006aff) !important; color: white !important; padding: 6px 18px !important; border-radius: 50px !important; box-shadow: 0 15px 15px rgba(0, 106, 255, 0.3) !important; display: inline-block !important; font-weight: bold !important; font-size: 13px !important; margin: 0 auto !important; transform: translateX(-15px) !important;">Tagihan -Token Gas</div>
 
-   </div>
- 
-</div>
+
+   
+
+    </div>
+
+
+
+       </div>
+
 <div style="margin-top: 90px !important;">
 
-<div class="floating-card" style="border-radius: 0px !important; box-shadow: none !important; background: transparent !important; background-color: transparent !important;">
-
-<div class="input-wrapper"
-style="width: 94% !important;
-margin: 12px auto 0px auto !important;
-box-sizing: border-box !important;
-padding: 0 !important;
-border-radius: 0px !important;
-background: transparent !important;
-background-color: transparent !important;">
-
+<!-- ========================================== -->
+<!-- 1. TAMPILAN BARU STYLE BRILINK UTAH        -->
+<!-- ========================================== -->
+<!-- KODE CSS UNTUK MENYEMBUNYIKAN DAFTAR PRODUK BAWAAN DI BAWAH -->
 <style>
-  *:focus-within {
-    border-color: #e0e0e0 !important;
-    box-shadow: none !important;
-    outline: none !important;
-  }
-  #idPlayer:focus {
-    border-color: #007bff !important;
-    box-shadow: 0 0 4px rgba(0, 123, 255, 0.5) !important;
-    outline: none !important;
-  }  .input-box img, 
-  #btnCekID img, 
-  div[style*="display: flex"] img,
-  img[alt="Kontak"],
-  img[alt="Info"],
-  img[alt="Scan"],
-  img[alt="Favorite"] {
-      filter: none !important;
-      -webkit-filter: grayscale(0%) !important;
-      opacity: 1 !important;
-      visibility: visible !important;
-  }
-
+/* Menyembunyikan container produk kustom bawaan bukaOlshop */
+#productContent, 
+.product-container, 
+.view-toggle-container, 
+#produkContainer,
+[id*="produk"],
+[class*="product-list"],
+.product-card {
+    display: none !important;
+}
 </style>
 
-<!-- 1. KOTAK UTAMA YANG MEMBUNGKUS INPUT DAN MENU AKSI -->
-<div class="input-box" style="position: relative !important; width: 100% !important; 
-margin-top: -37px !important;
-background-color: #ffffff !important; border: 1px solid #e0e0e0 !important; border-radius: 20px !important; padding: 16px !important; box-sizing: border-box !important; display: flex !important; flex-direction: column !important;">
-
-<!-- KOTAK UTAMA FORM ATAS (KODE FINAL: IKON LENGKAP & RAMPING PRESTISI) -->
-<div id="kotakFormUtama" style="width: 100% !important; background-color: #ffffff !important; border: 1px solid #e0e0e0 !important; border-radius: 24px !important; padding: 14px !important; box-sizing: border-box !important; display: flex !important; flex-direction: column !important; gap: 14px !important; transition: border-color 0.3s ease !important;">
-
-
-
-    <!-- KOLOM INPUT NOMOR UTAMA + IKON BUKU KONTAK -->
-    <div style="position: relative !important; width: 100% !important; display: block !important;">
-        <input type="tel" name="scanner-input" id="scanner-input" class="{{hasil_kontak}} scanner-input" placeholder="Masukkan Nomor Tujuan" oninput="satukkanNomorML()" onfocus="document.getElementById('kotakFormUtama').style.setProperty('border-color', '#007bff', 'important'); this.style.setProperty('border-color', '#007bff', 'important');" onblur="document.getElementById('kotakFormUtama').style.setProperty('border-color', '#e0e0e0', 'important'); this.style.setProperty('border-color', '#e0e0e0', 'important');" style="width: 100% !important; padding: 12px 45px 12px 14px !important; border: 1px solid #e0e0e0 !important; border-radius: 14px !important; outline: none !important; transition: border-color 0.3s ease !important; font-size: 15px !important;">
-       
-                <!-- IKON BUKU KONTAK BAWAAN BUKAOLSHOP (AKTIF LURUS) -->
-        <a href="https://pulsachrome.bukaolshop.site/ambil_kontak?catatan={{hasil_kontak}}" style="position: absolute !important; right: 10px !important; top: 50% !important; transform: translateY(-50%) !important; cursor: pointer !important; width: 24px !important; height: 24px !important; display: flex !important; align-items: center !important; justify-content: center !important; text-decoration: none !important;">
-            <img src="https://images.bukaolshop.com/hosting/183991/0d21898001c770894.png" alt="Kontak" style="width: 25px !important; height: 25px !important; display: block !important;" />
-        </a>
- 
-</div>
+<div class="menu-pln-brilink" style="background: #ffffff; padding: 15px; border-radius: 12px; font-family: sans-serif; box-shadow: 0 4px 12px rgba(0,0,0,0.05); margin: 10px;">
     
+           <!-- Info Pembatasan Jam (Disembunyikan di awal) -->
+        <div id="infoWaktuPLN" style="display: none; background: #e3f2fd; color: #0d47a1; padding: 12px; border-radius: 8px; font-size: 13px; margin-bottom: 15px; border-left: 4px solid #1976d2; line-height: 1.4;">
+            ℹ️ Pembelian & Pembayaran Layanan Gas tidak bisa dilakukan di pukul 23:45 - 00:15 WIB        </div>
 
-    <!-- KAPSUL BARIS TOMBOL (PAS MENYATU DI DALAM KOTAK PUTIH) -->
-    <div style="width: 100% !important; background-color: #f1f3f5 !important; border-radius: 16px !important; padding: 10px !important; box-sizing: border-box !important; display: flex !important; align-items: center !important; justify-content: space-around !important;">
-        
-        <!-- 1. Tombol Info -->
-        <div onclick="aksiBukaTutupInfo()" style="display: flex !important; align-items: center !important; justify-content: center !important; cursor: pointer !important; flex: 1 !important; gap: 6px !important;">
-            <img src="https://images.bukaolshop.com/hosting/183991/e70aaebff47a662105.png" alt="Info" style="width: 16px !important; height: 16px !important; display: block !important;" />
-            <span style="font-size: 13px !important; color: #000000 !important; font-weight: bold !important; font-family: sans-serif !important;">Info</span>
+    <!-- Pemicu Jenis Layanan -->
+    <div style="margin-bottom: 15px;">
+        <label style="font-size: 14px; color: #666; display: block; margin-bottom: 5px; font-weight: bold;">Jenis Layanan</label>
+        <div id="pemicuLayanan" style="width: 100%; padding: 14px 12px; border: 1px solid #ccc; border-radius: 8px; font-size: 15px; background: white; cursor: pointer; display: flex; justify-content: space-between; align-items: center; box-sizing: border-box;">
+            <span id="teksLayananTerpilih" style="color: #333;">Pilih Jenis Layanan</span>
+            <span style="color: #666; font-size: 12px;">▼</span>
         </div>
-        
-        <!-- Garis Pembatas Vertikal Kiri -->
-        <div style="width: 1px !important; height: 14px !important; background-color: #ced4da !important;"></div>
-        
-        <!-- 2. Tombol Scan -->
-        <a href="{{url_website_baru}}/scan_all" id="btnScanID" style="display: flex !important; align-items: center !important; justify-content: center !important; text-decoration: none !important; cursor: pointer !important; flex: 1 !important; gap: 6px !important;">
-            <img src="https://images.bukaolshop.com/hosting/183991/203d42a9cfb3540740.png" alt="Scan" style="width: 16px !important; height: 16px !important; display: block !important;" />
-            <span style="font-size: 13px !important; color: #000000 !important; font-weight: bold !important; font-family: sans-serif !important;">Scan</span>
-        </a>
-        
-        <!-- Garis Pembatas Vertikal Kanan -->
-        <div style="width: 1px !important; height: 14px !important; background-color: #ced4da !important;"></div>
-        
-        <!-- 3. Tombol Favorite -->
-        <div onclick="aksiBukaTutupFavorit()" style="display: flex !important; align-items: center !important; justify-content: center !important; cursor: pointer !important; flex: 1 !important; gap: 6px !important;">
-            <img src="https://images.bukaolshop.com/hosting/183991/6ce2ce008723802442.png" alt="Favorite" style="width: 16px !important; height: 16px !important; display: block !important;" />
-            <span style="font-size: 13px !important; color: #000000 !important; font-weight: bold !important; font-family: sans-serif !important;">Favorite</span>
-        </div>
-
     </div>
+
+    <!-- Input ID Pelanggan Baru -->
+    <div style="margin-bottom: 20px;">
+        <label style="font-size: 14px; color: #666; display: block; margin-bottom: 5px; font-weight: bold;">No. Meter/ID Pelanggan</label>
+        <input type="number" id="idPelangganBRILink" placeholder="Masukkan ID Pelanggan" style="width: 100%; padding: 12px; border: 1px solid #1976d2; border-radius: 8px; font-size: 15px; box-sizing: border-box;">
+    </div>
+
+    <!-- HALAMAN PILIHAN NOMINAL TOKEN BRILINK (Hanya muncul jika memilih tipe Token) -->
+    <div id="halPilihNominal" style="display: none; margin-top: 15px; margin-bottom: 20px; border-top: 1px solid #eee; padding-top: 15px;">
+        <p style="font-weight: bold; color: #333; margin-bottom: 15px; font-size: 15px;">Pilih Nominal Token Gas</p>
+        
+        <!-- Grid Tombol Nominal -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+   <div class="btn-nominal-token" data-value="5000" style="background: white; padding: 16px; text-align: center; border-radius: 8px; border: 1px solid #ddd; font-weight: bold; cursor: pointer; color: #333; transition: 0.2s;">Rp 5000</div>
+
+
+ <div class="btn-nominal-token" data-value="10.000" style="background: white; padding: 16px; text-align: center; border-radius: 8px; border: 1px solid #ddd; font-weight: bold; cursor: pointer; color: #333; transition: 0.2s;">Rp 10.000</div>
+
+
+ <div class="btn-nominal-token" data-value="15.000" style="background: white; padding: 16px; text-align: center; border-radius: 8px; border: 1px solid #ddd; font-weight: bold; cursor: pointer; color: #333; transition: 0.2s;">Rp 15.000</div>
+
+
+ <div class="btn-nominal-token" data-value="20.000" style="background: white; padding: 16px; text-align: center; border-radius: 8px; border: 1px solid #ddd; font-weight: bold; cursor: pointer; color: #333; transition: 0.2s;">Rp 20.000</div>
+
+          <div class="btn-nominal-token" data-value="25.000" style="background: white; padding: 16px; text-align: center; border-radius: 8px; border: 1px solid #ddd; font-weight: bold; cursor: pointer; color: #333; transition: 0.2s;">Rp 25.000</div>
+            <div class="btn-nominal-token" data-value="50.000" style="background: white; padding: 16px; text-align: center; border-radius: 8px; border: 1px solid #ddd; font-weight: bold; cursor: pointer; color: #333; transition: 0.2s;">Rp 50.000</div>
+            <div class="btn-nominal-token" data-value="100.000" style="background: white; padding: 16px; text-align: center; border-radius: 8px; border: 1px solid #ddd; font-weight: bold; cursor: pointer; color: #333; transition: 0.2s;">Rp 100.000</div>
+            <div class="btn-nominal-token" data-value="200.000" style="background: white; padding: 16px; text-align: center; border-radius: 8px; border: 1px solid #ddd; font-weight: bold; cursor: pointer; color: #333; transition: 0.2s;">Rp 200.000</div>
+            <div class="btn-nominal-token" data-value="500.000" style="background: white; padding: 16px; text-align: center; border-radius: 8px; border: 1px solid #ddd; font-weight: bold; cursor: pointer; color: #333; transition: 0.2s;">Rp 500.000</div>
+            <div class="btn-nominal-token" data-value="1.000.000" style="background: white; padding: 16px; text-align: center; border-radius: 8px; border: 1px solid #ddd; font-weight: bold; cursor: pointer; color: #333; transition: 0.2s;">Rp 1.000.000</div>
+        </div>
+    </div>
+
+    
+  
+
+<!-- Tombol Selanjutnya -->
+<button type="button" id="btnSelanjutnyaBRILink" style="width: 100% !important; padding: 14px !important; background-color: #0b63ca !important; color: #ffffff !important; border: none !important; border-radius: 10px !important; font-size: 16px !important; font-weight: bold !important; cursor: pointer !important; transition: all 0.1s ease !important; box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15) !important;">
+    Selanjutnya
+</button>
 
 </div>
 
+<div style="background-color: #ffffff !important; border-radius: 12px 12px 0px 0px !important; padding: 4px 20px 20px 20px !important; margin: 15px 10px 0px 10px !important; min-height: 50vh !important; box-shadow: 0px -2px 10px rgba(0,0,0,0.05) !important; box-sizing: border-box !important;">
 
 
-<!-- 2. TARUH KODE BARU INI TEPAT DI SINI (DI LUAR BUNGKUS TOMBOL) -->
-<div id="modalInfo" style="display: none; width: 100%; box-sizing: border-box; margin-top: 30px; margin-bottom: 10px; padding: 15px; background-color: #fff; border: 1px solid #e0e0e0; border-radius: 12px; font-family: sans-serif; clear: both;">
-    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; padding-bottom: 6px; margin-bottom: 10px;">
-        <span style="font-weight: bold; color: #333; font-size: 14px;">INFO PRODUK</span>
-        <span onclick="aksiBukaTutupInfo()" style="cursor: pointer; color: #aaa; font-weight: bold; font-size: 18px; padding: 0 5px;">×</span>
-    </div>
-    <p style="font-size: 13px; color: #555; line-height: 1.6; margin: 0; text-align: left;">
-        • Proses otomatis 1-5 menit.<br>
-        • Pastikan nomor tujuan sudah benar.<br>
-        • Layanan aktif 24 jam.
-    </p>
+<!-- ========================================== -->
+<!-- AREA NASABAH TERSIMPAN & ANIMASI MOBIL PLN -->
+<!-- ========================================== -->
+<div style="margin-top: 25px; font-family: sans-serif; padding-bottom: 20px;">
+    
+    <!-- Judul Section -->
+    <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 15px;">
+    <span style="font-weight: bold; font-size: 15px; color: #333;">Pelanggan Tersimpan</span>
+    <!-- TAMBAHKAN ONCLICK DI SINI -->
+    <span onclick="bukaMenuSimpanNasabah()" style="display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; background: #1976d2; color: #fff; border-radius: 50%; font-size: 11px; font-weight: bold; cursor: pointer; box-shadow: 0 2px 4px rgba(25,118,210,0.2);">+</span>
 </div>
 
-<script>
-function aksiBukaTutupInfo() {
-    var modal = document.getElementById("modalInfo");
-    if (modal.style.display === "none" || modal.style.display === "") {
-        modal.style.display = "block";
-    } else {
-        modal.style.display = "none";
-    }
+    <!-- Konten Kosong & Animasi Bergerak -->
+    <div style="text-align: center; padding: 20px 10px; background: #ffffff; border-radius: 12px;">
+              <!-- Jalur & Animasi Layanan Gas Kustom -->
+        <div style="position: relative; width: 100%; height: 55px; background: #f0f9ff; border-radius: 8px; margin: 0 auto 15px auto; overflow: hidden; border-bottom: 2px dashed #7dd3fc;">
+            
+            <!-- Elemen Aksen Latar Belakang Gas -->
+            <span style="position: absolute; right: 20%; bottom: 8px; font-size: 18px; opacity: 0.45;">🔥</span>
+            <span style="position: absolute; left: 15%; bottom: 8px; font-size: 16px; opacity: 0.35;">🏠</span>
+
+            <!-- Ikon & Label GAS Bergerak -->
+            <div style="position: absolute; bottom: 4px; font-size: 28px; animation: mobilMajuMundur 6s linear infinite; display: flex; align-items: center; gap: 4px;">
+                <svg width="26" height="26" viewBox="0 0 64 64" fill="none" xmlns="http://w3.org">
+                    <path d="M24 14H40V19H24V14Z" fill="#0284C7"/>
+                    <rect x="29" y="11" width="6" height="4" rx="1" fill="#0369A1"/>
+                    <rect x="20" y="19" width="24" height="30" rx="8" fill="#0EA5E9"/>
+                    <rect x="20" y="29" width="24" height="4" fill="#0284C7"/>
+                    <path d="M23 49H41L43 53H21L23 49Z" fill="#0369A1"/>
+                    <path d="M32 23C32 23 36.5 27.2 36.5 31C36.5 33.5 34.5 35.5 32 35.5C29.5 35.5 27.5 33.5 27.5 31C27.5 29.2 28.8 27.3 29.8 26.2C29.8 27.5 30.8 28.3 31.5 28.3C30.8 26.5 32 23 32 23Z" fill="#FACC15"/>
+                </svg>
+                <span style="font-size: 11px; background: #0284C7; color: #ffffff; padding: 2px 6px; border-radius: 4px; font-weight: bold; box-shadow: 1px 1px 3px rgba(0,0,0,0.12);">GAS</span>
+            </div>
+        </div>
+  
+        
+        <!-- Teks Keterangan -->
+                <!-- Wadah List Otomatis: Tempat Memunculkan Daftar Nasabah Tersimpan -->
+        <div id="tempatDaftarNasabahKustom" style="margin-top: 10px; text-align: left; max-height: 200px; overflow-y: auto; padding: 0 5px;">
+            <!-- Jika kosong, teks panduan di bawah ini yang akan tampil -->
+            <div id="teksPanduanKosong" style="text-align: center; padding: 10px 0;">
+                <h4 style="margin: 0 0 6px 0; font-size: 14px; color: #333; font-weight: bold;">Belum punya nasabah tersimpan?</h4>
+                <p style="margin: 0; font-size: 12px; color: #64748b; line-height: 1.4; padding: 0 15px;">Yuk, mulai transaksi dan simpan nasabah langgananmu!</p>
+            </div>
+        </div>
+
+<!-- Gaya CSS Khusus Pergerakan Jalur Animasi Mobil -->
+<style>
+@keyframes mobilMajuMundur {
+    0% { left: -50px; transform: scaleX(1); }
+    45% { left: calc(100% - 40px); transform: scaleX(1); }
+    50% { left: calc(100% - 40px); transform: scaleX(-1); }
+    95% { left: -10px; transform: scaleX(-1); }
+    100% { left: -50px; transform: scaleX(1); }
 }
+</style>
+
+
+</div>
+
+<!-- INPUT ASLI JALUR TRANSAKSI BUKAOLSHOP (Disembunyikan) -->
+<input type="number" id="userId" style="display: none !important;">
+
+<!-- POP-UP MENU BAWAH (BOTTOM SHEET) -->
+<!-- ========================================== -->
+<!-- KOMPONEN MENU BAWAH (BOTTOM SHEET) FIX TOTAL -->
+<!-- ========================================== -->
+<div id="overlayLayanan" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 99999;">
+    <div id="contentLayanan" style="position: fixed; bottom: -100%; left: 0; width: 100%; background: #ffffff; border-top-left-radius: 20px; border-top-right-radius: 20px; padding: 20px; box-sizing: border-box; transition: bottom 0.3s ease-out; font-family: sans-serif; z-index: 100000;">
+        
+        <!-- Header Menu & Tombol Silang -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px;">
+            <h3 style="margin: 0; font-size: 18px; color: #333; font-weight: bold;">Pilih Jenis Layanan</h3>
+            <div id="btnCloseLayanan" onclick="document.getElementById('contentLayanan').style.bottom = '-100%'; setTimeout(function(){ document.getElementById('overlayLayanan').style.display = 'none'; }, 300);" style="width: 32px; height: 32px; background: #f0f0f0; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #666; cursor: pointer; font-size: 16px;">✕</div>
+        </div>
+
+      <!-- Daftar Lengkap & Bisa Diklik Langsung -->
+<div style="max-height: 300px; overflow-y: auto;">
+
+  <!-- Opsi 1: Token Listrik -->
+  <div class="opsi-layanan" onclick="pilihLayananKustom('Token Gas', 'token')" style="padding: 16px 5px; border-bottom: 1px solid #eee; font-size: 15px; color: #333; cursor: pointer; font-weight: 500; display: flex; align-items: center;">
+    <img src="https://images.bukaolshop.com/hosting/183991/f130e1d0319f649241.png" style="width: 20px; height: 20px; margin-right: 12px;" alt="Token">
+    Token Gas
+  </div>
+
+  <!-- Opsi 2: BPJS kesehatan -->
+  <div class="opsi-layanan" onclick="pilihLayananKustom('BPJS Kesehatan', 'pascabayar')" style="padding: 16px 5px; border-bottom: 1px solid #eee; font-size: 15px; color: #333; cursor: pointer; font-weight: 500; display: flex; align-items: center;">
+    <img src="https://images.bukaolshop.com/hosting/183991/0ccab71e7bd6771363.png" style="width: 20px; height: 20px; margin-right: 12px;" alt="Tagihan">
+    BPJS lesehatan
+  </div>
+<!-- Opsi 3: Bayar Denda BPJS -->
+  <div class="opsi-layanan" onclick="pilihLayananKustom('Bayar Denda BPJS', 'pascabayar')" style="padding: 16px 5px; border-bottom: 1px solid #eee; font-size: 15px; color: #333; cursor: pointer; font-weight: 500; display: flex; align-items: center;">
+    <img src="https://images.bukaolshop.com/hosting/183991/0ccab71e7bd6771363.png" style="width: 20px; height: 20px; margin-right: 12px;" alt="Tagihan">
+    Bayar Denda BPJS
+  </div>
+<!-- Opsi 4: BPJS Ketenagakerjaan Pu -->
+  <div class="opsi-layanan" onclick="pilihLayananKustom('BPJS Ketenagakerjaan Pu', 'pascabayar')" style="padding: 16px 5px; border-bottom: 1px solid #eee; font-size: 15px; color: #333; cursor: pointer; font-weight: 500; display: flex; align-items: center;">
+    <img src="https://images.bukaolshop.com/hosting/183991/0ccab71e7bd6771363.png" style="width: 20px; height: 20px; margin-right: 12px;" alt="Tagihan">
+    BPJS Ketenagakerjaan Pu
+  </div>
+
+  <!-- Opsi 5: BPJS Ketenagakerjaa Bpu -->
+  <div class="opsi-layanan" onclick="pilihLayananKustom('BPJS ketenagakerjaa Bpu', 'non-taglis')" style="padding: 16px 5px; border-bottom: 1px solid #eee; font-size: 15px; color: #333; cursor: pointer; font-weight: 500; display: flex; align-items: center;">
+    <img src="https://images.bukaolshop.com/hosting/183991/0ccab71e7bd6771363.png" style="width: 20px; height: 20px; margin-right: 12px;" alt="Non Taglis">
+    BPJS Ketenagakerjaan Bpu
+  </div>
+
+</div>
+</div>
+<!-- Logika Pemilih Instan Langsung Berfungsi -->
+<script>
+function pilihLayananKustom(namaTeks, nilaiData) {
+    // 1. Ubah teks tulisan di halaman utama secara paksa
+    var elemenTeksUtama = document.getElementById('teksLayananTerpilih');
+    if (elemenTeksUtama) {
+        elemenTeksUtama.textContent = namaTeks;
+        elemenTeksUtama.style.color = '#333';
+    }
+    
+    // 2. Simpan jenis layanan aktif ke dalam memori aplikasi
+    window.nilaiLayananAktif = nilaiData;
+    
+    // ========================================================
+    // KUNCI BARU: MEMAKSA KOTAK INFO BIRU MUNCUL SAAT DIKLIK
+    // ========================================================
+    var kotakInfoBiru = document.getElementById('infoWaktuPLN');
+    if (kotakInfoBiru) {
+        kotakInfoBiru.style.display = 'block'; // Mengubah 'none' menjadi 'block' secara paksa
+    }
+    
+    // 3. Atur otomatis memunculkan/menyembunyikan grid nominal
+    var kotakNominalToken = document.getElementById('halPilihNominal');
+    if (kotakNominalToken) {
+        kotakNominalToken.style.display = 'none'; 
+    }
+    
+    // 4. Paksa menu bawah meluncur menutup kembali
+    var contentMenu = document.getElementById('contentLayanan');
+    var overlayMenu = document.getElementById('overlayLayanan');
+    if (contentMenu) contentMenu.style.bottom = '-100%';
+    setTimeout(function() {
+        if (overlayMenu) overlayMenu.style.display = 'none';
+    }, 300);
+}
+
 </script>
 
-<!-- AREA DAFTAR FAVORIT (DESAIN PRESET SESUAI GAMBAR CONTOH) -->
-<div id="areaDaftarFavorit" style="display: none !important; width: 100% !important; max-width: 100% !important; clear: both !important; box-sizing: border-box !important; margin-top: 15px !important; padding: 15px !important; background-color: #ffffff !important; border-radius: 12px !important; border: 1px solid #f0f0f0 !important; font-family: sans-serif !important;">
-    
-    <!-- Kolom Input Nama -->
-    <div style="margin-bottom: 12px !important; text-align: left !important;">
-        <label style="display: block !important; font-size: 13px !important; color: #333333 !important; margin-bottom: 6px !important; font-weight: 500 !important;">Nama</label>
-        <input type="text" id="inputNamaFav" placeholder="Masukkan Nama" style="width: 100% !important; padding: 12px !important; border: 1px solid #e2e8f0 !important; border-radius: 8px !important; font-size: 14px !important; outline: none !important; box-sizing: border-box !important; background-color: #fcfdfe !important;">
-    </div>
 
-    <!-- Kolom Input Nomor -->
-    <div style="margin-bottom: 12px !important; text-align: left !important;">
-        <label style="display: block !important; font-size: 13px !important; color: #333333 !important; margin-bottom: 6px !important; font-weight: 500 !important;">Nomor</label>
-        <input type="number" id="inputNomorFav" placeholder="Masukkan Nomor" style="width: 100% !important; padding: 12px !important; border: 1px solid #e2e8f0 !important; border-radius: 8px !important; font-size: 14px !important; outline: none !important; box-sizing: border-box !important; background-color: #fcfdfe !important;">
-    </div>
-
-    <!-- Tombol Simpan Biru -->
-    <button type="button" onclick="tambahDataFavoritKeList()" style="width: auto !important; padding: 10px 20px !important; background-color: #007aff !important; color: white !important; border: none !important; border-radius: 6px !important; font-size: 13px !important; font-weight: 500 !important; cursor: pointer !important; display: block !important; margin-bottom: 20px !important;">
-        Simpan ke Favorit
-    </button>
-
-    <!-- Label Sub-Header Daftar -->
-    <div style="font-size: 13px !important; color: #666666 !important; margin-bottom: 10px !important; text-align: left !important;">Daftar Favorit</div>
-
-    <!-- TEMPAT DAFTAR LIST PELANGGAN -->
-    <div id="kontainerListFavorit" style="display: flex !important; flex-direction: column !important; gap: 10px !important; width: 100% !important; box-sizing: border-box !important; margin-bottom: 15px !important;">
-        <!-- Area abu-abu dinamis akan muncul di sini via JavaScript -->
-    </div>
-
-    <!-- Tombol Tutup Merah di Paling Bawah -->
-    <div style="text-align: center !important; margin-top: 15px !important; width: 100% !important;">
-        <button type="button" onclick="aksiBukaTutupFavorit()" style="padding: 8px 30px !important; background-color: #ffffff !important; color: #ef4444 !important; border: 1px solid #ef4444 !important; border-radius: 6px !important; font-size: 13px !important; cursor: pointer !important; font-weight: 500 !important;">
-            Tutup
-        </button>
-    </div>
-</div>
-
-<!-- ENGINE JAVASCRIPT PINTAR -->
+<!-- ========================================== -->
+<!-- 2. LOGIKA JAVASCRIPT FIXED & ANTI-BENTROK  -->
+<!-- ========================================== -->
 <script>
-// Fungsi otomatis panggil daftar saat halaman terbuka
-document.addEventListener("DOMContentLoaded", function() {
-    muatDataFavoritDariMemori();
+var nilaiLayananAktif = "token"; // Standar awal memilih token listrik
+var nominalTerpilihMurni = "";
+
+// 1. Sinkronisasi Warna Tombol & Input Nomor Utama
+document.getElementById('idPelangganBRILink').addEventListener('input', function() {
+    var btn = document.getElementById('btnSelanjutnyaBRILink');
+    var inputAsli = document.getElementById('userId');
+    
+    if(inputAsli) {
+        inputAsli.value = this.value;
+        inputAsli.dispatchEvent(new Event('input', { bubbles: true }));
+    }
+
+    // Tampilkan pilihan grid nominal secara otomatis jika nomor sudah mulai diketik (Khusus Token)
+    if(this.value.trim().length >= 4 && nilaiLayananAktif === "token") {
+        document.getElementById('halPilihNominal').style.display = 'block';
+    }
+
+    if (this.value.trim().length > 4) {
+        btn.style.background = '#1976d2';
+        btn.style.color = '#ffffff';
+    } else {
+        btn.style.background = '#cbd5e1';
+        btn.style.color = '#64748b';
+    }
 });
 
-// 1. Fungsi Utama Buka Tutup Panel Mandiri (Anti Gagal / Mati Kaku)
-function aksiBukaTutupFavorit() {
-    var area = document.getElementById("areaDaftarFavorit");
-    if (area.style.getPropertyValue('display') === 'none' || area.style.display === 'none') {
-        area.style.setProperty('display', 'block', 'important');
-    } else {
-        area.style.setProperty('display', 'none', 'important');
-    }
-}
-
-// 2. Fungsi Simpan Data Baru ke Memori HP
-function tambahDataFavoritKeList() {
-    var nama = document.getElementById("inputNamaFav").value.trim();
-    var nomor = document.getElementById("inputNomorFav").value.trim();
-
-    if (nama === "" || nomor === "") {
-        alert("Mohon isi Nama dan Nomor HP terlebih dahulu!");
-        return;
-    }
-
-    var dataFavorit = JSON.parse(localStorage.getItem("data_favorit_pulsa")) || [];
-    dataFavorit.push({ nama: nama, nomor: nomor });
-    localStorage.setItem("data_favorit_pulsa", JSON.stringify(dataFavorit));
-
-    muatDataFavoritDariMemori();
-
-    document.getElementById("inputNamaFav").value = "";
-    document.getElementById("inputNomorFav").value = "";
-    
-    alert("Berhasil menyimpan " + nama + " ke daftar favorit!");
-}
-
-// 3. Fungsi Render Data dari Memori ke Kotak Abu-Abu Lembut (Sesuai Contoh Gambar)
-function muatDataFavoritDariMemori() {
-    var kontainer = document.getElementById("kontainerListFavorit");
-    var dataFavorit = JSON.parse(localStorage.getItem("data_favorit_pulsa")) || [];
-    
-    if (dataFavorit.length === 0) {
-        // Tampilan default abu-abu tulisan "Belum ada favorit" sesuai gambar contoh Anda
-        kontainer.innerHTML = `
-            <div style="padding: 20px !important; background-color: #f5f5f5 !important; color: #888888 !important; border-radius: 8px !important; text-align: center !important; font-size: 14px !important;">
-                Belum ada favorit
-            </div>
-        `;
-        return;
-    }
-
-    kontainer.innerHTML = "";
-
-    // Render daftar nama dalam bentuk kotak list interaktif yang bisa diklik langsung
-    dataFavorit.forEach(function(item, index) {
-        var itemHtml = `
-            <div onclick="gunakanNomorFavorit('${item.nomor}')" style="display: flex !important; justify-content: space-between !important; align-items: center !important; padding: 12px 15px !important; background-color: #f7f9fa !important; border-radius: 8px !important; border: 1px solid #edf2f4 !important; cursor: pointer !important; width: 100% !important; box-sizing: border-box !important;">
-                <div style="text-align: left !important;">
-                    <div style="font-size: 14px !important; font-weight: 600 !important; color: #2d3748 !important;">${item.nama}</div>
-                    <div style="font-size: 12px !important; color: #718096 !important; margin-top: 3px !important;">${item.nomor}</div>
-                </div>
-                <!-- Tombol Hapus Kecil Merah Silang -->
-                <span onclick="event.stopPropagation(); hapusDataFavorit(${index});" style="color: #a0aec0 !important; font-size: 18px !important; padding: 0 5px !important; cursor: pointer !important;" onmouseover="this.style.color='#ef4444'" onmouseout="this.style.color='#a0aec0'">×</span>
-            </div>
-        `;
-        kontainer.insertAdjacentHTML('beforeend', itemHtml);
+// 2. Logika Pemilihan Kotak Nominal (Gambar 3)
+document.querySelectorAll('.btn-nominal-token').forEach(function(box) {
+    box.addEventListener('click', function() {
+        // Reset warna kotak lain
+        document.querySelectorAll('.btn-nominal-token').forEach(b => {
+            b.style.border = '1px solid #ddd'; b.style.background = 'white'; b.style.color = '#333';
+        });
+        
+        // Aktifkan visual warna biru BRILink
+        this.style.border = '1px solid #1976d2';
+        this.style.background = '#e3f2fd';
+        this.style.color = '#1976d2';
+        
+        // Simpan nilai nominal terpilih secara akurat (Contoh: "20.000")
+        nominalTerpilihMurni = this.getAttribute('data-value');
+        console.log("Nominal terkunci aman: " + nominalTerpilihMurni);
     });
-}
+});
 
-// 4. Fungsi Mengisi Otomatis ke Kolom Input Nomor Tujuan Utama di Atas
-function gunakanNomorFavorit(nomor) {
-    var inputUtama = document.querySelector('input[placeholder*="Nomor"]') || document.querySelector('input[placeholder*="Tujuan"]') || document.querySelector('input[type="number"]');
+        // CARI PRODUK ASLI DENGAN COCOK TEKS YANG SANGAT KETAT (Mencegah 20k terklik ke 200k)
+        var semuaKartuProduk = document.querySelectorAll('.product-card, .btn-beli, .product-name-large, span, div');
+        var targetProdukBO = null;
+
+semuaKartuProduk.forEach(function(prod) {
+    var namaTeksBO = prod.textContent.trim();
     
-    if (inputUtama) {
-        inputUtama.value = nomor;
-        
-        // Trigger event internal wajib agar aplikasi Bukaolshop membaca perubahan data
-        inputUtama.dispatchEvent(new Event('input', { bubbles: true }));
-        inputUtama.dispatchEvent(new Event('change', { bubbles: true }));
-        
-        alert("Nomor " + nomor + " berhasil diterapkan!");
-        aksiBukaTutupFavorit(); // Otomatis menutup panel setelah nomor terpilih
-    } else {
-        alert("Gagal mendeteksi kolom input utama di atas.");
-    }
-}
-
-// 5. Fungsi Hapus Data Terpilih
-function hapusDataFavorit(index) {
-    if (confirm("Hapus nama ini dari daftar favorit?")) {
-        var dataFavorit = JSON.parse(localStorage.getItem("data_favorit_pulsa")) || [];
-        dataFavorit.splice(index, 1);
-        localStorage.setItem("data_favorit_pulsa", JSON.stringify(dataFavorit));
-        muatDataFavoritDariMemori();
-    }
-}
-  // 1. Pengawas Otomatis: Memonitor & membersihkan angka (Ubah 62 jadi 0, hapus spasi/strip)
-setInterval(function() {
-    var kolomInput = document.getElementById("scanner-input");
-    if (kolomInput && kolomInput.value !== "") {
-        var nomorMentah = kolomInput.value;
-        
-        // Hapus semua karakter selain angka (spasi, strip, tanda tambah dll)
-        var nomorBersih = nomorMentah.replace(/[^0-9]/g, ''); 
-        
-        // Mengubah kode 62 di depan menjadi angka 0
-        if (nomorBersih.startsWith('62')) {
-            nomorBersih = '0' + nomorBersih.slice(2); 
-        }
-
-        // Jika nomor berubah setelah dibersihkan, perbarui isi kolom input utama
-        if (nomorMentah !== nomorBersih) {
-            kolomInput.value = nomorBersih;
-        }
-
-        // Picu sensor sistem agar Bukaolshop membaca angka bersih ini dan memunculkan produk
-        kolomInput.dispatchEvent(new Event('input', { bubbles: true }));
-        kolomInput.dispatchEvent(new Event('change', { bubbles: true }));
-        
-        if (typeof satukanNomorML === "function") {
-            satukanNomorML();
-        }
-    }
-}, 500); // Mengecek secara agresif setiap 0.5 detik
-// 1. Fungsi Resmi Bukaolshop untuk Menangkap Hasil Scanner (Dipaksa Tembus)
-function onScanResult(result) {
-    if (!result) return;
-
-    // Bersihkan hasil scan dari karakter spasi, strip, atau simbol aneh
-    var nomorMentah = result.toString().trim().replace(/[^0-9]/g, '');
-    
-    // Otomatis ubah format jika diawali kode negara 62 menjadi 0
-    if (nomorBersih.startsWith('62')) {
-        nomorBersih = '0' + nomorBersih.slice(2);
-    }
-
-    // PAKSA SUNTIK DATA langsung ke dua target penanda sekaligus (ID & Class)
-    var inputID = document.getElementById("scanner-input") || document.getElementById("idPlayer");
-    var inputClass = document.querySelector(".scanner-input") || document.querySelector(".hasil_kontak");
-
-    // Eksekusi penulisan ke kolom input utama atas
-    if (inputID) {
-        inputID.value = nomorBersih;
-        inputID.dispatchEvent(new Event('input', { bubbles: true }));
-        inputID.dispatchEvent(new Event('change', { bubbles: true }));
-    }
-    if (inputClass) {
-        inputClass.value = nomorBersih;
-        inputClass.dispatchEvent(new Event('input', { bubbles: true }));
-        inputClass.dispatchEvent(new Event('change', { bubbles: true }));
-    }
-
-    // Jalankan paksa fungsi pemrosesan utama agar produk otomatis muncul
-    if (typeof satukanNomorML === "function") {
-        satukanNomorML();
+    // A. Filter ketat bawaan Anda untuk mencegah nominal 20k nyasar ke 200k
+    if (nominalTerpilihMurni === "20.000" && namaTeksBO.includes("200.000")) {
+        return; 
     }
     
-    alert("Berhasil memindai nomor: " + nomorBersih);
-}
-
-// 2. Duplikasi fungsi dengan nama alternatif yang sering dicari webview Bukaolshop
-function hasilScan(result) {
-    onScanResult(result);
-}
-
-// JALAN PINTAS: Memaksa Menangkap Nilai Apa Pun dari Webview Scanner
-setInterval(function() {
-    var inputUtama = document.getElementById("scanner-input") || document.getElementById("idPlayer") || document.querySelector(".scanner-input");
+    // B. Proteksi mutakhir: Jika klik 5.000, abaikan kartu yang mengandung angka 25.000
+    if (nominalTerpilihMurni === "5.000" && namaTeksBO.includes("25.000")) {
+        return;
+    }
     
-    if (inputUtama) {
-        // Cek apakah ada nomor yang sempat menyenggol halaman via URL catatan
-        var urlParams = new URLSearchParams(window.location.search);
-        var nomorUrl = urlParams.get('catatan');
-        
-        if (nomorUrl && inputUtama.value === "") {
-            inputUtama.value = nomorUrl.replace(/[^0-9]/g, '');
-        }
+    // C. Kunci kartu produk jika teks nominalnya cocok
+    if (namaTeksBO.includes(nominalTerpilihMurni)) {
+        targetProdukBO = prod;
+    }
+});
 
-        // Jalankan penggerak otomatis agar harga produk langsung menggelinding keluar
-        if (inputUtama.value !== "") {
-            inputUtama.dispatchEvent(new Event('input', { bubbles: true }));
-            inputUtama.dispatchEvent(new Event('change', { bubbles: true }));
-            if (typeof satukanNomorML === "function") {
-                satukanNomorML();
+
+                if (targetProdukBO) {
+            // Langkah A: Klik produk asli bawaan bukaOlshop di latar belakang (Memicu Gambar 4)
+            targetProdukBO.click(); 
+
+            // Langkah B: Bypass/Lewati Gambar 4 secara instan agar langsung meluncur ke Gambar 5 (Checkout)
+            setTimeout(function() {
+                var semuaTombolPopUp = document.querySelectorAll('button, .btn, .btn-primary, .btn-beli');
+                semuaTombolPopUp.forEach(function(tombol) {
+                    var teksTombol = tombol.textContent.trim().toLowerCase();
+                    if(teksTombol === "beli" || tombol.id.includes("beli") || teksTombol.includes("konfirmasi")) {
+                        tombol.click(); // Klik otomatis tombol Beli Biru pada Gambar 4
+                    }
+                });
+            }, 100); // Eksekusi super cepat 100 milidetik
+            
+        } else {
+            alert("Produk nominal Rp " + nominalTerpilihMurni + " tidak ditemukan di sistem bawah toko Anda!");
+        }
+        return;
+    }
+
+            return;
+    }
+
+    // JIKA TRANSAKSI BAYAR BPJS (PASCABAYAR & BPJS)
+    if (nilaiLayananAktif === "pascabayar" || nilaiLayananAktif === "non-taglis") {
+        var kataKunciTagihan = (nilaiLayananAktif === "non-taglis") ? "bpjs kesehatan" : "bayar denda bpjs"; : "bpjs ketenagakerjaan bpu"; : "bpjs ketenagakerjaan pu";
+        var semuaKartuProduk = document.querySelectorAll('.product-card, .card-produk, [onclick*="selectProduct"], [data-product-id], .item-produk');
+        var produkTagihanKetemu = null;
+
+        semuaKartuProduk.forEach(function(kartu) {
+            var teksKartu = (kartu.innerText || kartu.textContent || "").toLowerCase();
+            if (teksKartu.includes(kataKunciTagihan)) {
+                produkTagihanKetemu = kartu;
             }
+        });
+
+        if (produkTagihanKetemu) {
+            produkTagihanKetemu.click();
+            setTimeout(function() {
+                if (typeof buyProduct === 'function') {
+                    buyProduct();
+                }
+            }, 150);
+        } else {
+            alert("Produk " + kataKunciTagihan.toUpperCase() + " tidak ditemukan di sistem bawah toko Anda!");
         }
+        return;
     }
-}, 300); // Mengecek kilat setiap 0.3 detik
-
-
-// 4. Fungsi Gunakan Nomor Favorit (Tetap dijaga agar tidak rusak)
-function gunakanNomorFavorit(nomor) {
-    var inputUtama = document.getElementById("scanner-input") || document.getElementById("idPlayer") || document.querySelector(".scanner-input");
-    if (inputUtama) {
-        inputUtama.value = nomor;
-        inputUtama.dispatchEvent(new Event('input', { bubbles: true }));
-        inputUtama.dispatchEvent(new Event('change', { bubbles: true }));
-        alert("Nomor " + nomor + " berhasil diterapkan!");
-        aksiBukaTutupFavorit();
-    }
-}
+});
 
 </script>
- 
-</div>
-</div>
-</div>
-</div>
+ </div>
 </div>
 
-<div class="floating-card-filter" style="background: transparent !important; box-shadow: none !important; border: none !important;">
+     
+    
 
+</div>
+<div class="floating-card-filter">
 
 <!-- KODE TOMBOL GRID TAMBAHAN -->
-   <div class="view-toggle-container" style="display: flex !important; justify-content: space-between !important; align-items: center !important; width: 100% !important; padding: 0 0px !important; margin: 20px auto 0 auto !important; box-sizing: border-box !important; position: relative !important; background: transparent !important;">
-
+<div class="view-toggle-container" style="display: flex; justify-content: space-between; align-items: center; padding: 10px 15px; background: #fff; border-top: 1px solid #eee; position: relative;">
+    
     <!-- 1. DROPDOWN KIRI (TERENDAH / TERMAHAL) -->
     <div style="position: relative;">
          <div id="text-urut" onclick="document.getElementById('dropdown-menu').style.display = document.getElementById('dropdown-menu').style.display === 'block' ? 'none' : 'block'" style="font-size: 14px; font-weight: bold; color: #333; cursor: pointer; user-select: none;">
@@ -1390,7 +1302,6 @@ function gunakanNomorFavorit(nomor) {
 </div>
 
 </div>
-</div>
 
 <style>
 /* CSS untuk mengaktifkan Grid 2 Kolom pada daftar produk */
@@ -1400,58 +1311,35 @@ function gunakanNomorFavorit(nomor) {
     gap: 10px !important;
     padding: 10px !important;
 }
-/* 1. MENGHILANGKAN SEKAT BAWAAN AGAR KOTAK OTOMATIS MELOROT MENYATU */
-.input-wrapper, .floating-card {
-    background: transparent !important;
-    box-shadow: none !important;
-    border: none !important;
-    margin: 0 !important;
-    padding: 0 !important;
-}
 
-/* 2. MEMBUAT PEMBUNGKUS LUAR MENJADI SATU KOTAK MELAYANG 3D MEWAH */
-.input-wrapper {
-    background: #ffffff !important;
+/* Mengubah flex-direction kartu dari horizontal (list) menjadi vertikal (grid) */
+.layout-grid-dua > div {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    justify-content: space-between !important;
+    height: auto !important;
+    min-height: 110px !important;
+}
+.header-btn-pln {
+    background-color: #007aff !important;
+    color: #ffffff !important;
+    border: none !important;
+    outline: none !important;
     border-radius: 20px !important;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04), 0 12px 28px -5px rgba(0, 123, 255, 0.09) !important;
-    border: 1px solid rgba(0, 123, 255, 0.06) !important;
-    margin: 15px 5px !important;
-    padding: 16px 14px !important;
-}
-
-/* 3. LAPISAN KE-2: MEMBUAT KOTAK KONTAK & FAVORIT CEKUNG INDAH DI DALAM */
-.menu {
-    background: #f4f8ff !important;
-    padding: 12px 8px !important;
-    border-radius: 14px !important;
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02) !important;
-    border: none !important;
-    margin-top: 14px !important;
-    margin-bottom: 5px !important;
+    padding: 6px 16px !important;
+    font-size: 14px !important;
+    font-weight: bold !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    box-shadow: 0 8px 16px rgba(0, 122, 255, 0.4) !important;
 }
 
 </style>
 
 <script>
-setInterval(function() {
-    const idInput = document.getElementById('idPlayer');
-    const btnCek = document.getElementById('btnCekID');
-    const btnX = document.getElementById('btnHapusX');
-    const titik = document.getElementById('iconMenuTitik');
-    
-    if (idInput && btnCek && btnX && titik) {
-        if (idInput.value.trim().length > 0) {
-            btnCek.style.setProperty('display', 'flex', 'important');
-            btnX.style.setProperty('display', 'flex', 'important');
-            titik.style.setProperty('display', 'none', 'important');
-        } else {
-            btnCek.style.setProperty('display', 'none', 'important');
-            btnX.style.setProperty('display', 'none', 'important');
-            titik.style.setProperty('display', 'flex', 'important');
-        }
-    }
-}, 200);
-
 function changeLayout(mode) {
     // Menargetkan langsung elemen konten produk Anda
     const productContent = document.getElementById('productContent');
@@ -1482,12 +1370,6 @@ function changeLayout(mode) {
         btnGrid.style.color = '#333';
     }
 }
-
-document.addEventListener("DOMContentLoaded", () => {
-    const layoutTerakhir = localStorage.getItem('preferensiLayoutPulsa') || 'grid';
-    changeLayout(layoutTerakhir);
-});
-
 </script>
 <!-- AKHIR KODE TOMBOL GRID TAMBAHAN -->
 
@@ -1502,10 +1384,12 @@ document.addEventListener("DOMContentLoaded", () => {
     <div class="popup">
         <div class="drag-line"></div>
         <div class="product-name-large" id="transProductName">-</div>
-        <div class="sub-meta" id="transMeta">Freedom Play</div>
+        <div class="sub-meta" id="transMeta">Bayar BPJS</div>
         <div class="price-row">
             <span class="price-label">Nominal Harga</span>
-            <span class="price-value" id="transNominal">-</span>
+           <span class="price-value" id="transNominal" style="font-weight: bold; color: #1a1a1a; display: inline-block;">Cek Bayar</span>
+
+
         </div>
         <div class="divider-line"></div>
         <div class="description-header">
@@ -1515,7 +1399,12 @@ document.addEventListener("DOMContentLoaded", () => {
         <div class="description-text" id="transDescription">-</div>
         <div class="action-buttons">
             <button class="btn-later" onclick="closeTransactionPopupManual()">Nanti</button>
-            <button class="btn-buy" onclick="buyProduct()">Beli</button>
+    
+<button class="btn-buy" onclick="buyProduct()">Beli</button>
+
+
+
+
         </div>
     </div>
 </div>
@@ -1559,10 +1448,10 @@ document.addEventListener("DOMContentLoaded", () => {
         const tabMenu = document.getElementById('subcategoryTabMenu');
         
         if (produkContainer) {
-            produkContainer.innerHTML = `<div class="loading-spinner"><div></div><p style="margin-top: 20px; color: #999;">Memuat data KUOTA...</p></div>`;
+            produkContainer.innerHTML = `<div class="loading-spinner"><div></div><p style="margin-top: 20px; color: #999;">Memuat data Bauar Bpjs...</p></div>`;
         }
         if (tabMenu) {
-            tabMenu.innerHTML = `<div style="padding: 10px; text-align: center; color: #999;"><div class="loading-spinner" style="padding: 20px;"><div></div><p style="margin-top: 10px;">Loading kategori KUOTA...</p></div></div>`;
+            tabMenu.innerHTML = `<div style="padding: 10px; text-align: center; color: #999;"><div class="loading-spinner" style="padding: 20px;"><div></div><p style="margin-top: 10px;">Loading kategori Bayar BPJS...</p></div></div>`;
         }
         
         if (!token || token.trim() === '') {
@@ -1591,13 +1480,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function findTVCategory() {
-        const searchTerms = ["freedom play",];
+        const searchTerms = ["bayar bpjs",];
         
         for (const category of allCategories) {
             const catNameLower = (category.nama_kategori || '').toLowerCase();
             for (const term of searchTerms) {
                 if (catNameLower.includes(term)) {
-                    category.nama_kategori = "Freedom Play";
+                    category.nama_kategori = "Bayar BPJS";
                     return category;
                 }
             }
@@ -1606,13 +1495,13 @@ document.addEventListener("DOMContentLoaded", () => {
         for (const category of allCategories) {
             const catNameLower = (category.nama_kategori || '').toLowerCase(); 
             {
-                category.nama_kategori = "Freedom Play";
+                category.nama_kategori = "Bayar BPJS";
                 return category;
             }
         }
         
         if (allCategories.length > 0) {
-            allCategories[0].nama_kategori = "Freedom Play";
+            allCategories[0].nama_kategori = "Bayar BPJS";
             return allCategories[0];
         }
         
@@ -1644,7 +1533,7 @@ document.addEventListener("DOMContentLoaded", () => {
             
             if (allSubCategories.length === 0) {
                 const catId = tvCategory.id_kategori || tvCategory.id;
-                const catName = tvCategory.nama_kategori || tvCategory.name || "Freedom Play";
+                const catName = tvCategory.nama_kategori || tvCategory.name || "Bayar BPJS";
                 allSubCategories.push({
                     id: catId,
                     name: catName
@@ -1658,24 +1547,14 @@ document.addEventListener("DOMContentLoaded", () => {
     function renderSubCategoryTabs(subCategories) {
         const tabMenu = document.getElementById('subcategoryTabMenu');
         if (!tabMenu) return;
+        
         if (subCategories.length === 0) {
-    tabMenu.style.display = 'none';
-    tabMenu.innerHTML = `<div style="padding: 10px; text-align: center; color: #999;">Tidak ada sub kategori</div>`;
-    const container = document.getElementById('produkContainer');
-    if (container) {
-        container.innerHTML = `<div style="text-align: center; padding: 40px; color: #999;">Tidak ada produk TV tersedia</div>`;
-    }
-    return;
-}
-
-if (subCategories.length === 1) {
-    tabMenu.style.setProperty('display', 'none', 'important');
-} else {
-    tabMenu.style.setProperty('display', 'flex', 'important');
-}
-
-
-               
+            tabMenu.innerHTML = `<div style="padding: 10px; text-align: center; color: #999;">Tidak ada sub kategori</div>`;
+            const container = document.getElementById('produkContainer');
+            if (container) container.innerHTML = `<div style="text-align: center; padding: 40px; color: #999;">Tidak ada produk TV tersedia</div>`;
+            return;
+        }
+        
         let html = '';
         subCategories.forEach((sub, index) => {
             const activeClass = index === 0 ? 'active' : '';
@@ -1735,7 +1614,7 @@ if (subCategories.length === 1) {
 
         const container = document.getElementById('produkContainer');
         if (container) {
-            container.innerHTML = `<div class="loading-spinner"><div></div><p style="margin-top: 20px; color: #999;">Memuat Produk KUOTA....</p></div>`;
+            container.innerHTML = `<div class="loading-spinner"><div></div><p style="margin-top: 20px; color: #999;">Memuat Produk Bayar BPJS....</p></div>`;
         }
 
         try {
@@ -1777,7 +1656,7 @@ if (subCategories.length === 1) {
         if (!products || products.length === 0) {
             container.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 40px; color: #999; font-size: 12px;">
                     <img src="https://cdn-icons-png.flaticon.com/128/7023/7023038.png" style="width: 80px; margin-bottom:10px;">
-                    <p>Produk KUOTA belum tersedia</p>
+                    <p>Produk Tahihan Gas belum tersedia</p>
                 </div>`;
             return;
         }
@@ -1786,36 +1665,30 @@ if (subCategories.length === 1) {
         
         products.forEach(product => {
             const productName = product.nama_produk || 'Produk TV';
-            const productPrice = product.harga_produk || 0;
+   const currentPriceRaw = parseInt(product.harga_produk) || 0;
+const productPrice = currentPriceRaw === 1500 ? "Cek Bayar" : "Rp " + currentPriceRaw.toLocaleString('id-ID');
+         
             const productOriginalPrice = product.harga_produk_asli || 0;
             const productImg = product.url_gambar_produk || 'https://cdn-icons-png.flaticon.com/128/6165/6165611.png';
             const productDesc = product.deskripsi_produk || product.deskripsi_panjang || 'Tidak ada deskripsi';
             const productUrl = product.url_produk || '';
             const stok = product.stok ?? 1;
             const isOutOfStock = stok <= 0;
- const isGangguan = product.status_produk === 'gangguan' || product.status === 'gangguan' || product.status === '0' || product.status === 0 || product.status === false || product.multi === '0' || product.server_status === '0';
-const statusBadge = isGangguan ? '<span class="status-gangguan">⚠️ GANGGUAN</span>' : '';
-   
-
-  
-     const diskonPersen = hitungDiskon(productOriginalPrice, productPrice);
+            const diskonPersen = hitungDiskon(productOriginalPrice, productPrice);
             const isPromo = diskonPersen !== null && !isOutOfStock;
-            
-            const formattedPrice = `Rp${productPrice.toLocaleString('id-ID')}`;
+  const formattedPrice = productPrice;
+ 
             const formattedOriginalPrice = isPromo ? `Rp${productOriginalPrice.toLocaleString('id-ID')}` : '';
-        let ribbonHtml = '';
-if (isGangguan) {
-    ribbonHtml = `<div class="ribbon gangguan">GANGGUAN</div>`;
-} else if (isOutOfStock) {
-    ribbonHtml = `<div class="ribbon out-of-stock">STOK KOSONG</div>`;
-} else if (isPromo) {
-    ribbonHtml = `<div class="ribbon discount">DISKON ${diskonPersen}%</div>`;
-}
-    
-                        
-            let clickableClass = (!isOutOfStock && !isGangguan) ? '' : 'disabled';
-let disabledAttr = (isOutOfStock || isGangguan) ? 'disabled' : '';
-
+            
+            let ribbonHtml = '';
+            if (isOutOfStock) {
+                ribbonHtml = `<div class="ribbon out-of-stock">STOK KOSONG</div>`;
+            } else if (isPromo) {
+                ribbonHtml = `<div class="ribbon discount">DISKON ${diskonPersen}%</div>`;
+            }
+            
+            let clickableClass = !isOutOfStock ? '' : 'disabled';
+            let disabledAttr = isOutOfStock ? 'disabled' : '';
             
             let priceSectionHtml = `
                 ${isPromo ? `<div class="price-strike">${formattedOriginalPrice}</div>` : ''}
@@ -1855,9 +1728,12 @@ let disabledAttr = (isOutOfStock || isGangguan) ? 'disabled' : '';
                 
                 if (isOutOfStock) return;
                 
-      const customerId = "BYPASS";
-
-           
+                const customerId = document.getElementById('userId').value.trim();
+                if (!customerId) {
+                    showToast('Masukkan ID Pelanggan terlebih dahulu!', 2000);
+                    return;
+                }
+                
                 selectedProductData = {
                     id: this.getAttribute('data-product-id'),
                     name: this.getAttribute('data-product-name'),
@@ -1903,8 +1779,7 @@ let disabledAttr = (isOutOfStock || isGangguan) ? 'disabled' : '';
     }
 
     function showTransactionPopup(productCard) {
-    const customerId = "BYPASS";
-
+        const customerId = document.getElementById('userId').value.trim();
         if (!customerId) {
             showToast('Masukkan ID Pelanggan terlebih dahulu!', 2000);
             return;
@@ -1921,18 +1796,7 @@ let disabledAttr = (isOutOfStock || isGangguan) ? 'disabled' : '';
         document.getElementById('transDescription').innerHTML = desc;
         document.getElementById('transIcon').src = "https://cdn-icons-png.flaticon.com/128/9554/9554529.png";
         
-     // Pemicu otomatis agar langsung melempar pembeli ke halaman Checkout BukaOlshop
-    setTimeout(function() {
-        // Coba pemicu tombol beli bawaan yang ada di pop-up kodingan Anda
-        const tombolBeliPop = document.querySelector('.btn-buy') || 
-                             document.querySelector('.btn-confirm-payment') || 
-                             document.querySelector('[onclick*="buyProduct"]');
-        if (tombolBeliPop) {
-            tombolBeliPop.click();
-        } else if (typeof buyProduct === 'function') {
-            buyProduct();
-        }
-    }, 40); // Jeda aman 40 milidetik agar nomor HP selesai terbaca sempurna oleh sistem document.getElementById('transactionOverlay').classList.add('active'); 
+        
     }
 
     function closeTransactionPopup(e) {
@@ -1946,12 +1810,59 @@ let disabledAttr = (isOutOfStock || isGangguan) ? 'disabled' : '';
     }
 
     function buyProduct() {
-         const customerId = document.getElementById('scanner-input').value.trim();
-       
+        const customerId = document.getElementById('userId').value.trim();
+        
         if (!customerId) {
             showToast('Masukkan ID Pelanggan terlebih dahulu!', 2000);
             return;
         }
+    // Otomatis cari produk pascabayar dari kartu HTML atau semua variabel API
+    if (typeof nilaiLayananAktif !== 'undefined' && (nilaiLayananAktif === 'pascabayar' || nilaiLayananAktif === 'non-taglis')) {
+        const targetNama = (nilaiLayananAktif === 'non-taglis') ? 'pgn' : 'pertagas';
+        
+        // 1. Cari langsung dari elemen kartu produk yang sudah dirender di layar (meski tersembunyi)
+        const semuaKartu = Array.from(document.querySelectorAll('.product-card'));
+        const kartuCocok = semuaKartu.find(el => {
+            const nama = (el.getAttribute('data-product-name') || '').toLowerCase();
+            return nama.includes('tagihan') && nama.includes(targetNama);
+        });
+
+        if (kartuCocok) {
+            selectedProductData = {
+                id: kartuCocok.getAttribute('data-product-id') || '',
+                name: kartuCocok.getAttribute('data-product-name') || 'Bayar BPJS',
+                price: parseInt(kartuCocok.getAttribute('data-product-price') || 0),
+                url_produk: kartuCocok.getAttribute('data-product-url') || ''
+            };
+        } else {
+            // 2. Jika kartu belum dirender, cari dari seluruh isi allCategories API
+            let daftarSemuaProduk = [];
+            if (typeof allCategories !== 'undefined' && Array.isArray(allCategories)) {
+                allCategories.forEach(kat => {
+                    if (Array.isArray(kat.produk)) daftarSemuaProduk.push(...kat.produk);
+                    if (Array.isArray(kat.sub_kategori)) {
+                        kat.sub_kategori.forEach(sub => {
+                            if (Array.isArray(sub.produk)) daftarSemuaProduk.push(...sub.produk);
+                        });
+                    }
+                });
+            }
+
+            const produkApi = daftarSemuaProduk.find(p => {
+                const nama = (p.nama_produk || p.name || '').toLowerCase();
+                return nama.includes('tagihan') && nama.includes(targetNama);
+            });
+
+            if (produkApi) {
+                selectedProductData = {
+                    id: produkApi.id_produk || produkApi.id || '',
+                    name: produkApi.nama_produk || produkApi.name || 'Bayar BPJS',
+                    price: parseInt(produkApi.harga || produkApi.price || 0),
+                    url_produk: produkApi.url_produk || produkApi.url || ''
+                };
+            }
+        }
+    }
 
         if (selectedProductData && selectedProductData.url_produk) {
             let url = selectedProductData.url_produk;
@@ -1982,22 +1893,23 @@ let disabledAttr = (isOutOfStock || isGangguan) ? 'disabled' : '';
             showToast('Masukkan ID Pelanggan terlebih dahulu!', 2000);
             return false;
         }
-        let favorites = JSON.parse(localStorage.getItem('favoriteNumbers')) || [];
-        if (favorites.includes(number)) {
+            let favorites = JSON.parse(localStorage.getItem('data_favorit_pln')) || [];
+    if (favorites.includes(number)) {
             showToast(`ID ${number} sudah ada di daftar favorit!`, 2500);
             return false;
         }
         favorites.push(number);
-        localStorage.setItem('favoriteNumbers', JSON.stringify(favorites));
-        showToast(`✓ ID ${number} berhasil disimpan ke favorit!`, 2500);
+         localStorage.setItem('data_favorit_pln' , JSON.stringify(favorites));
+       showToast(`✓ ID ${number} berhasil disimpan ke favorit!`, 2500);
         return true;
     }
 
     function removeFavoriteNumber(number) {
-        let favorites = JSON.parse(localStorage.getItem('favoriteNumbers')) || [];
+       let favorites = JSON.parse(localStorage.getItem('data_favorit_pln')) || [];
+
         const newFavorites = favorites.filter(fav => fav !== number);
-        localStorage.setItem('favoriteNumbers', JSON.stringify(newFavorites));
-        showToast(`ID ${number} dihapus dari favorit`, 2000);
+         localStorage.setItem('data_favorit_pln' , JSON.stringify(newFavorites));
+       showToast(`ID ${number} dihapus dari favorit`, 2000);
         if (document.getElementById('favoritOverlay').classList.contains('active')) {
             displayFavoriteList();
         }
@@ -2012,8 +1924,8 @@ let disabledAttr = (isOutOfStock || isGangguan) ? 'disabled' : '';
 
     function displayFavoriteList() {
         const container = document.getElementById('favoriteListContainer');
-        const favorites = JSON.parse(localStorage.getItem('favoriteNumbers')) || [];
-        if (favorites.length === 0) {
+             const favorites = JSON.parse(localStorage.getItem('data_favorit_pln')) || [];
+   if (favorites.length === 0) {
             container.innerHTML = '<div class="empty-favorite">Belum ada ID favorit. Simpan ID dari halaman utama.</div>';
             return;
         }
@@ -2094,6 +2006,22 @@ let disabledAttr = (isOutOfStock || isGangguan) ? 'disabled' : '';
         
         loadTVData();
     });
+    // ==========================================
+    // KODE PERBAIKAN (MENGGANTI NOMINALTERPIELEN)
+    // ==========================================
+    if (document.getElementById('btnKeKonfirmasi')) {
+        document.getElementById('btnKeKonfirmasi').addEventListener('click', function() {
+            if (nominalTerpilih === 0) return; // Sudah diperbaiki menjadi nominalTerpilih
+
+            if(document.getElementById('halPilihNominal')) document.getElementById('halPilihNominal').style.display = 'none';
+            if(document.getElementById('halKonfirmasiAkhir')) document.getElementById('halKonfirmasiAkhir').style.display = 'block';
+
+            if(document.getElementById('fixNama')) document.getElementById('fixNama').textContent = document.getElementById('namaPelangganTop') ? document.getElementById('namaPelangganTop').textContent : '-';
+            if(document.getElementById('fixId')) document.getElementById('fixId').textContent = document.getElementById('idPelangganTop') ? document.getElementById('idPelangganTop').textContent : '-';
+            if(document.getElementById('fixNominal')) document.getElementById('fixNominal').textContent = "Rp " + nominalTerpilih.toLocaleString('id-ID');
+            if(document.getElementById('fixTotal')) document.getElementById('fixTotal').textContent = "Rp " + (nominalTerpilih + 3000).toLocaleString('id-ID');
+        });
+    }
 
 function toggleInfoBaru() {
     var boks = document.getElementById("kotak-info-baru");
@@ -2107,208 +2035,444 @@ function toggleInfoBaru() {
         panah.classList.add("putar-panah");
     }
 }
+// =============================================================
+// LOGIKA ABSOLUT: 100% SINKRON JENIS LAYANAN DAN TOMBOL UTAMA
+// =============================================================
 
-    const kotakInputBukaolshop = document.querySelector('.input-box');
-    const kolomTeksIdPlayer = document.getElementById('idPlayer');
+// FORCE CLICK: Memaksa menu bawah langsung terbuka saat disentuh
+var elementPemicuMenu = document.getElementById('pemicuLayanan') || document.querySelector('.menu-pln-brilink div:nth-child(2)');
+if (elementPemicuMenu) {
+    elementPemicuMenu.onclick = function() {
+        var overlay = document.getElementById('overlayLayanan');
+        var content = document.getElementById('contentLayanan');
+        if (overlay && content) {
+            overlay.style.display = 'block';
+            content.style.bottom = '0'; // Langsung naik tanpa delay
+        }
+    };
+}
 
-    if (kotakInputBukaolshop && kolomTeksIdPlayer) {
-        kolomTeksIdPlayer.addEventListener('focus', function() {
-            kotakInputBukaolshop.style.setProperty('border', '1.5px solid #006aff', 'important');
-            kotakInputBukaolshop.style.setProperty('box-shadow', '0 0 8px rgba(0, 106, 255, 0.2)', 'important');
-        });
+// FORCE INPUT: Memastikan tombol Selanjutnya berubah warna jadi biru saat mengetik nomor
+if(document.getElementById('idPelangganBRILink')) {
+    document.getElementById('idPelangganBRILink').oninput = function() {
+        var btnLanjut = document.getElementById('btnSelanjutnyaBRILink');
+        var inputAsliBO = document.getElementById('userId');
+        
+        if(inputAsliBO) inputAsliBO.value = this.value;
 
-        kolomTeksIdPlayer.addEventListener('blur', function() {
-            kotakInputBukaolshop.style.setProperty('border', '1px solid #e0e0e0', 'important');
-            kotakInputBukaolshop.style.setProperty('box-shadow', 'none', 'important');
-        });
-    }
-// ==========================================
-// KODE AKTIVASI CEK ID & KOTAK INFO DINAMIS
-// ==========================================
-(function() {
-    const inputId = document.getElementById('idPlayer');
-    const tombolCek = document.getElementById('btnCekID');
-    const inputBox = document.querySelector('.input-box');
-
-    if (!inputId || !tombolCek || !inputBox) return;
-
-    // 1. BUAT KOTAK INFO PELANGGAN SECARA OTOMATIS (Aman, tidak merusak HTML asli)
-    const kotakInfo = document.createElement('div');
-    kotakInfo.id = 'kotakResponDinamis';
-    kotakInfo.style.cssText = 'display: none !important; background: #ffffff !important; border: 1px solid #e0e0e0 !important; border-radius: 12px !important; padding: 12px !important; margin: 12px auto !important; width: 100% !important; box-sizing: border-box !important; box-shadow: 0 4px 12px rgba(0,0,0,0.05) !important;';
-    kotakInfo.innerHTML = `
-        <div style="font-weight: bold !important; font-size: 13px !important; color: #333333 !important; margin-bottom: 8px !important; border-bottom: 1px dashed #e0e0e0 !important; padding-bottom: 4px !important;">ℹ️ Info Pelanggan</div>
-        <table style="width: 100% !important; font-size: 13px !important; border-collapse: collapse !important;">
-            <tr>
-                <td style="color: #666666 !important; padding: 4px 0 !important; width: 35% !important;">Respon</td>
-                <td id="teksResponDinamis" style="font-weight: bold !important; color: #0081ff !important; padding: 4px 0 !important;">-</td>
-            </tr>
-        </table>
-    `;
-    // Memasukkan kotak info tepat di bawah kotak input nomor tujuan
-    inputBox.parentNode.insertBefore(kotakInfo, inputBox.nextSibling);
-
-    // 2. KONTROL MUNCUL & SEMBUNYI SAAT MENGETIK ATAU MENGHAPUS
-    inputId.addEventListener('input', function() {
-        if (inputId.value.trim().length > 0) {
-            tombolCek.style.setProperty('display', 'flex', 'important');
+        if (this.value.trim().length > 4) {
+            btnLanjut.style.background = '#1976d2';
+            btnLanjut.style.color = '#ffffff';
         } else {
-            // Jika kolom kosong/dihapus bersih, tombol dan kotak info ikut hilang seketika
-            tombolCek.style.setProperty('display', 'none', 'important');
-            kotakInfo.style.setProperty('display', 'none', 'important');
+            btnLanjut.style.background = '#cbd5e1';
+            btnLanjut.style.color = '#64748b';
+        }
+    };
+}
+
+// FORCE TRANSMISSION: Mengaktifkan tombol Selanjutnya agar membagi alur Token vs Pascabayar
+if(document.getElementById('btnSelanjutnyaBRILink')) {
+    document.getElementById('btnSelanjutnyaBRILink').onclick = function() {
+        var nomorMeteran = document.getElementById('idPelangganBRILink').value;
+
+        if (nomorMeteran.trim() === "") {
+            alert("Mohon masukkan ID Pelanggan terlebih dahulu!");
+            return;
+        }
+
+        // Jika user memilih Token Listrik, paksa grid pilihan nominal langsung menyembul keluar
+        if (typeof window.nilaiLayananAktif !== 'undefined' && window.nilaiLayananAktif === "token") {
+            var halNominalToken = document.getElementById('halPilihNominal');
+            if (halNominalToken) {
+                halNominalToken.style.display = 'block'; // Munculkan Gambar 3
+                halNominalToken.scrollIntoView({ behavior: 'smooth' });
+            }
+            return; // Rem Darurat: Mengunci sistem agar pop-up pascabayar tidak mengganggu
+        }
+         
+    // KILAT BYPASS AMAN (Tanpa merusak struktur penutup kode asli)
+setTimeout(function() {
+    // 1. Jalankan klik cek bayar secara instan
+    var semuaElemen = document.querySelectorAll('button, div, span, a');
+    semuaElemen.forEach(function(el) {
+        if (el.textContent.trim() === "Cek Bayar" || el.textContent.trim() === "Beli") {
+            el.click();
+        }
+        // 2. Langsung matikan warna abu-abu overlay di latar belakang
+        if (el.className && (el.className.includes('backdrop') || el.className.includes('overlay'))) {
+            el.style.display = 'none';
+            el.style.opacity = '0';
         }
     });
+}, 100);
 
-    // 3. MENYAMBUNGKAN TOMBOL CEK ID KE OPEN API KUOTA (Sudah Dilengkapi Proteksi Huruf)
-    window.cekIDPlayer = function() {
-        const idUser = inputId.value.trim();
-        const kolomRespon = document.getElementById('teksResponDinamis');
-
-        if (!idUser) {
-            alert('Silakan masukkan ID Player terlebih dahulu!');
-            return;
-        }
-
-        // Tampilkan kotak info pelanggan
-        kotakInfo.style.setProperty('display', 'block', 'important');
-
-        // PROTEKSI: Jika inputan berisi huruf (bukan angka), stop agar server API tidak crash
-        if (isNaN(idUser)) {
-            if (kolomRespon) kolomRespon.innerHTML = '<span style="color: red !important;">Format ID harus berupa angka!</span>';
-            return;
-        }
-
-        // Animasi loading pada tombol dan kotak info
-        const teksAsliTombol = tombolCek.innerHTML;
-        tombolCek.innerHTML = 'Memeriksa...';
-        tombolCek.disabled = true;
-        if (kolomRespon) kolomRespon.innerHTML = '<span style="color: #666666 !important;">Sedang memeriksa id...</span>';
-
-        // INTEGRASI OPEN API (Menggunakan API Jombloapi sebagai jembatan tes gratis)
-        // Di kemudian hari, Anda tinggal mengganti URL di bawah ini sesuai dengan Open API berbayar Anda
-        fetch(`https://jombloapi.xyz{idUser}`)
-            .then(res => res.json())
-            .then(hasil => {
-                tombolCek.innerHTML = teksAsliTombol;
-                tombolCek.disabled = false;
-
-                if (hasil && hasil.data && hasil.data.username) {
-                    // JIKA BERHASIL: Nickname muncul di kotak info pelanggan
-                    if (kolomRespon) kolomRespon.innerHTML = hasil.data.username;
-                    
-                    // Otomatis salin nickname ke kolom catatan pesanan Bukaolshop
-                    const catatan = document.getElementById('catatan');
-                    if (catatan) catatan.value = `Nick: ${hasil.data.username}`;
-                } else {
-                    if (kolomRespon) kolomRespon.innerHTML = '<span style="color: red !important;">ID Tidak Ditemukan!</span>';
-                }
-            })
-            .catch(() => {
-                tombolCek.innerHTML = teksAsliTombol;
-                tombolCek.disabled = false;
-                // Jika API gangguan, halaman produk bawah dijamin tetap AMAN dan TIDAK AKAN HILANG
-                if (kolomRespon) kolomRespon.innerHTML = '<span style="color: red !important;">Server API Gangguan!</span>';
-            });
     };
-})();
-</script>
+};
 
-<script>
-setInterval(function() {
-    const inputId = document.getElementById("idPlayer");
-    if (inputId) {
-        let nomor = inputId.value;
-        let sudahBerubah = false;
 
-        if (nomor.startsWith("+62")) {
-            inputId.value = "0" + nomor.slice(3);
-            sudahBerubah = true;
-        } else if (nomor.startsWith("62")) {
-            inputId.value = "0" + nomor.slice(2);
-            sudahBerubah = true;
-        }
 
-        // Kuncinya di sini: Pemicu input hanyakan berjalan SATU KALI saat nomor diganti ke 0
-        if (sudahBerubah) {
-            inputId.dispatchEvent(new Event('input', { bubbles: true }));
-            inputId.dispatchEvent(new Event('change', { bubbles: true }));
-        }
+// =============================================================
+// LOGIKA PINATASAN AKHIR: AKTIFKAN KLIK NOMINAL & AUTO CHECKOUT
+// =============================================================
+
+// 1. Logika untuk mengaktifkan klik pada semua kotak nominal uang (Gambar 3)
+document.body.addEventListener('click', function(e) {
+    if(e.target.classList.contains('btn-nominal-token')) {
+        // Reset warna kotak nominal lain agar kembali putih bersih
+        document.querySelectorAll('.btn-nominal-token').forEach(b => {
+            b.style.border = '1px solid #ddd'; b.style.background = 'white'; b.style.color = '#333';
+            b.classList.remove('opsi-terpilih-brilink');
+        });
+        
+        // Beri efek aktif warna biru BRILink pada kotak yang Anda klik
+        e.target.style.border = '1px solid #1976d2';
+        e.target.style.background = '#e3f2fd';
+        e.target.style.color = '#1976d2';
+        e.target.classList.add('opsi-terpilih-brilink'); // Beri penanda tanda fisik di HTML
     }
-}, 500);
-</script>
-
-
-<script>
-var kotakBesar = document.querySelector('.input-box');
-var inputKecil = document.getElementById('idPlayer');
-if (kotakBesar && inputKecil) {
-  inputKecil.addEventListener('focus', function() {
-    setTimeout(function() {
-      kotakBesar.style.setProperty('border-color', '#e0e0e0', 'important');
-      kotakBesar.style.setProperty('box-shadow', 'none', 'important');
-    }, 10);
-  });
-}
-
 });
 
-// Fungsi Sakelar Buka Tutup Menu Info (Anti Gagal Sistem Bukaolshop)
-function aksiBukaTutupInfo() {
-    var area = document.getElementById("areaInfoTransaksi");
-    if (area.style.getPropertyValue('display') === 'none' || area.style.display === 'none') {
-        area.style.setProperty('display', 'block', 'important');
+// 2. Hubungkan fungsi klik tombol "Selanjutnya" agar mengeksekusi nominal tersebut
+if(document.getElementById('btnSelanjutnyaBRILink')) {
+    document.getElementById('btnSelanjutnyaBRILink').addEventListener('click', function() {
+        var nomorPelanggan = document.getElementById('idPelangganBRILink').value;
+
+        if (nomorPelanggan.trim() === "") {
+            alert("Mohon masukkan ID Pelanggan terlebih dahulu!");
+            return;
+        }
+
+        // Jalankan alur transaksi jika user memilih Token Listrik
+        if (typeof window.nilaiLayananAktif !== 'undefined' && window.nilaiLayananAktif === "token") {
+            
+            // Cari kotak mana yang saat itu sedang diberi penanda 'opsi-terpilih-brilink'
+            var kotakAktif = document.querySelector('.opsi-terpilih-brilink');
+            var dataNominalMurni = "";
+
+            if (kotakAktif) {
+                // Ambil nilai data-value kustomnya (Contoh: "20.000", "50.000", dsb)
+                dataNominalMurni = kotakAktif.getAttribute('data-value');
+            }
+
+            // Validasi jika user belum mengetuk nominal uang sama sekali
+                  // =============================================================
+        // LOGIKA SINKRON: BUKA GRID DULU, BARU CEK NOMINAL (ANTI-POPUP)
+        // =============================================================
+        var halNominal = document.getElementById('halPilihNominal');
+
+        // TAHAP 1: Jika kotak nominal masih tertutup / tersembunyi
+               // Buat penanda otomatis di ingatan sistem aplikasi jika belum ada
+        if (typeof window.statusGridNominal === 'undefined') {
+            window.statusGridNominal = "tertutup";
+        }
+
+        // TAHAP 1: Jika ingatan sistem mencatat kotak masih tertutup
+        if (window.statusGridNominal === "tertutup") {
+            if (halNominal) {
+                halNominal.style.display = 'block'; // Paksa tampilkan kotak nominal uang
+                halNominal.scrollIntoView({ behavior: 'smooth' }); // Gulir ke bawah
+            }
+            window.statusGridNominal = "terbuka"; // KUNCI: Ubah status ingatan menjadi terbuka!
+            return; // REM MUTLAK: Berhenti total, pop-up error dijamin tidak akan keluar!
+        }
+
+        // TAHAP 2: Jika kotak nominal SUDAH terbuka, baru lakukan validasi pilihan uang
+        if (!dataNominalMurni || dataNominalMurni === "") {
+            alert("Mohon pilih Nominal Token Gas terlebih dahulu!");
+            return;
+        }
+  
+            // PROSES AUTO-KLIK PRODUK ASLI BAWAAN TEMPLATE BUKAOLSHOP ANDA
+            var seluruhCardBO = document.querySelectorAll('.product-card, .btn-beli, .product-name-large, span, div, button');
+            var produkKetemuBO = null;
+
+            seluruhCardBO.forEach(function(prod) {
+                var teksBO = prod.textContent.trim();
+                // Validasi super ketat agar nominal 20.000 tidak salah klik produk nominal 200.000
+                if (teksBO.includes(dataNominalMurni)) {
+                    if (dataNominalMurni === "20.000" && teksBO.includes("200.000")) { 
+                        return; // Lewati jika mendeteksi teks 200k saat cari 20k
+                    }
+                    produkKetemuBO = prod;
+                }
+            });
+
+            if (produkKetemuBO) {
+                produkKetemuBO.click(); // Klik otomatis produk asli toko Anda di latar belakang
+
+   // Lewati lembaran deskripsi secara instan agar layar user langsung mendarat di halaman checkout akhir
+setTimeout(function() {
+    var semuaTombolPopUp = document.querySelectorAll('button, .btn, .btn-primary, .btn-beli, div, span, a');
+    semuaTombolPopUp.forEach(function(tombol) {
+        var teksTombol = tombol.textContent.trim().toLowerCase();
+        if(teksTombol === "beli" || tombol.id.includes("beli") || teksTombol.includes("konfirmasi")) {
+            
+            // 1. POTONG RIWAYAT: Hapus paksa jejak langkah bottom sheet dari history navigasi
+            try {
+                if (window.history && window.history.length > 1) {
+                    window.history.replaceState(null, null, window.location.href);
+                }
+            } catch(e) {}
+
+            tombol.click(); // Klik otomatis tombol Beli biru asli bawaan server
+            
+            // 2. Sembunyikan elemen fisik pop-up secara instan
+            try {
+                var sheetPLN = tombol.closest('.modal, .bottom-sheet, [class*="modal"], [class*="bottom-sheet"], [id*="sheet"], [id*="modal"]');
+                if (sheetPLN) {
+                    sheetPLN.style.setProperty('display', 'none', 'important');
+                }
+            } catch(e) {}
+        }
         
-        // Otomatis menutup panel favorit jika sedang terbuka agar tidak tumpang tindih
-        var areaFav = document.getElementById("areaDaftarFavorit");
-        if (areaFav) areaFav.style.setProperty('display', 'none', 'important');
-    } else {
-        area.style.setProperty('display', 'none', 'important');
+        // 3. Bersihkan sisa layar abu-abu/backdrop latar belakang jika terdeteksi
+        if (tombol.className && (tombol.className.includes('backdrop') || tombol.className.includes('overlay'))) {
+            tombol.style.setProperty('display', 'none', 'important');
+            tombol.style.setProperty('opacity', '0', 'important');
+        }
+    });
+}, 100);
+} else {
+    alert("Produk nominal Rp " + dataNominalMurni + " gagal ditemukan di sistem!");
+}
+    }
+});
+}
+  
+
+         
+
+</script>
+<!-- ========================================== -->
+<!-- MODAL BOTTOM SHEET: INPUT NASABAH FAVORIT  -->
+<!-- ========================================== -->
+<div id="overlaySimpanNasabah" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 999999;">
+    <div id="contentSimpanNasabah" style="position: fixed; bottom: -100%; left: 0; width: 100%; background: #ffffff; border-top-left-radius: 20px; border-top-right-radius: 20px; padding: 20px; box-sizing: border-box; transition: bottom 0.3s ease-out; font-family: sans-serif; z-index: 1000000;">
+        
+        <!-- Judul Atas Jendela -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 12px;">
+            <h3 style="margin: 0; font-size: 16px; color: #333; font-weight: bold;">Tambah Nasabah Tersimpan</h3>
+            <div onclick="tutupMenuSimpanNasabah()" style="width: 28px; height: 28px; background: #f0f0f0; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #666; cursor: pointer; font-size: 13px;">✕</div>
+        </div>
+
+        <!-- Form Isian Nama -->
+        <div style="margin-bottom: 15px;">
+            <label style="font-size: 13px; color: #666; display: block; margin-bottom: 6px; font-weight: bold;">Nama</label>
+            <input type="text" id="inputNamaNasabahKustom" placeholder="Masukkan Nama" style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px; font-size: 14px; box-sizing: border-box; outline: none; background: #fafafa;">
+        </div>
+
+        <!-- Form Isian Nomor -->
+        <div style="margin-bottom: 25px;">
+            <label style="font-size: 13px; color: #666; display: block; margin-bottom: 6px; font-weight: bold;">Nomor ID / Meteran</label>
+            <input type="number" id="inputNomorNasabahKustom" placeholder="Masukkan Nomor" style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px; font-size: 14px; box-sizing: border-box; outline: none; background: #fafafa;">
+        </div>
+
+        <!-- Tombol Aksi Simpan -->
+        <button type="button" onclick="prosesSimpanNasabahKustom()" style="width: 100%; padding: 14px; background: #1976d2; color: #ffffff; border: none; border-radius: 8px; font-size: 15px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 12px rgba(25,118,210,0.3);">
+            Simpan ke Favorit
+        </button>
+    </div>
+</div>
+
+<script>
+// Logika otomatis menghubungkan klik icon bulat info utama ke menu simpan baru ini
+document.addEventListener("DOMContentLoaded", function() {
+    // Mencari tombol icon bulat biru kecil di samping judul Nasabah Tersimpan
+    var tombolInfoBulat = document.querySelector('.menu-pln-brilink div:nth-child(4) span:nth-child(2)') || document.querySelector('[style*="width: 15px; height: 15px; background: rgb(25, 118, 210)"]');
+    
+    if (tombolInfoBulat) {
+        tombolInfoBulat.style.cursor = 'pointer';
+        tombolInfoBulat.textContent = '+'; // Ubah jadi tanda tambah agar cocok untuk input data
+        tombolInfoBulat.style.width = '18px';
+        tombolInfoBulat.style.height = '18px';
+        tombolInfoBulat.style.fontSize = '11px';
+        
+        tombolInfoBulat.onclick = function() {
+            bukaMenuSimpanNasabah();
+        };
+    }
+});
+
+// Fungsi membuka lembaran input dari bawah
+function bukaMenuSimpanNasabah() {
+    var overlay = document.getElementById('overlaySimpanNasabah');
+    var content = document.getElementById('contentSimpanNasabah');
+    if (overlay && content) {
+        overlay.style.display = 'block';
+        setTimeout(function() { content.style.bottom = '0'; }, 50);
+        
+        // Otomatis mengambil nomor meteran jika user sudah mengetik di halaman utama
+        var nomorUtama = document.getElementById('idPelangganBRILink') ? document.getElementById('idPelangganBRILink').value : '';
+        if(nomorUtama) {
+            document.getElementById('inputNomorNasabahKustom').value = nomorUtama;
+        }
     }
 }
+
+// Fungsi menutup kembali lembaran jendela ke bawah
+function tutupMenuSimpanNasabah() {
+    var overlay = document.getElementById('overlaySimpanNasabah');
+    var content = document.getElementById('contentSimpanNasabah');
+    if (content) content.style.bottom = '-100%';
+    setTimeout(function() { if (overlay) overlay.style.display = 'none'; }, 300);
+}
+
+// Fungsi eksekusi ketika tombol biru simpan diklik
+function prosesSimpanNasabahKustom() {
+    var nama = document.getElementById('inputNamaNasabahKustom').value.trim();
+    var nomor = document.getElementById('inputNomorNasabahKustom').value.trim();
+
+    if (nama === "" || nomor === "") {
+        alert("Mohon isi Nama dan Nomor ID pelanggan terlebih dahulu!");
+        return;
+    }
+
+    // Sambungkan ke fungsi bawaan internal template toko online Anda
+    var inputNamaAsliBO = document.querySelector('[placeholder*="Nama"], #favName');
+    var inputNomorAsliBO = document.getElementById('userId') || document.querySelector('[placeholder*="Nomor"]');
+    
+    if (inputNamaAsliBO) inputNamaAsliBO.value = nama;
+    if (inputNomorAsliBO) {
+        inputNomorAsliBO.value = nomor;
+        inputNomorAsliBO.dispatchEvent(new Event('input', { bubbles: true }));
+    }
+
+    alert("Sukses! Nasabah '" + nama + "' berhasil disimpan ke data favorit toko Anda.");
+    tutupMenuSimpanNasabah();
+    
+    document.getElementById('inputNamaNasabahKustom').value = "";
+    document.getElementById('inputNomorNasabahKustom').value = "";
+}
+
+
+
+
+
 
 
 </script>
 <script>
-// Fungsi otomatis berjalan berulang untuk memaksa nomor hasil scan masuk kolom
-var cekHasilScan = setInterval(function() {
-    var kolomInput = document.getElementById('scanner-input');
+// =============================================================
+// MESIN BRILINK: KONEKSI LANGSUNG KE MEMORI HP (ANTI-GEMBUNG & RINGAN)
+// =============================================================
+document.addEventListener("DOMContentLoaded", function() {
+    // Jalankan fungsi membaca memori setiap kali halaman utama dibuka
+    muatUlangNasabahBRILinkDariHP();
+});
+
+// 1. Fungsi Utama: Menyedot data "Nang" dari memori internal HP dan menyusunnya ke bawah mobil
+function muatUlangNasabahBRILinkDariHP() {
+    var wadahDaftarBRILink = document.getElementById('tempatDaftarNasabahKustom');
+    var panduanKosong = document.getElementById('teksPanduanKosong');
+
+    if (!wadahDaftarBRILink) return;
+
+    // Menembak langsung ke kunci memori HP favorit Anda (Sesuai Gambar 4 & 5 Anda)
+    var dataFavoritHP = JSON.parse(localStorage.getItem("data_favorit_pln")) || [];
+
+    // Jika di dalam memori HP ternyata ada data nasabah tersimpan
+    if (dataFavoritHP.length > 0) {
+        if (panduanKosong) panduanKosong.style.display = 'none'; // Sembunyikan panduan kosong
+
+        var htmlDaftarBaru = "";
+        dataFavoritHP.forEach(function(item, index) {
+            // Bersihkan teks nomor dari karakter non-angka agar aman diklik
+            var nomorMurni = item.nomor.replace(/[^0-9]/g, '');
+
+            // Susun baris list kustom putih bersih khas perbankan BRILink (Anti Gembung!)
+            htmlDaftarBaru += `
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; border: 1px solid #e2e8f0; border-radius: 8px; margin-bottom: 8px; background: #ffffff; box-shadow: 0 1px 3px rgba(0,0,0,0.02); text-align: left;">
+                    
+                    <!-- Area Klik Kiri: Mengetik otomatis nomor ke input utama di atas -->
+                    <div onclick="pilihNasabahBRILinkMelesat('${nomorMurni}')" style="flex: 1; cursor: pointer;">
+                        <div style="font-weight: bold; font-size: 13px; color: #1976d2;">👤 ${item.nama}</div>
+                        <div style="font-size: 12px; color: #64748b; margin-top: 3px; font-family: monospace; letter-spacing: 0.5px;">${nomorMurni}</div>
+                    </div>
+                    
+                    <!-- Area Klik Kanan (✕): Menghapus nama langsung dari memori HP -->
+                    <div onclick="hapusNasabahBRILinkDariHP(${index})" style="padding: 5px 10px; font-size: 14px; color: #cbd5e1; cursor: pointer; font-weight: bold;" onmouseover="this.style.color='#ef4444'" onmouseout="this.style.color='#cbd5e1'">✕</div>
+                </div>
+            `;
+        });
+
+        wadahDaftarBRILink.innerHTML = htmlDaftarBaru;
+
+    } else {
+        // Jika memori kosong, kembalikan ke tampilan teks panduan awal
+        wadahDaftarBRILink.innerHTML = "";
+        if (panduanKosong) panduanKosong.style.display = 'block';
+    }
+}
+
+// 2. Fungsi Klik: Ketika nama diketuk, nomor langsung mengetik otomatis ke kolom No. Meter utama
+function pilihNasabahBRILinkMelesat(nomorID) {
+    var inputUtamaBRILink = document.getElementById('idPelangganBRILink');
+    var inputAsliBO = document.getElementById('userId'); // Menghubungkan ke input dasar server
+
+    if (inputUtamaBRILink) {
+        inputUtamaBRILink.value = nomorID;
+        // Memicu trigger event input agar tombol 'Selanjutnya' otomatis berubah menjadi biru aktif!
+        inputUtamaBRILink.dispatchEvent(new Event('input', { bubbles: true }));
+    }
     
-    if (kolomInput) {
-        // 1. Cek parameter URL bawaan webview aplikasi
-        const urlParams = new URLSearchParams(window.location.search);
-        let nomorFinal = urlParams.get('catatan') || urlParams.get('nomor') || urlParams.get('scan') || '';
-        
-        // 2. Jika URL kosong, cek langsung shortcode teks bawaan aplikasi BukaOlshop
-        if (!nomorFinal || nomorFinal === 'null') {
-            nomorFinal = "{{hasil_kontak}}";
-        }
-        
-        // Bersihkan teks saringan template kosong bawaan sistem
-        if (nomorFinal && nomorFinal !== '{{hasil_kontak}}' && nomorFinal !== '[nomor_hp]' && nomorFinal !== 'null') {
-            // Hilangkan semua spasi di antara nomor meteran (contoh: 14 3601 8991 5 menjadi 14360189915)
-            var nomorBersih = nomorFinal.replace(/[^0-9]/g, '');
+    if (inputAsliBO) {
+        inputAsliBO.value = nomorID;
+    }
+}
+
+// 3. Fungsi Hapus: Menghapus data langsung dari dalam localStorage HP Anda
+function hapusNasabahBRILinkDariHP(index) {
+    var dataFavoritHP = JSON.parse(localStorage.getItem("data_favorit_pln")) || [];
+    
+    if (dataFavoritHP[index]) {
+        if (confirm("Apakah Anda yakin ingin menghapus nasabah '" + dataFavoritHP[index].nama + "' dari data tersimpan?")) {
+            dataFavoritHP.splice(index, 1); // Potong antrean data
+         localStorage.setItem("data_favorit_pln", JSON.stringify(dataFavoritHP));
+    // Simpan ulang ke HP
             
-            if (nomorBersih !== "" && kolomInput.value !== nomorBersih) {
-                // Tulis paksa nomor ke dalam kolom input utama Anda
-                kolomInput.value = nomorBersih;
-                
-                // Hentikan pengecekan berulang karena nomor sudah berhasil masuk
-                clearInterval(cekHasilScan);
-                
-                // Memicu otomatis kemunculan daftar harga di bawahnya
-                if (typeof satukkanNomorML === "function") {
-                    satukkanNomorML();
-                }
+            // Segarkan tampilan list di bawah mobil detik itu juga
+            muatUlangNasabahBRILinkDariHP(); 
+            
+            // Sinkronisasikan agar list box abu-abu bawaan template Anda juga ikut ter-update otomatis
+            if (typeof muatDataFavoritDariMemori === 'function') {
+                muatDataFavoritDariMemori();
             }
         }
     }
-}, 300); // Mengecek otomatis setiap 0,3 detik secara agresif
+}
 
-// Pengaman otomatis: Matikan fungsi setelah 5 detik agar baterai HP user tidak boros
-setTimeout(function() {
-    clearInterval(cekHasilScan);
-}, 5000);
+// 4. Sinkronisasi Tambah Data: Memastikan ketika Anda mengklik tombol "Simpan ke Favorit" dari panel bawah, 
+// list kustom di bawah mobil langsung ikut ter-update otomatis tanpa perlu keluar-masuk halaman.
+var fungsiSimpanLama = window.prosesSimpanNasabahKustom;
+window.prosesSimpanNasabahKustom = function() {
+    var namaInput = document.getElementById('inputNamaNasabahKustom').value.trim();
+    var nomorInput = document.getElementById('inputNomorNasabahKustom').value.trim();
+
+    if (namaInput === "" || nomorInput === "") {
+        alert("Mohon isi Nama dan Nomor ID pelanggan terlebih dahulu!");
+        return;
+    }
+
+    // Ambil antrean lama di memori HP, lalu dorong data baru masuk ke dalamnya
+    var dataFavoritHP = JSON.parse(localStorage.getItem("data_favorit_pln")) || [];
+    dataFavoritHP.push({ nama: namaInput, nomor: nomorInput });
+    localStorage.setItem("data_favorit_pln", JSON.stringify(dataFavoritHP));
+
+
+    alert("Sukses! Nasabah '" + namaInput + "' berhasil disimpan ke data favorit toko Anda.");
+    
+    // Tutup panel bawah & bersihkan form inputan kustom
+    tutupMenuSimpanNasabah();
+    document.getElementById('inputNamaNasabahKustom').value = "";
+    document.getElementById('inputNomorNasabahKustom').value = "";
+
+    // Detik itu juga, paksa daftar di bawah mobil langsung memuat nama baru tersebut!
+    muatUlangNasabahBRILinkDariHP();
+    if (typeof muatDataFavoritDariMemori === 'function') {
+        muatDataFavoritDariMemori();
+    }
+};
 </script>
-</div>
+
 </body>
 </html>
