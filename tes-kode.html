@@ -871,10 +871,10 @@ div.subcategory-tab-btn.active,
 
 
         <!-- Ikon Air Jernih -->
-        <img src="https://images.bukaolshop.com/hosting/183991/731ca4938d3e674839.png" alt="Icon" style="width: 40px; height: 40px; object-fit: contain; margin-right: 0px;">
+        <img src="https://images.bukaolshop.com/hosting/183991/4441ea53e637756064.png" alt="Icon" style="width: 40px; height: 40px; object-fit: contain; margin-right: 0px;">
         <!-- Tulisan Teks Kategori -->
  <!-- Masukkan kode warna di dalam style seperti ini -->
-<div class="header-btn-KUOTA" style="background: linear-gradient(to right, #00a2ff, #006aff) !important; color: white !important; padding: 6px 18px !important; border-radius: 50px !important; box-shadow: 0 15px 15px rgba(0, 106, 255, 0.3) !important; display: inline-block !important; font-weight: bold !important; font-size: 13px !important; margin: 0 auto !important; transform: translateX(-15px) !important;">Layanan BPJS</div>
+<div class="header-btn-KUOTA" style="background: linear-gradient(to right, #00a2ff, #006aff) !important; color: white !important; padding: 6px 18px !important; border-radius: 50px !important; box-shadow: 0 15px 15px rgba(0, 106, 255, 0.3) !important; display: inline-block !important; font-weight: bold !important; font-size: 13px !important; margin: 0 auto !important; transform: translateX(-15px) !important;">TV Pascabayar</div>
 
 
    
@@ -908,7 +908,7 @@ div.subcategory-tab-btn.active,
     
            <!-- Info Pembatasan Jam (Disembunyikan di awal) -->
         <div id="infoWaktuPLN" style="display: none; background: #e3f2fd; color: #0d47a1; padding: 12px; border-radius: 8px; font-size: 13px; margin-bottom: 15px; border-left: 4px solid #1976d2; line-height: 1.4;">
-            ℹ️ Pembelian & Pembayaran Layanan Gas tidak bisa dilakukan di pukul 23:45 - 00:15 WIB        </div>
+            ℹ️ Masukkan 11 digit terakhir nomor kartu Indonesia Sehat di awali dengan angka (88888)       </div>
 
     <!-- Pemicu Jenis Layanan -->
     <div style="margin-bottom: 15px;">
@@ -921,8 +921,8 @@ div.subcategory-tab-btn.active,
 
     <!-- Input ID Pelanggan Baru -->
     <div style="margin-bottom: 20px;">
-        <label style="font-size: 14px; color: #666; display: block; margin-bottom: 5px; font-weight: bold;">No. Meter/ID Pelanggan</label>
-        <input type="number" id="idPelangganBRILink" placeholder="Masukkan ID Pelanggan" style="width: 100%; padding: 12px; border: 1px solid #1976d2; border-radius: 8px; font-size: 15px; box-sizing: border-box;">
+        <label style="font-size: 14px; color: #666; display: block; margin-bottom: 5px; font-weight: bold;">No. Peserta</label>
+        <input type="number" id="idPelangganBRILink" placeholder="Masukkan No Peserta" style="width: 100%; padding: 12px; border: 1px solid #1976d2; border-radius: 8px; font-size: 15px; box-sizing: border-box;">
     </div>
 
     <!-- HALAMAN PILIHAN NOMINAL TOKEN BRILINK (Hanya muncul jika memilih tipe Token) -->
@@ -1026,33 +1026,93 @@ div.subcategory-tab-btn.active,
             <div id="btnCloseLayanan" onclick="document.getElementById('contentLayanan').style.bottom = '-100%'; setTimeout(function(){ document.getElementById('overlayLayanan').style.display = 'none'; }, 300);" style="width: 32px; height: 32px; background: #f0f0f0; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #666; cursor: pointer; font-size: 16px;">✕</div>
         </div>
 
-      <!-- Daftar Lengkap & Bisa Diklik Langsung -->
-<div style="max-height: 300px; overflow-y: auto;">
+        <!-- Kotak Pencarian Cepat Provider TV -->
+        <div style="margin-bottom: 12px;">
+            <input type="text" id="cariProviderTV" onkeyup="saringProviderTV()" placeholder="🔍 Cari TV (misal: Indovision, MNC, K-Vision)..." style="width: 100%; box-sizing: border-box; padding: 11px 14px; border: 1.5px solid #cbd5e1; border-radius: 10px; font-size: 14px; outline: none; background: #f8fafc; color: #333;">
+        </div>
 
-  <!-- Opsi 1: Bpjs Kesehatan -->
-  <div class="opsi-layanan" onclick="pilihLayananKustom('BPJS Kesehatan', 'pascabayar')" style="padding: 16px 5px; border-bottom: 1px solid #eee; font-size: 15px; color: #333; cursor: pointer; font-weight: 500; display: flex; align-items: center;">
-    <img src="https://images.bukaolshop.com/hosting/183991/f130e1d0319f649241.png" style="width: 20px; height: 20px; margin-right: 12px;" alt="Token">
-    BPJS Kesehatan
-  </div>
+        <!-- Daftar Lengkap 11 Provider TV Pascabayar -->
+        <div id="wadahDaftarTV" style="max-height: 300px; overflow-y: auto;">
 
-  <!-- Opsi 2: BPJS Bayar Denda -->
-  <div class="opsi-layanan" onclick="pilihLayananKustom('BPJS Bayar Denda', 'pascabayar')" style="padding: 16px 5px; border-bottom: 1px solid #eee; font-size: 15px; color: #333; cursor: pointer; font-weight: 500; display: flex; align-items: center;">
-    <img src="https://images.bukaolshop.com/hosting/183991/0ccab71e7bd6771363.png" style="width: 20px; height: 20px; margin-right: 12px;" alt="Tagihan">
-    BPJS Bayar Denda
-  </div>
- <!-- Opsi 3: Bjs Bpu -->
-  <div class="opsi-layanan" onclick="pilihLayananKustom('BPJS Ketenagakerjaan Pu', 'non-taglis')" style="padding: 16px 5px; border-bottom: 1px solid #eee; font-size: 15px; color: #333; cursor: pointer; font-weight: 500; display: flex; align-items: center;">
-    <img src="https://images.bukaolshop.com/hosting/183991/0ccab71e7bd6771363.png" style="width: 20px; height: 20px; margin-right: 12px;" alt="Non Taglis">
-    BPJS Ketenagakerjaan Pu
-  </div>
+            <!-- 1. Tagihan Indovision -->
+            <div class="opsi-layanan" onclick="pilihLayananKustom('Tagihan Indovision', 'pascabayar')" style="padding: 14px 5px; border-bottom: 1px solid #eee; font-size: 15px; color: #333; cursor: pointer; font-weight: 500; display: flex; align-items: center;">
+                <span style="font-size: 22px; margin-right: 12px;">📺</span>
+                <span>Tagihan Indovision</span>
+            </div>
 
-  <!-- Opsi 4: Bjs Bpu -->
-  <div class="opsi-layanan" onclick="pilihLayananKustom('BPJS Ketenagakerjaan Bpu', 'non-taglis')" style="padding: 16px 5px; border-bottom: 1px solid #eee; font-size: 15px; color: #333; cursor: pointer; font-weight: 500; display: flex; align-items: center;">
-    <img src="https://images.bukaolshop.com/hosting/183991/0ccab71e7bd6771363.png" style="width: 20px; height: 20px; margin-right: 12px;" alt="Non Taglis">
-    BPJS Ketenagakerjaan Bpu
-  </div>
+            <!-- 2. Tagihan K-Vision -->
+            <div class="opsi-layanan" onclick="pilihLayananKustom('Tagihan K-Vision', 'pascabayar')" style="padding: 14px 5px; border-bottom: 1px solid #eee; font-size: 15px; color: #333; cursor: pointer; font-weight: 500; display: flex; align-items: center;">
+                <span style="font-size: 22px; margin-right: 12px;">📺</span>
+                <span>Tagihan K-Vision</span>
+            </div>
 
-</div>
+            <!-- 3. Tagihan MNC Play -->
+            <div class="opsi-layanan" onclick="pilihLayananKustom('Tagihan MNC Play', 'pascabayar')" style="padding: 14px 5px; border-bottom: 1px solid #eee; font-size: 15px; color: #333; cursor: pointer; font-weight: 500; display: flex; align-items: center;">
+                <span style="font-size: 22px; margin-right: 12px;">📺</span>
+                <span>Tagihan MNC Play</span>
+            </div>
+
+            <!-- 4. Tagihan MNC Vision -->
+            <div class="opsi-layanan" onclick="pilihLayananKustom('Tagihan MNC Vision', 'pascabayar')" style="padding: 14px 5px; border-bottom: 1px solid #eee; font-size: 15px; color: #333; cursor: pointer; font-weight: 500; display: flex; align-items: center;">
+                <span style="font-size: 22px; margin-right: 12px;">📺</span>
+                <span>Tagihan MNC Vision</span>
+            </div>
+
+            <!-- 5. Tagihan Nex Media -->
+            <div class="opsi-layanan" onclick="pilihLayananKustom('Tagihan Nex Media', 'pascabayar')" style="padding: 14px 5px; border-bottom: 1px solid #eee; font-size: 15px; color: #333; cursor: pointer; font-weight: 500; display: flex; align-items: center;">
+                <span style="font-size: 22px; margin-right: 12px;">📺</span>
+                <span>Tagihan Nex Media</span>
+            </div>
+
+            <!-- 6. Tagihan OkeVision -->
+            <div class="opsi-layanan" onclick="pilihLayananKustom('Tagihan OkeVision', 'pascabayar')" style="padding: 14px 5px; border-bottom: 1px solid #eee; font-size: 15px; color: #333; cursor: pointer; font-weight: 500; display: flex; align-items: center;">
+                <span style="font-size: 22px; margin-right: 12px;">📺</span>
+                <span>Tagihan OkeVision</span>
+            </div>
+
+            <!-- 7. Tagihan Telkomvision -->
+            <div class="opsi-layanan" onclick="pilihLayananKustom('Tagihan Telkomvision', 'pascabayar')" style="padding: 14px 5px; border-bottom: 1px solid #eee; font-size: 15px; color: #333; cursor: pointer; font-weight: 500; display: flex; align-items: center;">
+                <span style="font-size: 22px; margin-right: 12px;">📺</span>
+                <span>Tagihan Telkomvision</span>
+            </div>
+
+            <!-- 8. Tagihan TOP TV -->
+            <div class="opsi-layanan" onclick="pilihLayananKustom('Tagihan TOP TV', 'pascabayar')" style="padding: 14px 5px; border-bottom: 1px solid #eee; font-size: 15px; color: #333; cursor: pointer; font-weight: 500; display: flex; align-items: center;">
+                <span style="font-size: 22px; margin-right: 12px;">📺</span>
+                <span>Tagihan TOP TV</span>
+            </div>
+
+            <!-- 9. Tagihan Topas TV -->
+            <div class="opsi-layanan" onclick="pilihLayananKustom('Tagihan Topas TV', 'pascabayar')" style="padding: 14px 5px; border-bottom: 1px solid #eee; font-size: 15px; color: #333; cursor: pointer; font-weight: 500; display: flex; align-items: center;">
+                <span style="font-size: 22px; margin-right: 12px;">📺</span>
+                <span>Tagihan Topas TV</span>
+            </div>
+
+            <!-- 10. Tagihan Transvision -->
+            <div class="opsi-layanan" onclick="pilihLayananKustom('Tagihan Transvision', 'pascabayar')" style="padding: 14px 5px; border-bottom: 1px solid #eee; font-size: 15px; color: #333; cursor: pointer; font-weight: 500; display: flex; align-items: center;">
+                <span style="font-size: 22px; margin-right: 12px;">📺</span>
+                <span>Tagihan Transvision</span>
+            </div>
+
+            <!-- 11. Tagihan YES TV -->
+            <div class="opsi-layanan" onclick="pilihLayananKustom('Tagihan YES TV', 'pascabayar')" style="padding: 14px 5px; border-bottom: 1px solid #eee; font-size: 15px; color: #333; cursor: pointer; font-weight: 500; display: flex; align-items: center;">
+                <span style="font-size: 22px; margin-right: 12px;">📺</span>
+                <span>Tagihan YES TV</span>
+            </div>
+
+        </div>
+
+        <script>
+            function saringProviderTV() {
+                var input = document.getElementById('cariProviderTV').value.toLowerCase();
+                var daftar = document.querySelectorAll('#wadahDaftarTV .opsi-layanan');
+                daftar.forEach(function(item) {
+                    var teks = item.innerText.toLowerCase();
+                    item.style.display = teks.includes(input) ? 'flex' : 'none';
+                });
+            }
+        </script>
+
 </div>
 <!-- Logika Pemilih Instan Langsung Berfungsi -->
 <script>
@@ -1193,7 +1253,7 @@ semuaKartuProduk.forEach(function(prod) {
 
     // JIKA TRANSAKSI TAGIHAN BPJS (PASCABAYAR & BPJS)
     if (nilaiLayananAktif === "pascabayar" || nilaiLayananAktif === "non-taglis") {
-        var kataKunciTagihan = (nilaiLayananAktif === "non-taglis") ? "tagihan gas pgn" : "Bayar BPJS";
+        var kataKunciTagihan = (nilaiLayananAktif === "non-taglis") ? "tagihan gas pgn" : "Tv Pascabayar";
         var semuaKartuProduk = document.querySelectorAll('.product-card, .card-produk, [onclick*="selectProduct"], [data-product-id], .item-produk');
         var produkTagihanKetemu = null;
 
@@ -1365,7 +1425,7 @@ function changeLayout(mode) {
     <div class="popup">
         <div class="drag-line"></div>
         <div class="product-name-large" id="transProductName">-</div>
-        <div class="sub-meta" id="transMeta">Bayar BPJS</div>
+        <div class="sub-meta" id="transMeta">Tv Pascabayar</div>
         <div class="price-row">
             <span class="price-label">Nominal Harga</span>
            <span class="price-value" id="transNominal" style="font-weight: bold; color: #1a1a1a; display: inline-block;">Cek Bayar</span>
@@ -1461,13 +1521,13 @@ function changeLayout(mode) {
     }
 
     function findTVCategory() {
-        const searchTerms = ["bayar bpjs",];
+        const searchTerms = ["tv pascabayar",];
         
         for (const category of allCategories) {
             const catNameLower = (category.nama_kategori || '').toLowerCase();
             for (const term of searchTerms) {
                 if (catNameLower.includes(term)) {
-                    category.nama_kategori = "Bayar BPJS";
+                    category.nama_kategori = "Tv Pascabayar";
                     return category;
                 }
             }
@@ -1476,13 +1536,13 @@ function changeLayout(mode) {
         for (const category of allCategories) {
             const catNameLower = (category.nama_kategori || '').toLowerCase(); 
             {
-                category.nama_kategori = "Bayar BPJS";
+                category.nama_kategori = "Tv Pascabayar";
                 return category;
             }
         }
         
         if (allCategories.length > 0) {
-            allCategories[0].nama_kategori = "Bayar BPJS";
+            allCategories[0].nama_kategori = "Tv Pascabayar";
             return allCategories[0];
         }
         
@@ -1514,7 +1574,7 @@ function changeLayout(mode) {
             
             if (allSubCategories.length === 0) {
                 const catId = tvCategory.id_kategori || tvCategory.id;
-                const catName = tvCategory.nama_kategori || tvCategory.name || "Bayar BPJS";
+                const catName = tvCategory.nama_kategori || tvCategory.name || "Tv Pascabayar";
                 allSubCategories.push({
                     id: catId,
                     name: catName
