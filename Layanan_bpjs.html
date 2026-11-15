@@ -2476,54 +2476,87 @@ window.prosesSimpanNasabahKustom = function() {
 };
 </script>
 <script>
-  // Pengatur kode awalan otomatis sesuai pilihan layanan BPJS
+  // Pengatur kode awalan & kotak info dinamis sesuai pilihan layanan BPJS
   (function() {
     const kotakInput = document.getElementById('scanner-input') || document.querySelector('input[placeholder*="Peserta"], input[placeholder*="Nomor"]');
     const teksLayanan = document.getElementById('teksLayananTerpilih');
 
     if (!kotakInput || !teksLayanan) return;
 
-    function dapatkanKodeAwalan(namaLayanan) {
+    // Cari atau buat wadah info panduan dinamis tepat di bawah kolom input
+    let boxInfoDinamis = document.getElementById('infoDigitBPJS');
+    if (!boxInfoDinamis) {
+      boxInfoDinamis = document.createElement('div');
+      boxInfoDinamis.id = 'infoDigitBPJS';
+      boxInfoDinamis.style.cssText = 'display: none; margin-top: 8px; padding: 8px 12px; background: #eff6ff; border-left: 3.5px solid #2563eb; border-radius: 6px; font-size: 12px; color: #1e40af; font-weight: 500; line-height: 1.4;';
+      kotakInput.parentNode.insertAdjacentElement('afterend', boxInfoDinamis);
+    }
+
+    function dapatkanInfoLayanan(namaLayanan) {
       const n = (namaLayanan || '').toLowerCase();
-      if (n.includes('denda')) return '88881';
-      if (n.includes('ketenagakerjaan') || n.includes('bpu') || n.includes('pu') || n.includes('badan usaha')) return '888889';
-      return '88888'; // Default untuk BPJS Kesehatan
+      if (!n || n.includes('pilih')) {
+        return { kode: '', info: '' };
+      }
+      if (n.includes('denda')) {
+        return {
+          kode: '88881',
+          info: 'ℹ️ Masukkan <b>11 digit terakhir</b> nomor peserta setelah kode <b>88881</b>.'
+        };
+      }
+      if (n.includes('ketenagakerjaan') || n.includes('bpu') || n.includes('pu') || n.includes('badan usaha')) {
+        return {
+          kode: '888889',
+          info: 'ℹ️ Masukkan <b>10 digit terakhir</b> nomor peserta setelah kode <b>888889</b>.'
+        };
+      }
+      return {
+        kode: '88888',
+        info: 'ℹ️ Masukkan <b>11 digit terakhir</b> nomor peserta setelah kode <b>88888</b>.'
+      };
     }
 
-    // 1. Jalankan saat halaman pertama kali dibuka (mengisi 88888 secara otomatis)
-    let kodeAktif = dapatkanKodeAwalan(teksLayanan.textContent);
-    if (!kotakInput.value || kotakInput.value === '88888' || kotakInput.value === '88881' || kotakInput.value === '888889') {
-      kotakInput.value = kodeAktif;
+    // 1. Saat halaman pertama kali dibuka: biarkan kolom input tetap kosong jika belum ada layanan dipilih
+    const statusAwal = dapatkanInfoLayanan(teksLayanan.textContent);
+    if (!statusAwal.kode) {
+      kotakInput.value = '';
+      boxInfoDinamis.style.display = 'none';
     }
 
-    // 2. Pantau perubahan pada teks pilihan dropdown (ketika memilih Iuran, Denda, atau Ketenagakerjaan)
+    // 2. Pantau perubahan pilihan dropdown secara otomatis
     let layananSebelumnya = teksLayanan.textContent.trim();
     setInterval(function() {
       const layananSekarang = teksLayanan.textContent.trim();
       if (layananSekarang !== layananSebelumnya) {
         layananSebelumnya = layananSekarang;
-        const kodeBaru = dapatkanKodeAwalan(layananSekarang);
-        
-        // Ambil sisa nomor peserta jika pengguna sudah sempat mengetik setelah kode lama
-        let sisaNomor = kotakInput.value.replace(/^(888889|88888|88881)/, '');
-        kotakInput.value = kodeBaru + sisaNomor;
-        kodeAktif = kodeBaru;
+        const dataLayanan = dapatkanInfoLayanan(layananSekarang);
 
-        // Pindahkan kursor ke ujung kanan angka agar pengguna tinggal lanjut ketik nomor kartu
-        kotakInput.focus();
-        kotakInput.setSelectionRange(kotakInput.value.length, kotakInput.value.length);
-        kotakInput.dispatchEvent(new Event('input', { bubbles: true }));
+        if (dataLayanan.kode) {
+          // Pertahankan sisa digit nomor peserta jika pengguna sudah sempat mengetik sebelumnya
+          let sisaNomor = kotakInput.value.replace(/^(888889|88888|88881)/, '');
+          kotakInput.value = dataLayanan.kode + sisaNomor;
+
+          // Tampilkan kotak info 11 digit atau 10 digit di bawah input
+          boxInfoDinamis.innerHTML = dataLayanan.info;
+          boxInfoDinamis.style.display = 'block';
+
+          // Pindahkan kursor ke ujung kanan angka
+          kotakInput.focus();
+          kotakInput.setSelectionRange(kotakInput.value.length, kotakInput.value.length);
+          kotakInput.dispatchEvent(new Event('input', { bubbles: true }));
+        } else {
+          kotakInput.value = '';
+          boxInfoDinamis.style.display = 'none';
+        }
       }
     }, 200);
 
-    // 3. Lindungi kode awalan agar tidak ikut terhapus saat tombol Hapus (Backspace) ditekan
+    // 3. Lindungi kode awalan agar tidak ikut terhapus saat tombol Hapus ditekan
     kotakInput.addEventListener('input', function() {
-      const kodeWajib = dapatkanKodeAwalan(teksLayanan.textContent);
-      if (!kotakInput.value.startsWith(kodeWajib)) {
-        // Jika pengguna menghapus sebagian awalan, kembalikan awalan utuh di depan
+      const dataLayanan = dapatkanInfoLayanan(teksLayanan.textContent);
+      if (dataLayanan.kode && !kotakInput.value.startsWith(dataLayanan.kode)) {
         const angkaMurni = kotakInput.value.replace(/[^0-9]/g, '');
         const tanpaPotonganAwal = angkaMurni.replace(/^(88888|88881|888889|8888|888|88|8)/, '');
-        kotakInput.value = kodeWajib + tanpaPotonganAwal;
+        kotakInput.value = dataLayanan.kode + tanpaPotonganAwal;
       }
     });
   })();
