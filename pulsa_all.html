@@ -2396,45 +2396,6 @@ if (targetProduk && areaFilterAnda) {
 </script>
 
 </div>
-<script>
-  function mulaiInputSuara() {
-    const kotakInput = document.getElementById('scanner-input') || document.querySelector('input[placeholder*="Nomor"]');
-    
-    // Pastikan kursor langsung siap di kolom input
-    if (kotakInput) {
-      kotakInput.focus();
-      kotakInput.click();
-    }
-
-    // Pantau input suara selama 12 detik untuk merapatkan spasi angka otomatis
-    let pantauSuara = setInterval(function() {
-      if (kotakInput && kotakInput.value && /[^0-9]/.test(kotakInput.value)) {
-        let bersih = kotakInput.value.replace(/[^0-9]/g, '');
-        if (bersih.startsWith('62')) bersih = '0' + bersih.slice(2);
-        kotakInput.value = bersih;
-        if (typeof satukkanNomorML === 'function') {
-          satukkanNomorML();
-        } else if (typeof satukanNomorML === 'function') {
-          satukanNomorML();
-        }
-        kotakInput.dispatchEvent(new Event('input', { bubbles: true }));
-      }
-    }, 300);
-
-    setTimeout(function() {
-      clearInterval(pantauSuara);
-    }, 12000);
-
-    // Panggil Intent Layanan Ucapan Google bawaan Android (seperti gambar kedua)
-    try {
-      window.location.href = "intent:#Intent;action=android.speech.action.RECOGNIZE_SPEECH;S.android.speech.extra.LANGUAGE_MODEL=free_form;S.android.speech.extra.LANGUAGE=id-ID;S.android.speech.extra.PROMPT=Ucapkan%20nomor%20tujuan;end";
-    } catch (e) {}
-
-    if (typeof showToast === 'function') {
-      showToast('Ucapkan nomor atau tekan ikon Mikrofon (🎙️) di keyboard', 3000);
-    }
-  }
-</script>
 
 </body>
 </html>
