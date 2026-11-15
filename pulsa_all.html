@@ -992,12 +992,12 @@ background-color: #ffffff !important; border: 1px solid #e0e0e0 !important; bord
 
     <!-- KAPSUL BARIS TOMBOL (PAS MENYATU DI DALAM KOTAK PUTIH) -->
     <div style="width: 100% !important; background-color: #f1f3f5 !important; border-radius: 16px !important; padding: 10px !important; box-sizing: border-box !important; display: flex !important; align-items: center !important; justify-content: space-around !important;">
-        <!-- 1. Tombol Bicara -->
-<div onclick="mulaiInputSuara()" style="display: flex !important; align-items: center !important; justify-content: center !important; cursor: pointer !important; flex: 1 !important; gap: 6px !important;">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="width: 16px !important; height: 16px !important; display: block !important; color: #000000 !important;">
+      <!-- 1. Tombol Bicara -->
+<div role="button" tabindex="0" onclick="mulaiInputSuara()" style="display: flex !important; align-items: center !important; justify-content: center !important; cursor: pointer !important; flex: 1 !important; gap: 6px !important; user-select: none !important; -webkit-user-select: none !important; -webkit-tap-highlight-color: transparent !important; padding: 6px 0 !important;">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="width: 16px !important; height: 16px !important; display: block !important; color: #000000 !important; pointer-events: none !important;">
         <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.91-3c-.49 0-.9.36-.98.85C16.52 14.2 14.47 16 12 16s-4.52-1.8-4.93-4.15c-.08-.49-.49-.85-.98-.85-.61 0-1.09.54-1 1.14.49 3 2.89 5.35 5.91 5.78V20c0 .55.45 1 1 1s1-.45 1-1v-2.08c3.02-.43 5.42-2.78 5.91-5.78.1-.6-.39-1.14-1-1.14z"/>
     </svg>
-    <span id="teksTombolBicara" style="font-size: 13px !important; color: #000000 !important; font-weight: bold !important; font-family: sans-serif !important;">Bicara</span>
+    <span id="teksTombolBicara" style="font-size: 13px !important; color: #000000 !important; font-weight: bold !important; font-family: sans-serif !important; pointer-events: none !important;">Bicara</span>
 </div>
 
                
@@ -2399,34 +2399,39 @@ if (targetProduk && areaFilterAnda) {
 <script>
   function mulaiInputSuara() {
     const kotakInput = document.getElementById('scanner-input') || document.querySelector('input[placeholder*="Nomor"]');
+    
+    // Pastikan kursor langsung siap di kolom input
     if (kotakInput) {
       kotakInput.focus();
       kotakInput.click();
-      
-      // Pantau sementara selama 10 detik untuk merapatkan spasi otomatis dari hasil mikrofon keyboard
-      let pantauSuara = setInterval(function() {
-        if (kotakInput.value && /[^0-9]/.test(kotakInput.value)) {
-          let bersih = kotakInput.value.replace(/[^0-9]/g, '');
-          if (bersih.startsWith('62')) bersih = '0' + bersih.slice(2);
-          kotakInput.value = bersih;
-          if (typeof satukkanNomorML === 'function') {
-            satukkanNomorML();
-          } else if (typeof satukanNomorML === 'function') {
-            satukanNomorML();
-          }
-          kotakInput.dispatchEvent(new Event('input', { bubbles: true }));
+    }
+
+    // Pantau input suara selama 12 detik untuk merapatkan spasi angka otomatis
+    let pantauSuara = setInterval(function() {
+      if (kotakInput && kotakInput.value && /[^0-9]/.test(kotakInput.value)) {
+        let bersih = kotakInput.value.replace(/[^0-9]/g, '');
+        if (bersih.startsWith('62')) bersih = '0' + bersih.slice(2);
+        kotakInput.value = bersih;
+        if (typeof satukkanNomorML === 'function') {
+          satukkanNomorML();
+        } else if (typeof satukanNomorML === 'function') {
+          satukanNomorML();
         }
-      }, 300);
-
-      setTimeout(function() {
-        clearInterval(pantauSuara);
-      }, 10000);
-
-      if (typeof showToast === 'function') {
-        showToast('Tekan ikon Mikrofon (🎙️) di atas keyboard untuk bicara', 3000);
-      } else {
-        alert('Silakan tekan ikon Mikrofon (🎙️) pada bagian atas keyboard HP Anda untuk mengucapkan nomor tujuan.');
+        kotakInput.dispatchEvent(new Event('input', { bubbles: true }));
       }
+    }, 300);
+
+    setTimeout(function() {
+      clearInterval(pantauSuara);
+    }, 12000);
+
+    // Panggil Intent Layanan Ucapan Google bawaan Android (seperti gambar kedua)
+    try {
+      window.location.href = "intent:#Intent;action=android.speech.action.RECOGNIZE_SPEECH;S.android.speech.extra.LANGUAGE_MODEL=free_form;S.android.speech.extra.LANGUAGE=id-ID;S.android.speech.extra.PROMPT=Ucapkan%20nomor%20tujuan;end";
+    } catch (e) {}
+
+    if (typeof showToast === 'function') {
+      showToast('Ucapkan nomor atau tekan ikon Mikrofon (🎙️) di keyboard', 3000);
     }
   }
 </script>
