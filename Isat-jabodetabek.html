@@ -2309,7 +2309,48 @@ var cekHasilScan = setInterval(function() {
 setTimeout(function() {
     clearInterval(cekHasilScan);
 }, 5000);
+
+let nomorLama = "";
+
+function satukkanNomorML() {
+    const inputElement = document.getElementById('scanner-input');
+    if (!inputElement) return;
+
+    const nomorSekarang = inputElement.value ? inputElement.value.trim() : '';
+    const prefixSekarang = nomorSekarang.substring(0, 4); 
+
+    if (prefixSekarang !== nomorLama) {
+        nomorLama = prefixSekarang; 
+        
+        if (typeof loadTVData === 'function') {
+            loadTVData();
+        }
+    }
+}
+
+// --- KODE TAMBAHAN UNTUK TEMPEL FILTER ---
+const targetProduk = document.getElementById('productContent');
+const areaFilterAnda = document.querySelector('.floating-card-filter');
+
+if (areaFilterAnda) {
+    areaFilterAnda.style.setProperty('display', 'none', 'important');
+}
+
+if (targetProduk && areaFilterAnda) {
+    const observer = new MutationObserver(() => {
+        if (targetProduk.style.display !== 'none' && targetProduk.innerHTML.trim() !== "") {
+            areaFilterAnda.style.setProperty('display', 'block', 'important');
+        } else {
+            areaFilterAnda.style.setProperty('display', 'none', 'important');
+        }
+    });
+    observer.observe(targetProduk, { attributes: true, attributeFilter: ['style', 'class'], childList: true });
+}
+// -----------------------------------------
+
+
 </script>
+
 </div>
 </body>
 </html>
