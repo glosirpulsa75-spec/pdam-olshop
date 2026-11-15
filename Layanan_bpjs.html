@@ -2475,6 +2475,59 @@ window.prosesSimpanNasabahKustom = function() {
     }
 };
 </script>
+<script>
+  // Pengatur kode awalan otomatis sesuai pilihan layanan BPJS
+  (function() {
+    const kotakInput = document.getElementById('scanner-input') || document.querySelector('input[placeholder*="Peserta"], input[placeholder*="Nomor"]');
+    const teksLayanan = document.getElementById('teksLayananTerpilih');
+
+    if (!kotakInput || !teksLayanan) return;
+
+    function dapatkanKodeAwalan(namaLayanan) {
+      const n = (namaLayanan || '').toLowerCase();
+      if (n.includes('denda')) return '88881';
+      if (n.includes('ketenagakerjaan') || n.includes('bpu') || n.includes('pu') || n.includes('badan usaha')) return '888889';
+      return '88888'; // Default untuk BPJS Kesehatan
+    }
+
+    // 1. Jalankan saat halaman pertama kali dibuka (mengisi 88888 secara otomatis)
+    let kodeAktif = dapatkanKodeAwalan(teksLayanan.textContent);
+    if (!kotakInput.value || kotakInput.value === '88888' || kotakInput.value === '88881' || kotakInput.value === '888889') {
+      kotakInput.value = kodeAktif;
+    }
+
+    // 2. Pantau perubahan pada teks pilihan dropdown (ketika memilih Iuran, Denda, atau Ketenagakerjaan)
+    let layananSebelumnya = teksLayanan.textContent.trim();
+    setInterval(function() {
+      const layananSekarang = teksLayanan.textContent.trim();
+      if (layananSekarang !== layananSebelumnya) {
+        layananSebelumnya = layananSekarang;
+        const kodeBaru = dapatkanKodeAwalan(layananSekarang);
+        
+        // Ambil sisa nomor peserta jika pengguna sudah sempat mengetik setelah kode lama
+        let sisaNomor = kotakInput.value.replace(/^(888889|88888|88881)/, '');
+        kotakInput.value = kodeBaru + sisaNomor;
+        kodeAktif = kodeBaru;
+
+        // Pindahkan kursor ke ujung kanan angka agar pengguna tinggal lanjut ketik nomor kartu
+        kotakInput.focus();
+        kotakInput.setSelectionRange(kotakInput.value.length, kotakInput.value.length);
+        kotakInput.dispatchEvent(new Event('input', { bubbles: true }));
+      }
+    }, 200);
+
+    // 3. Lindungi kode awalan agar tidak ikut terhapus saat tombol Hapus (Backspace) ditekan
+    kotakInput.addEventListener('input', function() {
+      const kodeWajib = dapatkanKodeAwalan(teksLayanan.textContent);
+      if (!kotakInput.value.startsWith(kodeWajib)) {
+        // Jika pengguna menghapus sebagian awalan, kembalikan awalan utuh di depan
+        const angkaMurni = kotakInput.value.replace(/[^0-9]/g, '');
+        const tanpaPotonganAwal = angkaMurni.replace(/^(88888|88881|888889|8888|888|88|8)/, '');
+        kotakInput.value = kodeWajib + tanpaPotonganAwal;
+      }
+    });
+  })();
+</script>
 
 </body>
 </html>
