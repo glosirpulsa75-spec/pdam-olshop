@@ -2398,72 +2398,38 @@ if (targetProduk && areaFilterAnda) {
 </div>
 <script>
   function mulaiInputSuara() {
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-
-    if (!SpeechRecognition) {
-      alert("Perangkat atau WebView ini belum mendukung fitur input suara.");
-      return;
-    }
-
-    const recognition = new SpeechRecognition();
-    recognition.lang = 'id-ID';
-    recognition.interimResults = false;
-    recognition.maxAlternatives = 1;
-
-    const teksTombol = document.getElementById('teksTombolBicara');
     const kotakInput = document.getElementById('scanner-input') || document.querySelector('input[placeholder*="Nomor"]');
-
-    recognition.onstart = function() {
-      if (teksTombol) teksTombol.textContent = "Dengar...";
-    };
-
-    recognition.onresult = function(event) {
-      let hasilUcapan = event.results[0][0].transcript;
-
-      const kamusAngka = {
-        'kosong': '0', 'nol': '0', 'satu': '1', 'dua': '2', 'tiga': '3',
-        'empat': '4', 'lima': '5', 'enam': '6', 'tujuh': '7', 'delapan': '8', 'sembilan': '9'
-      };
-      hasilUcapan = hasilUcapan.toLowerCase().replace(/\b(kosong|nol|satu|dua|tiga|empat|lima|enam|tujuh|delapan|sembilan)\b/g, function(kata) {
-        return kamusAngka[kata];
-      });
-
-      let nomorBersih = hasilUcapan.replace(/[^0-9]/g, '');
-      if (nomorBersih.startsWith('62')) {
-        nomorBersih = '0' + nomorBersih.slice(2);
-      }
-
-      if (kotakInput && nomorBersih !== '') {
-        kotakInput.value = nomorBersih;
-
-        if (typeof satukkanNomorML === 'function') {
-          satukkanNomorML();
-        } else if (typeof satukanNomorML === 'function') {
-          satukanNomorML();
+    if (kotakInput) {
+      kotakInput.focus();
+      kotakInput.click();
+      
+      // Pantau sementara selama 10 detik untuk merapatkan spasi otomatis dari hasil mikrofon keyboard
+      let pantauSuara = setInterval(function() {
+        if (kotakInput.value && /[^0-9]/.test(kotakInput.value)) {
+          let bersih = kotakInput.value.replace(/[^0-9]/g, '');
+          if (bersih.startsWith('62')) bersih = '0' + bersih.slice(2);
+          kotakInput.value = bersih;
+          if (typeof satukkanNomorML === 'function') {
+            satukkanNomorML();
+          } else if (typeof satukanNomorML === 'function') {
+            satukanNomorML();
+          }
+          kotakInput.dispatchEvent(new Event('input', { bubbles: true }));
         }
-        kotakInput.dispatchEvent(new Event('input', { bubbles: true }));
-        kotakInput.dispatchEvent(new Event('change', { bubbles: true }));
-        kotakInput.dispatchEvent(new Event('keyup', { bubbles: true }));
+      }, 300);
+
+      setTimeout(function() {
+        clearInterval(pantauSuara);
+      }, 10000);
+
+      if (typeof showToast === 'function') {
+        showToast('Tekan ikon Mikrofon (🎙️) di atas keyboard untuk bicara', 3000);
+      } else {
+        alert('Silakan tekan ikon Mikrofon (🎙️) pada bagian atas keyboard HP Anda untuk mengucapkan nomor tujuan.');
       }
-    };
-
-    recognition.onerror = function(event) {
-      if (teksTombol) teksTombol.textContent = "Bicara";
-      if (event.error === 'not-allowed') {
-        alert("Izin mikrofon belum aktif. Silakan izinkan mikrofon di pengaturan aplikasi HP Anda.");
-      }
-    };
-
-    recognition.onend = function() {
-      if (teksTombol) teksTombol.textContent = "Bicara";
-    };
-
-    recognition.start();
+    }
   }
 </script>
 
 </body>
 </html>
-
-
-
