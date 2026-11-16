@@ -2394,6 +2394,26 @@ if (targetProduk && areaFilterAnda) {
 </script>
 
 </div>
+<script>
+  // Fungsi Resmi BukaOlshop untuk Menangkap Hasil Scanner ke Kolom Input PLN
+  window.onScanResult = function(result) {
+    if (!result) return;
+
+    // Bersihkan hasil scan dari spasi, strip, atau karakter non-angka (contoh: 14 3601 8991 5 -> 14360189915)
+    var nomorBersih = result.toString().trim().replace(/[^0-9]/g, '');
+
+    if (nomorBersih !== '') {
+      var kolomPLN = document.getElementById('idPelangganBRILink');
+      if (kolomPLN) {
+        kolomPLN.value = nomorBersih;
+        kolomPLN.focus();
+        kolomPLN.dispatchEvent(new Event('input', { bubbles: true }));
+        kolomPLN.dispatchEvent(new Event('change', { bubbles: true }));
+        kolomPLN.dispatchEvent(new Event('keyup', { bubbles: true }));
+      }
+    }
+  };
+</script>
 
 </body>
 </html>
