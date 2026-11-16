@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -872,10 +871,10 @@ div.subcategory-tab-btn.active,
 
 
         <!-- Ikon Air Jernih -->
-        <img src="https://images.bukaolshop.com/hosting/183991/bfbe6765e8b1727020.png" alt="Icon" style="width: 40px; height: 40px; object-fit: contain; margin-right: 0px;">
+        <img src="https://images.bukaolshop.com/hosting/183991/731ca4938d3e674839.png" alt="Icon" style="width: 40px; height: 40px; object-fit: contain; margin-right: 0px;">
         <!-- Tulisan Teks Kategori -->
  <!-- Masukkan kode warna di dalam style seperti ini -->
-<div class="header-btn-KUOTA" style="background: linear-gradient(to right, #00a2ff, #006aff) !important; color: white !important; padding: 6px 18px !important; border-radius: 50px !important; box-shadow: 0 15px 15px rgba(0, 106, 255, 0.3) !important; display: inline-block !important; font-weight: bold !important; font-size: 13px !important; margin: 0 auto !important; transform: translateX(-15px) !important;">Tagihan -Token Gas</div>
+<div class="header-btn-KUOTA" style="background: linear-gradient(to right, #00a2ff, #006aff) !important; color: white !important; padding: 6px 18px !important; border-radius: 50px !important; box-shadow: 0 15px 15px rgba(0, 106, 255, 0.3) !important; display: inline-block !important; font-weight: bold !important; font-size: 13px !important; margin: 0 auto !important; transform: translateX(-15px) !important;">Gas Negara</div>
 
 
    
@@ -909,8 +908,7 @@ div.subcategory-tab-btn.active,
     
            <!-- Info Pembatasan Jam (Disembunyikan di awal) -->
         <div id="infoWaktuPLN" style="display: none; background: #e3f2fd; color: #0d47a1; padding: 12px; border-radius: 8px; font-size: 13px; margin-bottom: 15px; border-left: 4px solid #1976d2; line-height: 1.4;">
-            ℹ️ Pembelian Layanan PLN tidak bisa dilakukan di pukul 23:45 - 00:15 WIB
-        </div>
+            ℹ️ Pembelian & Pembayaran Layanan Gas tidak bisa dilakukan di pukul 23:45 - 00:15 WIB        </div>
 
     <!-- Pemicu Jenis Layanan -->
     <div style="margin-bottom: 15px;">
@@ -920,49 +918,25 @@ div.subcategory-tab-btn.active,
             <span style="color: #666; font-size: 12px;">▼</span>
         </div>
     </div>
-<!-- Input ID Pelanggan Baru + Tombol Scan Kanan -->
-<div style="margin-bottom: 20px;">
-    <label style="font-size: 14px; color: #666; display: block; margin-bottom: 5px; font-weight: bold;">No. Meter/ID Pelanggan</label>
-    <div style="position: relative; width: 100%; display: flex; align-items: center;">
-        <input type="number" id="idPelangganBRILink" class="{{hasil_scan}}" placeholder="Masukkan ID Pelanggan" style="width: 100%; padding: 12px 46px 12px 12px; border: 1px solid #1976d2; border-radius: 8px; font-size: 15px; box-sizing: border-box; outline: none;">
-        
-        <!-- Tombol Scan Barcode di Ujung Kanan -->
-        <a href="https://bukaolshop.site" title="Scan Barcode Meteran" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; background: #e3f2fd; border-radius: 6px; text-decoration: none;">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1976d2" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M3 7V5a2 2 0 0 1 2-2h2"/>
-                <path d="M17 3h2a2 2 0 0 1 2 2v2"/>
-                <path d="M21 17v2a2 2 0 0 1-2 2h-2"/>
-                <path d="M7 21H5a2 2 0 0 1-2-2v-2"/>
-                <line x1="7" y1="12" x2="17" y2="12"/>
-            </svg>
-        </a>
-    </div>
-</div>
 
-  
+    <!-- Input ID Pelanggan Baru -->
+    <div style="margin-bottom: 20px;">
+        <label style="font-size: 14px; color: #666; display: block; margin-bottom: 5px; font-weight: bold;">No. Meter/ID Pelanggan</label>
+        <input type="number" id="idPelangganBRILink" placeholder="Masukkan ID Pelanggan" style="width: 100%; padding: 12px; border: 1px solid #1976d2; border-radius: 8px; font-size: 15px; box-sizing: border-box;">
+    </div>
+
     <!-- HALAMAN PILIHAN NOMINAL TOKEN BRILINK (Hanya muncul jika memilih tipe Token) -->
     <div id="halPilihNominal" style="display: none; margin-top: 15px; margin-bottom: 20px; border-top: 1px solid #eee; padding-top: 15px;">
         <p style="font-weight: bold; color: #333; margin-bottom: 15px; font-size: 15px;">Pilih Nominal Token Gas</p>
         
         <!-- Grid Tombol Nominal -->
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
-   <div class="btn-nominal-token" data-value="5000" style="background: white; padding: 16px; text-align: center; border-radius: 8px; border: 1px solid #ddd; font-weight: bold; cursor: pointer; color: #333; transition: 0.2s;">Rp 5000</div>
-
-
- <div class="btn-nominal-token" data-value="10.000" style="background: white; padding: 16px; text-align: center; border-radius: 8px; border: 1px solid #ddd; font-weight: bold; cursor: pointer; color: #333; transition: 0.2s;">Rp 10.000</div>
-
-
- <div class="btn-nominal-token" data-value="15.000" style="background: white; padding: 16px; text-align: center; border-radius: 8px; border: 1px solid #ddd; font-weight: bold; cursor: pointer; color: #333; transition: 0.2s;">Rp 15.000</div>
-
-
+   
  <div class="btn-nominal-token" data-value="20.000" style="background: white; padding: 16px; text-align: center; border-radius: 8px; border: 1px solid #ddd; font-weight: bold; cursor: pointer; color: #333; transition: 0.2s;">Rp 20.000</div>
 
-          <div class="btn-nominal-token" data-value="25.000" style="background: white; padding: 16px; text-align: center; border-radius: 8px; border: 1px solid #ddd; font-weight: bold; cursor: pointer; color: #333; transition: 0.2s;">Rp 25.000</div>
-            <div class="btn-nominal-token" data-value="50.000" style="background: white; padding: 16px; text-align: center; border-radius: 8px; border: 1px solid #ddd; font-weight: bold; cursor: pointer; color: #333; transition: 0.2s;">Rp 50.000</div>
+                   <div class="btn-nominal-token" data-value="50.000" style="background: white; padding: 16px; text-align: center; border-radius: 8px; border: 1px solid #ddd; font-weight: bold; cursor: pointer; color: #333; transition: 0.2s;">Rp 50.000</div>
             <div class="btn-nominal-token" data-value="100.000" style="background: white; padding: 16px; text-align: center; border-radius: 8px; border: 1px solid #ddd; font-weight: bold; cursor: pointer; color: #333; transition: 0.2s;">Rp 100.000</div>
             <div class="btn-nominal-token" data-value="200.000" style="background: white; padding: 16px; text-align: center; border-radius: 8px; border: 1px solid #ddd; font-weight: bold; cursor: pointer; color: #333; transition: 0.2s;">Rp 200.000</div>
-            <div class="btn-nominal-token" data-value="500.000" style="background: white; padding: 16px; text-align: center; border-radius: 8px; border: 1px solid #ddd; font-weight: bold; cursor: pointer; color: #333; transition: 0.2s;">Rp 500.000</div>
-            <div class="btn-nominal-token" data-value="1.000.000" style="background: white; padding: 16px; text-align: center; border-radius: 8px; border: 1px solid #ddd; font-weight: bold; cursor: pointer; color: #333; transition: 0.2s;">Rp 1.000.000</div>
         </div>
     </div>
 
@@ -993,20 +967,28 @@ div.subcategory-tab-btn.active,
 
     <!-- Konten Kosong & Animasi Bergerak -->
     <div style="text-align: center; padding: 20px 10px; background: #ffffff; border-radius: 12px;">
-        
-        <!-- Jalur & Animasi Mobil Bergerak Kustom -->
-        <div style="position: relative; width: 100%; height: 55px; background: #f8fafc; border-radius: 8px; margin: 0 auto 15px auto; overflow: hidden; border-bottom: 2px dashed #cbd5e1;">
+              <!-- Jalur & Animasi Layanan Gas Kustom -->
+        <div style="position: relative; width: 100%; height: 55px; background: #f0f9ff; border-radius: 8px; margin: 0 auto 15px auto; overflow: hidden; border-bottom: 2px dashed #7dd3fc;">
             
-            <!-- Elemen Tiang Listrik / Aksen Latar Belakang -->
-            <span style="position: absolute; right: 20%; bottom: 8px; font-size: 20px; opacity: 0.4;">⚡</span>
-            <span style="position: absolute; left: 15%; bottom: 8px; font-size: 16px; opacity: 0.3;">🏠</span>
-            
-            <!-- Mobil PLN Animasi Bergerak -->
-            <div style="position: absolute; bottom: 2px; font-size: 32px; animation: mobilMajuMundur 6s linear infinite; display: flex; align-items: center; gap: 2px;">
-                🚙<span style="font-size: 11px; background: #ffeb3b; color: #333; padding: 1px 4px; border-radius: 3px; font-weight: bold; border: 1px solid #333; box-shadow: 1px 1px 3px rgba(0,0,0,0.1); transform: translateY(-5px);">PLN</span>
+            <!-- Elemen Aksen Latar Belakang Gas -->
+            <span style="position: absolute; right: 20%; bottom: 8px; font-size: 18px; opacity: 0.45;">🔥</span>
+            <span style="position: absolute; left: 15%; bottom: 8px; font-size: 16px; opacity: 0.35;">🏠</span>
+
+            <!-- Ikon & Label GAS Bergerak -->
+            <div style="position: absolute; bottom: 4px; font-size: 28px; animation: mobilMajuMundur 6s linear infinite; display: flex; align-items: center; gap: 4px;">
+                <svg width="26" height="26" viewBox="0 0 64 64" fill="none" xmlns="http://w3.org">
+                    <path d="M24 14H40V19H24V14Z" fill="#0284C7"/>
+                    <rect x="29" y="11" width="6" height="4" rx="1" fill="#0369A1"/>
+                    <rect x="20" y="19" width="24" height="30" rx="8" fill="#0EA5E9"/>
+                    <rect x="20" y="29" width="24" height="4" fill="#0284C7"/>
+                    <path d="M23 49H41L43 53H21L23 49Z" fill="#0369A1"/>
+                    <path d="M32 23C32 23 36.5 27.2 36.5 31C36.5 33.5 34.5 35.5 32 35.5C29.5 35.5 27.5 33.5 27.5 31C27.5 29.2 28.8 27.3 29.8 26.2C29.8 27.5 30.8 28.3 31.5 28.3C30.8 26.5 32 23 32 23Z" fill="#FACC15"/>
+                </svg>
+                <span style="font-size: 11px; background: #0284C7; color: #ffffff; padding: 2px 6px; border-radius: 4px; font-weight: bold; box-shadow: 1px 1px 3px rgba(0,0,0,0.12);">GAS</span>
             </div>
         </div>
-
+  
+        
         <!-- Teks Keterangan -->
                 <!-- Wadah List Otomatis: Tempat Memunculkan Daftar Nasabah Tersimpan -->
         <div id="tempatDaftarNasabahKustom" style="margin-top: 10px; text-align: left; max-height: 200px; overflow-y: auto; padding: 0 5px;">
@@ -1051,21 +1033,21 @@ div.subcategory-tab-btn.active,
 <div style="max-height: 300px; overflow-y: auto;">
 
   <!-- Opsi 1: Token Listrik -->
-  <div class="opsi-layanan" onclick="pilihLayananKustom('Token Gas', 'token')" style="padding: 16px 5px; border-bottom: 1px solid #eee; font-size: 15px; color: #333; cursor: pointer; font-weight: 500; display: flex; align-items: center;">
-    <img src="https://images.bukaolshop.com/hosting/183991/f130e1d0319f649241.png" style="width: 20px; height: 20px; margin-right: 12px;" alt="Token">
-    Token Gas
+  <div class="opsi-layanan" onclick="pilihLayananKustom('Token Listrik', 'token')" style="padding: 16px 5px; border-bottom: 1px solid #eee; font-size: 15px; color: #333; cursor: pointer; font-weight: 500; display: flex; align-items: center;">
+    <img src="https://images.bukaolshop.com/hosting/183991/f130e1d0319f649241.png" style="width: 30px; height: 30px; margin-right: 12px;" alt="Token">
+    Token Listrik
   </div>
 
   <!-- Opsi 2: Tagihan Listrik -->
-  <div class="opsi-layanan" onclick="pilihLayananKustom('Tagihan Pertagas', 'pascabayar')" style="padding: 16px 5px; border-bottom: 1px solid #eee; font-size: 15px; color: #333; cursor: pointer; font-weight: 500; display: flex; align-items: center;">
-    <img src="https://images.bukaolshop.com/hosting/183991/0ccab71e7bd6771363.png" style="width: 20px; height: 20px; margin-right: 12px;" alt="Tagihan">
-    Tagihan Pertagas
+  <div class="opsi-layanan" onclick="pilihLayananKustom('Tagihan Listrik', 'pascabayar')" style="padding: 16px 5px; border-bottom: 1px solid #eee; font-size: 15px; color: #333; cursor: pointer; font-weight: 500; display: flex; align-items: center;">
+    <img src="https://images.bukaolshop.com/hosting/183991/0ccab71e7bd6771363.png" style="width: 30px; height: 30px; margin-right: 12px;" alt="Tagihan">
+    Tagihan Listrik
   </div>
 
   <!-- Opsi 3: Non Tagihan Listrik -->
-  <div class="opsi-layanan" onclick="pilihLayananKustom('Tagihan Gas Pgn', 'non-taglis')" style="padding: 16px 5px; border-bottom: 1px solid #eee; font-size: 15px; color: #333; cursor: pointer; font-weight: 500; display: flex; align-items: center;">
-    <img src="https://images.bukaolshop.com/hosting/183991/0ccab71e7bd6771363.png" style="width: 20px; height: 20px; margin-right: 12px;" alt="Non Taglis">
-    Tagihan Gas Pgn
+  <div class="opsi-layanan" onclick="pilihLayananKustom('Non Tagihan Listrik', 'non-taglis')" style="padding: 16px 5px; border-bottom: 1px solid #eee; font-size: 15px; color: #333; cursor: pointer; font-weight: 500; display: flex; align-items: center;">
+    <img src="https://images.bukaolshop.com/hosting/183991/0ccab71e7bd6771363.png" style="width: 30px; height: 30px; margin-right: 12px;" alt="Non Taglis">
+    Non Tagihan Listrik
   </div>
 
 </div>
@@ -1207,9 +1189,9 @@ semuaKartuProduk.forEach(function(prod) {
             return;
     }
 
-    // JIKA TRANSAKSI TAGIHAN GAS (PASCABAYAR & PGN)
+    // JIKA TRANSAKSI TAGIHAN LISTRIK (PASCABAYAR & PLN)
     if (nilaiLayananAktif === "pascabayar" || nilaiLayananAktif === "non-taglis") {
-        var kataKunciTagihan = (nilaiLayananAktif === "non-taglis") ? "tagihan gas pgn" : "tagihan pertagas";
+        var kataKunciTagihan = (nilaiLayananAktif === "non-taglis") ? "non tagihan listrik" : "tagihan listrik";
         var semuaKartuProduk = document.querySelectorAll('.product-card, .card-produk, [onclick*="selectProduct"], [data-product-id], .item-produk');
         var produkTagihanKetemu = null;
 
@@ -1381,7 +1363,7 @@ function changeLayout(mode) {
     <div class="popup">
         <div class="drag-line"></div>
         <div class="product-name-large" id="transProductName">-</div>
-        <div class="sub-meta" id="transMeta">Tagihan Gas</div>
+        <div class="sub-meta" id="transMeta">PLN Pascabayar</div>
         <div class="price-row">
             <span class="price-label">Nominal Harga</span>
            <span class="price-value" id="transNominal" style="font-weight: bold; color: #1a1a1a; display: inline-block;">Cek Bayar</span>
@@ -1445,10 +1427,10 @@ function changeLayout(mode) {
         const tabMenu = document.getElementById('subcategoryTabMenu');
         
         if (produkContainer) {
-            produkContainer.innerHTML = `<div class="loading-spinner"><div></div><p style="margin-top: 20px; color: #999;">Memuat data Tagihan Gas...</p></div>`;
+            produkContainer.innerHTML = `<div class="loading-spinner"><div></div><p style="margin-top: 20px; color: #999;">Memuat data PLN...</p></div>`;
         }
         if (tabMenu) {
-            tabMenu.innerHTML = `<div style="padding: 10px; text-align: center; color: #999;"><div class="loading-spinner" style="padding: 20px;"><div></div><p style="margin-top: 10px;">Loading kategori Tagihan Gas...</p></div></div>`;
+            tabMenu.innerHTML = `<div style="padding: 10px; text-align: center; color: #999;"><div class="loading-spinner" style="padding: 20px;"><div></div><p style="margin-top: 10px;">Loading kategori PLN Pascabayar...</p></div></div>`;
         }
         
         if (!token || token.trim() === '') {
@@ -1477,13 +1459,13 @@ function changeLayout(mode) {
     }
 
     function findTVCategory() {
-        const searchTerms = ["tagihan gas",];
+        const searchTerms = ["pln pascabayar",];
         
         for (const category of allCategories) {
             const catNameLower = (category.nama_kategori || '').toLowerCase();
             for (const term of searchTerms) {
                 if (catNameLower.includes(term)) {
-                    category.nama_kategori = "Tagihan Gas";
+                    category.nama_kategori = "PLN Pascabayar";
                     return category;
                 }
             }
@@ -1492,13 +1474,13 @@ function changeLayout(mode) {
         for (const category of allCategories) {
             const catNameLower = (category.nama_kategori || '').toLowerCase(); 
             {
-                category.nama_kategori = "Tagihan Gas";
+                category.nama_kategori = "PLN Pascabayar";
                 return category;
             }
         }
         
         if (allCategories.length > 0) {
-            allCategories[0].nama_kategori = "Tagihan Gas";
+            allCategories[0].nama_kategori = "PLN Pascabayar";
             return allCategories[0];
         }
         
@@ -1530,7 +1512,7 @@ function changeLayout(mode) {
             
             if (allSubCategories.length === 0) {
                 const catId = tvCategory.id_kategori || tvCategory.id;
-                const catName = tvCategory.nama_kategori || tvCategory.name || "Tagihan Gas";
+                const catName = tvCategory.nama_kategori || tvCategory.name || "PLN Pascabayar";
                 allSubCategories.push({
                     id: catId,
                     name: catName
@@ -1611,7 +1593,7 @@ function changeLayout(mode) {
 
         const container = document.getElementById('produkContainer');
         if (container) {
-            container.innerHTML = `<div class="loading-spinner"><div></div><p style="margin-top: 20px; color: #999;">Memuat Produk Tagihan Gas....</p></div>`;
+            container.innerHTML = `<div class="loading-spinner"><div></div><p style="margin-top: 20px; color: #999;">Memuat Produk PLN Pascabayar....</p></div>`;
         }
 
         try {
@@ -1827,7 +1809,7 @@ const productPrice = currentPriceRaw === 1500 ? "Cek Bayar" : "Rp " + currentPri
         if (kartuCocok) {
             selectedProductData = {
                 id: kartuCocok.getAttribute('data-product-id') || '',
-                name: kartuCocok.getAttribute('data-product-name') || 'Tagihan Gas',
+                name: kartuCocok.getAttribute('data-product-name') || 'PLN Pascabayar',
                 price: parseInt(kartuCocok.getAttribute('data-product-price') || 0),
                 url_produk: kartuCocok.getAttribute('data-product-url') || ''
             };
@@ -1853,7 +1835,7 @@ const productPrice = currentPriceRaw === 1500 ? "Cek Bayar" : "Rp " + currentPri
             if (produkApi) {
                 selectedProductData = {
                     id: produkApi.id_produk || produkApi.id || '',
-                    name: produkApi.nama_produk || produkApi.name || 'Tagihan Gas',
+                    name: produkApi.nama_produk || produkApi.name || 'PLN Pascabayar',
                     price: parseInt(produkApi.harga || produkApi.price || 0),
                     url_produk: produkApi.url_produk || produkApi.url || ''
                 };
