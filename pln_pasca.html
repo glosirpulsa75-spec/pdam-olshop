@@ -2484,5 +2484,49 @@ if (targetProduk && areaFilterAnda) {
 
 
 </script>
+<script>
+  // Penerima & pembersih otomatis hasil Scan Barcode untuk kotak input PLN
+  (function() {
+    var cekScanPLN = setInterval(function() {
+      var kolomPLN = document.getElementById('idPelangganBRILink');
+      if (!kolomPLN) return;
+
+      // 1. Ambil hasil scan dari parameter URL (catatan, scan, atau nomor)
+      const urlParams = new URLSearchParams(window.location.search);
+      let hasilScan = urlParams.get('catatan') || urlParams.get('scan') || urlParams.get('nomor') || '';
+
+      // 2. Cek apakah cangkang luar menyimpan hasil scan di window atau localStorage
+      if (!hasilScan && window.hasilScanTersimpan) {
+        hasilScan = window.hasilScanTersimpan;
+      }
+
+      // 3. Jika belum ada dari URL, cek apakah input sendiri sudah terisi teks ber-spasi dari sistem
+      if (!hasilScan && kolomPLN.value && kolomPLN.value !== '{{hasil_scan}}') {
+        hasilScan = kolomPLN.value;
+      }
+
+      if (hasilScan && hasilScan !== '{{hasil_scan}}' && hasilScan !== 'null') {
+        // Bersihkan semua spasi, tanda strip, atau huruf agar murni nomor meteran PLN
+        var nomorBersih = hasilScan.replace(/[^0-9]/g, '');
+
+        if (nomorBersih !== '' && kolomPLN.value !== nomorBersih) {
+          kolomPLN.value = nomorBersih;
+          kolomPLN.focus();
+
+          // Picu event agar sistem Cek ID / tombol Selanjutnya langsung merespons
+          kolomPLN.dispatchEvent(new Event('input', { bubbles: true }));
+          kolomPLN.dispatchEvent(new Event('change', { bubbles: true }));
+          clearInterval(cekScanPLN);
+        }
+      }
+    }, 300);
+
+    // Hentikan pemantauan setelah 8 detik agar ringan di HP
+    setTimeout(function() {
+      clearInterval(cekScanPLN);
+    }, 8000);
+  })();
+</script>
+
 </body>
 </html>
