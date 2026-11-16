@@ -2404,7 +2404,8 @@ if (targetProduk && areaFilterAnda) {
 
     if (nomorBersih !== '') {
       // Ambil semua kotak input yang berpotensi dipakai oleh Token maupun Pascabayar
-      var semuaKolom = document.querySelectorAll('#idPelangganBRILink, input[placeholder*="ID Pelanggan"], input[placeholder*="Meter"]');
+     var semuaKolom = document.querySelectorAll('#scanner-input, #idPelangganBRILink, input[placeholder*="Nomor Tujuan"], input[placeholder*="ID Pelanggan"], input[placeholder*="Meter"]');
+
       
       semuaKolom.forEach(function(kolom) {
         // Set nilai menggunakan setter asli agar terbaca oleh semua skrip
