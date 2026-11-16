@@ -2205,7 +2205,10 @@ function goToStep2() {
         else if (teksBank.includes('permata')) kodeBankOtomatis = 'permata';
         else if (teksBank.includes('danamon')) kodeBankOtomatis = 'danamon'; const urlTargetApi = "https://api-cekid.mitra-scbo.my.id/trueid/bank/?rekening=" + encodeURIComponent(nomorHP.trim()) + "&bank=" + encodeURIComponent(kodeBankOtomatis) + "&key=b2cd7f877d43aa82"; 
 
-const urlProxy = "https://corsproxy.io/?" + encodeURIComponent(urlTargetApi); fetch(urlProxy) .then(res => res.json()) .then(hasil => { const namaDitemukan = (hasil && (hasil.name || hasil.nama || (hasil.data && (hasil.data.name || hasil.data.nama)))); if (namaDitemukan) { if (elemenNama) { elemenNama.innerText = namaDitemukan; elemenNama.style.color = "#16a34a"; } } else { if (elemenNama) { const pesanApi = (hasil && (hasil.message || hasil.msg || hasil.error)) ? (hasil.message || hasil.msg || hasil.error) : "Nama Tampil di Akhir Transaksi"; elemenNama.innerText = pesanApi; elemenNama.style.color = "#64748b"; } } }) .catch(err => { if (elemenNama) { elemenNama.innerText = "Siap Transfer (Nama Tampil di Akhir Transaksi)"; elemenNama.style.color = "#0284c7"; } });
+const hostProxy = "https://api.allorigins.win";
+const jalurProxy = "/raw?url=";
+const urlProxy = hostProxy + jalurProxy + encodeURIComponent(urlTargetApi);
+ fetch(urlProxy) .then(res => res.json()) .then(hasil => { const namaDitemukan = (hasil && (hasil.name || hasil.nama || (hasil.data && (hasil.data.name || hasil.data.nama)))); if (namaDitemukan) { if (elemenNama) { elemenNama.innerText = namaDitemukan; elemenNama.style.color = "#16a34a"; } } else { if (elemenNama) { const pesanApi = (hasil && (hasil.message || hasil.msg || hasil.error)) ? (hasil.message || hasil.msg || hasil.error) : "Nama Tampil di Akhir Transaksi"; elemenNama.innerText = pesanApi; elemenNama.style.color = "#64748b"; } } }) .catch(err => { if (elemenNama) { elemenNama.innerText = "Siap Transfer (Nama Tampil di Akhir Transaksi)"; elemenNama.style.color = "#0284c7"; } });
 
     }
 
