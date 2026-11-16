@@ -1644,7 +1644,8 @@ function changeLayout(mode) {
         products.forEach(product => {
             const productName = product.nama_produk || 'Produk TV';
    const currentPriceRaw = parseInt(product.harga_produk) || 0;
-const productPrice = currentPriceRaw === 1500 ? "Cek Bayar" : "Rp " + currentPriceRaw.toLocaleString('id-ID');
+const productPrice = currentPriceRaw === 1500 ? "Cek Bayar" : (currentPriceRaw === 3000 ? "Cek Non Taglis" : "Rp " + currentPriceRaw.toLocaleString('id-ID'));
+
          
             const productOriginalPrice = product.harga_produk_asli || 0;
             const productImg = product.url_gambar_produk || 'https://cdn-icons-png.flaticon.com/128/6165/6165611.png';
@@ -2021,25 +2022,27 @@ if(document.getElementById('btnSelanjutnyaBRILink')) {
             return; // Rem Darurat: Mengunci sistem agar pop-up pascabayar tidak mengganggu
         }
          
-    // KILAT BYPASS AMAN (Tanpa merusak struktur penutup kode asli)
-setTimeout(function() {
-    // 1. Jalankan klik cek bayar secara instan
-    var semuaElemen = document.querySelectorAll('button, div, span, a');
-    semuaElemen.forEach(function(el) {
-        if (el.textContent.trim() === "Cek Bayar" || el.textContent.trim() === "Beli") {
-            el.click();
-        }
-        // 2. Langsung matikan warna abu-abu overlay di latar belakang
-        if (el.className && (el.className.includes('backdrop') || el.className.includes('overlay'))) {
-            el.style.display = 'none';
-            el.style.opacity = '0';
-        }
-    });
-}, 100);
+          // KILAT BYPASS AMAN (Tanpa merusak struktur penutup kode asli)
+        setTimeout(function() {
+            var targetTeksTombol = (typeof window.nilaiLayananAktif !== 'undefined' && window.nilaiLayananAktif === "non-taglis") ? "Cek Non Taglis" : "Cek Bayar";
+
+            // 1. Jalankan klik cek bayar secara instan sesuai layanan yang dipilih
+            var semuaElemen = document.querySelectorAll('button, div, span, a');
+            semuaElemen.forEach(function(el) {
+                if (el.textContent.trim() === targetTeksTombol || el.textContent.trim() === "Beli") {
+                    el.click();
+                }
+                // 2. Langsung matikan warna abu-abu overlay di latar belakang
+                if (el.className && (el.className.includes('backdrop') || el.className.includes('overlay'))) {
+                    el.style.display = 'none';
+                    el.style.opacity = '0';
+                }
+            });
+        }, 100);
 
     };
-};
 
+};
 
 
 // =============================================================
