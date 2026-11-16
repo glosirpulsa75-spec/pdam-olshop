@@ -925,19 +925,20 @@ div.subcategory-tab-btn.active,
     <div style="position: relative; width: 100%; display: flex; align-items: center;">
         <input type="number" id="idPelangganBRILink" class="{{hasil_scan}}" placeholder="Masukkan ID Pelanggan" style="width: 100%; padding: 12px 46px 12px 12px; border: 1px solid #1976d2; border-radius: 8px; font-size: 15px; box-sizing: border-box; outline: none;">
         
-        <!-- Tombol Scan Barcode di Ujung Kanan -->
-        <a href="https://bukaolshop.site" title="Scan Barcode Meteran" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; background: #e3f2fd; border-radius: 6px; text-decoration: none;">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1976d2" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M3 7V5a2 2 0 0 1 2-2h2"/>
-                <path d="M17 3h2a2 2 0 0 1 2 2v2"/>
-                <path d="M21 17v2a2 2 0 0 1-2 2h-2"/>
-                <path d="M7 21H5a2 2 0 0 1-2-2v-2"/>
-                <line x1="7" y1="12" x2="17" y2="12"/>
-            </svg>
+        <!-- Input ID Pelanggan Baru + Tombol Scan Kanan -->
+<div style="margin-bottom: 20px;">
+    <label style="font-size: 14px; color: #666; display: block; margin-bottom: 5px; font-weight: bold;">No. Meter/ID Pelanggan</label>
+    <div style="position: relative; width: 100%; display: flex; align-items: center;">
+        <input type="number" id="idPelangganBRILink" name="scanner-input" class="{{hasil_scan}} scanner-input" placeholder="Masukkan ID Pelanggan" style="width: 100%; padding: 12px 46px 12px 12px; border: 1px solid #1976d2; border-radius: 8px; font-size: 15px; box-sizing: border-box; outline: none;">
+        
+        <!-- Tombol Scan Barcode (Menggunakan id="btnScanID" seperti Pulsa All) -->
+        <a href="https://bukaolshop.site" id="btnScanID" title="Scan Barcode Meteran" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; background: #e3f2fd; border-radius: 6px; text-decoration: none;">
+            <img src="https://bukaolshop.com" alt="Scan" style="width: 18px; height: 18px; display: block;" />
         </a>
     </div>
 </div>
 
+        
    
     <!-- HALAMAN PILIHAN NOMINAL TOKEN BRILINK (Hanya muncul jika memilih tipe Token) -->
     <div id="halPilihNominal" style="display: none; margin-top: 15px; margin-bottom: 20px; border-top: 1px solid #eee; padding-top: 15px;">
