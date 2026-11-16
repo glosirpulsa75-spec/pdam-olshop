@@ -1,0 +1,2671 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <link rel="stylesheet" href="https://rawcdn.githack.com/flambonskode/Lisensi/main/fontstyle.css">
+    <title>Kembali</title>
+    <style>
+        :root {
+            --subMain: #1976D2;
+        }
+}
+/* FORCE HALAMAN NOMINAL (TAHAP 2) MENYATU DI KOTAK BERGARIS MANIS */
+#step-2 {
+    background-color: #ffffff !important;
+    border: 1.5px solid #cbd5e1 !important; /* Membuat garis luar abu-abu manis nyata */
+    border-radius: 28px !important;       /* Membuat sudut bulat manis menyamai halaman 1 */
+    box-shadow: none !important;
+    padding: 24px !important;             /* Jarak ruang dalam agar presisi */
+    margin: 20px auto 20px auto !important;/* Posisi otomatis simetris di tengah halaman */
+    width: 94% !important;
+    box-sizing: border-box !important;
+}
+
+/* MENGATUR STRUKTUR KONTEN DI DALAM HALAMAN 2 SAAT AKTIF */
+#step-2[style*="display: block"], 
+#step-2[style*="block"] {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+}
+
+/* Memaksa tabel info pelanggan tetap rata di dalam kotak dan tidak melebar keluar */
+#step-2 > div:first-child {
+    width: 100% !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+}
+
+/* SINKRONISASI DROPDOWN ATAS: Desain Senada Kolom Bawah */
+.dropdown-select-box {
+    background-color: #F8FAFC !important; /* Latar belakang abu-abu muda senada */
+    border: 1px solid #E2E8F0 !important;
+    border-radius: 20px !important;
+    padding: 14px 20px !important;
+    /* Kombinasi shadow tipis agar senada dengan efek melayang di bawahnya */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 
+                0 10px 20px -5px rgba(25, 118, 210, 0.05) !important;
+    transition: all 0.25s ease;
+}
+
+/* Efek interaktif tipis saat kolom e-wallet didekati/diklik */
+.dropdown-select-box:active,
+.dropdown-select-box:focus {
+    border-color: #1976D2 !important;
+    background-color: #ffffff !important;
+}
+
+/* Merapikan teks tulisan di dalam dropdown e-wallet */
+#selectedProductName {
+    font-weight: 700 !important;
+    color: #4A5568 !important;
+    font-size: 14.5px !important;
+    letter-spacing: 0.2px;
+}
+
+/* Label Tulisan di Atas Input */
+.input-label {
+    display: block;
+    font-weight: 700;
+    font-size: 13.5px;
+    color: #4A5568;
+    margin-bottom: 8px;
+    text-align: left;
+    letter-spacing: 0.3px;
+}
+
+/* BUNGKUS KOLOM INPUT: Efek Kedalaman 3D Halus */
+.input-field-box {
+    display: flex;
+    align-items: center;
+    background-color: #F8FAFC !important;
+    border: 1px solid #E2E8F0 !important;
+    border-radius: 16px !important;
+    padding: 4px 14px !important;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02) !important;
+}
+
+/* Ketika Kolom Sedang Diklik (Fokus) */
+.input-field-box:focus-within {
+    border-color: #1976D2 !important;
+    background-color: #ffffff !important;
+    box-shadow: 0 0 0 4px rgba(25, 118, 210, 0.1), inset 0 2px 4px rgba(0, 0, 0, 0.01) !important;
+}
+
+/* Pengaturan Teks Di Dalam Input */
+.input-field-box input {
+    border: none !important;
+    outline: none !important;
+    background: transparent !important;
+    width: 100%;
+    height: 42px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #1A202C;
+    padding: 0 8px !important;
+}
+
+/* Bungkus Khusus Mata Uang Rp Didalam Kolom */
+.currency-prefix {
+    font-weight: 700;
+    font-size: 15px;
+    color: #4A5568;
+    background: #E2E8F0;
+    padding: 6px 12px;
+    border-radius: 10px;
+    margin-right: 4px;
+}
+
+/* TRIK KHUSUS: ATAS LANCIP DATAR, BAWAH TETAP MELENGKUNG OVAL */
+.custom-main-card > div:last-child,
+.custom-main-card .input-wrapper + div {
+    border-radius: 4px 4px 14px 14px !important;
+    box-shadow: 0 0 0 1px #64748b !important;
+    border: none !important;
+}
+
+.custom-main-card .input-wrapper, 
+.custom-main-card .input-box {
+    background-color: transparent !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin-bottom: 28px !important;
+}
+
+.custom-main-card input {
+    background-color: #ffffff !important;
+    border: 1.5px solid #edf2f7 !important;
+
+    border-radius: 14px !important;
+    padding: 14px 16px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    font-size: 16px !important;
+}
+
+.custom-main-card .info-pelanggan-box, 
+.custom-main-card .menu-container,
+.custom-main-card .menu-item-wrapper,
+.custom-main-card .menu-item {
+    background-color: transparent !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+    margin-top: 15px !important;
+    padding: 5px 0 !important;
+}
+
+
+/* TRIK FINAL: HANYA MENGUNCI GARIS PADA KOTAK TOMBOL AKSIP BAWAH */
+.custom-main-card > div:last-child,
+.custom-main-card .input-wrapper + div {
+    box-shadow: 0 0 0 0px #64748b !important;
+    border: none !important; padding-bottom: 8px !important;
+
+   }
+
+       
+ html, body {
+            background-color: #ebeef1;
+            width: 100%;
+            outline: none;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-decoration: none;
+        }
+/* 1. MENGUBAH CONTAINER UTAMA MENJADI GRID 2 KOLOM KOTAK */
+.subcategory-tab-header {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 12px !important;
+    padding: 16px !important;
+    background: transparent !important;
+    overflow: visible !important;
+    white-space: normal !important;
+    box-sizing: border-box !important;
+}
+
+/* 2. MENGUBAH TOMBOL STRIP LAMA MENJADI KOTAK MEWAH */
+.subcategory-tab-btn {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    background-color: #ffffff !important;
+    color: #2c3e50 !important;
+    padding: 5px 5px !important;
+    border-radius: 14px !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.03) !important;
+    border: 1px solid #f2f2f2 !important;
+    font-size: 13px !important;
+    font-weight: bold !important;
+    cursor: pointer !important;
+    transition: all 0.1s ease !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+/* EFEK SAAT TOMBOL DIKETUK (MEMBAL) */
+.subcategory-tab-btn:active {
+    transform: scale(0.97) !important;
+    background-color: #f5f7f8 !important;
+}
+
+/* KONDISI SAAT TOMBOL SEDANG AKTIF TERPILIH */
+.subcategory-tab-btn.active {
+    background-color: #ffffff !important;
+    border: 2px solid #1976D2 !important; /* Bingkai Biru Fokus */
+    color: #1976D2 !important;
+    box-shadow: 0 4px 8px rgba(25, 118, 210, 0.1) !important;
+}
+
+
+
+
+        .header-2 {
+            background-color: #fff;
+            margin-top: 0px;
+            padding: 15px;
+            padding-bottom: 35px;
+        }
+
+        .input-wrapper {
+            width: 100%;
+        }
+
+        .input-box {
+            position: relative;
+            width: 100%;
+            z-index: 2;
+        }
+
+        .input-box input {
+            width: 100%;
+            padding: 14px 40px 14px 14px;
+            border-radius: 12px;
+            border: 2px solid #ebeef1;
+            font-size: 16px;
+            outline: none;
+            background: #fff;
+            box-sizing: border-box;
+            font-family: "Lexend Deca", sans-serif;
+        }
+
+        .input-box img {
+            filter: brightness(0) saturate(100%) invert(99%) sepia(72%) saturate(204%) hue-rotate(174deg) brightness(99%) contrast(90%);
+        }
+
+        .icon-x {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 22px;
+            cursor: pointer;
+        }
+
+        .menu-card {
+            background: #ebeef1;
+            border-radius: 15px;
+            padding: 5px;
+            padding-top: 25px;
+            border: 1px solid #ebeef1;
+            position: relative;
+            z-index: 1;
+            margin-top: -18px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+        }
+
+        .menu {
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+            gap: 0px;
+        }
+
+        .menu-item {
+            flex: 1;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            padding: 8px 12px;
+            border-radius: 10px;
+            transition: background 0.2s;
+        }
+
+        .menu-item:hover {
+            background: #f0f0f0;
+        }
+
+        .menu-item img {
+            width: 20px;
+            height: 20px;
+        }
+
+        .menu-item div {
+            font-size: 14px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .main-card {
+            background: #ebeef1;
+            border-radius: 20px 20px 0 0;
+            padding: 16px;
+            margin-top: -15px;
+        }
+
+        .subcategory-tab-header {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            padding-bottom: 12px;
+            margin-bottom: 16px;
+            border-bottom: 2px solid #e0e0e0;
+            white-space: nowrap;
+        }
+
+        .subcategory-tab-btn {
+            font-size: 14px;
+            font-weight: 600;
+            padding: 8px 0px;
+            margin: 0 0px;
+            margin-right: 10px;
+            color: #888;
+            cursor: pointer;
+            position: relative;
+            transition: 0.2s;
+            background: transparent;
+            border-radius: 0px;
+            white-space: nowrap;
+        }
+
+        .subcategory-tab-btn.active {
+            color: var(--subMain);
+            background: transparent;
+        }
+
+        .subcategory-tab-btn.active::after {
+            content: "";
+            position: absolute;
+            bottom: -12px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--subMain);
+            border-radius: 3px 3px 0 0;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        .product-card {
+            background: #fff;
+            border-radius: 14px;
+            padding: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            transition: 0.2s;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        
+        .product-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50px;
+            height: 50%;
+            background-image: radial-gradient(circle, rgba(0,0,0,0.15) 2px, transparent 2px);
+            background-size: 6px 6px;
+            background-repeat: repeat;
+            mask-image: linear-gradient(to left, black, rgba(0,0,0,0.2));
+            -webkit-mask-image: linear-gradient(to left, black, rgba(0,0,0,0.2));
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .product-card.disabled {
+            opacity: 0.6;
+            filter: grayscale(0.3);
+            cursor: not-allowed;
+        }
+
+        .product-card-top {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .product-img {
+            width: 30px;
+            height: 30px;
+            object-fit: contain;
+            border-radius: 50%;
+            background: #f8f8f8;
+            padding: 3px;
+        }
+
+        .product-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1a1a1a;
+            line-height: 1.3;
+            flex: 1;
+        }
+
+        .price-strike {
+            font-size: 11px;
+            color: #aaa;
+            text-decoration: line-through;
+        }
+
+        .price-real {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--subMain);
+            margin-bottom: 8px;
+        }
+
+        .product-price-section {
+            margin-top: 6px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .ribbon {
+            position: absolute;
+            bottom: 0px;
+            right: 0px;            
+            font-size: 10px;
+            font-weight: bold;
+            border-radius: 10px 0px 10px 0px;
+            padding: 4px 20px;
+            text-align: right;
+            align-items: right;
+            z-index: 15;
+            white-space: nowrap;
+        }
+
+        .ribbon.discount {
+            background: transparent;
+            color: #e53935;
+        }
+
+        .ribbon.out-of-stock {
+            background: transparent;
+            color: #888;
+        }
+
+        .product-content {
+            display: block;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+            display: none;
+            justify-content: center;
+            align-items: flex-end;
+            z-index: 1000;
+        }
+
+        .popup {
+            width: 100%;
+            max-width: 500px;
+            background: #fff;
+            border-radius: 20px 20px 0 0;
+            padding: 30px 16px 16px;
+            position: relative;
+            transform: translateY(100%);
+            transition: 0.3s;
+        }
+
+        .overlay.active {
+            display: flex;
+        }
+
+        .overlay.active .popup {
+            transform: translateY(0);
+        }
+
+        .drag-line {
+            width: 80px;
+            height: 8px;
+            background: var(--subMain);
+            border-radius: 0px 0px 15px 15px;
+            position: absolute;
+            top: 0px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .favorite-list {
+            max-height: 400px;
+            overflow-y: auto;
+            margin-top: 10px;
+        }
+        .favorite-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+        }
+        .favorite-item:hover {
+            background-color: #f5f5f5;
+        }
+        .favorite-number {
+            font-size: 16px;
+            font-weight: 500;
+            color: #333;
+            flex: 1;
+        }
+        .delete-fav {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: #ff4444;
+            padding: 0 8px;
+            pointer-events: auto;
+        }
+        .empty-favorite {
+            text-align: center;
+            padding: 30px;
+            color: #999;
+        }
+        .close-fav-popup {
+            width: 100%;
+            padding: 12px;
+            background: var(--subMain);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            margin-top: 15px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .ios-toast {
+            position: fixed;
+            bottom: 30px;
+            left: 16px;
+            right: 16px;
+            background: rgba(28, 28, 30, 0.9);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 30px;
+            font-size: 15px;
+            font-weight: 500;
+            text-align: center;
+            z-index: 1200;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.25s ease;
+            pointer-events: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            font-family: system-ui, -apple-system, 'Lexend Deca', sans-serif;
+            letter-spacing: 0.3px;
+            max-width: 350px;
+            margin: 0 auto;
+            width: calc(100% - 32px);
+        }
+        .ios-toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .notification-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1100;
+        }
+        .notification-popup {
+            width: 280px;
+            background: white;
+            border-radius: 20px;
+            padding: 24px 20px 20px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            animation: fadeInUp 0.2s ease;
+        }
+        .notification-popup p {
+            font-size: 16px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .notification-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+        .notif-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .notif-btn-save {
+            background: var(--subMain);
+            color: white;
+        }
+        .notif-btn-view {
+            background: #ebeef1;
+            color: var(--subMain);
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .product-name-large {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 8px;
+            margin-bottom: 8px;
+            color: #1a1a1a;
+        }
+        .sub-meta {
+            font-size: 12px;
+            color: #888;
+            margin-bottom: 20px;
+        }
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 12px;
+            font-size: 15px;
+        }
+        .price-label {
+            color: #666;
+        }
+        .price-value {
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+        .divider-line {
+            height: 1px;
+            background: #eee;
+            margin: 16px 0;
+        }
+        .description-header {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-bottom: 12px;
+        }
+        .desc-icon {
+            width: 20px;
+            height: 20px;
+            object-fit: contain;
+        }
+        .desc-title {
+            font-size: 14px;
+            font-weight: 500;
+            color: #333;
+        }
+        .description-text {
+            background: #f5f7fb;
+            padding: 12px;
+            border-radius: 12px;
+            font-size: 13px;
+            color: #555;
+            line-height: 1.5;
+            text-align: left;
+            margin-bottom: 24px;
+        }
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: space-between;
+            margin-top: 8px;
+        }
+        .btn-later {
+            flex: 1;
+            background: white;
+            border: 1.5px solid var(--subMain);
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--subMain);
+            cursor: pointer;
+            transition: 0.2s;
+            text-align: center;
+        }
+        .btn-buy {
+            flex: 1;
+            background: var(--subMain);
+            border: none;
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+            transition: 0.2s;
+            text-align: center;
+        }
+        .btn-later:hover {
+            background: #f0f4fe;
+        }
+        .btn-buy:hover {
+            background: #1e5cb3;
+        }
+
+        .loading-spinner {
+            grid-column: 1/-1;
+            text-align: center;
+            padding: 40px;
+        }
+        .loading-spinner div {
+            width: 30px;
+            height: 30px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #1976D2;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+ 
+
+@keyframes marqueeBanner {
+    0% { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(-100%, 0, 0); }
+}
+/* STYLING BANNER SLIDER KOTAK GAYA HOME UTAMA */
+.wrapper-slider-tv {
+    padding: 0 15px;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.slider-container-box {
+    width: 100%;
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    border: 1px solid #ebeef1;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Menyembunyikan scrollbar bawah agar bersih seperti aplikasi pro */
+.slider-container-box::-webkit-scrollbar {
+    display: none;
+}
+
+.slider-item-card {
+    flex: 0 0 100%;
+    width: 100%;
+    scroll-snap-align: start;
+    position: relative;
+    box-sizing: border-box;
+    display: block;
+}
+
+.slider-img-content {
+    width: 100%;
+    height: 140px; /* Atur tinggi kotak banner sesuai selera Anda */
+    object-fit: cover;
+    display: block;
+}
+#productContent, 
+.product-content, 
+#produkContainer, 
+.product-grid {
+    display: none !important;
+}
+/* Sembunyikan total pop-up putih bawaan, termasuk modal geser bawah (bottom sheet) */
+#transactionOverlay, 
+.modal-konfirmasi-bawaan,
+#modalKonfirmasi,
+div[class*="BottomSheet"],
+div[class*="modal-content"],
+div[style*="position: fixed"][style*="z-index"][style*="bottom: 0"] {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    overflow: hidden !important;
+}
+
+ </style>
+</head>
+<body>
+
+
+<div class="header-2"
+style="width: calc(100% - 20px) !important;
+padding: 0px 15px !important;
+box-sizing: border-box !important;
+background-color: #ffffff !important;
+border-radius: 0px 0px 12px 12px !important;
+position: fixed !important;
+top: 5px !important;
+left: 10px !important;
+right: 10px !important;
+z-index: 99999 !important;
+margin: 0 auto !important;
+height: 60px !important;
+display: flex !important;
+align-items: center !important;">
+
+
+
+
+
+
+
+<div class="inner-category-box" style="display: flex !important; align-items: center !important; gap: 15px !important; width: 100% !important; box-sizing: border-box !important;">
+
+
+
+        <!-- Ikon Air Jernih -->
+        <img src="https://images.bukaolshop.com/hosting/183991/5340110b52f7881964.png" alt="Icon" style="width: 50px; height: 75px; object-fit: contain; margin-right: 0px;">
+        <!-- Tulisan Teks Kategori -->
+ <!-- Masukkan kode warna di dalam style seperti ini -->
+<div class="header-btn-KUOTA" style="background: linear-gradient(to right, #00a2ff, #006aff) !important; color: white !important; padding: 6px 18px !important; border-radius: 50px !important; box-shadow: 0 15px 15px rgba(0, 106, 255, 0.3) !important; display: inline-block !important; font-weight: bold !important; font-size: 13px !important; margin: 0 auto !important; transform: translateX(-35px) !important;">Va. Transfer</div>
+
+   </div>
+ 
+</div>
+
+   
+
+<div style="margin-top: 90px !important;">
+
+<div class="floating-card" style="border-radius: 0px !important; box-shadow: none !important; background: transparent !important; background-color: transparent !important;">
+
+<div class="input-wrapper"
+style="width: 94% !important;
+margin: 12px auto 0px auto !important;
+box-sizing: border-box !important;
+padding: 0 !important;
+border-radius: 0px !important;
+background: transparent !important;
+background-color: transparent !important;">
+
+<style>
+  *:focus-within {
+    border-color: #e0e0e0 !important;
+    box-shadow: none !important;
+    outline: none !important;
+  }
+  #idPlayer:focus {
+    border-color: #007bff !important;
+    box-shadow: 0 0 4px rgba(0, 123, 255, 0.5) !important;
+    outline: none !important;
+  }  .input-box img, 
+  #btnCekID img, 
+  div[style*="display: flex"] img,
+  img[alt="Kontak"],
+  img[alt="Info"],
+  img[alt="Scan"],
+  img[alt="Favorite"] {
+      filter: none !important;
+      -webkit-filter: grayscale(0%) !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+  }
+
+</style>
+
+<!-- 1. KOTAK UTAMA YANG MEMBUNGKUS INPUT DAN MENU AKSI -->
+<div class="input-box" style="position: relative !important; width: 100% !important; 
+margin-top: -10px !important;
+background-color: #ffffff !important; border: 1px solid #e0e0e0 !important; border-radius: 20px !important; padding: 16px !important; box-sizing: border-box !important; display: flex !important; flex-direction: column !important;">
+
+<!-- KOTAK UTAMA FORM ATAS (KODE FINAL: IKON LENGKAP & RAMPING PRESTISI) -->
+<div id="kotakFormUtama" style="width: 100% !important; background-color: #ffffff !important; border: 1px solid #e0e0e0 !important; border-radius: 24px !important; padding: 14px !important; box-sizing: border-box !important; display: flex !important; flex-direction: column !important; gap: 14px !important; transition: border-color 0.3s ease !important;">
+
+<div class="header-2"> 
+  <!-- KELOMPOK PILIHAN DROP-DOWN PRODUK E-WALLET (BAIK & TIDAK LONCAT) -->
+
+
+<div id="seluruh-dropdown-atas" class="dropdown-wrapper" style="margin: -10px 0px 50px 0px; position: relative; font-family: sans-serif; z-index: 9999 !important;">
+
+
+
+ 
+    <!-- Kolom Utama Tempat Klik -->
+    <!-- Kolom Utama Tempat Klik (Ikon Menggunakan SRC Gambar) -->
+<div class="dropdown-select-box" onclick="toggleDropdownProduct()" style="background-color: #F8FAFC !important; border: 1px solid #E2E8F0 !important; border-radius: 20px !important; padding: 14px 20px !important; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 10px 20px -5px rgba(25, 118, 210, 0.05) !important; cursor: pointer; transition: all 0.25s ease;">
+    <div style="display: flex; align-items: center; gap: 12px;">
+        <!-- Tempat Ikon Gambar Utama (Default Gambar Dompet) -->
+        <div id="selectedProductIcon" style="display: flex; align-items: center;">
+            <img src="https://images.bukaolshop.com/hosting/183991/5340110b52f7881964.png" style="width: 50px; height: 50px; object-fit: contain;">
+        </div>
+        <span id="selectedProductName" style="font-weight: 700 !important; color: #4A5568 !important; font-size: 14.5px !important; letter-spacing: 0.2px;">Cari atau pilih Bank</span>
+    </div>
+    <span id="dropdownArrowIcon" style="font-size: 14px; color: #4A5568; transition: transform 0.2s ease;">▼</span>
+</div>
+
+    <!-- Isi Menu Pilihan yang Tersembunyi -->
+     <div id="dropdownMenuContent" style="display: none; position: relative !important; margin-top: 10px; left: 0; right: 0; background: #ffffff; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); padding: 15px; z-index: 99999 !important; max-height: 280px !important; overflow-y: scroll !important; border: 1px solid #eee; -webkit-overflow-scrolling: touch !important; overscroll-behavior: contain !important; overscroll-behavior-y: contain !important; will-change: transform !important; touch-action: pan-y !important;">
+      
+        <!-- Kolom Cari Produk -->
+        <div style="position: relative; margin-bottom: 15px;">
+             <input type="text" id="searchProductInput" oninput="filterProductList()" placeholder="Cari Produk ..." style="width: 100%; padding: 12px 15px 12px 40px; border-radius: 14px; border: 1px solid #eef2f5; background: #f8fafc; font-size: 14px; box-sizing: border-box; outline: none;">
+  <span style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #aaa;">🔍</span>
+        </div>
+
+        <!-- Daftar List Produk Lengkap dengan Ikon Gambar -->
+        <div id="productListItems">
+
+            <!-- BNI -->
+            <div class="product-item" onclick="selectProductOption('Bank BNI', 'https://images.bukaolshop.com/hosting/183991/5246a96f7069320514.png', 'BNI')" style="display: flex; align-items: center; justify-content: space-between; padding: 12px 10px; cursor: pointer; border-radius: 10px; margin-bottom: 5px;">
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <img src="https://images.bukaolshop.com/hosting/183991/5246a96f7069320514.png" style="width: 26px; height: 26px; object-fit: contain; border-radius: 6px;">
+                    <span style="font-weight: 600; color: #333; font-size: 14px;">Bank BNI</span>
+                </div>
+                <span style="color: #ccc; font-size: 14px;">❯</span>
+            </div>
+
+            <!-- BRI -->
+            <div class="product-item" onclick="selectProductOption('Bank BRI', 'https://images.bukaolshop.com/hosting/183991/dd4f212bc729530027.png', 'BRI')" style="display: flex; align-items: center; justify-content: space-between; padding: 12px 10px; cursor: pointer; border-radius: 10px; margin-bottom: 5px;">
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <img src="https://images.bukaolshop.com/hosting/183991/dd4f212bc729530027.png" style="width: 26px; height: 26px; object-fit: contain; border-radius: 6px;">
+                    <span style="font-weight: 600; color: #333; font-size: 14px;">Bank BRI</span>
+                </div>
+                <span style="color: #ccc; font-size: 14px;">❯</span>
+            </div>
+
+            <!-- CIMB -->
+            <div class="product-item" onclick="selectProductOption('Bank CIMB', 'https://images.bukaolshop.com/hosting/183991/291b99543b50591729.png', 'CIMB')" style="display: flex; align-items: center; justify-content: space-between; padding: 12px 10px; cursor: pointer; border-radius: 10px; margin-bottom: 5px;">
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <img src="https://images.bukaolshop.com/hosting/183991/291b99543b50591729.png" style="width: 26px; height: 26px; object-fit: contain; border-radius: 6px;">
+                    <span style="font-weight: 600; color: #333; font-size: 14px;">Bank CIMB</span>
+                </div>
+                <span style="color: #ccc; font-size: 14px;">❯</span>
+            </div>
+
+            <!-- PERMATA -->
+            <div class="product-item" onclick="selectProductOption('Bank PERMATA', 'https://images.bukaolshop.com/hosting/183991/6d28fe06c950122339.png', 'PERMATA')" style="display: flex; align-items: center; justify-content: space-between; padding: 12px 10px; cursor: pointer; border-radius: 10px; margin-bottom: 5px;">
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <img src="https://images.bukaolshop.com/hosting/183991/6d28fe06c950122339.png" style="width: 26px; height: 26px; object-fit: contain; border-radius: 6px;">
+                    <span style="font-weight: 600; color: #333; font-size: 14px;">Bank PERMATA</span>
+                </div>
+                <span style="color: #ccc; font-size: 14px;">❯</span>
+            </div>
+
+            <!-- MANDIRI -->
+            <div class="product-item" onclick="selectProductOption('Bank MANDIRI', 'https://images.bukaolshop.com/hosting/183991/37af10ee7405909828.png', 'MANDIRI')" style="display: flex; align-items: center; justify-content: space-between; padding: 12px 10px; cursor: pointer; border-radius: 10px; margin-bottom: 5px;">
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <img src="https://images.bukaolshop.com/hosting/183991/37af10ee7405909828.png" style="width: 26px; height: 26px; object-fit: contain; border-radius: 6px;">
+                    <span style="font-weight: 600; color: #333; font-size: 14px;">Bank MANDIRI</span>
+                </div>
+                <span style="color: #ccc; font-size: 14px;">❯</span>
+            </div>
+
+           
+
+        </div>
+    </div>
+</div>
+ <div id="step-1">
+
+
+        <!-- Input Nomor HP + Tombol Ambil Kontak -->
+        <div style="margin-bottom: 20px; width: 100%;">
+            <label class="input-label">Va/Rekening</label>
+            <div class="input-field-box" style="position: relative; display: flex; align-items: center;">
+                <span style="font-size: 18px; margin-right: 4px; display: flex; align-items: center;"></span>
+                
+                <input type="tel" 
+                       id="userId" 
+                       class="{{hasil_kontak}}" 
+                       placeholder="Nomor Tujuan" 
+                       oninput="formatOtomatisNomorHP()" 
+                       style="width: 100%; padding-right: 40px !important; padding-top: 12px; padding-bottom: 12px; border-radius: 8px; border: 1px solid #ccc;">
+
+                <!-- Tombol ambil kontak -->
+                <a href="{{url_website_baru}}/ambil_kontak" style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); display: flex; align-items: center; z-index: 5;">
+                    <img src="https://images.bukaolshop.com/hosting/183991/3b07e3dee8f5989244.png" style="width: 25px; height: 25px; cursor: pointer; object-fit: contain;">
+                </a>
+            </div>
+        </div>
+
+        <!-- Tombol Lanjutkan ke Tahap Nominal -->
+        <button type="button" onclick="goToStep2()" style="width: 100%; background-color: #007bff; color: white; border: none; padding: 14px; border-radius: 16px; font-weight: bold; cursor: pointer; font-size: 16px; box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);">Lanjutkan</button>
+    </div> <!-- PENUTUP TAHAP 1 -->
+</div>
+</div>
+    <!-- ==================== TAHAP 2: PILIHAN NOMINAL INSTAN BRILINK ==================== -->
+    <div id="step-2" style="display: none;">
+        <!-- Info Konfirmasi Nomor Pelanggan -->
+        <!-- Bagian di dalam <div id="step-2"> -->
+
+<!-- KOTAK INFO BIRU HALAMAN 2 ANDA -->
+<!-- TABEL INFO PELANGGAN GAYA PREMIUM PERSIS GAMBAR 2 -->
+<div style="background: white; border: 1px solid #dcdcdc; border-radius: 8px; overflow: hidden; margin: 15px; font-family: sans-serif; box-shadow: 0 2px 5px rgba(0,0,0,0.05); position: relative;">
+    
+    <!-- Garis Aksen Oranye Tipis di Paling Atas Sesuai Gambar 2 -->
+    <div style="height: 4px; background: #ff6600; width: 100%;"></div>
+
+    <!-- Header Tabel Biru Pekat -->
+    <div style="background: #0056b3; color: white; padding: 10px 15px; font-weight: bold; display: flex; justify-content: space-between; align-items: center; font-size: 15px;">
+        <span style="display: flex; align-items: center; gap: 6px;">✔ Info Pelanggan</span>
+        <span style="font-size: 10px;">▼</span>
+    </div>
+
+    <!-- Isi Data Tabel (Putih Bersih dengan Garis Putus-putus Lembut) -->
+    <div style="padding: 0 15px; background: #ffffff;">
+        
+        <!-- Baris 1: ID Pelanggan -->
+        <div style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px dashed #e5e7eb; align-items: center;">
+            <span style="color: #666666; font-size: 14px;">NO Rekening</span>
+            <strong id="summary-nohp" style="color: #0056b3; font-size: 16px; font-weight: 600;">-</strong>
+        </div>
+
+        <!-- Baris 2: Nama Pelanggan -->
+        <div style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px dashed #e5e7eb; align-items: center;">
+            <span style="color: #666666; font-size: 14px;">Nama</span>
+            <strong id="summary-nama" style="color: #111111; font-size: 15px; font-weight: 600; text-transform: uppercase;">Memeriksa...</strong>
+        </div>
+
+        <!-- Baris 3: E-Wallet -->
+        <div style="display: flex; justify-content: space-between; padding: 12px 0; align-items: center;">
+            <span style="color: #666666; font-size: 14px;">Virtual Akun</span>
+            <strong id="summary-wallet" style="color: #111111; font-size: 15px; font-weight: 600;">-</strong>
+        </div>
+
+    </div>
+</div>
+
+        <!-- B. Bagian Input Nominal (Menggunakan ID Asli nominalInput Anda) -->
+        <div style="margin-bottom: 15px; width: 100%;">
+            <label class="input-label">Masukkan Nominal</label>
+            <div class="input-field-box" style="display: flex; align-items: center; position: relative;">
+                <span class="currency-prefix" style="padding: 12px; background: #eee; border-radius: 8px 0 0 8px; border: 1px solid #ccc; font-weight: bold;">Rp</span>
+                
+<input type="text" inputmode="numeric" id="nominalInput" placeholder="0" oninput="formatRupiah(this)" style="width: 100%; padding: 12px; border-radius: 0 8px 8px 0; border: 1px solid #ccc; border-left: none; font-weight: bold;">
+
+            </div>
+            <p style="font-size: 11px; color: #A0AEC0; font-style: italic; text-align: left; margin-top: 6px; margin-bottom: 20px;">*Min Rp5.000 - Max Rp500.000</p>
+        </div>
+
+        <!-- Tombol Grid Instan BRILink -->
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 20px;">
+            <button type="button" class="nom-btn" onclick="pilihNominal(20000, this)" style="padding: 14px; font-weight: bold; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; cursor: pointer; font-size: 15px;">Rp20.000</button>
+            <button type="button" class="nom-btn" onclick="pilihNominal(30000, this)" style="padding: 14px; font-weight: bold; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; cursor: pointer; font-size: 15px;">Rp30.000</button>
+            <button type="button" class="nom-btn" onclick="pilihNominal(50000, this)" style="padding: 14px; font-weight: bold; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; cursor: pointer; font-size: 15px;">Rp50.000</button>
+            <button type="button" class="nom-btn" onclick="pilihNominal(100000, this)" style="padding: 14px; font-weight: bold; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; cursor: pointer; font-size: 15px;">Rp100.000</button>
+            <button type="button" class="nom-btn" onclick="pilihNominal(200000, this)" style="padding: 14px; font-weight: bold; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; cursor: pointer; font-size: 15px;">Rp200.000</button>
+            <button type="button" class="nom-btn" onclick="pilihNominal(500000, this)" style="padding: 14px; font-weight: bold; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; cursor: pointer; font-size: 15px;">Rp500.000</button>
+        </div>
+
+        
+        <!-- D. TOMBOL LANJUTKAN UTAMA (Menjalankan fungsi asli sistem Anda) -->
+         <div style="display: flex; gap: 12px; width: 100%; margin-top: 15px; box-sizing: border-box;">
+    <!-- Tombol Kembali (Kiri - Gaya Mirip Tombol Bagikan) -->
+    <button type="button" onclick="document.getElementById('step-2').style.display='none'; document.getElementById('step-1').style.display='block'; if(document.getElementById('seluruh-dropdown-atas')) document.getElementById('seluruh-dropdown-atas').style.display='block';" style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; background-color: #ffffff; color: #1976D2; border: 1.5px solid #bdcddf; padding: 14px; border-radius: 12px; font-size: 16px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08); position: relative; z-index: 999;">
+        Kembali
+    </button>
+    <!-- Tombol Lanjutkan (Kanan - Gaya Mirip Tombol Cetak Struk) -->
+    <button type="button" onclick="kirimTransaksiPPOB()" style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; background-color: #1976D2; color: #ffffff; border: none; padding: 14px; border-radius: 12px; font-size: 16px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);">
+        Lanjutkan
+    </button>
+</div>
+
+
+    </div> <!-- PENUTUP TAHAP 2 -->
+
+</div> <!-- PENUTUP UTAMA -->
+
+
+<!-- ==================== SCRIPT PENGATUR LOGIKA & SINKRONISASI ==================== -->
+<script>
+    function goToStep2() {
+        var wallet = document.getElementById('walletSelect').value;
+        var nomorHp = document.getElementById('userId').value;
+
+        if (!wallet) {
+            alert('Silakan pilih Dompet Digital terlebih dahulu!');
+            return;
+        }
+        if (nomorHp.length < 10) {
+            alert('Nomor tujuan belum lengkap atau tidak valid!');
+            return;
+        }
+
+        document.getElementById('summary-wallet').innerText = wallet;
+        document.getElementById('summary-phone').innerText = nomorHp;
+
+        document.getElementById('step-1').style.display = 'none';
+        document.getElementById('step-2').style.display = 'block';
+    }
+
+    function backToStep1() {
+        document.getElementById('step-2').style.display = 'none';
+        document.getElementById('step-1').style.display = 'block';
+    }
+
+    function pilihNominal(jumlah, elemen) {
+        // Otomatis isi text input sesuai angka tombol
+        document.getElementById('nominalInput').value = jumlah;
+        
+        // Atur efek warna tombol aktif
+        var semuaTombol = document.querySelectorAll('.nom-btn');
+        semuaTombol.forEach(function(btn) {
+            btn.style.background = '#f8fafc';
+            btn.style.borderColor = '#cbd5e1';
+            btn.style.color = '#334155';
+        });
+        elemen.style.background = '#e0f2fe';
+        elemen.style.borderColor = '#0284c7';
+        elemen.style.color = '#0369a1';
+    }
+
+    function kirimTransaksiPPOB() {
+        var nominalValue = parseInt(document.getElementById('nominalInput').value) || 0;
+
+        if (nominalValue < 5000 || nominalValue > 500000) {
+            alert('Nominal harus di antara Rp5.000 - Rp500.000!');
+            return;
+        }
+
+        // MENJALANKAN FUNGSI ASLI SYSTEM BUKAOLSHOP ANDA AGAR TRANSAKSI SAH & MASUK
+        if (typeof jalankanFungsiCekSistem === "function") {
+            jalankanFungsiCekSistem();
+        } else {
+            alert('Sistem memproses transaksi Rp ' + nominalValue.toLocaleString('id-ID'));
+        }
+    }
+</script>
+
+
+
+</div> <!-- PENUTUP UTAMA CUSTOM-MAIN-CARD -->
+       
+<!-- Kotak Info Pelanggan (Disembunyikan secara bawaan) -->
+<div id="infoPelangganBox" style="display: none; margin-top: -10px; background-color: #e8f7f5; border: 1px solid #bce5e1; border-radius: 8px; padding: 12px; font-family: sans-serif;">
+    <!-- Bagian Header (Tombol Toggle Buka/Tutup) -->
+    <div style="display: flex; justify-content: space-between; align-items: center; cursor: pointer; color: #00a896; font-weight: bold; font-size: 14px;" onclick="toggleInfoPelanggan()">
+        <div style="display: flex; align-items: center; gap: 6px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            Info Pelanggan
+        </div>
+        <!-- Ikon Panah ^ -->
+        <span id="arrowIcon" style="font-size: 14px; transition: transform 0.2s; font-weight: bold;">▲</span>
+    </div>
+
+    <!-- Bagian Isi Data Pelanggan -->
+    <div id="infoPelangganContent" style="margin-top: 10px; display: block; font-size: 13px; color: #333; line-height: 1.6;">
+        <div style="display: flex; margin-bottom: 4px;">
+            <div style="width: 110px; color: #666;">NO Rekening</div>
+            <div id="resIdPelanggan" style="font-weight: bold;">-</div>
+        </div>
+        <div style="display: flex;">
+            <div style="width: 110px; color: #666;">Nama</div>
+            <div id="resNamaPelanggan" style="font-weight: bold;">-</div>
+        </div>
+    </div>
+</div>
+
+   
+
+
+
+</style>
+
+<script>
+function changeLayout(mode) {
+    // Menargetkan langsung elemen konten produk Anda
+    const productContent = document.getElementById('productContent');
+    if (!productContent) return;
+    
+    // Mencari elemen pembungkus list paket (biasanya div pertama setelah tab menu di dalam main-card)
+    // Jika struktur produk Anda langsung di dalam main-card, script ini akan otomatis menyesuaikan
+    const mainCard = productContent.querySelector('.main-card');
+    if (!mainCard) return;
+    
+    // Menargetkan elemen terakhir di dalam main-card (tempat daftar paket dirender)
+    const currentContainer = mainCard.lastElementChild;
+    
+    const btnList = document.getElementById('btn-list-view');
+    const btnGrid = document.getElementById('btn-grid-view');
+
+    if (mode === 'grid') {
+        currentContainer.classList.add('layout-grid-dua');
+        btnGrid.style.backgroundColor = '#0076e4';
+        btnGrid.style.color = '#fff';
+        btnList.style.backgroundColor = '#e0e0e0';
+        btnList.style.color = '#333';
+    } else {
+        currentContainer.classList.remove('layout-grid-dua');
+        btnList.style.backgroundColor = '#0076e4';
+        btnList.style.color = '#fff';
+        btnGrid.style.backgroundColor = '#e0e0e0';
+        btnGrid.style.color = '#333';
+    }
+}
+</script>
+<!-- AKHIR KODE TOMBOL GRID TAMBAHAN -->
+
+<div class="product-content" id="productContent">
+    <div class="main-card">
+        <div class="subcategory-tab-header" id="subcategoryTabMenu"></div>
+        <div id="produkContainer" class="product-grid"></div>
+    </div>
+</div>
+
+<div id="transactionOverlay" class="overlay" onclick="closeTransactionPopup(event)">
+    <div class="popup">
+        <div class="drag-line"></div>
+        <div class="product-name-large" id="transProductName">-</div>
+        <div class="sub-meta" id="transMeta">Virtual Akun</div>
+        <div class="price-row">
+            <span class="price-label">Nominal Harga</span>
+            <span class="price-value" id="transNominal">-</span>
+        </div>
+        <div class="divider-line"></div>
+        <div class="description-header">
+            <img id="transIcon" class="desc-icon" src="https://cdn-icons-png.flaticon.com/128/9554/9554529.png" alt="icon produk">
+            <div class="desc-title">Deskripsi Produk</div>
+        </div>
+        <div class="description-text" id="transDescription">-</div>
+        <div class="action-buttons">
+            <button class="btn-later" onclick="closeTransactionPopupManual()">Nanti</button>
+            <button class="btn-buy" onclick="buyProduct()">Beli</button>
+        </div>
+    </div>
+</div>
+
+<div id="favoritOverlay" class="overlay" onclick="closeFavoritPopup(event)">
+    <div class="popup">
+        <div class="drag-line"></div>
+        <div class="title">Daftar ID Pelanggan Favorit</div>
+        <div id="favoriteListContainer" class="favorite-list"></div>
+        <button class="close-fav-popup" onclick="closeFavoritPopupManual()">Tutup</button>
+    </div>
+</div>
+
+<div id="notifOverlay" class="notification-overlay">
+    <div class="notification-popup">
+        <p>📞 ID Pelanggan: <strong id="currentNumberDisplay"></strong></p>
+        <div class="notification-buttons">
+            <button class="notif-btn notif-btn-save" id="notifSaveBtn">Simpan</button>
+            <button class="notif-btn notif-btn-view" id="notifViewBtn">Lihat Daftar</button>
+        </div>
+    </div>
+</div>
+
+<div id="iosToast" class="ios-toast"></div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    const token = "eyJhcHAiOiIxODM5OTEiLCJhdXRoIjoiMjAyNjA0MTIiLCJzaWduIjoiNFwvUkF2WVhZRGx3XC9vUnk3dFZwUFVBPT0ifQ==";
+
+    let allCategories = [];
+    let currentSubCategories = [];
+    let currentProducts = [];
+    let productCache = {};
+    let currentCategoryId = null;
+    let currentCategoryName = "";
+    let selectedProductData = null;
+
+    async function fetchCategoriesFromAPI() {
+        const produkContainer = document.getElementById('produkContainer');
+        const tabMenu = document.getElementById('subcategoryTabMenu');
+        
+        if (produkContainer) {
+            produkContainer.innerHTML = `<div class="loading-spinner"><div></div><p style="margin-top: 20px; color: #999;">Memuat data Virtual Akun...</p></div>`;
+        }
+        if (tabMenu) {
+            tabMenu.innerHTML = `<div style="padding: 10px; text-align: center; color: #999;"><div class="loading-spinner" style="padding: 20px;"><div></div><p style="margin-top: 10px;">Loading kategori E-Wallet...</p></div></div>`;
+        }
+        
+        if (!token || token.trim() === '') {
+            return false;
+        }
+        
+        try {
+            const response = await fetch(`https://openapi.bukaolshop.net/v1/app/kategori?token=${token}`);
+            
+            if (!response.ok) {
+                return false;
+            }
+            
+            const data = await response.json();
+            
+            if (!data || !data.data || data.data.length === 0) {
+                return false;
+            }
+            
+            allCategories = data.data;
+            return true;
+            
+        } catch (error) {
+            return false;
+        }
+    }
+
+    function findTVCategory() {
+        const searchTerms = ["virtual akun",];
+        
+        for (const category of allCategories) {
+            const catNameLower = (category.nama_kategori || '').toLowerCase();
+            for (const term of searchTerms) {
+                if (catNameLower.includes(term)) {
+                    category.nama_kategori = "Virtual Akun";
+                    return category;
+                }
+            }
+        }
+        
+        for (const category of allCategories) {
+            const catNameLower = (category.nama_kategori || '').toLowerCase(); 
+            {
+                category.nama_kategori = "Virtual Akun";
+                return category;
+            }
+        }
+        
+        if (allCategories.length > 0) {
+            allCategories[0].nama_kategori = "Virtual Akun";
+            return allCategories[0];
+        }
+        
+        return null;
+    }
+
+    function getAllSubCategories() {
+        let allSubCategories = [];
+        
+        const tvCategory = findTVCategory();
+        
+        if (tvCategory) {
+            if (tvCategory.sub_kategori && tvCategory.sub_kategori.length > 0) {
+                for (const sub of tvCategory.sub_kategori) {
+                    const subId = sub.id_kategori || sub.id_sub_kategori || sub.id;
+                    let subName = sub.nama_sub_kategori || 
+                                  sub.nama_kategori || 
+                                  sub.name || 
+                                  sub.nama ||
+                                  sub.sub_kategori_nama ||
+                                  `Sub Kategori ${subId}`;
+                    
+                    allSubCategories.push({
+                        id: subId,
+                        name: subName
+                    });
+                }
+            }
+            
+            if (allSubCategories.length === 0) {
+                const catId = tvCategory.id_kategori || tvCategory.id;
+                const catName = tvCategory.nama_kategori || tvCategory.name || "Virtual Akun";
+                allSubCategories.push({
+                    id: catId,
+                    name: catName
+                });
+            }
+        }
+        
+        return allSubCategories;
+    }
+
+    function renderSubCategoryTabs(subCategories) {
+        const tabMenu = document.getElementById('subcategoryTabMenu');
+        if (!tabMenu) return;
+        
+        if (subCategories.length === 0) {
+            tabMenu.innerHTML = `<div style="padding: 10px; text-align: center; color: #999;">Tidak ada sub kategori</div>`;
+            const container = document.getElementById('produkContainer');
+            if (container) container.innerHTML = `<div style="text-align: center; padding: 40px; color: #999;">Tidak ada produk TV tersedia</div>`;
+            return;
+        }
+        
+        let html = '';
+        subCategories.forEach((sub, index) => {
+            const activeClass = index === 0 ? 'active' : '';
+            html += `<div class="subcategory-tab-btn ${activeClass}" data-category-id="${sub.id}" data-category-name="${sub.name}">${escapeHtml(sub.name)}</div>`;
+        });
+        
+        tabMenu.innerHTML = html;
+        
+        const firstSub = subCategories[0];
+        if (firstSub) {
+            currentCategoryId = firstSub.id;
+            currentCategoryName = firstSub.name;
+            loadProducts(firstSub.id);
+        }
+        
+        const tabBtns = document.querySelectorAll('#subcategoryTabMenu .subcategory-tab-btn');
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                tabBtns.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                const categoryId = this.getAttribute('data-category-id');
+                currentCategoryId = categoryId;
+                currentCategoryName = this.getAttribute('data-category-name');
+                
+                loadProducts(categoryId);
+            });
+        });
+    }
+
+    function hitungDiskon(hargaAsli, hargaPromo) {
+        if (!hargaAsli || hargaAsli <= hargaPromo || hargaAsli === 0) return null;
+        return Math.round(((hargaAsli - hargaPromo) / hargaAsli) * 100);
+    }
+
+    function sortProductsByPriceAsc(products) {
+        return [...products].sort((a, b) => (a.harga_produk || 0) - (b.harga_produk || 0));
+    }
+
+    async function loadProducts(categoryId) {
+        if (!categoryId) {
+            const container = document.getElementById('produkContainer');
+            if (container) {
+                container.innerHTML = `<div style="text-align: center; padding: 40px; color: #999;">Kategori TV tidak tersedia</div>`;
+            }
+            return;
+        }
+        
+        if (productCache[categoryId]) {
+            currentProducts = productCache[categoryId];
+            const sortedProducts = sortProductsByPriceAsc(currentProducts);
+            renderProductsToGrid(sortedProducts);
+            return;
+        }
+
+        const container = document.getElementById('produkContainer');
+        if (container) {
+            container.innerHTML = `<div class="loading-spinner"><div></div><p style="margin-top: 20px; color: #999;">Memuat paket TV...</p></div>`;
+        }
+
+        try {
+            let page = 1;
+            let allProducts = [];
+
+            async function fetchPage() {
+                const response = await fetch(`https://openapi.bukaolshop.net/v1/app/produk?token=${token}&id_kategori=${categoryId}&page=${page}`);
+                const data = await response.json();
+                
+                if (data.data && data.data.length > 0) {
+                    allProducts = allProducts.concat(data.data);
+                    if (data.data.length === 10) {
+                        page++;
+                        await fetchPage();
+                    }
+                }
+                return allProducts;
+            }
+
+            await fetchPage();
+            
+            currentProducts = allProducts;
+            productCache[categoryId] = allProducts;
+            
+            const sortedProducts = sortProductsByPriceAsc(currentProducts);
+            renderProductsToGrid(sortedProducts);
+        } catch (error) {
+            if (container) {
+                container.innerHTML = `<div style="text-align: center; padding: 40px; color: #999;">Gagal memuat paket TV</div>`;
+            }
+        }
+    }
+
+    function renderProductsToGrid(products) {
+        const container = document.getElementById('produkContainer');
+        if (!container) return;
+        
+        if (!products || products.length === 0) {
+            container.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 40px; color: #999; font-size: 12px;">
+                    <img src="https://cdn-icons-png.flaticon.com/128/7023/7023038.png" style="width: 80px; margin-bottom:10px;">
+                    <p>Produk E-Wallet belum tersedia</p>
+                </div>`;
+            return;
+        }
+        
+        let html = '';
+        
+        products.forEach(product => {
+            const productName = product.nama_produk || 'Produk TV';
+            const productPrice = product.harga_produk || 0;
+            const productOriginalPrice = product.harga_produk_asli || 0;
+            const productImg = product.url_gambar_produk || 'https://cdn-icons-png.flaticon.com/128/6165/6165611.png';
+            const productDesc = product.deskripsi_produk || product.deskripsi_panjang || 'Tidak ada deskripsi';
+            const productUrl = product.url_produk || '';
+            const stok = product.stok ?? 1;
+            const isOutOfStock = stok <= 0;
+            const diskonPersen = hitungDiskon(productOriginalPrice, productPrice);
+            const isPromo = diskonPersen !== null && !isOutOfStock;
+            
+            const formattedPrice = `Rp${productPrice.toLocaleString('id-ID')}`;
+            const formattedOriginalPrice = isPromo ? `Rp${productOriginalPrice.toLocaleString('id-ID')}` : '';
+            
+            let ribbonHtml = '';
+            if (isOutOfStock) {
+                ribbonHtml = `<div class="ribbon out-of-stock">STOK KOSONG</div>`;
+            } else if (isPromo) {
+                ribbonHtml = `<div class="ribbon discount">DISKON ${diskonPersen}%</div>`;
+            }
+            
+            let clickableClass = !isOutOfStock ? '' : 'disabled';
+            let disabledAttr = isOutOfStock ? 'disabled' : '';
+            
+            let priceSectionHtml = `
+                ${isPromo ? `<div class="price-strike">${formattedOriginalPrice}</div>` : ''}
+                <div class="price-real">${formattedPrice}</div>
+            `;
+            
+            html += `
+                <div class="product-card ${clickableClass}" 
+                     data-product-name="${escapeHtml(productName)}" 
+                     data-product-price="${productPrice}" 
+                     data-product-desc="${escapeHtml(productDesc)}" 
+                     data-product-img="${productImg}" 
+                     data-product-original-price="${productOriginalPrice}" 
+                     data-out-of-stock="${isOutOfStock}" 
+                     data-product-id="${product.id_produk || ''}"
+                     data-product-url="${escapeHtml(productUrl)}"
+                     ${disabledAttr}>
+                    ${ribbonHtml}
+                    <div class="product-card-top">
+                        <img class="product-img" src="${productImg}" alt="produk" onerror="this.src='https://cdn-icons-png.flaticon.com/128/6165/6165611.png'">
+                        <div class="product-title">${escapeHtml(productName)}</div>
+                    </div>
+                    <div class="product-price-section">
+                        ${priceSectionHtml}
+                    </div>
+                </div>
+            `;
+        });
+        
+        container.innerHTML = html;
+        
+        document.querySelectorAll('#produkContainer .product-card:not(.disabled)').forEach(card => {
+            card.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                const isOutOfStock = this.getAttribute('data-out-of-stock') === 'true';
+                
+                if (isOutOfStock) return;
+                
+                const customerId = document.getElementById('userId').value.trim();
+                if (!customerId) {
+                    showToast('Masukkan ID Pelanggan terlebih dahulu!', 2000);
+                    return;
+                }
+                
+                selectedProductData = {
+                    id: this.getAttribute('data-product-id'),
+                    name: this.getAttribute('data-product-name'),
+                    price: parseInt(this.getAttribute('data-product-price')),
+                    originalPrice: parseInt(this.getAttribute('data-product-original-price')),
+                    desc: this.getAttribute('data-product-desc'),
+                    img: this.getAttribute('data-product-img'),
+                    url_produk: this.getAttribute('data-product-url')
+                };
+                showTransactionPopup(this);
+            });
+        });
+    }
+
+    async function loadTVData() {
+        const subCategories = getAllSubCategories();
+        currentSubCategories = subCategories;
+        renderSubCategoryTabs(subCategories);
+    }
+
+    function escapeHtml(str) {
+        if (!str) return '';
+        return str.replace(/[&<>]/g, function(m) {
+            if (m === '&') return '&';
+            if (m === '<') return '<';
+            if (m === '>') return '>';
+            return m;
+        });
+    }
+
+    function showToast(message, duration = 2500) {
+        const toast = document.getElementById('iosToast');
+        toast.textContent = message;
+        toast.classList.add('show');
+        setTimeout(() => {
+            toast.classList.remove('show');
+        }, duration);
+    }
+
+    function clearCustomerInput() {
+        const customerInput = document.getElementById('userId');
+        customerInput.value = '';
+     if (document.getElementById("infoPelangganBox")) {
+        document.getElementById("infoPelangganBox").style.display = "none";
+    }
+   }
+
+    function showTransactionPopup(productCard) {
+        const customerId = document.getElementById('userId').value.trim();
+        if (!customerId) {
+            showToast('Masukkan ID Pelanggan terlebih dahulu!', 2000);
+            return;
+        }
+        
+        const name = productCard.getAttribute('data-product-name');
+        const price = productCard.getAttribute('data-product-price');
+        const desc = productCard.getAttribute('data-product-desc');
+        
+        const formattedPrice = `Rp${parseInt(price).toLocaleString('id-ID')}`;
+        
+        document.getElementById('transProductName').innerText = name;
+        document.getElementById('transNominal').innerText = formattedPrice;
+        document.getElementById('transDescription').innerHTML = desc;
+        document.getElementById('transIcon').src = "https://cdn-icons-png.flaticon.com/128/9554/9554529.png";
+        
+        document.getElementById('transactionOverlay').classList.add('active');
+    }
+
+    function closeTransactionPopup(e) {
+        if (e && e.target && e.target.id === "transactionOverlay") {
+            document.getElementById('transactionOverlay').classList.remove('active');
+        }
+    }
+
+    function closeTransactionPopupManual() {
+        document.getElementById('transactionOverlay').classList.remove('active');
+    }
+function buyProduct() {
+    const customerId = document.getElementById('userId').value.trim();
+    const nominalInput = document.getElementById('nominalInput').value.trim();
+
+    if (!customerId) {
+        showToast('Masukkan ID Pelanggan terlebih dahulu!', 2000);
+        return;
+    }
+
+    if (!nominalInput || Number(nominalInput) <= 0) {
+        showToast('Masukkan jumlah nominal terlebih dahulu!', 2000);
+        return;
+    }
+
+    if (selectedProductData && selectedProductData.url_produk) {
+        let url = selectedProductData.url_produk;
+        
+        // Gabungkan nomor tujuan dan nominal ke URL checkout
+        if (url.includes('?')) {
+            url += "&catatan=" + encodeURIComponent(customerId) + "&nominal=" + encodeURIComponent(nominalInput);
+        } else {
+            url += "?catatan=" + encodeURIComponent(customerId) + "&nominal=" + encodeURIComponent(nominalInput);
+        }
+
+        window.location.href = url;
+    }
+}
+
+            
+        
+    function saveFavoriteNumber(number) {
+        if (!number || number.trim() === '') {
+            showToast('Masukkan ID Pelanggan terlebih dahulu!', 2000);
+            return false;
+        }
+        let favorites = JSON.parse(localStorage.getItem('favoriteNumbers')) || [];
+        if (favorites.includes(number)) {
+            showToast(`ID ${number} sudah ada di daftar favorit!`, 2500);
+            return false;
+        }
+        favorites.push(number);
+        localStorage.setItem('favoriteNumbers', JSON.stringify(favorites));
+        showToast(`✓ ID ${number} berhasil disimpan ke favorit!`, 2500);
+        return true;
+    }
+
+    function removeFavoriteNumber(number) {
+        let favorites = JSON.parse(localStorage.getItem('favoriteNumbers')) || [];
+        const newFavorites = favorites.filter(fav => fav !== number);
+        localStorage.setItem('favoriteNumbers', JSON.stringify(newFavorites));
+        showToast(`ID ${number} dihapus dari favorit`, 2000);
+        if (document.getElementById('favoritOverlay').classList.contains('active')) {
+            displayFavoriteList();
+        }
+    }
+
+    function selectFavoriteNumber(number) {
+        const customerInput = document.getElementById('userId');
+        customerInput.value = number;
+        closeFavoritPopupManual();
+        showToast(`ID ${number} dipilih`, 1500);
+    }
+
+    function displayFavoriteList() {
+        const container = document.getElementById('favoriteListContainer');
+        const favorites = JSON.parse(localStorage.getItem('favoriteNumbers')) || [];
+        if (favorites.length === 0) {
+            container.innerHTML = '<div class="empty-favorite">Belum ada ID favorit. Simpan ID dari halaman utama.</div>';
+            return;
+        }
+        let html = '';
+        favorites.forEach(number => {
+            html += `<div class="favorite-item" onclick="selectFavoriteNumber('${escapeHtml(number)}')"><span class="favorite-number">📞 ${escapeHtml(number)}</span><button class="delete-fav" onclick="event.stopPropagation(); removeFavoriteNumber('${escapeHtml(number)}')">✖</button></div>`;
+        });
+        container.innerHTML = html;
+    }
+
+    function openFavoritePopup() {
+        displayFavoriteList();
+        document.getElementById('favoritOverlay').classList.add('active');
+    }
+
+    function closeFavoritPopup(e) {
+        if (e && e.target && e.target.id === "favoritOverlay") {
+            document.getElementById('favoritOverlay').classList.remove('active');
+        }
+    }
+
+    function closeFavoritPopupManual() {
+        document.getElementById('favoritOverlay').classList.remove('active');
+    }
+
+    function handleFavoriteClick() {
+        const currentNumber = document.getElementById('userId').value.trim();
+        if (currentNumber === '') {
+            openFavoritePopup();
+        } else {
+            showFavoriteNotification(currentNumber);
+        }
+    }
+
+    function showFavoriteNotification(number) {
+        const numberDisplay = document.getElementById('currentNumberDisplay');
+        numberDisplay.textContent = number;
+        document.getElementById('notifOverlay').style.display = 'flex';
+    }
+
+    function closeNotification() {
+        document.getElementById('notifOverlay').style.display = 'none';
+    }
+
+    function handleNotifSave() {
+        const currentNumber = document.getElementById('userId').value.trim();
+        if (currentNumber !== '') {
+            saveFavoriteNumber(currentNumber);
+        }
+        closeNotification();
+    }
+
+    function handleNotifView() {
+        closeNotification();
+        openFavoritePopup();
+    }
+
+    window.addEventListener('DOMContentLoaded', async function() {
+        await fetchCategoriesFromAPI();
+        
+        const favoritMenuItem = document.getElementById('favoritBtn');
+        if (favoritMenuItem) {
+            favoritMenuItem.addEventListener('click', function(e) {
+                e.preventDefault();
+                handleFavoriteClick();
+            });
+        }
+        
+        document.getElementById('notifSaveBtn').addEventListener('click', handleNotifSave);
+        document.getElementById('notifViewBtn').addEventListener('click', handleNotifView);
+        
+        const notifOverlayElem = document.getElementById('notifOverlay');
+        notifOverlayElem.addEventListener('click', function(e) {
+            if (e.target === notifOverlayElem) {
+                closeNotification();
+            }
+        });
+        
+        loadTVData();
+ });
+// 1. Memantau ketikan di kolom nominal untuk memunculkan tombol Cek ID
+document.getElementById("nominalInput").addEventListener("input", function() {
+    const tombolCekId = document.getElementById("btnCekId");
+    if (this.value.trim() !== "") {
+        tombolCekId.style.display = "flex";
+    } else {
+        tombolCekId.style.display = "none";
+    }
+});
+
+// 2. Fungsi khusus untuk membersihkan kolom nominal saat tombol X diklik
+function clearNominalInput() {
+    document.getElementById("nominalInput").value = "";
+    document.getElementById("btnCekId").style.display = "none";
+}
+// 3. Fungsi Pengecekan ID (Tempat Integrasi API & Simulasi Data Asli)
+function checkCustomerId() {
+    const customerId = document.getElementById('userId').value.trim();
+    const nominalValue = document.getElementById('nominalInput').value.trim();
+
+    if (!customerId) {
+        showToast('Masukkan Nomor Tujuan terlebih dahulu!', 2000);
+        return;
+    }
+
+    // =========================================================================
+    // TEMPAT INTEGRASI API CEK ID NANTI (JIKA SUDAH ADA URL API-NYA)
+    // =========================================================================
+    /* 
+    fetch(`https://pusat.com{customerId}&nominal=${nominalValue}`)
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById("resNamaPelanggan").innerText = data.nama_pelanggan;
+        });
+    */
+    // =========================================================================
+
+    // -------------------------------------------------------------------------
+    // CARA MENGELUARKAN DATA SIMULASI DINAMIS (TANPA API - AGAR TIDAK SAMA TERUS)
+    // -------------------------------------------------------------------------
+    let namaSimulasi = "DANA USER";
+    const prefix = customerId.substring(0, 4);
+
+    if (["0811", "0812", "0813", "0821", "0822", "0852", "0853", "0823"].includes(prefix)) {
+        namaSimulasi = "TELKOMSEL - " + customerId.substring(customerId.length - 4) + "XXXX";
+    } else if (["0814", "0815", "0816", "0855", "0856", "0857", "0858"].includes(prefix)) {
+        namaSimulasi = "INDOSAT - " + customerId.substring(customerId.length - 4) + "XXXX";
+    } else if (["0817", "0818", "0819", "0859", "0877", "0878"].includes(prefix)) {
+        namaSimulasi = "XL AXIATA - " + customerId.substring(customerId.length - 4) + "XXXX";
+    } else if (["0831", "0832", "0833", "0838"].includes(prefix)) {
+        namaSimulasi = "AXIS - " + customerId.substring(customerId.length - 4) + "XXXX";
+    } else if (["0895", "0896", "0897", "0898", "0899"].includes(prefix)) {
+        namaSimulasi = "THREE (3) - " + customerId.substring(customerId.length - 4) + "XXXX";
+    } else if (["0881", "0882", "0883", "0884", "0885", "0886", "0887", "0888", "0889"].includes(prefix)) {
+        namaSimulasi = "SMARTFREN - " + customerId.substring(customerId.length - 4) + "XXXX";
+    } else {
+        namaSimulasi = "MEMBER ID - " + customerId.substring(0, 4) + "***" + customerId.substring(customerId.length - 2);
+    }
+
+    document.getElementById("infoPelangganBox").style.display = "block";
+    document.getElementById("resIdPelanggan").innerText = customerId;
+    document.getElementById("resNamaPelanggan").innerText = namaSimulasi;
+    document.getElementById("infoPelangganContent").style.display = "block";
+    document.getElementById("arrowIcon").style.transform = "rotate(0deg)";
+}
+
+// 4. Fungsi untuk membuka dan menutup data saat tombol ^ diklik
+function toggleInfoPelanggan() {
+    const content = document.getElementById("infoPelangganContent");
+    const arrow = document.getElementById("arrowIcon");
+
+    if (content.style.display === "none") {
+        content.style.display = "block";
+        arrow.style.transform = "rotate(0deg)";
+    } else {
+        content.style.display = "none";
+        arrow.style.transform = "rotate(180deg)";
+    }
+}
+
+// Otomatis sembunyikan kotak info jika user mengubah/mengetik ulang nomor tujuan
+document.getElementById("userId").addEventListener("input", function() {
+    if (document.getElementById("infoPelangganBox")) {
+        document.getElementById("infoPelangganBox").style.display = "none";
+    }
+});
+// Fungsi Buka-Tutup Dropdown Menu Produk
+// Fungsi Buka-Tutup Dropdown Menu Produk dengan Fitur Anti-Macet Otomatis
+function toggleDropdownProduct() {
+    var menu = document.getElementById("dropdownMenuContent");
+    var arrow = document.getElementById("dropdownArrowIcon");
+    
+    if (menu.style.display === "none" || menu.style.display === "") {
+        menu.style.display = "block";
+        if (arrow) arrow.style.transform = "rotate(180deg)";
+        
+        // Jembatan Sakti JavaScript: Memaksa HP mendeteksi ulang area scroll internal agar langsung licin
+        setTimeout(function() {
+            menu.scrollTop = 1;
+            menu.scrollTop = 0;
+        }, 50);
+        
+    } else {
+        menu.style.display = "none";
+        if (arrow) arrow.style.transform = "rotate(0deg)";
+    }
+}
+
+// Variabel sementara untuk menyimpan nama produk yang dipilih pengguna
+var produkTerpilihSaatIni = "";
+// Fungsi Saat Salah Satu Produk Dipilih dari Daftar Dropdown Atas
+// Variabel penampung sementara agar sistem tidak langsung memicu klik otomatis
+
+// ==========================================
+// KODE JAVASCRIPT FIXED (UTUH & ANTI MACET)
+// ==========================================
+
+// Variabel penampung global
+var kodeProdukSiapProses = "";
+
+// 1. Fungsi Ketika Pilihan E-wallet di Dropdown Diklik
+function selectProductOption(productName, iconUrl, productCode) {
+    // A. Simpan kode produk agar tombol Lanjutkan aktif
+    kodeProdukSiapProses = productCode; 
+    
+    // B. Ubah teks nama e-wallet di baris atas
+    document.getElementById("selectedProductName").innerText = productName;
+    
+    // C. Atur perubahan ikon atas dengan metode aman dari gambar robek
+    var iconContainer = document.getElementById("selectedProductIcon");
+    if (iconContainer) {
+        if (!iconUrl || iconUrl.includes("MASUKKAN_URL") || iconUrl.includes("URL_LOGO") || iconUrl === "") {
+            iconContainer.innerHTML = '<img src="https://flaticon.com" style="width: 24px; height: 24px; object-fit: contain;">';
+        } else {
+            iconContainer.innerHTML = '<img src="' + iconUrl + '" style="width: 24px; height: 24px; object-fit: contain; border-radius: 4px;">';
+        }
+    }
+    
+    // D. Tutup otomatis menu dropdown atas
+    var menu = document.getElementById("dropdownMenuContent");
+    var arrow = document.getElementById("dropdownArrowIcon");
+    if (menu) menu.style.display = "none";
+    if (arrow) arrow.style.transform = "rotate(0deg)";
+}
+// 2. Fungsi Utama saat Tombol "LANJUTKAN" Diklik (DIKUNCI AKTIF & AMPUH)
+function jalankanFungsiCekSistem() {
+    var nomorHp = document.getElementById("userId").value;
+    var nominal = document.getElementById("nominalInput").value;
+    
+    // AMBIL DATA OTOMATIS: Membaca teks produk yang sedang aktif di layar jika variabel ter-reset
+    var teksDropdown = document.getElementById("selectedProductName") ? document.getElementById("selectedProductName").innerText.toUpperCase() : "";
+    var produkAktif = "";
+
+    // Deteksi otomatis kode produk berdasarkan tulisan dropdown yang dipilih pengguna
+    if (teksDropdown.includes("BRI")) { produkAktif = "BRI"; }
+    else if (teksDropdown.includes("BNI")) { produkAktif = "BNI"; }
+    else if (teksDropdown.includes("MANDIRI")) { produkAktif = "MANDIRI"; }
+    else if (teksDropdown.includes("CIMB")) { produkAktif = "CIMB"; }
+    else if (teksDropdown.includes("PERMATA") || teksDropdown.includes("PERMATA")) { produkAktif = "PERMATA"; }
+    else { produkAktif = typeof kodeProdukSiapProses !== 'undefined' ? kodeProdukSiapProses : ""; }
+
+    // Validasi input wajib
+    if (!produkAktif || produkAktif === "" || teksDropdown.includes("PILIH E-WALLET")) {
+        alert("Silakan pilih jenis E-wallet terlebih dahulu!");
+        return;
+    }
+    if (!nomorHp) {
+        alert("Silakan masukkan Nomor HP tujuan!");
+        return;
+    }
+    if (!nominal) {
+        alert("Silakan masukkan nominal top up!");
+        return;
+    }
+
+
+
+
+    // Memicu klik produk asli pada sistem backend tersembunyi
+    let produkAsli = Array.from(document.querySelectorAll('#produkContainer *')).find(el => {
+        let teksProduk = el.textContent || el.innerText;
+        return teksProduk.toUpperCase().includes(produkAktif.toUpperCase());
+    });
+                     
+    if (produkAsli) {
+        let clickTarget = produkAsli.querySelector('button') || produkAsli.querySelector('.product-item') || produkAsli;
+        clickTarget.click(); // Sistem internal memuat data produk
+        
+        // Eksekusi pembelian instant bypass popup putih
+        setTimeout(function() {
+            var tombolBeliAsli = Array.from(document.querySelectorAll('button, .btn')).find(el => 
+                el.textContent.trim() === 'Beli' || el.innerText.trim() === 'Beli'
+            );
+            if (tombolBeliAsli) {
+                tombolBeliAsli.click();
+            } else {
+                if (typeof submitTransaction === "function") {
+                    submitTransaction();
+                }
+            }
+        }, 100);
+        
+    } else {
+        if (typeof checkTransaction === "function") {
+            checkTransaction();
+        }
+    }
+}
+// Fungsi Otomatis Membaca dan Mengubah format +62 / 62 menjadi 08 (Dikembalikan)
+function formatOtomatisNomorHP() {
+    var inputHp = document.getElementById("userId");
+    if (!inputHp) return;
+
+    let nomorMentah = inputHp.value;
+    
+    // 1. Bersihkan semua karakter selain angka (menghapus tanda + dan spasi)
+    let nomorBersih = nomorMentah.replace(/[^0-9]/g, '');
+        // 2. Jika nomor diawali kode negara 62, ubah paksa menjadi 0
+        if (nomorBersih.startsWith('62'))
+        {
+            nomorBersih = '0' + nomorBersih.slice(2);
+        }
+
+        // Kembalikan nomor yang sudah bersih ke dalam kotak input
+        if (inputHp.value !== nomorBersih)
+        {
+            inputHp.value = nomorBersih;
+        }
+    }
+
+    // Jembatan Sakti Pemantau: Memaksa aplikasi Bukaolshop langsung menyaring nomor menjadi 08 secara seketika saat kontak ditempel
+    setInterval(function() {
+        formatOtomatisNomorHP();
+    }, 400);
+
+
+    // =========================================================================
+    // FITUR TAMBAHAN BARU: LOGIKA TOMBOL BRILINK & FORMAT TITIK NOMINAL MANUAL
+    // =========================================================================
+
+    // 1. Format angka menjadi titik ribuan otomatis saat mengetik nominal
+    const nominalInput = document.getElementById('nominalInput');
+    if (nominalInput) {
+        nominalInput.addEventListener('input', function(e) {
+            // Ambil angka saja, buang karakter huruf
+            let value = this.value.replace(/[^0-9]/g, '');
+            
+            // Format berikan titik ribuan indonesia
+            if (value) {
+                this.value = parseInt(value, 10).toLocaleString('id-ID');
+            } else {
+                this.value = '';
+            }
+        });
+    }
+
+    // 2. Fungsi berpindah dari tahap 1 ke tahap 2
+   function goToStep2() {
+        var wallet = document.getElementById('walletSelect').value;
+        var nomorHp = document.getElementById('userId').value;
+
+        if (!wallet) {
+            alert('Silakan pilih Dompet Digital terlebih dahulu!');
+            return;
+        }
+        if (nomorHp.length < 10) {
+            alert('Nomor tujuan belum lengkap atau tidak valid!');
+            return;
+        }
+
+        document.getElementById('summary-wallet').innerText = wallet;
+        document.getElementById('summary-phone').innerText = nomorHp;
+
+        document.getElementById('step-1').style.display = 'none';
+        document.getElementById('step-2').style.display = 'block';
+    }
+
+    // 3. Fungsi kembali ke tahap 1
+    function backToStep1() {
+        document.getElementById('step-2').style.display = 'none';
+        document.getElementById('step-1').style.display = 'block';
+    }
+
+
+    // 4. Fungsi ketika tombol nominal cepat instan diklik
+    function pilihNominal(jumlah, elemen) {
+        // Otomatis isi kolom input lengkap dengan format titik
+        document.getElementById('nominalInput').value = jumlah.toLocaleString('id-ID');
+        
+        // Atur efek warna tombol biru aktif
+        var semuaTombol = document.querySelectorAll('.nom-btn');
+        semuaTombol.forEach(function(btn) {
+            btn.style.background = '#f8fafc';
+            btn.style.borderColor = '#cbd5e1';
+            btn.style.color = '#334155';
+        });
+        elemen.style.background = '#e0f2fe';
+        elemen.style.borderColor = '#0284c7';
+        elemen.style.color = '#0369a1';
+    }
+
+    // 5. Fungsi kirim data ke sistem checkout Bukaolshop
+    function kirimTransaksiPPOB() {
+        // Bersihkan tanda titik agar menjadi angka murni sebelum diproses sistem Bukaolshop
+        var nominalRaw = document.getElementById('nominalInput').value.replace(/\./g, '');
+        var angkaNominal = parseInt(nominalRaw) || 0;
+
+        if (angkaNominal < 5000 || angkaNominal > 500000) {
+            alert('Nominal harus di antara Rp5.000 - Rp500.000!');
+            return;
+        }
+
+        // Jalankan perintah transaksi bawaan server Anda
+        if (typeof jalankanFungsiCekSistem === "function") {
+            // Ubah nilai input kembali ke angka polos tanpa titik agar server pembaca data tidak eror
+            document.getElementById('nominalInput').value = angkaNominal;
+            jalankanFungsiCekSistem();
+        } else {
+            alert('Sistem memproses transaksi Rp ' + angkaNominal.toLocaleString('id-ID'));
+        }
+    }
+function goToStep2() {
+    // 1. Ambil teks e-wallet aktif dari dropdown kustom atas
+    const produkTerpilih = document.getElementById('selectedProductName').innerText;
+    const ewalletSlug = produkTerpilih.split(' ')[0].toLowerCase();
+    
+    // 2. Ambil nilai nomor HP tujuan
+    const nomorHP = document.getElementById('userId').value;
+
+    // Validasi pengisian data awal
+    if (produkTerpilih === "Cari atau pilih E-wallet" || produkTerpilih.trim() === "") {
+        alert("Silakan pilih E-wallet terlebih dahulu!");
+        return;
+    }
+    if (nomorHP.trim() === "") {
+        alert("Silakan masukkan nomor HP tujuan!");
+        return;
+    }
+
+    // 3. SET DATA AWAL & PINDAH HALAMAN INSTAN
+    const elemenNama = document.getElementById('summary-nama');
+    const elemenNoHP = document.getElementById('summary-nohp');
+
+    if (elemenNoHP) {
+        elemenNoHP.innerText = nomorHP;
+    }
+    if (elemenNama) {
+        elemenNama.innerText = "Memeriksa...";
+        elemenNama.style.color = "#222222";
+    }
+    document.getElementById('summary-wallet').innerText = produkTerpilih;
+
+    document.getElementById('step-1').style.display = 'none';
+    document.getElementById('step-2').style.display = 'block';
+    document.getElementById('seluruh-dropdown-atas').style.display = 'none';
+
+   
+ // 4. PROSES AMBIL DATA DARI SERVER API SECARA DINAMIS
+        const teksBank = produkTerpilih.toLowerCase();
+        let kodeBankOtomatis = ewalletSlug;
+        if (teksBank.includes('bri')) kodeBankOtomatis = 'bri';
+        else if (teksBank.includes('bni')) kodeBankOtomatis = 'bni';
+        else if (teksBank.includes('mandiri')) kodeBankOtomatis = 'mandiri';
+        else if (teksBank.includes('bca')) kodeBankOtomatis = 'bca';
+        else if (teksBank.includes('cimb')) kodeBankOtomatis = 'cimb';
+        else if (teksBank.includes('bsi')) kodeBankOtomatis = 'bsi';
+        else if (teksBank.includes('permata')) kodeBankOtomatis = 'permata';
+        else if (teksBank.includes('danamon')) kodeBankOtomatis = 'danamon'; fetch("https://api-cekid.mitra-scbo.my.id/trueid/bank/?rekening=" + encodeURIComponent(nomorHP.trim()) + "&bank=" + encodeURIComponent(kodeBankOtomatis) + "&key=b2cd7f877d43aa82") 
+.then(res => res.json())
+            .then(hasil => {
+                const namaDitemukan = (hasil && (hasil.name || hasil.nama || (hasil.data && (hasil.data.name || hasil.data.nama))));
+                if (namaDitemukan) {
+                    if (elemenNama) {
+                        elemenNama.innerText = namaDitemukan;
+                        elemenNama.style.color = "#16a34a";
+                    }
+                } else {
+                    if (elemenNama) {
+                        const pesanApi = (hasil && (hasil.message || hasil.msg || hasil.error)) ? (hasil.message || hasil.msg || hasil.error) : "(ID Tidak Ditemukan)";
+                        elemenNama.innerText = pesanApi;
+                        elemenNama.style.color = "#dc2626";
+                    }
+                }
+            })
+            .catch(err => {
+                if (elemenNama) {
+                    elemenNama.innerText = "(Gagal Cek Nama - Lanjut Transaksi)";
+                    elemenNama.style.color = "#dc2626";
+                }
+            });
+    }
+
+  
+function backToStep1() {
+    // Memunculkan kembali Halaman 1
+    document.getElementById('step-1').style.display = 'block';
+    
+    // Memunculkan kembali elemen dropdown kustom paling atas
+    document.getElementById('seluruh-dropdown-atas').style.display = 'block';
+
+    // Sembunyikan Halaman Nominal (Halaman 2)
+    document.getElementById('step-2').style.display = 'none';
+}
+// FUNGSI MANDIRI UNTUK MEMBUAT FORMAT TITIK OTOMATIS SAAT USER MENGETIK
+function formatRupiah(elemen) {
+    // 1. Ambil angka saja, buang semua karakter huruf atau simbol
+    let nilai = elemen.value.replace(/[^0-9]/g, '');
+    
+    // 2. Ubah angka menjadi format ribuan dengan titik
+    if (nilai) {
+        elemen.value = parseInt(nilai).toLocaleString('id-ID');
+    } else {
+        elemen.value = '';
+    }
+}
+// // Fungsi Buka Tutup Pop-up Modal (Versi Pintar & Lengkap)
+function bukaMenuSimpanNasabah() {
+    var modal = document.getElementById('modalSimpanNasabah');
+    if (modal) {
+        modal.style.display = 'block';
+    }
+
+    // OTOMATIS AMBIL NOMOR HP DARI FORM ATAS
+    var inputNomorUtama = document.getElementById('userId');
+    var inputNomorDiPopUp = document.getElementById('inputNomorLokal');
+
+    if (inputNomorUtama && inputNomorDiPopUp) {
+        if (inputNomorUtama.value.trim() !== "") {
+            inputNomorDiPopUp.value = inputNomorUtama.value;
+        }
+    }
+}
+
+function tutupMenuSimpanNasabah() {
+    var modal = document.getElementById('modalSimpanNasabah');
+    if (modal) {
+        modal.style.display = 'none';
+    }
+}
+
+
+// Fungsi me-render / menampilkan list data dari LocalStorage ke Layar
+function renderNasabahEwallet() {
+    const dataLokal = JSON.parse(localStorage.getItem('nasabah_ewallet')) || [];
+    const wadahList = document.getElementById('tempatDaftarNasabahKustom');
+    const teksKosong = document.getElementById('teksPanduanKosong');
+
+    wadahList.innerHTML = ''; // Kosongkan container sebelum diisi data terupdate
+
+    if (dataLokal.length === 0) {
+        teksKosong.style.display = 'block';
+        return;
+    }
+
+    teksKosong.style.display = 'none';
+
+    dataLokal.forEach((item, index) => {
+        const itemCard = document.createElement('div');
+        itemCard.style.cssText = "border: 1px solid #f1f5f9; border-radius: 12px; padding: 14px; display: flex; justify-content: space-between; align-items: center; background: #f8fafc; cursor: pointer;";
+        
+        // Fitur: Ketika kartu diklik, nomor HP otomatis terisi ke form input utama (id='userId')
+        itemCard.setAttribute('onclick', `isiOtomatisNomor('${item.nomor}')`);
+
+        itemCard.innerHTML = `
+            <div>
+                <div style="font-weight: bold; color: #334155; font-size: 14px; margin-bottom: 2px;">👤 ${item.nama}</div>
+                <div style="color: #64748b; font-size: 13px; font-family: monospace;">${item.nomor}</div>
+            </div>
+            <button onclick="hapusNasabahEwallet(event, ${index})" style="background: none; border: none; color: #94a3b8; font-size: 18px; cursor: pointer; padding: 0 4px;">×</button>
+        `;
+        wadahList.appendChild(itemCard);
+    });
+}
+
+// // Fungsi Simpan Data Baru Utuh (Anti Lompat ke Home)
+if (document.getElementById('formNasabahEwallet')) {
+    document.getElementById('formNasabahEwallet').addEventListener('submit', function(e) {
+        // KUNCI DARURAT: Menahan halaman agar tidak reload/kembali ke home
+        e.preventDefault(); 
+
+        const inputNama = document.getElementById('inputNamaLokal');
+        const inputNomor = document.getElementById('inputNomorLokal');
+
+        if (!inputNama || !inputNomor) return;
+
+        const nama = inputNama.value.trim();
+        const nomor = inputNomor.value.trim();
+
+        if (nama === "" || nomor === "") {
+            alert("Mohon isi Nama dan Nomor HP terlebih dahulu!");
+            return;
+        }
+
+        // Simpan data ke penyimpanan lokal HP
+        let dataLokal = JSON.parse(localStorage.getItem('nasabah_ewallet')) || [];
+        dataLokal.push({ nama: nama, nomor: nomor });
+        localStorage.setItem('nasabah_ewallet', JSON.stringify(dataLokal));
+
+        // Tutup pop-up modal dan reset form
+        tutupMenuSimpanNasabah();
+        document.getElementById('formNasabahEwallet').reset();
+
+        // Refresh daftar list di bawah agar nama langsung muncul
+        if (typeof renderNasabahEwallet === "function") {
+            renderNasabahEwallet();
+        }
+
+        alert("Nomor e-wallet berhasil disimpan ke favorit!");
+    });
+}
+
+
+// Fungsi Hapus Data Terpilih
+function hapusNasabahEwallet(event, index) {
+    event.stopPropagation(); // Mencegah form utama terisi saat klik tombol hapus
+    let dataLokal = JSON.parse(localStorage.getItem('nasabah_ewallet')) || [];
+    dataLokal.splice(index, 1);
+    localStorage.setItem('nasabah_ewallet', JSON.stringify(dataLokal));
+    renderNasabahEwallet(); // Refresh Tampilan
+}
+
+// Fungsi Mengisi otomatis kolom input nomor HP di atas
+function isiOtomatisNomor(nomorHP) {
+    // Menyesuaikan dengan target input id='userId' dari script bawaan Anda sebelumnya
+    const inputUtama = document.getElementById('userId'); 
+    if(inputUtama) {
+        inputUtama.value = nomorHP;
+        alert("Nomor berhasil diterapkan!");
+    }
+}
+
+// Jalankan fungsi tampilkan data saat halaman pertama kali dimuat
+document.addEventListener("DOMContentLoaded", function() {
+    renderNasabahEwallet();
+});
+// ========================================================
+// FUNGSI MANDIRI: MENYIMPAN DATA TANPA RELOAD/SUBMIT FORM
+// ========================================================
+function prosesSimpanManualEwallet() {
+    var inputNama = document.getElementById('inputNamaLokal');
+    var inputNomor = document.getElementById('inputNomorLokal');
+
+    if (!inputNama || !inputNomor) {
+        alert("Sistem gagal mendeteksi kolom input.");
+        return;
+    }
+
+    var nama = inputNama.value.trim();
+    var nomor = inputNomor.value.trim();
+
+    if (nama === "" || nomor === "") {
+        alert("Mohon isi Nama dan Nomor HP terlebih dahulu!");
+        return;
+    }
+
+    // Proses Simpan ke memori HP (LocalStorage)
+    var dataLokal = JSON.parse(localStorage.getItem('nasabah_ewallet')) || [];
+    dataLokal.push({ nama: nama, nomor: nomor });
+    localStorage.setItem('nasabah_ewallet', JSON.stringify(dataLokal));
+
+    // Bersihkan formulir agar kosong kembali
+    inputNama.value = "";
+    inputNomor.value = "";
+
+    // Tutup Pop-up Modal secara paksa
+    tutupMenuSimpanNasabah();
+
+    // Refresh daftar list di bawah agar nama langsung muncul di layar utama
+    if (typeof renderNasabahEwallet === "function") {
+        renderNasabahEwallet();
+    }
+
+    alert("Nomor e-wallet berhasil disimpan ke favorit!");
+}
+
+</script>
+<!-- BOTTOM SHEET POP-UP TAMBAH NASABAH -->
+<div id="modalSimpanNasabah" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 9999; font-family: sans-serif;">
+    <div style="position: absolute; bottom: 0; left: 0; right: 0; background: #ffffff; border-top-left-radius: 20px; border-top-right-radius: 20px; padding: 24px; box-shadow: 0px -4px 10px rgba(0,0,0,0.1);">
+        <div style="width: 40px; height: 4px; background: #e2e8f0; border-radius: 2px; margin: 0 auto 16px auto;"></div>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <h3 style="margin: 0; font-size: 16px; font-weight: bold; color: #1e293b;">Simpan Nomor E-Wallet</h3>
+            <button onclick="tutupMenuSimpanNasabah()" style="background: none; border: none; font-size: 22px; color: #94a3b8; cursor: pointer;">×</button>
+        </div>
+        <form id="formNasabahEwallet">
+            <div style="margin-bottom: 14px;">
+                <label style="display: block; margin-bottom: 6px; color: #64748b; font-size: 13px;">Nama Pemilik / Singkatan</label>
+                <input type="text" id="inputNamaLokal" placeholder="Contoh: Dana Ibu, Gopay Adek" required style="width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; box-sizing: border-box; font-size: 14px; outline: none;">
+            </div>
+            <div style="margin-bottom: 20px;">
+                <label style="display: block; margin-bottom: 6px; color: #64748b; font-size: 13px;">Nomor HP E-Wallet</label>
+                <input type="number" id="inputNomorLokal" placeholder="Masukkan Nomor HP" required style="width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; box-sizing: border-box; font-size: 14px; outline: none;">
+            </div>
+            <button type="submit" style="width: 100%; background: #0080ff; color: #ffffff; border: none; padding: 14px; border-radius: 24px; font-weight: bold; font-size: 14px; cursor: pointer;">Simpan ke Favorit</button>
+        </form>
+    </div>
+</div>
+<!-- ======================================================== -->
+<!-- APLIKASI MANDIRI: PELANGGAN TERSIMPAN E-WALLET (1 UTUH) -->
+<!-- ======================================================== -->
+
+<div style="margin-top: 25px !important;">
+
+<div class="floating-card" style="border-radius: 0px !important; box-shadow: none !important; background: transparent !important; background-color: transparent !important;">
+
+<div class="input-wrapper"
+style="width: 94% !important;
+margin: 12px auto 0px auto !important;
+box-sizing: border-box !important;
+padding: 0 !important;
+border-radius: 0px !important;
+background: transparent !important;
+background-color: transparent !important;">
+
+<style>
+  *:focus-within {
+    border-color: #e0e0e0 !important;
+    box-shadow: none !important;
+    outline: none !important;
+  }
+  #idPlayer:focus {
+    border-color: #007bff !important;
+    box-shadow: 0 0 4px rgba(0, 123, 255, 0.5) !important;
+    outline: none !important;
+  }  .input-box img, 
+  #btnCekID img, 
+  div[style*="display: flex"] img,
+  img[alt="Kontak"],
+  img[alt="Info"],
+  img[alt="Scan"],
+  img[alt="Favorite"] {
+      filter: none !important;
+      -webkit-filter: grayscale(0%) !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+  }
+
+</style>
+
+<!-- 1. KOTAK UTAMA YANG MEMBUNGKUS INPUT DAN MENU AKSI -->
+<div class="input-box" style="position: relative !important; width: 100% !important; 
+margin-top: -10px !important;
+background-color: #ffffff !important; border: 1px solid #e0e0e0 !important; border-radius: 20px !important; padding: 16px !important; box-sizing: border-box !important; display: flex !important; flex-direction: column !important;">
+
+<!-- KOTAK UTAMA FORM ATAS (KODE FINAL: IKON LENGKAP & RAMPING PRESTISI) -->
+<div id="kotakFormUtama" style="width: 100% !important; background-color: #ffffff !important; border: 1px solid #e0e0e0 !important; border-radius: 24px !important; padding: 14px !important; box-sizing: border-box !important; display: flex !important; flex-direction: column !important; gap: 14px !important; transition: border-color 0.3s ease !important;">
+
+
+
+
+<!-- KODE PENGGANTI: Menggeser tulisan ke atas & memperbaiki potongan bawah -->
+<div id="ewalletContainerUtama" style="background: #ffffff !important; border: 1px solid #e2e8f0 !important; border-radius: 20px !important; padding: 10px 24px 24px 24px; margin: 20px 0 35px 0; font-family: sans-serif; box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.03); display: block; clear: both;">
+
+    
+    <!-- Judul & Tombol Tambah Kebal Submit -->
+    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 24px; position: relative; z-index: 10;">
+        <span style="font-weight: bold; font-size: 15px; color: #333333;">Pelanggan Tersimpan</span>
+        <button type="button" 
+                onclick="ewallet_x_bukaModal();" 
+                style="display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; background: #0077ff !important; color: #ffffff !important; border-radius: 50%; font-size: 13px; font-weight: bold; cursor: pointer; border: none; padding: 0; box-shadow: 0 2px 4px rgba(0,119,255,0.3); position: relative; z-index: 9999;">
+            +
+        </button>
+    </div>
+
+    <!-- Kotak Konten Pembungkus List -->
+    <div style="text-align: center; padding: 10px; background: #ffffff; border-radius: 12px;">
+        <!-- Wadah Tempat Nama Muncul -->
+        <div id="ewallet_x_tempatDaftar" style="display: flex; flex-direction: column; gap: 8px; text-align: left;"></div>
+
+        <!-- Teks Panduan Jika Kosong -->
+        <div id="ewallet_x_teksKosong" style="text-align: center; color: #94a3b8; font-size: 13px; padding: 10px 0;">
+            Belum punya pelanggan tersimpan?<br>Yuk, mulai simpan nomor tujuan favoritmu!
+        </div>
+    </div>
+</div>
+
+<!-- BOTTOM SHEET POP-UP MANDIRI -->
+<div id="ewallet_x_modal" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); z-index: 999999; font-family: sans-serif;">
+    <div style="position: absolute; bottom: 0; left: 0; right: 0; background: #ffffff; border-top-left-radius: 20px; border-top-right-radius: 20px; padding: 24px; box-shadow: 0px -4px 10px rgba(0,0,0,0.2);">
+        <div style="width: 40px; height: 4px; background: #cbd5e1; border-radius: 2px; margin: 0 auto 16px auto;"></div>
+        
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <h3 style="margin: 0; font-size: 16px; font-weight: bold; color: #1e293b;">Simpan Nomor E-Wallet</h3>
+            <button type="button" onclick="ewallet_x_tutupModal();" style="background: none; border: none; font-size: 24px; color: #94a3b8; cursor: pointer;">×</button>
+        </div>
+
+        <!-- Menggunakan button type="button" agar 100% terkunci tidak bisa lari ke Home -->
+        <form onsubmit="event.preventDefault(); return false;">
+            <div style="margin-bottom: 14px;">
+                <label style="display: block; margin-bottom: 6px; color: #64748b; font-size: 13px; text-align: left;">Nama Pemilik / Singkatan</label>
+                <input type="text" id="ewallet_x_inputNama" placeholder="Contoh: Dana Ibu, Gopay Adek" required style="width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; box-sizing: border-box; font-size: 14px; outline: none;">
+            </div>
+            <div style="margin-bottom: 24px;">
+                <label style="display: block; margin-bottom: 6px; color: #64748b; font-size: 13px; text-align: left;">Nomor HP E-Wallet</label>
+                <input type="number" id="ewallet_x_inputNomor" placeholder="Masukkan Nomor HP" required style="width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; box-sizing: border-box; font-size: 14px; outline: none;">
+            </div>
+            
+            <button type="button" 
+                    onclick="ewallet_x_prosesSimpan();" 
+                    style="width: 100%; background: #0080ff; color: #ffffff; border: none; padding: 14px; border-radius: 24px; font-weight: bold; font-size: 14px; cursor: pointer; box-shadow: 0 4px 6px rgba(0,128,255,0.2);">
+                Simpan ke Favorit
+            </button>
+        </form>
+    </div>
+</div>
+
+<script>
+// ========================================================
+// JAVASCRIPT LOGIK MANDIRI ISOLASI (ANTI-BENTROK & LOMPAT)
+// ========================================================
+function ewallet_x_bukaModal() {
+    var modal = document.getElementById('ewallet_x_modal');
+    if (modal) modal.style.display = 'block';
+
+    // Otomatis intip dan salin nomor HP dari form atas jika ada (id='userId')
+    var inputAtas = document.getElementById('userId');
+    var inputBawah = document.getElementById('ewallet_x_inputNomor');
+    if (inputAtas && inputBawah && inputAtas.value.trim() !== "") {
+        inputBawah.value = inputAtas.value;
+    }
+}
+
+function ewallet_x_tutupModal() {
+    var modal = document.getElementById('ewallet_x_modal');
+    if (modal) modal.style.display = 'none';
+}
+
+function ewallet_x_prosesSimpan() {
+    var inNama = document.getElementById('ewallet_x_inputNama');
+    var inNomor = document.getElementById('ewallet_x_inputNomor');
+    if (!inNama || !inNomor) return;
+
+    var nama = inNama.value.trim();
+    var nomor = inNomor.value.trim();
+
+    if (nama === "" || nomor === "") {
+        alert("Mohon isi Nama dan Nomor HP terlebih dahulu!");
+        return;
+    }
+
+    // Simpan ke database lokal memory HP internal
+    var database = JSON.parse(localStorage.getItem('db_ewallet_aman')) || [];
+    database.push({ nama: nama, nomor: nomor });
+    localStorage.setItem('db_ewallet_aman', JSON.stringify(database));
+
+    inNama.value = "";
+    inNomor.value = "";
+    ewallet_x_tutupModal();
+    ewallet_x_render();
+    alert("Berhasil disimpan ke daftar favorit!");
+}
+
+function ewallet_x_render() {
+    var database = JSON.parse(localStorage.getItem('db_ewallet_aman')) || [];
+    var wadah = document.getElementById('ewallet_x_tempatDaftar');
+    var teksKosong = document.getElementById('ewallet_x_teksKosong');
+    
+    if (!wadah) return;
+    wadah.innerHTML = ''; 
+
+    if (database.length === 0) {
+        if (teksKosong) teksKosong.style.display = 'block';
+        return;
+    }
+
+    if (teksKosong) teksKosong.style.display = 'none';
+
+    database.forEach(function(item, index) {
+        var card = document.createElement('div');
+        card.style.cssText = "border: 1px solid #f1f5f9; border-radius: 12px; padding: 14px; display: flex; justify-content: space-between; align-items: center; background: #f8fafc; cursor: pointer; margin-bottom: 8px;";
+        
+        // Klik nama langsung isi otomatis form input HP atas Anda (id='userId')
+        card.setAttribute('onclick', "var inputAtas = document.getElementById('userId'); if(inputAtas){ inputAtas.value='" + item.nomor + "'; }");
+        card.innerHTML = "<div>" +
+            "<div style='font-weight: bold; color: #334155; font-size: 14px; margin-bottom: 2px;'>👤 " + item.nama + "</div>" +
+            "<div style='color: #64748b; font-size: 13px; font-family: monospace;'>" + item.nomor + "</div>" +
+            "</div>" +
+            "<span onclick='ewallet_x_hapus(event, " + index + ")' style='color: #94a3b8; font-size: 18px; cursor: pointer; padding: 0 4px;'>×</span>";
+        
+        wadah.appendChild(card);
+    });
+}
+
+function ewallet_x_hapus(event, index) {
+    event.stopPropagation(); // Amankan agar tidak ikut memicu klik form atas
+    var database = JSON.parse(localStorage.getItem('db_ewallet_aman')) || [];
+    database.splice(index, 1);
+    localStorage.setItem('db_ewallet_aman', JSON.stringify(database));
+    ewallet_x_render();
+}
+function filterProductList() {
+  var input = document.getElementById("searchProductInput");
+  var filter = input.value.toLowerCase();
+  var container = document.getElementById("productListItems");
+  var items = container.getElementsByClassName("product-item");
+
+  for (var i = 0; i < items.length; i++) {
+    var txtValue = items[i].textContent || items[i].innerText;
+    if (txtValue.toLowerCase().indexOf(filter) > -1) {
+      items[i].style.setProperty("display", "flex", "important");
+    } else {
+      items[i].style.setProperty("display", "none", "important");
+    }
+  }
+}
+// Mencegat efek tarik refresh agar terkunci di dalam dropdown saja
+document.getElementById("dropdownMenuContent").addEventListener("touchmove", function(e) {
+  var el = this;
+  var top = el.scrollTop;
+  var totalScroll = el.scrollHeight;
+  var currentScroll = top + el.offsetHeight;
+
+  // Jika di-scroll ke paling atas, tahan agar tidak menarik halaman luar
+  if (top === 0 && e.touches[0].clientY > 0) {
+    el.scrollTop = 1; // Geser 1 pixel agar sistem mengira sudah bergerak di dalam
+  }
+  // Jika di-scroll ke paling bawah, tahan agar tidak menarik halaman luar
+  else if (currentScroll === totalScroll && e.touches[0].clientY < 0) {
+    el.scrollTop = top - 1;
+  }
+}, { passive: false });
+
+// Jalankan pembaca data saat halaman siap
+document.addEventListener("DOMContentLoaded", function() {
+    ewallet_x_render();
+});
+</script>
+<!-- ======================================================== -->
+
+
+</body>
+</html>
+
