@@ -2347,9 +2347,10 @@ function toggleInfoBaru() {
 // KODE AKTIVASI CEK ID & KOTAK INFO DINAMIS
 // ==========================================
 (function() {
-    const inputId = document.getElementById('idPlayer');
+    const inputId = document.getElementById('scanner-input');
     const tombolCek = document.getElementById('btnCekID');
-    const inputBox = document.querySelector('.input-box');
+    const inputBox = document.querySelector('.input-box') || inputId.parentElement;
+
 
     if (!inputId || !tombolCek || !inputBox) return;
 
