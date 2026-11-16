@@ -2913,6 +2913,58 @@ if (targetProduk && areaFilterAnda) {
 
 </script>
 
+<script>
+  // Jembatan otomatis penghubung scanner-input dengan sistem Cek ID Mobile Legends
+  (function() {
+    const inpUtama = document.getElementById('scanner-input');
+    const btnCekID = document.getElementById('btnCekID');
+    const btnHapusX = document.getElementById('btnHapusX');
+
+    if (!inpUtama) return;
+
+    // 1. Perbaiki fungsi tombol X agar menghapus isi scanner-input
+    if (btnHapusX) {
+      btnHapusX.onclick = function() {
+        inpUtama.value = '';
+        inpUtama.focus();
+        perbaruiTombolML();
+      };
+    }
+
+    // 2. Pastikan fungsi cekIDPlayer() asli tetap menemukan angka ID dari scanner-input
+    if (typeof window.cekIDPlayer === 'function') {
+      const cekIDAsli = window.cekIDPlayer;
+      window.cekIDPlayer = function() {
+        // Buat elemen bayangan idPlayer jika fungsi asli mencarinya
+        let bayangan = document.getElementById('idPlayer');
+        if (!bayangan) {
+          bayangan = document.createElement('input');
+          bayangan.type = 'hidden';
+          bayangan.id = 'idPlayer';
+          document.body.appendChild(bayangan);
+        }
+        bayangan.value = inpUtama.value;
+        return cekIDAsli.apply(this, arguments);
+      };
+    }
+
+    // 3. Munculkan otomatis tombol biru "Cek ID" dan tombol "X" saat angka masuk
+    function perbaruiTombolML() {
+      const isi = (inpUtama.value || '').trim();
+      if (isi.length > 0) {
+        if (btnCekID) btnCekID.style.setProperty('display', 'inline-flex', 'important');
+        if (btnHapusX) btnHapusX.style.setProperty('display', 'inline-flex', 'important');
+      } else {
+        if (btnCekID) btnCekID.style.setProperty('display', 'none', 'important');
+        if (btnHapusX) btnHapusX.style.setProperty('display', 'none', 'important');
+      }
+    }
+
+    inpUtama.addEventListener('input', perbaruiTombolML);
+    inpUtama.addEventListener('keyup', perbaruiTombolML);
+    setInterval(perbaruiTombolML, 250);
+  })();
+</script>
 
 </body>
 </html>
