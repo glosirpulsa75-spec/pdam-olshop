@@ -2203,29 +2203,10 @@ function goToStep2() {
         else if (teksBank.includes('cimb')) kodeBankOtomatis = 'cimb';
         else if (teksBank.includes('bsi')) kodeBankOtomatis = 'bsi';
         else if (teksBank.includes('permata')) kodeBankOtomatis = 'permata';
-        else if (teksBank.includes('danamon')) kodeBankOtomatis = 'danamon'; fetch("https://api-cekid.mitra-scbo.my.id/trueid/bank/?rekening=" + encodeURIComponent(nomorHP.trim()) + "&bank=" + encodeURIComponent(kodeBankOtomatis) + "&key=b2cd7f877d43aa82") 
-.then(res => res.json())
-            .then(hasil => {
-                const namaDitemukan = (hasil && (hasil.name || hasil.nama || (hasil.data && (hasil.data.name || hasil.data.nama))));
-                if (namaDitemukan) {
-                    if (elemenNama) {
-                        elemenNama.innerText = namaDitemukan;
-                        elemenNama.style.color = "#16a34a";
-                    }
-                } else {
-                    if (elemenNama) {
-                        const pesanApi = (hasil && (hasil.message || hasil.msg || hasil.error)) ? (hasil.message || hasil.msg || hasil.error) : "(ID Tidak Ditemukan)";
-                        elemenNama.innerText = pesanApi;
-                        elemenNama.style.color = "#dc2626";
-                    }
-                }
-            })
-            .catch(err => {
-                if (elemenNama) {
-                    elemenNama.innerText = "(Gagal Cek Nama - Lanjut Transaksi)";
-                    elemenNama.style.color = "#dc2626";
-                }
-            });
+        else if (teksBank.includes('danamon')) kodeBankOtomatis = 'danamon'; const urlTargetApi = "https://api-cekid.mitra-scbo.my.id/trueid/bank/?rekening=" + encodeURIComponent(nomorHP.trim()) + "&bank=" + encodeURIComponent(kodeBankOtomatis) + "&key=b2cd7f877d43aa82"; 
+
+const urlProxy = "https://corsproxy.io/?" + encodeURIComponent(urlTargetApi); fetch(urlProxy) .then(res => res.json()) .then(hasil => { const namaDitemukan = (hasil && (hasil.name || hasil.nama || (hasil.data && (hasil.data.name || hasil.data.nama)))); if (namaDitemukan) { if (elemenNama) { elemenNama.innerText = namaDitemukan; elemenNama.style.color = "#16a34a"; } } else { if (elemenNama) { const pesanApi = (hasil && (hasil.message || hasil.msg || hasil.error)) ? (hasil.message || hasil.msg || hasil.error) : "Nama Tampil di Akhir Transaksi"; elemenNama.innerText = pesanApi; elemenNama.style.color = "#64748b"; } } }) .catch(err => { if (elemenNama) { elemenNama.innerText = "Siap Transfer (Nama Tampil di Akhir Transaksi)"; elemenNama.style.color = "#0284c7"; } });
+
     }
 
   
