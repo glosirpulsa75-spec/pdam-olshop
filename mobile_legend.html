@@ -2914,7 +2914,7 @@ if (targetProduk && areaFilterAnda) {
 </script>
 
 <script>
-  // Jembatan otomatis penghubung scanner-input dengan sistem Cek ID Mobile Legends
+  // Jembatan otomatis & perapian posisi presisi kotak input Mobile Legends
   (function() {
     const inpUtama = document.getElementById('scanner-input');
     const btnCekID = document.getElementById('btnCekID');
@@ -2922,8 +2922,51 @@ if (targetProduk && areaFilterAnda) {
 
     if (!inpUtama) return;
 
-    // 1. Perbaiki fungsi tombol X agar menghapus isi scanner-input
+    // 1. Rapikan wadah kotak input agar menjadi patokan tengah yang presisi
+    const pembungkus = inpUtama.parentElement;
+    if (pembungkus) {
+      pembungkus.style.setProperty('position', 'relative', 'important');
+      pembungkus.style.setProperty('display', 'flex', 'important');
+      pembungkus.style.setProperty('align-items', 'center', 'important');
+    }
+
+    // 2. Rapikan kotak input (tinggi & ruang kiri-kanan agar tidak menabrak ikon dan tombol)
+    inpUtama.style.setProperty('height', '46px', 'important');
+    inpUtama.style.setProperty('padding', '0 105px 0 44px', 'important');
+    inpUtama.style.setProperty('box-sizing', 'border-box', 'important');
+    inpUtama.style.setProperty('line-height', '46px', 'important');
+
+    // 3. Kunci posisi Ikon Buku Kontak tepat di tengah vertikal sebelah kiri
+    const linkKontak = pembungkus ? pembungkus.querySelector('a[href*="ambil_kontak"]') : null;
+    if (linkKontak) {
+      linkKontak.style.setProperty('position', 'absolute', 'important');
+      linkKontak.style.setProperty('left', '10px', 'important');
+      linkKontak.style.setProperty('top', '50%', 'important');
+      linkKontak.style.setProperty('transform', 'translateY(-50%)', 'important');
+      linkKontak.style.setProperty('display', 'flex', 'important');
+      linkKontak.style.setProperty('align-items', 'center', 'important');
+      linkKontak.style.setProperty('z-index', '5', 'important');
+    }
+
+    // 4. Kunci posisi Tombol Biru "Cek ID" di ujung kanan dalam kotak input
+    if (btnCekID) {
+      btnCekID.style.setProperty('position', 'absolute', 'important');
+      btnCekID.style.setProperty('right', '8px', 'important');
+      btnCekID.style.setProperty('top', '50%', 'important');
+      btnCekID.style.setProperty('transform', 'translateY(-50%)', 'important');
+      btnCekID.style.setProperty('margin', '0', 'important');
+      btnCekID.style.setProperty('z-index', '6', 'important');
+    }
+
+    // 5. Kunci posisi Tombol Silang "X" rapi tepat di sebelah kiri tombol "Cek ID"
     if (btnHapusX) {
+      btnHapusX.style.setProperty('position', 'absolute', 'important');
+      btnHapusX.style.setProperty('right', '78px', 'important');
+      btnHapusX.style.setProperty('top', '50%', 'important');
+      btnHapusX.style.setProperty('transform', 'translateY(-50%)', 'important');
+      btnHapusX.style.setProperty('margin', '0', 'important');
+      btnHapusX.style.setProperty('z-index', '6', 'important');
+
       btnHapusX.onclick = function() {
         inpUtama.value = '';
         inpUtama.focus();
@@ -2931,11 +2974,10 @@ if (targetProduk && areaFilterAnda) {
       };
     }
 
-    // 2. Pastikan fungsi cekIDPlayer() asli tetap menemukan angka ID dari scanner-input
+    // 6. Hubungkan cekIDPlayer() asli agar tetap membaca nilai dari scanner-input
     if (typeof window.cekIDPlayer === 'function') {
       const cekIDAsli = window.cekIDPlayer;
       window.cekIDPlayer = function() {
-        // Buat elemen bayangan idPlayer jika fungsi asli mencarinya
         let bayangan = document.getElementById('idPlayer');
         if (!bayangan) {
           bayangan = document.createElement('input');
@@ -2948,7 +2990,7 @@ if (targetProduk && areaFilterAnda) {
       };
     }
 
-    // 3. Munculkan otomatis tombol biru "Cek ID" dan tombol "X" saat angka masuk
+    // 7. Tampilkan / sembunyikan tombol Cek ID dan X otomatis
     function perbaruiTombolML() {
       const isi = (inpUtama.value || '').trim();
       if (isi.length > 0) {
