@@ -2395,22 +2395,39 @@ if (targetProduk && areaFilterAnda) {
 
 </div>
 <script>
-  // Fungsi Resmi BukaOlshop untuk Menangkap Hasil Scanner ke Kolom Input PLN
+  // Fungsi Resmi Bukaolshop untuk Menangkap Hasil Scanner & Mengaktifkan Tombol Selanjutnya PLN
   window.onScanResult = function(result) {
     if (!result) return;
 
-    // Bersihkan hasil scan dari spasi, strip, atau karakter non-angka (contoh: 14 3601 8991 5 -> 14360189915)
+    // Bersihkan hasil scan dari spasi, strip, atau karakter non-angka
     var nomorBersih = result.toString().trim().replace(/[^0-9]/g, '');
 
     if (nomorBersih !== '') {
-      var kolomPLN = document.getElementById('idPelangganBRILink');
-      if (kolomPLN) {
-        kolomPLN.value = nomorBersih;
-        kolomPLN.focus();
-        kolomPLN.dispatchEvent(new Event('input', { bubbles: true }));
-        kolomPLN.dispatchEvent(new Event('change', { bubbles: true }));
-        kolomPLN.dispatchEvent(new Event('keyup', { bubbles: true }));
-      }
+      // Ambil semua kotak input yang berpotensi dipakai oleh Token maupun Pascabayar
+      var semuaKolom = document.querySelectorAll('#idPelangganBRILink, input[placeholder*="ID Pelanggan"], input[placeholder*="Meter"]');
+      
+      semuaKolom.forEach(function(kolom) {
+        // Set nilai menggunakan setter asli agar terbaca oleh semua skrip
+        var nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
+        nativeInputValueSetter.call(kolom, nomorBersih);
+
+        // Jalankan fungsi oninput inline jika terpasang di tag HTML-nya
+        if (typeof kolom.oninput === 'function') {
+          kolom.oninput();
+        }
+        if (typeof kolom.onchange === 'function') {
+          kolom.onchange();
+        }
+
+        // Picu seluruh event standar keyboard & form
+        kolom.dispatchEvent(new Event('input', { bubbles: true }));
+        kolom.dispatchEvent(new Event('change', { bubbles: true }));
+        kolom.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true, key: '0' }));
+      });
+
+      // Cadangan jika ada variabel global penyimpanan ID di halaman PLN
+      if (typeof window.idPelanggan !== 'undefined') window.idPelanggan = nomorBersih;
+      if (typeof window.nomorMeter !== 'undefined') window.nomorMeter = nomorBersih;
     }
   };
 </script>
