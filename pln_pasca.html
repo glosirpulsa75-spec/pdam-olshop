@@ -2528,6 +2528,32 @@ if (targetProduk && areaFilterAnda) {
     }, 8000);
   })();
 </script>
+<script>
+  // Sinkronisasi otomatis ID Pelanggan PLN dari tahap 1 ke tahap 2 (pilihan nominal)
+  (function() {
+    setInterval(function() {
+      var kolomUtama = document.getElementById('idPelangganBRILink');
+      if (!kolomUtama) return;
+
+      var nilaiSaatIni = (kolomUtama.value || '').trim();
+      if (nilaiSaatIni !== '') {
+        // 1. Pastikan semua input tersembunyi/lainnya ikut terisi
+        var daftarIDLain = ['scanner-input', 'userId', 'idPelanggan', 'nomorPelanggan', 'customerId'];
+        daftarIDLain.forEach(function(idTarget) {
+          var el = document.getElementById(idTarget);
+          if (el && el.value !== nilaiSaatIni) {
+            el.value = nilaiSaatIni;
+          }
+        });
+
+        // 2. Perbarui variabel global jika dipakai oleh tombol Selanjutnya tahap 2
+        window.idPelanggan = nilaiSaatIni;
+        window.nomorMeter = nilaiSaatIni;
+        window.customerId = nilaiSaatIni;
+      }
+    }, 300);
+  })();
+</script>
 
 </body>
 </html>
