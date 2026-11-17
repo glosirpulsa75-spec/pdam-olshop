@@ -3005,78 +3005,7 @@ if (targetProduk && areaFilterAnda) {
     setInterval(perbaruiTombolML, 250);
   })();
 </script>
-<script>
-  // Jembatan Ringan Multi-Alur (Mendukung Ketik Panjang, Favorite, Scan, Bicara & Anti-Kedip)
-  (function() {
-    let idTerakhir = '';
 
-    // 1. Pastikan input tidak dibatasi panjangnya dan selalu sinkron ke idPlayer
-    function sinkronkanSekarang() {
-      const inp = document.getElementById('scanner-input');
-      if (!inp) return;
-
-      // Hapus pembatasan maxlength jika ada yang membatasi panjang angka
-      if (inp.hasAttribute('maxlength')) {
-        inp.removeAttribute('maxlength');
-      }
-
-      const nilai = inp.value.trim();
-      if (nilai !== '') {
-        idTerakhir = nilai;
-      }
-
-      let bayangan = document.getElementById('idPlayer');
-      if (!bayangan) {
-        bayangan = document.createElement('input');
-        bayangan.type = 'hidden';
-        bayangan.id = 'idPlayer';
-        document.body.appendChild(bayangan);
-      }
-      bayangan.value = nilai;
-    }
-
-    // 2. Pantau saat user mengetik bebas (tanpa mengubah atau menahan nilai inp.value!)
-    document.addEventListener('input', function(e) {
-      if (e.target && e.target.id === 'scanner-input') {
-        sinkronkanSekarang();
-      }
-    });
-
-    // 3. Tangkap klik pada Cek ID, Tombol X, Favorite, atau Kartu Produk
-    document.addEventListener('click', function(e) {
-      const inp = document.getElementById('scanner-input');
-      if (!inp) return;
-
-      // Jika klik tombol X, bersihkan memori
-      if (e.target.closest('#btnHapusX')) {
-        idTerakhir = '';
-        inp.value = '';
-        sinkronkanSekarang();
-        return;
-      }
-
-      // Jika klik Cek ID, simpan angka terakhir dan pulihkan SEKALI saja setelah 600ms jika terhapus
-      if (e.target.closest('#btnCekID')) {
-        const nilaiSaatCek = inp.value.trim();
-        if (nilaiSaatCek !== '') {
-          idTerakhir = nilaiSaatCek;
-          sinkronkanSekarang();
-          setTimeout(function() {
-            const kotak = document.getElementById('scanner-input');
-            if (kotak && kotak.value.trim() === '' && idTerakhir !== '') {
-              kotak.value = idTerakhir;
-              sinkronkanSekarang();
-            }
-          }, 600);
-        }
-        return;
-      }
-
-      // Setiap klik lainnya (termasuk pilih Favorite atau pilih Produk), sinkronkan setelah jeda 100ms
-      setTimeout(sinkronkanSekarang, 100);
-    });
-  })();
-</script>
 
 </body>
 </html>
