@@ -3006,13 +3006,25 @@ if (targetProduk && areaFilterAnda) {
   })();
 </script>
 <script>
-  // Pengunci Nomor ID & Multi-Alur Event-Murni (Diam Total 100% Tanpa Kedipan)
+  // Jembatan Ringan Multi-Alur (Mendukung Ketik Panjang, Favorite, Scan, Bicara & Anti-Kedip)
   (function() {
-    let idTerkunci = '';
-    let sedangHapusManual = false;
-    let statusTerakhirTampil = null;
+    let idTerakhir = '';
 
-    function sinkronSemuaID(nilai) {
+    // 1. Pastikan input tidak dibatasi panjangnya dan selalu sinkron ke idPlayer
+    function sinkronkanSekarang() {
+      const inp = document.getElementById('scanner-input');
+      if (!inp) return;
+
+      // Hapus pembatasan maxlength jika ada yang membatasi panjang angka
+      if (inp.hasAttribute('maxlength')) {
+        inp.removeAttribute('maxlength');
+      }
+
+      const nilai = inp.value.trim();
+      if (nilai !== '') {
+        idTerakhir = nilai;
+      }
+
       let bayangan = document.getElementById('idPlayer');
       if (!bayangan) {
         bayangan = document.createElement('input');
@@ -3020,113 +3032,49 @@ if (targetProduk && areaFilterAnda) {
         bayangan.id = 'idPlayer';
         document.body.appendChild(bayangan);
       }
-      if (bayangan.value !== nilai) {
-        bayangan.value = nilai;
-      }
+      bayangan.value = nilai;
     }
 
-    function aturTombolSekali(tampilkan) {
-      if (statusTerakhirTampil === tampilkan) return;
-      statusTerakhirTampil = tampilkan;
-
-      const btnCekID = document.getElementById('btnCekID');
-      const btnHapusX = document.getElementById('btnHapusX');
-      if (btnCekID) btnCekID.style.setProperty('display', tampilkan ? 'inline-flex' : 'none', 'important');
-      if (btnHapusX) btnHapusX.style.setProperty('display', tampilkan ? 'inline-flex' : 'none', 'important');
-    }
-
-    // 1. Pantau perubahan langsung pada elemen #scanner-input tanpa timer berulang
-    function pasangPengawasInput() {
-      const inp = document.getElementById('scanner-input');
-      if (!inp || inp.dataset.sudahDiawasi === '1') return;
-      inp.dataset.sudahDiawasi = '1';
-
-      // Pantau jika skrip lain mengubah atribut atau value
-      const observer = new MutationObserver(function() {
-        const val = inp.value.trim();
-        if (val === '' && idTerkunci !== '' && !sedangHapusManual) {
-          inp.value = idTerkunci;
-          sinkronSemuaID(idTerkunci);
-          aturTombolSekali(true);
-        }
-      });
-      observer.observe(inp, { attributes: true, attributeFilter: ['value'] });
-    }
-
-    // 2. Tangkap setiap interaksi klik
-    document.addEventListener('click', function(e) {
-      pasangPengawasInput();
-      const inp = document.getElementById('scanner-input');
-
-      if (e.target.closest('#btnCekID') && inp) {
-        const val = inp.value.trim();
-        if (val !== '') {
-          idTerkunci = val;
-          sedangHapusManual = false;
-          sinkronSemuaID(val);
-          aturTombolSekali(true);
-        }
-      }
-
-      if (e.target.closest('#btnHapusX') && inp) {
-        sedangHapusManual = true;
-        idTerkunci = '';
-        inp.value = '';
-        sinkronSemuaID('');
-        aturTombolSekali(false);
-        setTimeout(function() { sedangHapusManual = false; }, 350);
-      }
-
-      // Pastikan tombol Lanjutkan di modal selalu bisa diklik
-      const tombolLanjut = e.target.closest('button, a, div');
-      if (tombolLanjut && tombolLanjut.textContent && tombolLanjut.textContent.trim() === 'Lanjutkan') {
-        tombolLanjut.style.setProperty('pointer-events', 'auto', 'important');
-        tombolLanjut.style.setProperty('z-index', '99999', 'important');
-      }
-
-      if (inp && inp.value.trim() !== '') {
-        idTerkunci = inp.value.trim();
-        sinkronSemuaID(idTerkunci);
-      }
-    }, true);
-
-    // 3. Tangkap hapus manual via keyboard HP
-    document.addEventListener('keydown', function(e) {
-      if (e.target && e.target.id === 'scanner-input') {
-        if (e.key === 'Backspace' || e.key === 'Delete') {
-          sedangHapusManual = true;
-          setTimeout(function() {
-            const inp = document.getElementById('scanner-input');
-            if (inp && inp.value.trim() === '') {
-              idTerkunci = '';
-              sinkronSemuaID('');
-              aturTombolSekali(false);
-            }
-            sedangHapusManual = false;
-          }, 120);
-        }
-      }
-    }, true);
-
-    // 4. Tangkap perubahan isi kotak input (ketik, suara, scan, favorite)
+    // 2. Pantau saat user mengetik bebas (tanpa mengubah atau menahan nilai inp.value!)
     document.addEventListener('input', function(e) {
-      pasangPengawasInput();
       if (e.target && e.target.id === 'scanner-input') {
-        const val = e.target.value.trim();
-        if (val !== '') {
-          idTerkunci = val;
-          sinkronSemuaID(val);
-          aturTombolSekali(true);
-        } else if (!sedangHapusManual && idTerkunci !== '') {
-          e.target.value = idTerkunci;
-          sinkronSemuaID(idTerkunci);
-          aturTombolSekali(true);
-        }
+        sinkronkanSekarang();
       }
-    }, true);
+    });
 
-    // Jalankan inisialisasi awal satu kali
-    setTimeout(pasangPengawasInput, 300);
+    // 3. Tangkap klik pada Cek ID, Tombol X, Favorite, atau Kartu Produk
+    document.addEventListener('click', function(e) {
+      const inp = document.getElementById('scanner-input');
+      if (!inp) return;
+
+      // Jika klik tombol X, bersihkan memori
+      if (e.target.closest('#btnHapusX')) {
+        idTerakhir = '';
+        inp.value = '';
+        sinkronkanSekarang();
+        return;
+      }
+
+      // Jika klik Cek ID, simpan angka terakhir dan pulihkan SEKALI saja setelah 600ms jika terhapus
+      if (e.target.closest('#btnCekID')) {
+        const nilaiSaatCek = inp.value.trim();
+        if (nilaiSaatCek !== '') {
+          idTerakhir = nilaiSaatCek;
+          sinkronkanSekarang();
+          setTimeout(function() {
+            const kotak = document.getElementById('scanner-input');
+            if (kotak && kotak.value.trim() === '' && idTerakhir !== '') {
+              kotak.value = idTerakhir;
+              sinkronkanSekarang();
+            }
+          }, 600);
+        }
+        return;
+      }
+
+      // Setiap klik lainnya (termasuk pilih Favorite atau pilih Produk), sinkronkan setelah jeda 100ms
+      setTimeout(sinkronkanSekarang, 100);
+    });
   })();
 </script>
 
