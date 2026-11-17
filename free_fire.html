@@ -3005,6 +3005,35 @@ if (targetProduk && areaFilterAnda) {
     setInterval(perbaruiTombolML, 250);
   })();
 </script>
+<script>
+  // Pengunci nomor ID agar tidak hilang setelah kartu Info Pelanggan muncul
+  (function() {
+    let idTerakhirDicek = '';
+
+    // 1. Rekam nomor ID saat tombol Cek ID ditekan
+    document.addEventListener('click', function(e) {
+      const tombol = e.target.closest('#btnCekID');
+      if (tombol) {
+        const inp = document.getElementById('scanner-input');
+        if (inp && inp.value.trim() !== '') {
+          idTerakhirDicek = inp.value.trim();
+        }
+      }
+    }, true);
+
+    // 2. Jika kartu Info Pelanggan tampil namun kotak input ter-reset jadi kosong, kembalikan angkanya
+    setInterval(function() {
+      const inp = document.getElementById('scanner-input');
+      const kartuInfo = document.getElementById('hasilCekID') || document.querySelector('[id*="infoPelanggan"], [class*="info-pelanggan"]');
+      const teksHalaman = document.body.innerText || '';
+
+      if (inp && inp.value.trim() === '' && idTerakhirDicek !== '' && teksHalaman.includes('Info Pelanggan')) {
+        inp.value = idTerakhirDicek;
+        inp.dispatchEvent(new Event('input', { bubbles: true }));
+      }
+    }, 300);
+  })();
+</script>
 
 </body>
 </html>
