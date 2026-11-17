@@ -3006,73 +3006,127 @@ if (targetProduk && areaFilterAnda) {
   })();
 </script>
 <script>
-  // Penahan Nomor ID Anti-Reset & Anti-Kedip (Sinkron dengan Tombol X, Keyboard HP, dan Favorite)
+  // Pengunci Nomor ID & Multi-Alur Event-Murni (Diam Total 100% Tanpa Kedipan)
   (function() {
-    const inp = document.getElementById('scanner-input');
-    if (!inp) return;
-
     let idTerkunci = '';
     let sedangHapusManual = false;
+    let statusTerakhirTampil = null;
 
-    // 1. Cekat langsung setiap usaha skrip lain yang mencoba mengosongkan inp.value = '' secara paksa
-    const descAsli = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value');
-    Object.defineProperty(inp, 'value', {
-      get: function() {
-        return descAsli.get.call(this);
-      },
-      set: function(nilaiBaru) {
-        // Jika skrip lain mencoba mengosongkan input padahal bukan klik tombol X atau hapus keyboard, tahan!
-        if ((nilaiBaru === '' || nilaiBaru === null) && idTerkunci !== '' && !sedangHapusManual) {
-          return;
-        }
-        // Jika ada nomor baru masuk (misalnya dari Favorite atau Scan), perbarui kuncinya
-        if (nilaiBaru && nilaiBaru.toString().trim() !== '') {
-          idTerkunci = nilaiBaru.toString().trim();
-        }
-        descAsli.set.call(this, nilaiBaru);
+    function sinkronSemuaID(nilai) {
+      let bayangan = document.getElementById('idPlayer');
+      if (!bayangan) {
+        bayangan = document.createElement('input');
+        bayangan.type = 'hidden';
+        bayangan.id = 'idPlayer';
+        document.body.appendChild(bayangan);
       }
-    });
+      if (bayangan.value !== nilai) {
+        bayangan.value = nilai;
+      }
+    }
 
-    // 2. Kunci nilai saat tombol Cek ID diklik
+    function aturTombolSekali(tampilkan) {
+      if (statusTerakhirTampil === tampilkan) return;
+      statusTerakhirTampil = tampilkan;
+
+      const btnCekID = document.getElementById('btnCekID');
+      const btnHapusX = document.getElementById('btnHapusX');
+      if (btnCekID) btnCekID.style.setProperty('display', tampilkan ? 'inline-flex' : 'none', 'important');
+      if (btnHapusX) btnHapusX.style.setProperty('display', tampilkan ? 'inline-flex' : 'none', 'important');
+    }
+
+    // 1. Pantau perubahan langsung pada elemen #scanner-input tanpa timer berulang
+    function pasangPengawasInput() {
+      const inp = document.getElementById('scanner-input');
+      if (!inp || inp.dataset.sudahDiawasi === '1') return;
+      inp.dataset.sudahDiawasi = '1';
+
+      // Pantau jika skrip lain mengubah atribut atau value
+      const observer = new MutationObserver(function() {
+        const val = inp.value.trim();
+        if (val === '' && idTerkunci !== '' && !sedangHapusManual) {
+          inp.value = idTerkunci;
+          sinkronSemuaID(idTerkunci);
+          aturTombolSekali(true);
+        }
+      });
+      observer.observe(inp, { attributes: true, attributeFilter: ['value'] });
+    }
+
+    // 2. Tangkap setiap interaksi klik
     document.addEventListener('click', function(e) {
-      if (e.target.closest('#btnCekID')) {
-        const nilaiSaatIni = descAsli.get.call(inp).trim();
-        if (nilaiSaatIni !== '') {
-          idTerkunci = nilaiSaatIni;
+      pasangPengawasInput();
+      const inp = document.getElementById('scanner-input');
+
+      if (e.target.closest('#btnCekID') && inp) {
+        const val = inp.value.trim();
+        if (val !== '') {
+          idTerkunci = val;
           sedangHapusManual = false;
+          sinkronSemuaID(val);
+          aturTombolSekali(true);
         }
       }
 
-      // 3. Jika tombol silang X diklik, buka kunci dan kosongkan bersih
-      if (e.target.closest('#btnHapusX')) {
+      if (e.target.closest('#btnHapusX') && inp) {
         sedangHapusManual = true;
         idTerkunci = '';
-        descAsli.set.call(inp, '');
-        inp.dispatchEvent(new Event('input', { bubbles: true }));
-        setTimeout(function() { sedangHapusManual = false; }, 300);
+        inp.value = '';
+        sinkronSemuaID('');
+        aturTombolSekali(false);
+        setTimeout(function() { sedangHapusManual = false; }, 350);
+      }
+
+      // Pastikan tombol Lanjutkan di modal selalu bisa diklik
+      const tombolLanjut = e.target.closest('button, a, div');
+      if (tombolLanjut && tombolLanjut.textContent && tombolLanjut.textContent.trim() === 'Lanjutkan') {
+        tombolLanjut.style.setProperty('pointer-events', 'auto', 'important');
+        tombolLanjut.style.setProperty('z-index', '99999', 'important');
+      }
+
+      if (inp && inp.value.trim() !== '') {
+        idTerkunci = inp.value.trim();
+        sinkronSemuaID(idTerkunci);
       }
     }, true);
 
-    // 4. Jika user menghapus manual lewat tombol Backspace/Hapus di keyboard HP, izinkan!
-    inp.addEventListener('keydown', function(e) {
-      if (e.key === 'Backspace' || e.key === 'Delete') {
-        sedangHapusManual = true;
-        setTimeout(function() {
-          const sisa = descAsli.get.call(inp).trim();
-          idTerkunci = sisa;
-          sedangHapusManual = false;
-        }, 100);
+    // 3. Tangkap hapus manual via keyboard HP
+    document.addEventListener('keydown', function(e) {
+      if (e.target && e.target.id === 'scanner-input') {
+        if (e.key === 'Backspace' || e.key === 'Delete') {
+          sedangHapusManual = true;
+          setTimeout(function() {
+            const inp = document.getElementById('scanner-input');
+            if (inp && inp.value.trim() === '') {
+              idTerkunci = '';
+              sinkronSemuaID('');
+              aturTombolSekali(false);
+            }
+            sedangHapusManual = false;
+          }, 120);
+        }
       }
-    });
+    }, true);
 
-    inp.addEventListener('input', function() {
-      const isiBaru = descAsli.get.call(inp).trim();
-      if (isiBaru !== '') {
-        idTerkunci = isiBaru;
-      } else if (sedangHapusManual) {
-        idTerkunci = '';
+    // 4. Tangkap perubahan isi kotak input (ketik, suara, scan, favorite)
+    document.addEventListener('input', function(e) {
+      pasangPengawasInput();
+      if (e.target && e.target.id === 'scanner-input') {
+        const val = e.target.value.trim();
+        if (val !== '') {
+          idTerkunci = val;
+          sinkronSemuaID(val);
+          aturTombolSekali(true);
+        } else if (!sedangHapusManual && idTerkunci !== '') {
+          e.target.value = idTerkunci;
+          sinkronSemuaID(idTerkunci);
+          aturTombolSekali(true);
+        }
       }
-    });
+    }, true);
+
+    // Jalankan inisialisasi awal satu kali
+    setTimeout(pasangPengawasInput, 300);
   })();
 </script>
 
