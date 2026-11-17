@@ -1107,7 +1107,7 @@ box-shadow: none !important;">
  
  <!-- KAPSUL BARIS TOMBOL (PAS MENYATU DI DALAM KOTAK PUTIH) -->
     <div style="width: 100% !important; background-color: #f1f3f5 !important; border-radius: 16px !important; padding: 10px !important; box-sizing: border-box !important; display: flex !important; align-items: center !important; justify-content: space-around !important;">
-         <!-- Tombol Bicara Mandiri (Anti-Putus Gboard dengan Kotak Suara Terpisah) -->
+        <!-- Tombol Bicara Mandiri (Anti-Putus Gboard dengan Kotak Suara Terpisah) -->
 <div role="button" tabindex="0" onclick="(function(){ var inpUtama = document.getElementById('scanner-input') || document.querySelector('input[placeholder*=\'Nomor\']'); if(!inpUtama) return; var box = document.getElementById('boxInputSuaraKustom'); if(!box){ box = document.createElement('div'); box.id = 'boxInputSuaraKustom'; box.style.cssText = 'margin-top:10px; padding:10px; background:#f0f9ff; border:1.5px solid #0284c7; border-radius:10px;'; box.innerHTML = '<div style=\'font-size:11.5px; color:#0369a1; margin-bottom:6px; font-weight:600;\'>🎙️ Tekan ikon Mikrofon di keyboard & ucapkan seluruh nomor:</div><div style=\'display:flex; gap:6px;\'><input type=\'tel\' id=\'inputSuaraSementara\' placeholder=\'Hasil suara muncul di sini...\' style=\'flex:1; padding:8px 10px; border:1px solid #bae6fd; border-radius:8px; font-size:14px; font-weight:bold; color:#0f172a; outline:none; background:#ffffff;\'><button type=\'button\' id=\'btnTerapkanSuara\' style=\'background:#0284c7; color:#fff; border:none; border-radius:8px; padding:0 12px; font-size:12px; font-weight:bold; cursor:pointer;\'>Pakai</button></div>'; inpUtama.parentNode.parentNode.appendChild(box); document.getElementById('btnTerapkanSuara').onclick = function(){ var val = document.getElementById('inputSuaraSementara').value.replace(/[^0-9]/g,''); if(val.startsWith('62')) val = '0'+val.slice(2); if(val){ inpUtama.value = val; if(typeof satukkanNomorML==='function') satukkanNomorML(); inpUtama.dispatchEvent(new Event('input',{bubbles:true})); } box.style.display = 'none'; }; } box.style.display = 'block'; var inpSuara = document.getElementById('inputSuaraSementara'); inpSuara.value = ''; inpSuara.focus(); inpSuara.click(); var lastS = ''; var tmr = null; var iv = setInterval(function(){ if(box.style.display === 'none'){ clearInterval(iv); return; } if(inpSuara.value !== lastS){ lastS = inpSuara.value; clearTimeout(tmr); tmr = setTimeout(function(){ var bersih = inpSuara.value.replace(/[^0-9]/g,''); if(bersih.startsWith('62')) bersih = '0'+bersih.slice(2); if(bersih.length >= 10){ inpUtama.value = bersih; if(typeof satukkanNomorML==='function') satukkanNomorML(); inpUtama.dispatchEvent(new Event('input',{bubbles:true})); box.style.display = 'none'; clearInterval(iv); } }, 2200); } }, 300); })()" style="display: flex !important; align-items: center !important; justify-content: center !important; cursor: pointer !important; flex: 1 !important; gap: 6px !important; user-select: none !important; -webkit-user-select: none !important; -webkit-tap-highlight-color: transparent !important; padding: 0 !important; margin: 0 !important;">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="width: 16px !important; height: 16px !important; display: block !important; color: #000000 !important; pointer-events: none !important;">
         <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.91-3c-.49 0-.9.36-.98.85C16.52 14.2 14.47 16 12 16s-4.52-1.8-4.93-4.15c-.08-.49-.49-.85-.98-.85-.61 0-1.09.54-1 1.14.49 3 2.89 5.35 5.91 5.78V20c0 .55.45 1 1 1s1-.45 1-1v-2.08c3.02-.43 5.42-2.78 5.91-5.78.1-.6-.39-1.14-1-1.14z"/>
@@ -1124,8 +1124,8 @@ box-shadow: none !important;">
             <img src="https://images.bukaolshop.com/hosting/183991/203d42a9cfb3540740.png" alt="Scan" style="width: 16px !important; height: 16px !important; display: block !important;" />
             <span style="font-size: 13px !important; color: #000000 !important; font-weight: bold !important; font-family: sans-serif !important;">Scan</span>
         </a>
-  
-            
+   
+        
         <!-- Garis Pembatas Vertikal Kanan -->
         <div style="width: 1px !important; height: 14px !important; background-color: #ced4da !important;"></div>
         
@@ -2840,7 +2840,6 @@ function closePromoModal(e) {
 
 
 </script>
-
 <script>
 // Fungsi otomatis berjalan berulang untuk memaksa nomor hasil scan masuk kolom
 var cekHasilScan = setInterval(function() {
@@ -2922,5 +2921,103 @@ if (targetProduk && areaFilterAnda) {
 
 
 </script>
+
+<script>
+  // Jembatan otomatis & perapian posisi presisi kotak input Mobile Legends
+  (function() {
+    const inpUtama = document.getElementById('scanner-input');
+    const btnCekID = document.getElementById('btnCekID');
+    const btnHapusX = document.getElementById('btnHapusX');
+
+    if (!inpUtama) return;
+
+    // 1. Rapikan wadah kotak input agar menjadi patokan tengah yang presisi
+    const pembungkus = inpUtama.parentElement;
+    if (pembungkus) {
+      pembungkus.style.setProperty('position', 'relative', 'important');
+      pembungkus.style.setProperty('display', 'flex', 'important');
+      pembungkus.style.setProperty('align-items', 'center', 'important');
+    }
+
+    // 2. Rapikan kotak input (tinggi & ruang kiri-kanan agar tidak menabrak ikon dan tombol)
+    inpUtama.style.setProperty('height', '46px', 'important');
+    inpUtama.style.setProperty('padding', '0 105px 0 44px', 'important');
+    inpUtama.style.setProperty('box-sizing', 'border-box', 'important');
+    inpUtama.style.setProperty('line-height', '46px', 'important');
+
+    // 3. Kunci posisi Ikon Buku Kontak tepat di tengah vertikal sebelah kiri
+    const linkKontak = pembungkus ? pembungkus.querySelector('a[href*="ambil_kontak"]') : null;
+    if (linkKontak) {
+      linkKontak.style.setProperty('position', 'absolute', 'important');
+      linkKontak.style.setProperty('left', '10px', 'important');
+      linkKontak.style.setProperty('top', '50%', 'important');
+      linkKontak.style.setProperty('transform', 'translateY(-50%)', 'important');
+      linkKontak.style.setProperty('display', 'flex', 'important');
+      linkKontak.style.setProperty('align-items', 'center', 'important');
+      linkKontak.style.setProperty('z-index', '5', 'important');
+    }
+
+    // 4. Kunci posisi Tombol Biru "Cek ID" di ujung kanan dalam kotak input
+    if (btnCekID) {
+      btnCekID.style.setProperty('position', 'absolute', 'important');
+      btnCekID.style.setProperty('right', '8px', 'important');
+      btnCekID.style.setProperty('top', '50%', 'important');
+      btnCekID.style.setProperty('transform', 'translateY(-50%)', 'important');
+      btnCekID.style.setProperty('margin', '0', 'important');
+      btnCekID.style.setProperty('z-index', '6', 'important');
+    }
+
+    // 5. Kunci posisi Tombol Silang "X" rapi tepat di sebelah kiri tombol "Cek ID"
+    if (btnHapusX) {
+      btnHapusX.style.setProperty('position', 'absolute', 'important');
+      btnHapusX.style.setProperty('right', '78px', 'important');
+      btnHapusX.style.setProperty('top', '50%', 'important');
+      btnHapusX.style.setProperty('transform', 'translateY(-50%)', 'important');
+      btnHapusX.style.setProperty('margin', '0', 'important');
+      btnHapusX.style.setProperty('z-index', '6', 'important');
+
+      btnHapusX.onclick = function() {
+        inpUtama.value = '';
+        inpUtama.focus();
+        perbaruiTombolML();
+      };
+    }
+
+    // 6. Hubungkan cekIDPlayer() asli agar tetap membaca nilai dari scanner-input
+    if (typeof window.cekIDPlayer === 'function') {
+      const cekIDAsli = window.cekIDPlayer;
+      window.cekIDPlayer = function() {
+        let bayangan = document.getElementById('idPlayer');
+        if (!bayangan) {
+          bayangan = document.createElement('input');
+          bayangan.type = 'hidden';
+          bayangan.id = 'idPlayer';
+          document.body.appendChild(bayangan);
+        }
+        bayangan.value = inpUtama.value;
+        return cekIDAsli.apply(this, arguments);
+      };
+    }
+
+    // 7. Tampilkan / sembunyikan tombol Cek ID dan X otomatis
+    function perbaruiTombolML() {
+      const isi = (inpUtama.value || '').trim();
+      if (isi.length > 0) {
+        if (btnCekID) btnCekID.style.setProperty('display', 'inline-flex', 'important');
+        if (btnHapusX) btnHapusX.style.setProperty('display', 'inline-flex', 'important');
+      } else {
+        if (btnCekID) btnCekID.style.setProperty('display', 'none', 'important');
+        if (btnHapusX) btnHapusX.style.setProperty('display', 'none', 'important');
+      }
+    }
+
+    inpUtama.addEventListener('input', perbaruiTombolML);
+    inpUtama.addEventListener('keyup', perbaruiTombolML);
+    setInterval(perbaruiTombolML, 250);
+  })();
+</script>
+
+
+
 </body>
 </html>
