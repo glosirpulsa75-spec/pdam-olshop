@@ -3006,70 +3006,71 @@ if (targetProduk && areaFilterAnda) {
   })();
 </script>
 <script>
-  // Pengunci nomor ID sekali jalan (anti-kedip & sinkron dengan tombol X dan Favorite)
+  // Penahan Nomor ID Anti-Reset & Anti-Kedip (Sinkron dengan Tombol X, Keyboard HP, dan Favorite)
   (function() {
-    let idTerakhirDicek = '';
+    const inp = document.getElementById('scanner-input');
+    if (!inp) return;
 
-    // 1. Rekam nomor ID saat tombol Cek ID diklik, lalu kembalikan SEKALI setelah info muncul
+    let idTerkunci = '';
+    let sedangHapusManual = false;
+
+    // 1. Cekat langsung setiap usaha skrip lain yang mencoba mengosongkan inp.value = '' secara paksa
+    const descAsli = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value');
+    Object.defineProperty(inp, 'value', {
+      get: function() {
+        return descAsli.get.call(this);
+      },
+      set: function(nilaiBaru) {
+        // Jika skrip lain mencoba mengosongkan input padahal bukan klik tombol X atau hapus keyboard, tahan!
+        if ((nilaiBaru === '' || nilaiBaru === null) && idTerkunci !== '' && !sedangHapusManual) {
+          return;
+        }
+        // Jika ada nomor baru masuk (misalnya dari Favorite atau Scan), perbarui kuncinya
+        if (nilaiBaru && nilaiBaru.toString().trim() !== '') {
+          idTerkunci = nilaiBaru.toString().trim();
+        }
+        descAsli.set.call(this, nilaiBaru);
+      }
+    });
+
+    // 2. Kunci nilai saat tombol Cek ID diklik
     document.addEventListener('click', function(e) {
-      const tombolCek = e.target.closest('#btnCekID');
-      if (tombolCek) {
-        const inp = document.getElementById('scanner-input');
-        if (inp && inp.value.trim() !== '') {
-          idTerakhirDicek = inp.value.trim();
-
-          // Pantau selama maksimal 3 detik saja untuk mengembalikan angka SEKALI jika terhapus
-          let percobaan = 0;
-          const pemulihSekali = setInterval(function() {
-            percobaan++;
-            const kotak = document.getElementById('scanner-input');
-            if (kotak && kotak.value.trim() === '' && idTerakhirDicek !== '') {
-              kotak.value = idTerakhirDicek;
-              kotak.dispatchEvent(new Event('input', { bubbles: true }));
-              clearInterval(pemulihSekali); // Hentikan segera agar tidak berkedip!
-            }
-            if (percobaan >= 15) {
-              clearInterval(pemulihSekali);
-            }
-          }, 200);
+      if (e.target.closest('#btnCekID')) {
+        const nilaiSaatIni = descAsli.get.call(inp).trim();
+        if (nilaiSaatIni !== '') {
+          idTerkunci = nilaiSaatIni;
+          sedangHapusManual = false;
         }
       }
 
-      // 2. Jika tombol X diklik, hapus memori idTerakhirDicek agar tidak muncul lagi
-      const tombolX = e.target.closest('#btnHapusX');
-      if (tombolX) {
-        idTerakhirDicek = '';
-        const inp = document.getElementById('scanner-input');
-        if (inp) {
-          inp.value = '';
-          inp.dispatchEvent(new Event('input', { bubbles: true }));
-        }
-      }
-
-      // 3. Jika memilih ID dari daftar Favorite, reset memori lama & masukkan ID Favorite yang diklik
-      const itemFavorit = e.target.closest('[onclick*="pilihFavorit"], .item-favorit, .fav-item, [data-id]');
-      if (itemFavorit) {
-        idTerakhirDicek = '';
+      // 3. Jika tombol silang X diklik, buka kunci dan kosongkan bersih
+      if (e.target.closest('#btnHapusX')) {
+        sedangHapusManual = true;
+        idTerkunci = '';
+        descAsli.set.call(inp, '');
+        inp.dispatchEvent(new Event('input', { bubbles: true }));
+        setTimeout(function() { sedangHapusManual = false; }, 300);
       }
     }, true);
 
-    // 4. Pastikan setiap pemanggilan fungsi Favorite langsung mengisi scanner-input
-    const daftarFungsiFav = ['pilihFavorit', 'pilihFavorite', 'useFavorite', 'gunakanFavorit'];
-    daftarFungsiFav.forEach(function(namaFungsi) {
-      if (typeof window[namaFungsi] === 'function') {
-        const fungsiAsli = window[namaFungsi];
-        window[namaFungsi] = function(idBaru) {
-          idTerakhirDicek = '';
-          const hasil = fungsiAsli.apply(this, arguments);
-          setTimeout(function() {
-            const inp = document.getElementById('scanner-input');
-            if (inp && typeof idBaru === 'string' && idBaru.trim() !== '') {
-              inp.value = idBaru.trim();
-              inp.dispatchEvent(new Event('input', { bubbles: true }));
-            }
-          }, 50);
-          return hasil;
-        };
+    // 4. Jika user menghapus manual lewat tombol Backspace/Hapus di keyboard HP, izinkan!
+    inp.addEventListener('keydown', function(e) {
+      if (e.key === 'Backspace' || e.key === 'Delete') {
+        sedangHapusManual = true;
+        setTimeout(function() {
+          const sisa = descAsli.get.call(inp).trim();
+          idTerkunci = sisa;
+          sedangHapusManual = false;
+        }, 100);
+      }
+    });
+
+    inp.addEventListener('input', function() {
+      const isiBaru = descAsli.get.call(inp).trim();
+      if (isiBaru !== '') {
+        idTerkunci = isiBaru;
+      } else if (sedangHapusManual) {
+        idTerkunci = '';
       }
     });
   })();
