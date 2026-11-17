@@ -2644,6 +2644,259 @@ function closePromoModal(e) {
    
 
 </script>
+<script>
+// Fungsi otomatis berjalan berulang untuk memaksa nomor hasil scan masuk kolom
+var cekHasilScan = setInterval(function() {
+    var kolomInput = document.getElementById('scanner-input');
+    
+    if (kolomInput) {
+        // 1. Cek parameter URL bawaan webview aplikasi
+        const urlParams = new URLSearchParams(window.location.search);
+        let nomorFinal = urlParams.get('catatan') || urlParams.get('nomor') || urlParams.get('scan') || '';
+        
+        // 2. Jika URL kosong, cek langsung shortcode teks bawaan aplikasi BukaOlshop
+        if (!nomorFinal || nomorFinal === 'null') {
+            nomorFinal = "{{hasil_kontak}}";
+        }
+        
+        // Bersihkan teks saringan template kosong bawaan sistem
+        if (nomorFinal && nomorFinal !== '{{hasil_kontak}}' && nomorFinal !== '[nomor_hp]' && nomorFinal !== 'null') {
+            // Hilangkan semua spasi di antara nomor meteran (contoh: 14 3601 8991 5 menjadi 14360189915)
+            var nomorBersih = nomorFinal.replace(/[^0-9]/g, '');
+            
+            if (nomorBersih !== "" && kolomInput.value !== nomorBersih) {
+                // Tulis paksa nomor ke dalam kolom input utama Anda
+                kolomInput.value = nomorBersih;
+                
+                // Hentikan pengecekan berulang karena nomor sudah berhasil masuk
+                clearInterval(cekHasilScan);
+                
+                // Memicu otomatis kemunculan daftar harga di bawahnya
+                if (typeof satukkanNomorML === "function") {
+                    satukkanNomorML();
+                }
+            }
+        }
+    }
+}, 300); // Mengecek otomatis setiap 0,3 detik secara agresif
+
+// Pengaman otomatis: Matikan fungsi setelah 5 detik agar baterai HP user tidak boros
+setTimeout(function() {
+    clearInterval(cekHasilScan);
+}, 5000);
+
+let nomorLama = "";
+
+function satukkanNomorML() {
+    const inputElement = document.getElementById('scanner-input');
+    if (!inputElement) return;
+
+    const nomorSekarang = inputElement.value ? inputElement.value.trim() : '';
+    const prefixSekarang = nomorSekarang.substring(0, 4); 
+
+    if (prefixSekarang !== nomorLama) {
+        nomorLama = prefixSekarang; 
+        
+        if (typeof loadTVData === 'function') {
+            loadTVData();
+        }
+    }
+}
+
+// --- KODE TAMBAHAN UNTUK TEMPEL FILTER ---
+const targetProduk = document.getElementById('productContent');
+const areaFilterAnda = document.querySelector('.floating-card-filter');
+
+if (areaFilterAnda) {
+    areaFilterAnda.style.setProperty('display', 'none', 'important');
+}
+
+if (targetProduk && areaFilterAnda) {
+    const observer = new MutationObserver(() => {
+        if (targetProduk.style.display !== 'none' && targetProduk.innerHTML.trim() !== "") {
+            areaFilterAnda.style.setProperty('display', 'block', 'important');
+        } else {
+            areaFilterAnda.style.setProperty('display', 'none', 'important');
+        }
+    });
+    observer.observe(targetProduk, { attributes: true, attributeFilter: ['style', 'class'], childList: true });
+}
+// -----------------------------------------
+
+
+</script>
+<script>
+  // Jembatan otomatis & perapian posisi presisi kotak input Mobile Legends
+  (function() {
+    const inpUtama = document.getElementById('scanner-input');
+    const btnCekID = document.getElementById('btnCekID');
+    const btnHapusX = document.getElementById('btnHapusX');
+
+    if (!inpUtama) return;
+
+    // 1. Rapikan wadah kotak input agar menjadi patokan tengah yang presisi
+    const pembungkus = inpUtama.parentElement;
+    if (pembungkus) {
+      pembungkus.style.setProperty('position', 'relative', 'important');
+      pembungkus.style.setProperty('display', 'flex', 'important');
+      pembungkus.style.setProperty('align-items', 'center', 'important');
+    }
+
+    // 2. Rapikan kotak input
+    inpUtama.style.setProperty('height', '46px', 'important');
+    inpUtama.style.setProperty('padding', '0 105px 0 44px', 'important');
+    inpUtama.style.setProperty('box-sizing', 'border-box', 'important');
+    inpUtama.style.setProperty('line-height', '46px', 'important');
+
+    // 3. Kunci posisi Ikon Buku Kontak tepat di tengah vertikal sebelah kiri
+    const linkKontak = pembungkus ? pembungkus.querySelector('a[href*="ambil_kontak"]') : null;
+    if (linkKontak) {
+      linkKontak.style.setProperty('position', 'absolute', 'important');
+      linkKontak.style.setProperty('left', '10px', 'important');
+      linkKontak.style.setProperty('top', '50%', 'important');
+      linkKontak.style.setProperty('transform', 'translateY(-50%)', 'important');
+      linkKontak.style.setProperty('display', 'flex', 'important');
+      linkKontak.style.setProperty('align-items', 'center', 'important');
+      linkKontak.style.setProperty('z-index', '5', 'important');
+    }
+
+    // 4. Kunci posisi Tombol Biru "Cek ID" & pastikan event kliknya aktif penuh
+    if (btnCekID) {
+      btnCekID.style.setProperty('position', 'absolute', 'important');
+      btnCekID.style.setProperty('right', '8px', 'important');
+      btnCekID.style.setProperty('top', '50%', 'important');
+      btnCekID.style.setProperty('transform', 'translateY(-50%)', 'important');
+      btnCekID.style.setProperty('margin', '0', 'important');
+      btnCekID.style.setProperty('z-index', '10', 'important');
+      btnCekID.style.setProperty('pointer-events', 'auto', 'important');
+
+      // Simpan perintah onclick asli dari tombol btnCekID sebelum diperkuat
+      const kodeOnclickAsli = btnCekID.getAttribute('onclick') || '';
+
+      btnCekID.addEventListener('click', function() {
+        // Sediakan elemen bayangan idPlayer agar skrip lama selalu menemukan angkanya
+        let bayangan = document.getElementById('idPlayer');
+        if (!bayangan) {
+          bayangan = document.createElement('input');
+          bayangan.type = 'hidden';
+          bayangan.id = 'idPlayer';
+          document.body.appendChild(bayangan);
+        }
+        bayangan.value = inpUtama.value;
+
+        // Jika fungsi cekIDPlayer tidak jalan otomatis, panggil fungsi cek lain yang tersedia
+        if (!kodeOnclickAsli) {
+          if (typeof window.cekIDPlayer === 'function') window.cekIDPlayer();
+          else if (typeof window.cekNickname === 'function') window.cekNickname();
+          else if (typeof window.cekIdML === 'function') window.cekIdML();
+          else if (typeof showToast === 'function') showToast('Onclick Cek ID kosong, mohon cek kode tombol Cek ID', 3000);
+        }
+      }, true); // Gunakan capture=true agar bayangan idPlayer terisi SEBELUM onclick asli dijalankan
+    }
+
+    // 5. Kunci posisi Tombol Silang "X" rapi tepat di sebelah kiri tombol "Cek ID"
+    if (btnHapusX) {
+      btnHapusX.style.setProperty('position', 'absolute', 'important');
+      btnHapusX.style.setProperty('right', '78px', 'important');
+      btnHapusX.style.setProperty('top', '50%', 'important');
+      btnHapusX.style.setProperty('transform', 'translateY(-50%)', 'important');
+      btnHapusX.style.setProperty('margin', '0', 'important');
+      btnHapusX.style.setProperty('z-index', '10', 'important');
+
+      btnHapusX.onclick = function() {
+        inpUtama.value = '';
+        inpUtama.focus();
+        perbaruiTombolML();
+      };
+    }
+
+    // 6. Tampilkan / sembunyikan tombol Cek ID dan X otomatis
+    function perbaruiTombolML() {
+      const isi = (inpUtama.value || '').trim();
+      if (isi.length > 0) {
+        if (btnCekID) btnCekID.style.setProperty('display', 'inline-flex', 'important');
+        if (btnHapusX) btnHapusX.style.setProperty('display', 'inline-flex', 'important');
+      } else {
+        if (btnCekID) btnCekID.style.setProperty('display', 'none', 'important');
+        if (btnHapusX) btnHapusX.style.setProperty('display', 'none', 'important');
+      }
+    }
+
+    inpUtama.addEventListener('input', perbaruiTombolML);
+    inpUtama.addEventListener('keyup', perbaruiTombolML);
+    setInterval(perbaruiTombolML, 250);
+  })();
+</script>
+<script>
+  // Penahan Nomor ID Anti-Reset & Anti-Kedip (Sinkron dengan Tombol X, Keyboard HP, dan Favorite)
+  (function() {
+    const inp = document.getElementById('scanner-input');
+    if (!inp) return;
+
+    let idTerkunci = '';
+    let sedangHapusManual = false;
+
+    // 1. Cekat langsung setiap usaha skrip lain yang mencoba mengosongkan inp.value = '' secara paksa
+    const descAsli = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value');
+    Object.defineProperty(inp, 'value', {
+      get: function() {
+        return descAsli.get.call(this);
+      },
+      set: function(nilaiBaru) {
+        // Jika skrip lain mencoba mengosongkan input padahal bukan klik tombol X atau hapus keyboard, tahan!
+        if ((nilaiBaru === '' || nilaiBaru === null) && idTerkunci !== '' && !sedangHapusManual) {
+          return;
+        }
+        // Jika ada nomor baru masuk (misalnya dari Favorite atau Scan), perbarui kuncinya
+        if (nilaiBaru && nilaiBaru.toString().trim() !== '') {
+          idTerkunci = nilaiBaru.toString().trim();
+        }
+        descAsli.set.call(this, nilaiBaru);
+      }
+    });
+
+    // 2. Kunci nilai saat tombol Cek ID diklik
+    document.addEventListener('click', function(e) {
+      if (e.target.closest('#btnCekID')) {
+        const nilaiSaatIni = descAsli.get.call(inp).trim();
+        if (nilaiSaatIni !== '') {
+          idTerkunci = nilaiSaatIni;
+          sedangHapusManual = false;
+        }
+      }
+
+      // 3. Jika tombol silang X diklik, buka kunci dan kosongkan bersih
+      if (e.target.closest('#btnHapusX')) {
+        sedangHapusManual = true;
+        idTerkunci = '';
+        descAsli.set.call(inp, '');
+        inp.dispatchEvent(new Event('input', { bubbles: true }));
+        setTimeout(function() { sedangHapusManual = false; }, 300);
+      }
+    }, true);
+
+    // 4. Jika user menghapus manual lewat tombol Backspace/Hapus di keyboard HP, izinkan!
+    inp.addEventListener('keydown', function(e) {
+      if (e.key === 'Backspace' || e.key === 'Delete') {
+        sedangHapusManual = true;
+        setTimeout(function() {
+          const sisa = descAsli.get.call(inp).trim();
+          idTerkunci = sisa;
+          sedangHapusManual = false;
+        }, 100);
+      }
+    });
+
+    inp.addEventListener('input', function() {
+      const isiBaru = descAsli.get.call(inp).trim();
+      if (isiBaru !== '') {
+        idTerkunci = isiBaru;
+      } else if (sedangHapusManual) {
+        idTerkunci = '';
+      }
+    });
+  })();
+</script>
 
 </body>
 </html>
