@@ -3006,32 +3006,72 @@ if (targetProduk && areaFilterAnda) {
   })();
 </script>
 <script>
-  // Pengunci nomor ID agar tidak hilang setelah kartu Info Pelanggan muncul
+  // Pengunci nomor ID sekali jalan (anti-kedip & sinkron dengan tombol X dan Favorite)
   (function() {
     let idTerakhirDicek = '';
 
-    // 1. Rekam nomor ID saat tombol Cek ID ditekan
+    // 1. Rekam nomor ID saat tombol Cek ID diklik, lalu kembalikan SEKALI setelah info muncul
     document.addEventListener('click', function(e) {
-      const tombol = e.target.closest('#btnCekID');
-      if (tombol) {
+      const tombolCek = e.target.closest('#btnCekID');
+      if (tombolCek) {
         const inp = document.getElementById('scanner-input');
         if (inp && inp.value.trim() !== '') {
           idTerakhirDicek = inp.value.trim();
+
+          // Pantau selama maksimal 3 detik saja untuk mengembalikan angka SEKALI jika terhapus
+          let percobaan = 0;
+          const pemulihSekali = setInterval(function() {
+            percobaan++;
+            const kotak = document.getElementById('scanner-input');
+            if (kotak && kotak.value.trim() === '' && idTerakhirDicek !== '') {
+              kotak.value = idTerakhirDicek;
+              kotak.dispatchEvent(new Event('input', { bubbles: true }));
+              clearInterval(pemulihSekali); // Hentikan segera agar tidak berkedip!
+            }
+            if (percobaan >= 15) {
+              clearInterval(pemulihSekali);
+            }
+          }, 200);
         }
+      }
+
+      // 2. Jika tombol X diklik, hapus memori idTerakhirDicek agar tidak muncul lagi
+      const tombolX = e.target.closest('#btnHapusX');
+      if (tombolX) {
+        idTerakhirDicek = '';
+        const inp = document.getElementById('scanner-input');
+        if (inp) {
+          inp.value = '';
+          inp.dispatchEvent(new Event('input', { bubbles: true }));
+        }
+      }
+
+      // 3. Jika memilih ID dari daftar Favorite, reset memori lama & masukkan ID Favorite yang diklik
+      const itemFavorit = e.target.closest('[onclick*="pilihFavorit"], .item-favorit, .fav-item, [data-id]');
+      if (itemFavorit) {
+        idTerakhirDicek = '';
       }
     }, true);
 
-    // 2. Jika kartu Info Pelanggan tampil namun kotak input ter-reset jadi kosong, kembalikan angkanya
-    setInterval(function() {
-      const inp = document.getElementById('scanner-input');
-      const kartuInfo = document.getElementById('hasilCekID') || document.querySelector('[id*="infoPelanggan"], [class*="info-pelanggan"]');
-      const teksHalaman = document.body.innerText || '';
-
-      if (inp && inp.value.trim() === '' && idTerakhirDicek !== '' && teksHalaman.includes('Info Pelanggan')) {
-        inp.value = idTerakhirDicek;
-        inp.dispatchEvent(new Event('input', { bubbles: true }));
+    // 4. Pastikan setiap pemanggilan fungsi Favorite langsung mengisi scanner-input
+    const daftarFungsiFav = ['pilihFavorit', 'pilihFavorite', 'useFavorite', 'gunakanFavorit'];
+    daftarFungsiFav.forEach(function(namaFungsi) {
+      if (typeof window[namaFungsi] === 'function') {
+        const fungsiAsli = window[namaFungsi];
+        window[namaFungsi] = function(idBaru) {
+          idTerakhirDicek = '';
+          const hasil = fungsiAsli.apply(this, arguments);
+          setTimeout(function() {
+            const inp = document.getElementById('scanner-input');
+            if (inp && typeof idBaru === 'string' && idBaru.trim() !== '') {
+              inp.value = idBaru.trim();
+              inp.dispatchEvent(new Event('input', { bubbles: true }));
+            }
+          }, 50);
+          return hasil;
+        };
       }
-    }, 300);
+    });
   })();
 </script>
 
