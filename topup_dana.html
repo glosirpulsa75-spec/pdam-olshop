@@ -2816,6 +2816,76 @@ if (targetProduk && areaFilterAnda) {
     setInterval(perbaruiTombolML, 250);
   })();
 </script>
+<script>
+  // Penahan Nomor ID Anti-Reset & Anti-Kedip (Sinkron dengan Tombol X, Keyboard HP, dan Favorite)
+  (function() {
+    const inp = document.getElementById('scanner-input');
+    if (!inp) return;
+
+    let idTerkunci = '';
+    let sedangHapusManual = false;
+
+    // 1. Cekat langsung setiap usaha skrip lain yang mencoba mengosongkan inp.value = '' secara paksa
+    const descAsli = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value');
+    Object.defineProperty(inp, 'value', {
+      get: function() {
+        return descAsli.get.call(this);
+      },
+      set: function(nilaiBaru) {
+        // Jika skrip lain mencoba mengosongkan input padahal bukan klik tombol X atau hapus keyboard, tahan!
+        if ((nilaiBaru === '' || nilaiBaru === null) && idTerkunci !== '' && !sedangHapusManual) {
+          return;
+        }
+        // Jika ada nomor baru masuk (misalnya dari Favorite atau Scan), perbarui kuncinya
+        if (nilaiBaru && nilaiBaru.toString().trim() !== '') {
+          idTerkunci = nilaiBaru.toString().trim();
+        }
+        descAsli.set.call(this, nilaiBaru);
+      }
+    });
+
+    // 2. Kunci nilai saat tombol Cek ID diklik
+    document.addEventListener('click', function(e) {
+      if (e.target.closest('#btnCekID')) {
+        const nilaiSaatIni = descAsli.get.call(inp).trim();
+        if (nilaiSaatIni !== '') {
+          idTerkunci = nilaiSaatIni;
+          sedangHapusManual = false;
+        }
+      }
+
+      // 3. Jika tombol silang X diklik, buka kunci dan kosongkan bersih
+      if (e.target.closest('#btnHapusX')) {
+        sedangHapusManual = true;
+        idTerkunci = '';
+        descAsli.set.call(inp, '');
+        inp.dispatchEvent(new Event('input', { bubbles: true }));
+        setTimeout(function() { sedangHapusManual = false; }, 300);
+      }
+    }, true);
+
+    // 4. Jika user menghapus manual lewat tombol Backspace/Hapus di keyboard HP, izinkan!
+    inp.addEventListener('keydown', function(e) {
+      if (e.key === 'Backspace' || e.key === 'Delete') {
+        sedangHapusManual = true;
+        setTimeout(function() {
+          const sisa = descAsli.get.call(inp).trim();
+          idTerkunci = sisa;
+          sedangHapusManual = false;
+        }, 100);
+      }
+    });
+
+    inp.addEventListener('input', function() {
+      const isiBaru = descAsli.get.call(inp).trim();
+      if (isiBaru !== '') {
+        idTerkunci = isiBaru;
+      } else if (sedangHapusManual) {
+        idTerkunci = '';
+      }
+    });
+  })();
+</script>
 
 </body>
 </html>
