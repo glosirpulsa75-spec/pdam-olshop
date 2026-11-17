@@ -721,7 +721,7 @@ align-items: center !important;">
  
 
         <!-- Ikon Air Jernih -->
-        <img src="https://images.bukaolshop.com/hosting/183991/5a02cc2a01d2869106.png" alt="Icon" style="width: 75px; height: 75px; object-fit: contain; margin-right: 0px;">
+        <img src="https://images.bukaolshop.com/hosting/183991/51c7692c9a6511971.png" alt="Icon" style="width: 75px; height: 75px; object-fit: contain; margin-right: 0px;">
         <!-- Tulisan Teks Kategori -->
  <!-- Masukkan kode warna di dalam style seperti ini -->
 <div class="header-btn-KUOTA" style="background: linear-gradient(to right, #00a2ff, #006aff) !important; color: white !important; padding: 6px 18px !important; border-radius: 50px !important; box-shadow: 0 15px 15px rgba(0, 106, 255, 0.3) !important; display: inline-block !important; font-weight: bold !important; font-size: 13px !important; margin: 0 auto !important; transform: translateX(-35px) !important;">Free Fire</div>
@@ -1079,18 +1079,9 @@ box-shadow: none !important;">
 <a href="https://pulsachrome.bukaolshop.site/ambil_kontak" style="position: absolute !important; left: 6px !important; top: 50% !important; transform: translateY(-50%) !important; cursor: pointer !important; width: 35px !important; height: 32px !important; display: flex !important; align-items: center !important; justify-content: center !important; background: #f0f4f9 !important; border: 1px solid #e0e0e0 !important; border-radius: 8px !important; text-decoration: none !important; z-index: 10 !important;">
     <img src="https://images.bukaolshop.com/hosting/183991/3b07e3dee8f5989244.png" style="width: 25px !important; height: 25px !important; display: block !important; object-fit: contain !important;" />
 </a>
-
-<input type="tel" id="idPlayer" name="nomor_hp" class="{{hasil_kontak}}" placeholder="Masukkan Nomor Tujuan" oninput="satukanNomorML()" onfocus="document.getElementById('kotakFormUtama').style.setProperty('border-color', '#007bff', 'important'); this.style.setProperty('border-color', '#007bff', 'important');" onblur="document.getElementById('kotakFormUtama').style.setProperty('border-color', '#e0e0e0', 'important'); this.style.setProperty('border-color', '#e0e0e0', 'important');" style="width: 100% !important; padding: 12px 45px 12px 50px !important; border: 1px solid #e0e0e0 !important; border-radius: 14px !important; outline: none !important; transition: border-color 0.3s ease !important; font-size: 15px !important; "> 
+ <input type="tel" name="scanner-input" id="scanner-input" class="{{hasil_kontak} {{hasil_scan}} scanner-input" placeholder="Masukkan ID (Server)" oninput="satukanNomorML()" onfocus="document.getElementById('kotakFormUtama').style.setProperty('border-color', '#007bff', 'important'); this.style.setProperty('border-color', '#007bff', 'important');" onblur="document.getElementById('kotakFormUtama').style.setProperty('border-color', '#e0e0e0', 'important'); this.style.setProperty('border-color', '#e0e0e0', 'important');" style="width: 100% !important; padding: 12px 45px 12px 50px !important; border: 1px solid #e0e0e0 !important; border-radius: 14px !important; outline: none !important; transition: border-color 0.3s ease !important; font-size: 15px !important; "> 
         
-
-
-
-
-  
-
-  <!-- CONTAINER SISI KANAN (Tempat Bersarangnya Tombol) -->
    
-
        <!-- 2. Tombol Cek ID Biru Menyala Modern -->
         <button type="button" id="btnCekID" onclick="cekIDPlayer()" style="position: absolute !important; right: 6px !important; top: 50% !important; transform: translateY(-50%) !important; background: linear-gradient(135deg, #007aff, #0056b3) !important; color: white !important; border: none !important; border-radius: 7px !important; padding: 4px 2px !important; font-size: 10px !important; font-weight: bold !important; white-space: nowrap !important; z-index: 10 !important; height: 26px !important; max-width: 55px !important; display: none; align-items: center !important; justify-content: center !important; gap: 2px !important; box-shadow: 0 2px 4px rgba(0,123,255,0.3) !important; cursor: pointer !important;">
 
@@ -1107,7 +1098,8 @@ box-shadow: none !important;">
  
  <!-- KAPSUL BARIS TOMBOL (PAS MENYATU DI DALAM KOTAK PUTIH) -->
     <div style="width: 100% !important; background-color: #f1f3f5 !important; border-radius: 16px !important; padding: 10px !important; box-sizing: border-box !important; display: flex !important; align-items: center !important; justify-content: space-around !important;">
-        <!-- Tombol Bicara Mandiri (Anti-Putus Gboard dengan Kotak Suara Terpisah) -->
+        
+       <!-- Tombol Bicara Mandiri (Anti-Putus Gboard dengan Kotak Suara Terpisah) -->
 <div role="button" tabindex="0" onclick="(function(){ var inpUtama = document.getElementById('scanner-input') || document.querySelector('input[placeholder*=\'Nomor\']'); if(!inpUtama) return; var box = document.getElementById('boxInputSuaraKustom'); if(!box){ box = document.createElement('div'); box.id = 'boxInputSuaraKustom'; box.style.cssText = 'margin-top:10px; padding:10px; background:#f0f9ff; border:1.5px solid #0284c7; border-radius:10px;'; box.innerHTML = '<div style=\'font-size:11.5px; color:#0369a1; margin-bottom:6px; font-weight:600;\'>🎙️ Tekan ikon Mikrofon di keyboard & ucapkan seluruh nomor:</div><div style=\'display:flex; gap:6px;\'><input type=\'tel\' id=\'inputSuaraSementara\' placeholder=\'Hasil suara muncul di sini...\' style=\'flex:1; padding:8px 10px; border:1px solid #bae6fd; border-radius:8px; font-size:14px; font-weight:bold; color:#0f172a; outline:none; background:#ffffff;\'><button type=\'button\' id=\'btnTerapkanSuara\' style=\'background:#0284c7; color:#fff; border:none; border-radius:8px; padding:0 12px; font-size:12px; font-weight:bold; cursor:pointer;\'>Pakai</button></div>'; inpUtama.parentNode.parentNode.appendChild(box); document.getElementById('btnTerapkanSuara').onclick = function(){ var val = document.getElementById('inputSuaraSementara').value.replace(/[^0-9]/g,''); if(val.startsWith('62')) val = '0'+val.slice(2); if(val){ inpUtama.value = val; if(typeof satukkanNomorML==='function') satukkanNomorML(); inpUtama.dispatchEvent(new Event('input',{bubbles:true})); } box.style.display = 'none'; }; } box.style.display = 'block'; var inpSuara = document.getElementById('inputSuaraSementara'); inpSuara.value = ''; inpSuara.focus(); inpSuara.click(); var lastS = ''; var tmr = null; var iv = setInterval(function(){ if(box.style.display === 'none'){ clearInterval(iv); return; } if(inpSuara.value !== lastS){ lastS = inpSuara.value; clearTimeout(tmr); tmr = setTimeout(function(){ var bersih = inpSuara.value.replace(/[^0-9]/g,''); if(bersih.startsWith('62')) bersih = '0'+bersih.slice(2); if(bersih.length >= 10){ inpUtama.value = bersih; if(typeof satukkanNomorML==='function') satukkanNomorML(); inpUtama.dispatchEvent(new Event('input',{bubbles:true})); box.style.display = 'none'; clearInterval(iv); } }, 2200); } }, 300); })()" style="display: flex !important; align-items: center !important; justify-content: center !important; cursor: pointer !important; flex: 1 !important; gap: 6px !important; user-select: none !important; -webkit-user-select: none !important; -webkit-tap-highlight-color: transparent !important; padding: 0 !important; margin: 0 !important;">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="width: 16px !important; height: 16px !important; display: block !important; color: #000000 !important; pointer-events: none !important;">
         <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.91-3c-.49 0-.9.36-.98.85C16.52 14.2 14.47 16 12 16s-4.52-1.8-4.93-4.15c-.08-.49-.49-.85-.98-.85-.61 0-1.09.54-1 1.14.49 3 2.89 5.35 5.91 5.78V20c0 .55.45 1 1 1s1-.45 1-1v-2.08c3.02-.43 5.42-2.78 5.91-5.78.1-.6-.39-1.14-1-1.14z"/>
@@ -1124,7 +1116,7 @@ box-shadow: none !important;">
             <img src="https://images.bukaolshop.com/hosting/183991/203d42a9cfb3540740.png" alt="Scan" style="width: 16px !important; height: 16px !important; display: block !important;" />
             <span style="font-size: 13px !important; color: #000000 !important; font-weight: bold !important; font-family: sans-serif !important;">Scan</span>
         </a>
-   
+
         
         <!-- Garis Pembatas Vertikal Kanan -->
         <div style="width: 1px !important; height: 14px !important; background-color: #ced4da !important;"></div>
@@ -1228,9 +1220,9 @@ function tambahDataFavoritKeList() {
         return;
     }
 
-    var dataFavorit = JSON.parse(localStorage.getItem("data_favorit_freefire")) || [];
+    var dataFavorit = JSON.parse(localStorage.getItem("data_favorit_pulsa")) || [];
     dataFavorit.push({ nama: nama, nomor: nomor });
-    localStorage.setItem("data_favorit_freefire", JSON.stringify(dataFavorit));
+    localStorage.setItem("data_favorit_pulsa", JSON.stringify(dataFavorit));
 
     muatDataFavoritDariMemori();
 
@@ -1243,7 +1235,7 @@ function tambahDataFavoritKeList() {
 // 3. Fungsi Render Data dari Memori ke Kotak Abu-Abu Lembut (Sesuai Contoh Gambar)
 function muatDataFavoritDariMemori() {
     var kontainer = document.getElementById("kontainerListFavorit");
-    var dataFavorit = JSON.parse(localStorage.getItem("data_favorit_freefire")) || [];
+    var dataFavorit = JSON.parse(localStorage.getItem("data_favorit_pulsa")) || [];
     
     if (dataFavorit.length === 0) {
         // Tampilan default abu-abu tulisan "Belum ada favorit" sesuai gambar contoh Anda
@@ -1294,9 +1286,9 @@ function gunakanNomorFavorit(nomor) {
 // 5. Fungsi Hapus Data Terpilih
 function hapusDataFavorit(index) {
     if (confirm("Hapus nama ini dari daftar favorit?")) {
-        var dataFavorit = JSON.parse(localStorage.getItem("data_favorit_freefire")) || [];
+        var dataFavorit = JSON.parse(localStorage.getItem("data_favorit_pulsa")) || [];
         dataFavorit.splice(index, 1);
-        localStorage.setItem("data_favorit_freefire", JSON.stringify(dataFavorit));
+        localStorage.setItem("data_favorit_pulsa", JSON.stringify(dataFavorit));
         muatDataFavoritDariMemori();
     }
 }
@@ -1624,7 +1616,7 @@ function changeLayout(mode) {
       <div class="promo-section-dana" onclick="openPromoModal()">
         <div class="promo-left-content">
           <!-- Silakan ganti link src di bawah ini dengan gambar ikon DANA Anda -->
-          <img class="promo-dana-icon" src="https://images.bukaolshop.com/hosting/183991/5a02cc2a01d2869106.png" alt="Ikon DANA">
+          <img class="promo-dana-icon" src="https://images.bukaolshop.com/hosting/183991/51c7692c9a6511971.png" alt="Ikon DANA">
           <div class="promo-dana-badge">Punya Kode Promo?</div>
         </div>
         <span class="promo-arrow">></span>
@@ -1898,7 +1890,7 @@ if (subCategories.length === 1) {
 
         const container = document.getElementById('produkContainer');
         if (container) {
-            container.innerHTML = `<div class="loading-spinner"><div></div><p style="margin-top: 20px; color: #999;">Memuat Produk Game....</p></div>`;
+            container.innerHTML = `<div class="loading-spinner"><div></div><p style="margin-top: 20px; color: #999;">Memuat Produk Games....</p></div>`;
         }
 
         try {
@@ -1940,7 +1932,7 @@ if (subCategories.length === 1) {
         if (!products || products.length === 0) {
             container.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 40px; color: #999; font-size: 12px;">
                     <img src="https://cdn-icons-png.flaticon.com/128/7023/7023038.png" style="width: 80px; margin-bottom:10px;">
-                    <p>Produk Game belum tersedia</p>
+                    <p>Produk KUOTA belum tersedia</p>
                 </div>`;
             return;
         }
@@ -2134,8 +2126,7 @@ let disabledAttr = (isOutOfStock || isGangguan) ? 'disabled' : '';
     }
 
     // MENGGUNAKAN PARAMETER ?id= DAN &server= SESUAI DENGAN GAMBAR CONTOH SUKSES ANDA
-       const apiUrl = "https://cekid-mitrascbo.devdani.my.id/trueid/game/freefire/?id=" + customerId + "&key=b2cd7f878d43aa82";
-    
+    const apiUrl = "https://cekid-mitrascbo.devdani.my.id/trueid/game/freefire/?id=" + customerId + "&key=b2cd7f878d43aa82";    
     fetch(apiUrl)
              .then(res => res.json())
         .then(hasil => {
@@ -2215,19 +2206,19 @@ let disabledAttr = (isOutOfStock || isGangguan) ? 'disabled' : '';
             showToast('Masukkan ID Pelanggan terlebih dahulu!', 2000);
             return false;
         }
-             let favorites = JSON.parse(localStorage.getItem('data_favorit_freefire')) || [];
-   if (favorites.includes(number)) {
+        let favorites = JSON.parse(localStorage.getItem('favoriteNumbers')) || [];
+        if (favorites.includes(number)) {
             showToast(`ID ${number} sudah ada di daftar favorit!`, 2500);
             return false;
         }
         favorites.push(number);
-         localStorage.setItem('data_favorit_pln', JSON.stringify(favorites));
-       showToast(`✓ ID ${number} berhasil disimpan ke favorit!`, 2500);
+        localStorage.setItem('favoriteNumbers', JSON.stringify(favorites));
+        showToast(`✓ ID ${number} berhasil disimpan ke favorit!`, 2500);
         return true;
     }
 
     function removeFavoriteNumber(number) {
-        let favorites = JSON.parse(localStorage.getItem('data_favorit_freefire')) || [];
+        let favorites = JSON.parse(localStorage.getItem('favoriteNumbers')) || [];
         const newFavorites = favorites.filter(fav => fav !== number);
         localStorage.setItem('favoriteNumbers', JSON.stringify(newFavorites));
         showToast(`ID ${number} dihapus dari favorit`, 2000);
@@ -2355,9 +2346,10 @@ function toggleInfoBaru() {
 // KODE AKTIVASI CEK ID & KOTAK INFO DINAMIS
 // ==========================================
 (function() {
-    const inputId = document.getElementById('idPlayer');
+    const inputId = document.getElementById('scanner-input');
     const tombolCek = document.getElementById('btnCekID');
-    const inputBox = document.querySelector('.input-box');
+    const inputBox = document.querySelector('.input-box') || inputId.parentElement;
+
 
     if (!inputId || !tombolCek || !inputBox) return;
 
@@ -2448,8 +2440,6 @@ if (idUser.length > 0) {
         // INTEGRASI OPEN API (Menggunakan API Jombloapi sebagai jembatan tes gratis)
         // Di kemudian hari, Anda tinggal mengganti URL di bawah ini sesuai dengan Open API
 fetch("https://cekid-mitrascbo.devdani.my.id/trueid/game/freefire/?id=" + idUser + "&key=b2cd7f878d43aa82")
-
-
 
 
   .then(res => res.json())
@@ -2772,8 +2762,7 @@ function jalankanCekIDOtomatisPop(nomorHp) {
     }
 
     // 2. Jalankan request ke API Mas Dani secara mandiri
-    const apiUrl = "https://devdani.my.id" + nomorHp + "&key=b2cd7f878d43aa82";
-    
+    const apiUrl = "https://devdani.my.id" + nomorHp + "&key=b2cd7f878d43aa82";    
     fetch(apiUrl)
         .then(res => res.json())
         .then(hasil => {
@@ -2923,7 +2912,7 @@ if (targetProduk && areaFilterAnda) {
 </script>
 
 <script>
-  // Jembatan otomatis & perapian posisi presisi kotak input Mobile Legends
+  // Jembatan otomatis & perapian posisi presisi kotak input free fire
   (function() {
     const inpUtama = document.getElementById('scanner-input');
     const btnCekID = document.getElementById('btnCekID');
@@ -3016,8 +3005,6 @@ if (targetProduk && areaFilterAnda) {
     setInterval(perbaruiTombolML, 250);
   })();
 </script>
-
-
 
 </body>
 </html>
