@@ -3012,14 +3012,14 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 </script>
 </div>
-
 <script>
   // =========================================================================
-  // DETEKSI GANGGUAN OKECONNECT MANDIRI (LANGSUNG AKTIF & ANTI-BLOKIR)
+  // DETEKSI GANGGUAN OKECONNECT + INDIKATOR STATUS LANGSUNG DI LAYAR
   // =========================================================================
   (function() {
     const urlOke = "https://okeconnect.com";
     let listGangguan = [];
+    let pesanStatus = "Mengecek status server OkeConnect...";
 
     function bersihkan(teks) {
       return (teks || '').toLowerCase()
@@ -3029,10 +3029,23 @@ document.addEventListener("DOMContentLoaded", function() {
         .trim();
     }
 
-    function tempelLabelMerah() {
+    function perbaruiTampilan() {
+      // 1. Tampilkan indikator status kecil di dalam pop-up agar terlihat apakah data masuk
+      const wadahList = document.getElementById('financeListContainer');
+      if (wadahList) {
+        let infoBar = document.getElementById('infoStatusOkeConnect');
+        if (!infoBar) {
+          infoBar = document.createElement('div');
+          infoBar.id = 'infoStatusOkeConnect';
+          infoBar.style.cssText = 'padding:6px 14px; font-size:11px; background:#f8fafc; color:#475569; border-bottom:1px solid #e2e8f0;';
+          wadahList.parentNode.insertBefore(infoBar, wadahList);
+        }
+        infoBar.textContent = pesanStatus;
+      }
+
       if (listGangguan.length === 0) return;
 
-      // Cari semua baris pilihan di pop-up maupun daftar (termasuk .finance-item atau elemen teks di dalam #financeListContainer)
+      // 2. Tempelkan badge merah "Gangguan" ke semua item yang cocok
       const semuaBaris = document.querySelectorAll('.finance-item, #financeListContainer > div, .provider-item, .list-item, [data-value]');
       semuaBaris.forEach(function(baris) {
         if (baris.tagName === 'OPTION' || baris.dataset.cekGgn === '1') return;
@@ -3053,17 +3066,14 @@ document.addEventListener("DOMContentLoaded", function() {
           baris.style.setProperty('color', '#9ca3af', 'important');
           baris.style.setProperty('cursor', 'not-allowed', 'important');
 
-          // Buat badge merah bertuliskan "Gangguan" di sebelah kanan
           const lencana = document.createElement('span');
           lencana.textContent = 'Gangguan';
           lencana.style.cssText = 'background:#dc2626 !important; color:#ffffff !important; font-size:11px !important; font-weight:bold !important; padding:3px 8px !important; border-radius:6px !important; margin-left:10px !important; flex-shrink:0 !important; display:inline-block !important;';
           baris.appendChild(lencana);
 
-          // Kunci agar tidak bisa masuk ke halaman Beli Produk saat diklik
           baris.addEventListener('click', function(e) {
             e.preventDefault();
             e.stopImmediatePropagation();
-            alert('Maaf, layanan ' + namaAsli + ' sedang GANGGUAN dari pusat.');
           }, true);
         }
       });
@@ -3081,27 +3091,32 @@ document.addEventListener("DOMContentLoaded", function() {
         }
       });
       listGangguan = hasil;
-      tempelLabelMerah();
+      pesanStatus = hasil.length > 0
+        ? "Status Pusat: " + hasil.length + " layanan sedang gangguan"
+        : "Status Pusat: Semua layanan normal";
+      perbaruiTampilan();
     }
 
-    // Ambil JSON OkeConnect memakai 3 jalur cadangan otomatis (Langsung -> CorsProxy -> AllOrigins)
+    // Ambil JSON OkeConnect dengan 3 jalur cadangan
     fetch(urlOke)
       .then(function(r) { return r.json(); })
       .then(olahJson)
       .catch(function() {
-        fetch("https://corsproxy.io?" + encodeURIComponent(urlOke))
+        fetch("https://codetabs.com" + encodeURIComponent(urlOke))
           .then(function(r) { return r.json(); })
           .then(olahJson)
           .catch(function() {
             fetch("https://allorigins.win" + encodeURIComponent(urlOke))
               .then(function(r) { return r.json(); })
-              .then(olahJson)
-              .catch(function(e) { console.log('Gagal ambil status:', e); });
+              .then(function(res) { olahJson(JSON.parse(res.contents)); })
+              .catch(function(err) {
+                pesanStatus = "Gagal koneksi status pusat (Blokir WebView)";
+                perbaruiTampilan();
+              });
           });
       });
 
-    // Jalankan otomatis setiap kali pop-up dibuka atau diketik
-    setInterval(tempelLabelMerah, 500);
+    setInterval(perbaruiTampilan, 500);
   })();
 </script>
 
