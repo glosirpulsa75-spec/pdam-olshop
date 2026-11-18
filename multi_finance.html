@@ -2000,102 +2000,7 @@ let disabledAttr = (isOutOfStock || isGangguan) ? 'disabled' : '';
         
         container.innerHTML = html;
         
-            // =========================================================================
-        // DETEKSI OTOMATIS GANGGUAN PASCABAYAR (BEBAS BLOKIR CORS & AUTO-POPUP)
-        // =========================================================================
-        (function cekGangguanOkeConnectUniversal() {
-            const urlAsli = "https://okeconnect.com";
-            // Jembatan proxy agar tidak diblokir CORS oleh WebView HP
-            const urlProxy = "https://allorigins.win" + encodeURIComponent(urlAsli);
-            let daftarGangguanTersimpan = [];
-
-            function bersihkanTeks(t) {
-                return (t || '').toLowerCase()
-                    .replace(/tagihan|bayar|cek|pembayaran|finance|multifinance|pdam|kota|kabupaten|kab\.|pt|indonesia|motor|mobil|\(.*?\)/g, ' ')
-                    .replace(/[^a-z0-9\s]/g, ' ')
-                    .replace(/\s+/g, ' ')
-                    .trim();
-            }
-
-            function terapkanBadgeSekarang() {
-                if (daftarGangguanTersimpan.length === 0) return;
-
-                // 1. Tandai & kunci semua item di pop-up pilihan (.finance-item / lainnya)
-                document.querySelectorAll('.finance-item, .provider-item, .list-item, [data-value]').forEach(item => {
-                    if (item.tagName === 'OPTION') return;
-                    const namaAsli = (item.getAttribute('data-value') || item.textContent || '').trim();
-                    const kunci = bersihkanTeks(namaAsli);
-                    if (kunci.length < 3) return;
-
-                    const cocok = daftarGangguanTersimpan.some(g => g === kunci || g.includes(kunci) || kunci.includes(g));
-                    if (cocok && !item.dataset.gangguanApplied) {
-                        item.dataset.gangguanApplied = '1';
-                        item.style.setProperty('display', 'flex', 'important');
-                        item.style.setProperty('justify-content', 'space-between', 'important');
-                        item.style.setProperty('align-items', 'center', 'important');
-                        item.style.setProperty('background-color', '#fff5f5', 'important');
-                        item.style.setProperty('color', '#9ca3af', 'important');
-                        item.style.setProperty('cursor', 'not-allowed', 'important');
-
-                        const badge = document.createElement('span');
-                        badge.innerText = 'Gangguan';
-                        badge.style.cssText = 'background:#dc2626; color:#ffffff; font-size:11px; font-weight:bold; padding:3px 8px; border-radius:6px; margin-left:8px; flex-shrink:0;';
-                        item.appendChild(badge);
-
-                        item.addEventListener('click', function(e) {
-                            e.preventDefault();
-                            e.stopImmediatePropagation();
-                            alert('Maaf, layanan ' + namaAsli + ' sedang GANGGUAN dari pusat.');
-                        }, true);
-                    }
-                });
-
-                // 2. Tandai & nonaktifkan opsi di dropdown <select>
-                document.querySelectorAll('select option').forEach(opt => {
-                    if (!opt.value) return;
-                    const namaOpt = (opt.value || opt.textContent || '').trim();
-                    const kunci = bersihkanTeks(namaOpt);
-                    if (kunci.length < 3) return;
-
-                    const cocok = daftarGangguanTersimpan.some(g => g === kunci || g.includes(kunci) || kunci.includes(g));
-                    if (cocok && !opt.disabled) {
-                        opt.disabled = true;
-                        opt.text = namaOpt + ' (GANGGUAN)';
-                    }
-                });
-            }
-
-            function prosesDataOkeConnect(data) {
-                const list = Array.isArray(data) ? data : (data.data || []);
-                const hasil = [];
-                list.forEach(item => {
-                    if (String(item.status) === '0') {
-                        const bersih = bersihkanTeks(item.keterangan || item.produk || '');
-                        if (bersih.length >= 3 && !hasil.includes(bersih)) {
-                            hasil.push(bersih);
-                        }
-                    }
-                });
-                daftarGangguanTersimpan = hasil;
-                terapkanBadgeSekarang();
-            }
-
-            // Coba ambil langsung, jika diblokir CORS otomatis beralih ke proxy
-            fetch(urlAsli)
-                .then(res => res.json())
-                .then(prosesDataOkeConnect)
-                .catch(() => {
-                    fetch(urlProxy)
-                        .then(res => res.json())
-                        .then(prosesDataOkeConnect)
-                        .catch(err => console.log('Gagal memuat data gangguan:', err));
-                });
-
-            // Pasang ulang setiap kali user mengetuk atau mengetik di pop-up pencarian
-            document.addEventListener('click', () => setTimeout(terapkanBadgeSekarang, 100));
-            document.addEventListener('input', () => setTimeout(terapkanBadgeSekarang, 100));
-        })();
-    document.querySelectorAll('#produkContainer .product-card:not(.disabled)').forEach(card => {
+        document.querySelectorAll('#produkContainer .product-card:not(.disabled)').forEach(card => {
             card.addEventListener('click', function(e) {
                 e.preventDefault();
                 e.stopPropagation();
@@ -3106,16 +3011,100 @@ document.addEventListener("DOMContentLoaded", function() {
     ewallet_x_render();
 });
 </script>
-
-
-
-
-
-
-
-
-
 </div>
+
+<script>
+  // =========================================================================
+  // DETEKSI GANGGUAN OKECONNECT MANDIRI (LANGSUNG AKTIF & ANTI-BLOKIR)
+  // =========================================================================
+  (function() {
+    const urlOke = "https://okeconnect.com";
+    let listGangguan = [];
+
+    function bersihkan(teks) {
+      return (teks || '').toLowerCase()
+        .replace(/tagihan|bayar|cek|pembayaran|finance|multifinance|pdam|kota|kabupaten|kab\.|pt|indonesia|motor|mobil|\(.*?\)/g, ' ')
+        .replace(/[^a-z0-9\s]/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+    }
+
+    function tempelLabelMerah() {
+      if (listGangguan.length === 0) return;
+
+      // Cari semua baris pilihan di pop-up maupun daftar (termasuk .finance-item atau elemen teks di dalam #financeListContainer)
+      const semuaBaris = document.querySelectorAll('.finance-item, #financeListContainer > div, .provider-item, .list-item, [data-value]');
+      semuaBaris.forEach(function(baris) {
+        if (baris.tagName === 'OPTION' || baris.dataset.cekGgn === '1') return;
+        const namaAsli = (baris.getAttribute('data-value') || baris.innerText || '').trim();
+        const kataKunci = bersihkan(namaAsli);
+        if (kataKunci.length < 3) return;
+
+        const isGgn = listGangguan.some(function(g) {
+          return g === kataKunci || g.includes(kataKunci) || kataKunci.includes(g);
+        });
+
+        if (isGgn) {
+          baris.dataset.cekGgn = '1';
+          baris.style.setProperty('display', 'flex', 'important');
+          baris.style.setProperty('justify-content', 'space-between', 'important');
+          baris.style.setProperty('align-items', 'center', 'important');
+          baris.style.setProperty('background-color', '#fef2f2', 'important');
+          baris.style.setProperty('color', '#9ca3af', 'important');
+          baris.style.setProperty('cursor', 'not-allowed', 'important');
+
+          // Buat badge merah bertuliskan "Gangguan" di sebelah kanan
+          const lencana = document.createElement('span');
+          lencana.textContent = 'Gangguan';
+          lencana.style.cssText = 'background:#dc2626 !important; color:#ffffff !important; font-size:11px !important; font-weight:bold !important; padding:3px 8px !important; border-radius:6px !important; margin-left:10px !important; flex-shrink:0 !important; display:inline-block !important;';
+          baris.appendChild(lencana);
+
+          // Kunci agar tidak bisa masuk ke halaman Beli Produk saat diklik
+          baris.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            alert('Maaf, layanan ' + namaAsli + ' sedang GANGGUAN dari pusat.');
+          }, true);
+        }
+      });
+    }
+
+    function olahJson(data) {
+      const arr = Array.isArray(data) ? data : (data.data || []);
+      const hasil = [];
+      arr.forEach(function(item) {
+        if (String(item.status) === '0') {
+          const nama = bersihkan(item.keterangan || item.produk || '');
+          if (nama.length >= 3 && !hasil.includes(nama)) {
+            hasil.push(nama);
+          }
+        }
+      });
+      listGangguan = hasil;
+      tempelLabelMerah();
+    }
+
+    // Ambil JSON OkeConnect memakai 3 jalur cadangan otomatis (Langsung -> CorsProxy -> AllOrigins)
+    fetch(urlOke)
+      .then(function(r) { return r.json(); })
+      .then(olahJson)
+      .catch(function() {
+        fetch("https://corsproxy.io?" + encodeURIComponent(urlOke))
+          .then(function(r) { return r.json(); })
+          .then(olahJson)
+          .catch(function() {
+            fetch("https://allorigins.win" + encodeURIComponent(urlOke))
+              .then(function(r) { return r.json(); })
+              .then(olahJson)
+              .catch(function(e) { console.log('Gagal ambil status:', e); });
+          });
+      });
+
+    // Jalankan otomatis setiap kali pop-up dibuka atau diketik
+    setInterval(tempelLabelMerah, 500);
+  })();
+</script>
+
 </body>
 </html>
 
