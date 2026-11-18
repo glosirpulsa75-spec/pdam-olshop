@@ -2000,7 +2000,81 @@ let disabledAttr = (isOutOfStock || isGangguan) ? 'disabled' : '';
         
         container.innerHTML = html;
         
-        document.querySelectorAll('#produkContainer .product-card:not(.disabled)').forEach(card => {
+              // =========================================================================
+        // PENGHUBUNG OTOMATIS LABEL MERAH GANGGUAN KE POP-UP & DROPDOWN PILIHAN
+        // =========================================================================
+        (function terapkanGangguanKePilihan() {
+            function bersihkanTeks(t) {
+                return (t || '').toLowerCase()
+                    .replace(/tagihan|bayar|cek|finance|pdam|kota|kabupaten|kab\.|pt|indonesia|\(.*?\)/g, ' ')
+                    .replace(/[^a-z0-9\s]/g, ' ')
+                    .replace(/\s+/g, ' ')
+                    .trim();
+            }
+
+            // Kumpulkan semua nama produk yang berstatus Gangguan atau Stok <= 0 dari OpenAPI
+            const daftarGangguan = [];
+            products.forEach(p => {
+                const stok = p.stok ?? 1;
+                const isHabis = stok <= 0;
+                const isGgn = p.status_produk === 'gangguan' || p.status === 'gangguan' ||
+                              p.status === '0' || p.status === 0 || p.status === false ||
+                              p.multi === '0' || p.server_status === '0' ||
+                              String(p.status_produk || p.status || '').toLowerCase() === 'tidak aktif';
+
+                if (isHabis || isGgn) {
+                    const bersih = bersihkanTeks(p.nama_produk || p.nama || '');
+                    if (bersih.length >= 2) daftarGangguan.push(bersih);
+                }
+            });
+
+            if (daftarGangguan.length === 0) return;
+
+            // 1. Tandai & kunci item di dalam pop-up pilihan (.finance-item / daftar pilihan lainnya)
+            document.querySelectorAll('.finance-item, .provider-item, .list-item, [data-value]').forEach(item => {
+                if (item.tagName === 'OPTION') return;
+                const namaAsli = (item.getAttribute('data-value') || item.textContent || '').trim();
+                const kunci = bersihkanTeks(namaAsli);
+                if (kunci.length < 2) return;
+
+                const cocok = daftarGangguan.some(g => g.includes(kunci) || kunci.includes(g));
+                if (cocok && !item.dataset.gangguanApplied) {
+                    item.dataset.gangguanApplied = '1';
+                    item.style.setProperty('display', 'flex', 'important');
+                    item.style.setProperty('justify-content', 'space-between', 'important');
+                    item.style.setProperty('align-items', 'center', 'important');
+                    item.style.setProperty('background-color', '#fff5f5', 'important');
+                    item.style.setProperty('color', '#9ca3af', 'important');
+                    item.style.setProperty('cursor', 'not-allowed', 'important');
+
+                    const badge = document.createElement('span');
+                    badge.innerText = 'Gangguan';
+                    badge.style.cssText = 'background:#dc2626; color:#ffffff; font-size:11px; font-weight:bold; padding:3px 8px; border-radius:6px; margin-left:8px; flex-shrink:0;';
+                    item.appendChild(badge);
+
+                    item.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        e.stopImmediatePropagation();
+                        alert('Maaf, layanan ' + namaAsli + ' sedang GANGGUAN dari pusat.');
+                    }, true);
+                }
+            });
+
+            // 2. Tandai & nonaktifkan opsi di dropdown <select>
+            document.querySelectorAll('select option').forEach(opt => {
+                if (!opt.value) return;
+                const namaOpt = (opt.value || opt.textContent || '').trim();
+                const kunci = bersihkanTeks(namaOpt);
+                if (kunci.length < 2) return;
+
+                const cocok = daftarGangguan.some(g => g.includes(kunci) || kunci.includes(g));
+                if (cocok && !opt.disabled) {
+                    opt.disabled = true;
+                    opt.text = namaOpt + ' (GANGGUAN)';
+                }
+            });
+        })();
+  document.querySelectorAll('#produkContainer .product-card:not(.disabled)').forEach(card => {
             card.addEventListener('click', function(e) {
                 e.preventDefault();
                 e.stopPropagation();
@@ -3012,105 +3086,6 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 </script>
 </div>
-
-<script>
-  // =========================================================================
-  // MASTER DETEKSI GANGGUAN OTOMATIS (ANTI-CORS & MULTI-KATEGORI)
-  // =========================================================================
-  (function() {
-    // CUKUP GANTI NAMA SLUG KATEGORI INI SAJA UNTUK HALAMAN LAIN:
-    const slugKategori = "multi-finan-733650";
-
-    function bersihkanKata(teks) {
-      return (teks || '')
-        .toLowerCase()
-        .replace(/tagihan|bayar|cek|finance|pdam|kota|kabupaten|kab\.|pt|indonesia|\(.*?\)/g, ' ')
-        .replace(/[^a-z0-9\s]/g, ' ')
-        .replace(/\s+/g, ' ')
-        .trim();
-    }
-
-    function terapkanLabelGangguan(daftarProdukGangguan) {
-      if (!daftarProdukGangguan || daftarProdukGangguan.length === 0) return;
-
-      // 1. Tandai & kunci semua item daftar (pop-up maupun list biasa)
-      document.querySelectorAll('.finance-item, .provider-item, .list-item, [data-value]').forEach(function(item) {
-        if (item.tagName === 'OPTION') return;
-
-        const namaAsli = (item.getAttribute('data-value') || item.textContent || '').trim();
-        const kataKunci = bersihkanKata(namaAsli);
-        if (kataKunci.length < 2) return;
-
-        const isGangguan = daftarProdukGangguan.some(function(teksGangguan) {
-          return teksGangguan.includes(kataKunci);
-        });
-
-        if (isGangguan && !item.dataset.gangguanApplied) {
-          item.dataset.gangguanApplied = '1';
-          item.style.setProperty('display', 'flex', 'important');
-          item.style.setProperty('justify-content', 'space-between', 'important');
-          item.style.setProperty('align-items', 'center', 'important');
-          item.style.setProperty('background-color', '#fff5f5', 'important');
-          item.style.setProperty('color', '#9ca3af', 'important');
-          item.style.setProperty('cursor', 'not-allowed', 'important');
-
-          const badge = document.createElement('span');
-          badge.innerText = 'Gangguan';
-          badge.style.cssText = 'background:#dc2626; color:#ffffff; font-size:11px; font-weight:bold; padding:3px 8px; border-radius:6px; margin-left:8px; flex-shrink:0;';
-          item.appendChild(badge);
-
-          item.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopImmediatePropagation();
-            alert('Maaf, produk ' + namaAsli + ' sedang GANGGUAN dari pusat.');
-          }, true);
-        }
-      });
-
-      // 2. Tandai & kunci dropdown <select>
-      document.querySelectorAll('select option').forEach(function(opt) {
-        if (!opt.value) return;
-        const namaOpt = (opt.value || opt.textContent || '').trim();
-        const kataKunci = bersihkanKata(namaOpt);
-        if (kataKunci.length < 2) return;
-
-        const isGangguan = daftarProdukGangguan.some(function(teksGangguan) {
-          return teksGangguan.includes(kataKunci);
-        });
-
-        if (isGangguan && !opt.disabled) {
-          opt.disabled = true;
-          opt.text = namaOpt + ' (GANGGUAN)';
-        }
-      });
-    }
-
-    // Gunakan jalur relatif "/kategori/..." agar satu origin dengan APK (bebas blokir CORS)
-    fetch("/kategori/" + slugKategori)
-      .then(function(res) { return res.text(); })
-      .then(function(html) {
-        const doc = new DOMParser().parseFromString(html, 'text/html');
-        const listGangguan = [];
-
-        // Cari kartu produk yang memiliki tanda Gangguan, Tidak Aktif, Habis, atau Out of Stock
-        doc.querySelectorAll('.card, .product-card, .item-produk, [class*="product"], [class*="produk"], a').forEach(function(el) {
-          const teks = (el.textContent || '').toLowerCase();
-          const kelas = (el.className || '').toLowerCase();
-          if (
-            (teks.includes('gangguan') || teks.includes('tidak aktif') || teks.includes('stok habis') || kelas.includes('disabled') || kelas.includes('out-of-stock')) &&
-            teks.length < 300
-          ) {
-            listGangguan.push(bersihkanKata(teks));
-          }
-        });
-
-        terapkanLabelGangguan(listGangguan);
-      })
-      .catch(function(err) {
-        console.log('Deteksi gangguan:', err);
-      });
-  })();
-</script>
 
 </body>
 </html>
