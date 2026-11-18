@@ -3011,15 +3011,21 @@ document.addEventListener("DOMContentLoaded", function() {
     ewallet_x_render();
 });
 </script>
+
+
+
+
+
+
+
+
+
 </div>
 <script>
-  // =========================================================================
-  // DETEKSI GANGGUAN OKECONNECT + INDIKATOR STATUS LANGSUNG DI LAYAR
-  // =========================================================================
+  // Penghubung Bersih OpenAPI bukaOlshop -> Pop-Up Pilihan (Bebas Blokir WebView)
   (function() {
-    const urlOke = "https://okeconnect.com";
-    let listGangguan = [];
-    let pesanStatus = "Mengecek status server OkeConnect...";
+    const infoLama = document.getElementById('infoStatusOkeConnect');
+    if (infoLama) infoLama.remove();
 
     function bersihkan(teks) {
       return (teks || '').toLowerCase()
@@ -3029,34 +3035,26 @@ document.addEventListener("DOMContentLoaded", function() {
         .trim();
     }
 
-    function perbaruiTampilan() {
-      // 1. Tampilkan indikator status kecil di dalam pop-up agar terlihat apakah data masuk
-      const wadahList = document.getElementById('financeListContainer');
-      if (wadahList) {
-        let infoBar = document.getElementById('infoStatusOkeConnect');
-        if (!infoBar) {
-          infoBar = document.createElement('div');
-          infoBar.id = 'infoStatusOkeConnect';
-          infoBar.style.cssText = 'padding:6px 14px; font-size:11px; background:#f8fafc; color:#475569; border-bottom:1px solid #e2e8f0;';
-          wadahList.parentNode.insertBefore(infoBar, wadahList);
-        }
-        infoBar.textContent = pesanStatus;
-      }
+    // Pantau kartu grid tersembunyi (#produkContainer .product-card.disabled) yang sudah dirender oleh OpenAPI bukaOlshop
+    setInterval(function() {
+      const kartuGangguan = document.querySelectorAll('#produkContainer .product-card.disabled, #produkContainer .ribbon.gangguan');
+      if (kartuGangguan.length === 0) return;
 
-      if (listGangguan.length === 0) return;
+      const listGgn = [];
+      document.querySelectorAll('#produkContainer .product-card.disabled').forEach(function(card) {
+        const nama = bersihkan(card.textContent || '');
+        if (nama.length >= 3) listGgn.push(nama);
+      });
 
-      // 2. Tempelkan badge merah "Gangguan" ke semua item yang cocok
-      const semuaBaris = document.querySelectorAll('.finance-item, #financeListContainer > div, .provider-item, .list-item, [data-value]');
-      semuaBaris.forEach(function(baris) {
+      if (listGgn.length === 0) return;
+
+      document.querySelectorAll('.finance-item, #financeListContainer > div, .provider-item, .list-item, [data-value]').forEach(function(baris) {
         if (baris.tagName === 'OPTION' || baris.dataset.cekGgn === '1') return;
         const namaAsli = (baris.getAttribute('data-value') || baris.innerText || '').trim();
         const kataKunci = bersihkan(namaAsli);
         if (kataKunci.length < 3) return;
 
-        const isGgn = listGangguan.some(function(g) {
-          return g === kataKunci || g.includes(kataKunci) || kataKunci.includes(g);
-        });
-
+        const isGgn = listGgn.some(function(g) { return g.includes(kataKunci) || kataKunci.includes(g); });
         if (isGgn) {
           baris.dataset.cekGgn = '1';
           baris.style.setProperty('display', 'flex', 'important');
@@ -3077,46 +3075,7 @@ document.addEventListener("DOMContentLoaded", function() {
           }, true);
         }
       });
-    }
-
-    function olahJson(data) {
-      const arr = Array.isArray(data) ? data : (data.data || []);
-      const hasil = [];
-      arr.forEach(function(item) {
-        if (String(item.status) === '0') {
-          const nama = bersihkan(item.keterangan || item.produk || '');
-          if (nama.length >= 3 && !hasil.includes(nama)) {
-            hasil.push(nama);
-          }
-        }
-      });
-      listGangguan = hasil;
-      pesanStatus = hasil.length > 0
-        ? "Status Pusat: " + hasil.length + " layanan sedang gangguan"
-        : "Status Pusat: Semua layanan normal";
-      perbaruiTampilan();
-    }
-
-    // Ambil JSON OkeConnect dengan 3 jalur cadangan
-    fetch(urlOke)
-      .then(function(r) { return r.json(); })
-      .then(olahJson)
-      .catch(function() {
-        fetch("https://codetabs.com" + encodeURIComponent(urlOke))
-          .then(function(r) { return r.json(); })
-          .then(olahJson)
-          .catch(function() {
-            fetch("https://allorigins.win" + encodeURIComponent(urlOke))
-              .then(function(r) { return r.json(); })
-              .then(function(res) { olahJson(JSON.parse(res.contents)); })
-              .catch(function(err) {
-                pesanStatus = "Gagal koneksi status pusat (Blokir WebView)";
-                perbaruiTampilan();
-              });
-          });
-      });
-
-    setInterval(perbaruiTampilan, 500);
+    }, 500);
   })();
 </script>
 
