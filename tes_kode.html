@@ -2989,37 +2989,93 @@ function satukkanNomorML() {
    
   })();
 </script>
+
 <script>
-  // Sinkronisasi Multi-Alur Murni (Tanpa Timer CSS yang Menyebabkan Kedipan)
+  // Jembatan Dua Arah Murni: Buku Kontak, Favorite, Scan, Bicara -> #scanner-input (Tanpa Ubah CSS Tombol)
   (function() {
-    function salinKeBayangan() {
-      const inp = document.getElementById('scanner-input');
-      if (!inp) return;
+    let nilaiTerakhirBayangan = '';
+
+    // Pastikan elemen bayangan #idPlayer selalu tersedia untuk ditangkap Buku Kontak, Favorite, & Scan
+    function pastikanBayanganAda() {
       let bayangan = document.getElementById('idPlayer');
       if (!bayangan) {
         bayangan = document.createElement('input');
-        bayangan.type = 'hidden';
+        bayangan.type = 'text';
         bayangan.id = 'idPlayer';
+        bayangan.style.cssText = 'position:fixed; top:-200px; left:0; width:1px; height:1px; opacity:0; pointer-events:none;';
         document.body.appendChild(bayangan);
       }
-      bayangan.value = inp.value.trim();
+      return bayangan;
     }
 
+    // 1. Jika user mengetik langsung di #scanner-input, salin ke #idPlayer
     document.addEventListener('input', function(e) {
-      if (e.target && e.target.id === 'scanner-input') salinKeBayangan();
+      if (e.target && e.target.id === 'scanner-input') {
+        const bayangan = pastikanBayanganAda();
+        const val = e.target.value.trim();
+        bayangan.value = val;
+        nilaiTerakhirBayangan = val;
+      }
     }, true);
 
+    // 2. Jika Buku Kontak, Favorite, Scan, atau Bicara mengisi #idPlayer (atau input penangkap lainnya), salin ke #scanner-input
+    setInterval(function() {
+      const inp = document.getElementById('scanner-input');
+      const bayangan = pastikanBayanganAda();
+      if (!inp) return;
+
+      // Cek apakah #idPlayer baru saja diisi oleh Buku Kontak, Favorite, atau Scan
+      const isiBayangan = (bayangan.value || '').trim();
+      if (isiBayangan !== '' && isiBayangan !== nilaiTerakhirBayangan) {
+        nilaiTerakhirBayangan = isiBayangan;
+        if (inp.value.trim() !== isiBayangan) {
+          inp.value = isiBayangan;
+          inp.dispatchEvent(new Event('input', { bubbles: true }));
+          inp.dispatchEvent(new Event('keyup', { bubbles: true }));
+        }
+        return;
+      }
+
+      // Cek apakah ada input penangkap kontak/scan lain di halaman yang baru terisi angka
+      const semuaInput = document.querySelectorAll('input[type="text"], input[type="tel"], input[type="number"]');
+      for (let i = 0; i < semuaInput.length; i++) {
+        const el = semuaInput[i];
+        if (el.id !== 'scanner-input' && el.id !== 'idPlayer' && el.id !== 'inputNomorFav' && el.id !== 'inputNamaFav' && el.id !== 'inputSuaraSementara') {
+          const valLain = (el.value || '').replace(/[^0-9]/g, '');
+          if (valLain.length >= 6 && valLain !== nilaiTerakhirBayangan) {
+            nilaiTerakhirBayangan = valLain;
+            bayangan.value = valLain;
+            inp.value = valLain;
+            el.value = ''; // Kosongkan penangkap agar siap dipakai lagi
+            inp.dispatchEvent(new Event('input', { bubbles: true }));
+            inp.dispatchEvent(new Event('keyup', { bubbles: true }));
+            break;
+          }
+        }
+      }
+    }, 250);
+
+    // 3. Pengaman tombol X dan tombol Lanjutkan
     document.addEventListener('click', function(e) {
-      salinKeBayangan();
+      const inp = document.getElementById('scanner-input');
+      const bayangan = pastikanBayanganAda();
+
+      if (e.target.closest('#btnHapusX') && inp) {
+        inp.value = '';
+        bayangan.value = '';
+        nilaiTerakhirBayangan = '';
+        inp.dispatchEvent(new Event('input', { bubbles: true }));
+      }
+
       const tombolLanjut = e.target.closest('button, a, div');
       if (tombolLanjut && tombolLanjut.textContent && tombolLanjut.textContent.trim() === 'Lanjutkan') {
+        if (inp) bayangan.value = inp.value.trim();
         tombolLanjut.style.setProperty('pointer-events', 'auto', 'important');
         tombolLanjut.style.setProperty('z-index', '99999', 'important');
       }
     }, true);
   })();
 </script>
-
 
 
 </body>
