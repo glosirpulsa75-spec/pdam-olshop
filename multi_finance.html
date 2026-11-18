@@ -3012,18 +3012,15 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 </script>
 </div>
+
 <script>
   // =========================================================================
-  // MASTER DETEKSI GANGGUAN OTOMATIS UNIVERSAL (TINGGAL GANTI NAMA KATEGORI)
+  // MASTER DETEKSI GANGGUAN OTOMATIS (ANTI-CORS & MULTI-KATEGORI)
   // =========================================================================
   (function() {
-    // 1. CUKUP GANTI NAMA KATEGORI INI SAJA UNTUK SETIAP HALAMAN BARU:
-    // Contoh: "multi-finan", "pdam", "bpjs", "internet-tv", dll.
+    // CUKUP GANTI NAMA SLUG KATEGORI INI SAJA UNTUK HALAMAN LAIN:
     const slugKategori = "multi-finan-733650";
-const domainToko   = "https://pulsachrome.tokoq.net";
 
-
-    // Fungsi pembersih kata umum agar pencocokan nama produk 100% akurat di semua kategori
     function bersihkanKata(teks) {
       return (teks || '')
         .toLowerCase()
@@ -3036,10 +3033,8 @@ const domainToko   = "https://pulsachrome.tokoq.net";
     function terapkanLabelGangguan(daftarProdukGangguan) {
       if (!daftarProdukGangguan || daftarProdukGangguan.length === 0) return;
 
-      // A. Deteksi otomatis semua daftar pilihan berbentuk div/kartu (pop-up maupun list biasa)
-      const kandidatItem = document.querySelectorAll('.finance-item, .provider-item, .list-item, [data-value]');
-      kandidatItem.forEach(function(item) {
-        // Lewati jika elemen adalah <option> (ditangani di bagian B)
+      // 1. Tandai & kunci semua item daftar (pop-up maupun list biasa)
+      document.querySelectorAll('.finance-item, .provider-item, .list-item, [data-value]').forEach(function(item) {
         if (item.tagName === 'OPTION') return;
 
         const namaAsli = (item.getAttribute('data-value') || item.textContent || '').trim();
@@ -3059,13 +3054,11 @@ const domainToko   = "https://pulsachrome.tokoq.net";
           item.style.setProperty('color', '#9ca3af', 'important');
           item.style.setProperty('cursor', 'not-allowed', 'important');
 
-          // Tempelkan label merah GANGGUAN di sebelah kanan tulisan produk
           const badge = document.createElement('span');
           badge.innerText = 'Gangguan';
           badge.style.cssText = 'background:#dc2626; color:#ffffff; font-size:11px; font-weight:bold; padding:3px 8px; border-radius:6px; margin-left:8px; flex-shrink:0;';
           item.appendChild(badge);
 
-          // Kunci item agar tidak bisa diklik saat gangguan
           item.addEventListener('click', function(e) {
             e.preventDefault();
             e.stopImmediatePropagation();
@@ -3074,7 +3067,7 @@ const domainToko   = "https://pulsachrome.tokoq.net";
         }
       });
 
-      // B. Deteksi otomatis semua dropdown <select> di halaman
+      // 2. Tandai & kunci dropdown <select>
       document.querySelectorAll('select option').forEach(function(opt) {
         if (!opt.value) return;
         const namaOpt = (opt.value || opt.textContent || '').trim();
@@ -3092,17 +3085,21 @@ const domainToko   = "https://pulsachrome.tokoq.net";
       });
     }
 
-    // Ambil data status produk langsung dari halaman kategori toko bukaOlshop Anda
-    const urlTarget = domainToko + "/kategori/" + slugKategori;
-    fetch(urlTarget)
+    // Gunakan jalur relatif "/kategori/..." agar satu origin dengan APK (bebas blokir CORS)
+    fetch("/kategori/" + slugKategori)
       .then(function(res) { return res.text(); })
       .then(function(html) {
         const doc = new DOMParser().parseFromString(html, 'text/html');
         const listGangguan = [];
 
-        doc.querySelectorAll('.card, .product-card, [class*="produk"], [class*="product"], a, div').forEach(function(el) {
+        // Cari kartu produk yang memiliki tanda Gangguan, Tidak Aktif, Habis, atau Out of Stock
+        doc.querySelectorAll('.card, .product-card, .item-produk, [class*="product"], [class*="produk"], a').forEach(function(el) {
           const teks = (el.textContent || '').toLowerCase();
-          if (teks.includes('gangguan') && teks.length < 250) {
+          const kelas = (el.className || '').toLowerCase();
+          if (
+            (teks.includes('gangguan') || teks.includes('tidak aktif') || teks.includes('stok habis') || kelas.includes('disabled') || kelas.includes('out-of-stock')) &&
+            teks.length < 300
+          ) {
             listGangguan.push(bersihkanKata(teks));
           }
         });
@@ -3110,7 +3107,7 @@ const domainToko   = "https://pulsachrome.tokoq.net";
         terapkanLabelGangguan(listGangguan);
       })
       .catch(function(err) {
-        console.log('Info deteksi gangguan:', err);
+        console.log('Deteksi gangguan:', err);
       });
   })();
 </script>
