@@ -2991,92 +2991,58 @@ function satukkanNomorML() {
 </script>
 
 <script>
-  // Jembatan Dua Arah Murni: Buku Kontak, Favorite, Scan, Bicara -> #scanner-input (Tanpa Ubah CSS Tombol)
+  // Jembatan Satu Arah Aman (Tanpa Menghapus Input Lain)
   (function() {
-    let nilaiTerakhirBayangan = '';
+    let terakhirDisalin = '';
 
-    // Pastikan elemen bayangan #idPlayer selalu tersedia untuk ditangkap Buku Kontak, Favorite, & Scan
-    function pastikanBayanganAda() {
-      let bayangan = document.getElementById('idPlayer');
-      if (!bayangan) {
-        bayangan = document.createElement('input');
-        bayangan.type = 'text';
-        bayangan.id = 'idPlayer';
-        bayangan.style.cssText = 'position:fixed; top:-200px; left:0; width:1px; height:1px; opacity:0; pointer-events:none;';
-        document.body.appendChild(bayangan);
+    // 1. Pastikan elemen #idPlayer ada sebagai penerima dari Favorite/Kontak/Scan
+    function ambilBayangan() {
+      let el = document.getElementById('idPlayer');
+      if (!el) {
+        el = document.createElement('input');
+        el.type = 'hidden';
+        el.id = 'idPlayer';
+        document.body.appendChild(el);
       }
-      return bayangan;
+      return el;
     }
 
-    // 1. Jika user mengetik langsung di #scanner-input, salin ke #idPlayer
+    // 2. Jika #idPlayer terisi angka baru dari Favorite/Kontak/Scan, salin ke #scanner-input TANPA mengosongkan apa pun
+    setInterval(function() {
+      const inp = document.getElementById('scanner-input');
+      const bayangan = ambilBayangan();
+      if (!inp) return;
+
+      const isiBaru = (bayangan.value || '').trim();
+      if (isiBaru !== '' && isiBaru !== terakhirDisalin) {
+        terakhirDisalin = isiBaru;
+        inp.value = isiBaru;
+        inp.dispatchEvent(new Event('input', { bubbles: true }));
+        inp.dispatchEvent(new Event('keyup', { bubbles: true }));
+      }
+    }, 200);
+
+    // 3. Jika user mengetik manual di #scanner-input, perbarui memori agar tidak tertimpa
     document.addEventListener('input', function(e) {
       if (e.target && e.target.id === 'scanner-input') {
-        const bayangan = pastikanBayanganAda();
         const val = e.target.value.trim();
-        bayangan.value = val;
-        nilaiTerakhirBayangan = val;
+        terakhirDisalin = val;
+        ambilBayangan().value = val;
       }
     }, true);
 
-    // 2. Jika Buku Kontak, Favorite, Scan, atau Bicara mengisi #idPlayer (atau input penangkap lainnya), salin ke #scanner-input
-    setInterval(function() {
-      const inp = document.getElementById('scanner-input');
-      const bayangan = pastikanBayanganAda();
-      if (!inp) return;
-
-      // Cek apakah #idPlayer baru saja diisi oleh Buku Kontak, Favorite, atau Scan
-      const isiBayangan = (bayangan.value || '').trim();
-      if (isiBayangan !== '' && isiBayangan !== nilaiTerakhirBayangan) {
-        nilaiTerakhirBayangan = isiBayangan;
-        if (inp.value.trim() !== isiBayangan) {
-          inp.value = isiBayangan;
-          inp.dispatchEvent(new Event('input', { bubbles: true }));
-          inp.dispatchEvent(new Event('keyup', { bubbles: true }));
-        }
-        return;
-      }
-
-      // Cek apakah ada input penangkap kontak/scan lain di halaman yang baru terisi angka
-      const semuaInput = document.querySelectorAll('input[type="text"], input[type="tel"], input[type="number"]');
-      for (let i = 0; i < semuaInput.length; i++) {
-        const el = semuaInput[i];
-        if (el.id !== 'scanner-input' && el.id !== 'idPlayer' && el.id !== 'inputNomorFav' && el.id !== 'inputNamaFav' && el.id !== 'inputSuaraSementara') {
-          const valLain = (el.value || '').replace(/[^0-9]/g, '');
-          if (valLain.length >= 6 && valLain !== nilaiTerakhirBayangan) {
-            nilaiTerakhirBayangan = valLain;
-            bayangan.value = valLain;
-            inp.value = valLain;
-            el.value = ''; // Kosongkan penangkap agar siap dipakai lagi
-            inp.dispatchEvent(new Event('input', { bubbles: true }));
-            inp.dispatchEvent(new Event('keyup', { bubbles: true }));
-            break;
-          }
-        }
-      }
-    }, 250);
-
-    // 3. Pengaman tombol X dan tombol Lanjutkan
+    // 4. Jika tombol X diklik, bersihkan keduanya
     document.addEventListener('click', function(e) {
-      const inp = document.getElementById('scanner-input');
-      const bayangan = pastikanBayanganAda();
-
-      if (e.target.closest('#btnHapusX') && inp) {
-        inp.value = '';
-        bayangan.value = '';
-        nilaiTerakhirBayangan = '';
-        inp.dispatchEvent(new Event('input', { bubbles: true }));
-      }
-
-      const tombolLanjut = e.target.closest('button, a, div');
-      if (tombolLanjut && tombolLanjut.textContent && tombolLanjut.textContent.trim() === 'Lanjutkan') {
-        if (inp) bayangan.value = inp.value.trim();
-        tombolLanjut.style.setProperty('pointer-events', 'auto', 'important');
-        tombolLanjut.style.setProperty('z-index', '99999', 'important');
+      if (e.target.closest('#btnHapusX')) {
+        const inp = document.getElementById('scanner-input');
+        if (inp) inp.value = '';
+        ambilBayangan().value = '';
+        terakhirDisalin = '';
+        if (inp) inp.dispatchEvent(new Event('input', { bubbles: true }));
       }
     }, true);
   })();
 </script>
-
 
 </body>
 </html>
