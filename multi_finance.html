@@ -1999,11 +1999,15 @@ let disabledAttr = (isOutOfStock || isGangguan) ? 'disabled' : '';
         });
         
         container.innerHTML = html;
-              // =========================================================================
-        // DETEKSI OTOMATIS GANGGUAN PASCABAYAR REAL-TIME DARI JSON OKECONNECT
+        
+            // =========================================================================
+        // DETEKSI OTOMATIS GANGGUAN PASCABAYAR (BEBAS BLOKIR CORS & AUTO-POPUP)
         // =========================================================================
         (function cekGangguanOkeConnectUniversal() {
-            const urlJsonOkeConnect = "https://okeconnect.com/harga/json?id=905ccd028329b0a&produk=sms_telepon,kuota_nasional,kuota_telkomsel,bulk_cashback,kuota_byu,kuota_indosat,kuota_xl,kuota_axis,kuota_smartfren,saldo_gojek,cetak_voucher,ecommerce,tagihan,air_pdam,finance,tagihan_pbb,pulsa_transfer";
+            const urlAsli = "https://okeconnect.com";
+            // Jembatan proxy agar tidak diblokir CORS oleh WebView HP
+            const urlProxy = "https://allorigins.win" + encodeURIComponent(urlAsli);
+            let daftarGangguanTersimpan = [];
 
             function bersihkanTeks(t) {
                 return (t || '').toLowerCase()
@@ -2013,17 +2017,17 @@ let disabledAttr = (isOutOfStock || isGangguan) ? 'disabled' : '';
                     .trim();
             }
 
-            function pasangBadgeGangguan(daftarGangguan) {
-                if (!daftarGangguan || daftarGangguan.length === 0) return;
+            function terapkanBadgeSekarang() {
+                if (daftarGangguanTersimpan.length === 0) return;
 
-                // 1. Tandai & kunci item di pop-up pilihan (.finance-item / daftar pilihan lainnya)
+                // 1. Tandai & kunci semua item di pop-up pilihan (.finance-item / lainnya)
                 document.querySelectorAll('.finance-item, .provider-item, .list-item, [data-value]').forEach(item => {
                     if (item.tagName === 'OPTION') return;
                     const namaAsli = (item.getAttribute('data-value') || item.textContent || '').trim();
                     const kunci = bersihkanTeks(namaAsli);
                     if (kunci.length < 3) return;
 
-                    const cocok = daftarGangguan.some(g => g === kunci || g.includes(kunci) || kunci.includes(g));
+                    const cocok = daftarGangguanTersimpan.some(g => g === kunci || g.includes(kunci) || kunci.includes(g));
                     if (cocok && !item.dataset.gangguanApplied) {
                         item.dataset.gangguanApplied = '1';
                         item.style.setProperty('display', 'flex', 'important');
@@ -2053,7 +2057,7 @@ let disabledAttr = (isOutOfStock || isGangguan) ? 'disabled' : '';
                     const kunci = bersihkanTeks(namaOpt);
                     if (kunci.length < 3) return;
 
-                    const cocok = daftarGangguan.some(g => g === kunci || g.includes(kunci) || kunci.includes(g));
+                    const cocok = daftarGangguanTersimpan.some(g => g === kunci || g.includes(kunci) || kunci.includes(g));
                     if (cocok && !opt.disabled) {
                         opt.disabled = true;
                         opt.text = namaOpt + ' (GANGGUAN)';
@@ -2061,28 +2065,37 @@ let disabledAttr = (isOutOfStock || isGangguan) ? 'disabled' : '';
                 });
             }
 
-            fetch(urlJsonOkeConnect)
-                .then(res => res.json())
-                .then(data => {
-                    const list = Array.isArray(data) ? data : (data.data || []);
-                    const gangguanList = [];
-
-                    list.forEach(item => {
-                        // Status "0" di OkeConnect berarti produk sedang Gangguan / Tidak Aktif
-                        if (String(item.status) === '0') {
-                            const bersih = bersihkanTeks(item.keterangan || item.produk || '');
-                            if (bersih.length >= 3 && !gangguanList.includes(bersih)) {
-                                gangguanList.push(bersih);
-                            }
+            function prosesDataOkeConnect(data) {
+                const list = Array.isArray(data) ? data : (data.data || []);
+                const hasil = [];
+                list.forEach(item => {
+                    if (String(item.status) === '0') {
+                        const bersih = bersihkanTeks(item.keterangan || item.produk || '');
+                        if (bersih.length >= 3 && !hasil.includes(bersih)) {
+                            hasil.push(bersih);
                         }
-                    });
+                    }
+                });
+                daftarGangguanTersimpan = hasil;
+                terapkanBadgeSekarang();
+            }
 
-                    pasangBadgeGangguan(gangguanList);
-                })
-                .catch(err => console.log('Gagal memuat JSON OkeConnect:', err));
+            // Coba ambil langsung, jika diblokir CORS otomatis beralih ke proxy
+            fetch(urlAsli)
+                .then(res => res.json())
+                .then(prosesDataOkeConnect)
+                .catch(() => {
+                    fetch(urlProxy)
+                        .then(res => res.json())
+                        .then(prosesDataOkeConnect)
+                        .catch(err => console.log('Gagal memuat data gangguan:', err));
+                });
+
+            // Pasang ulang setiap kali user mengetuk atau mengetik di pop-up pencarian
+            document.addEventListener('click', () => setTimeout(terapkanBadgeSekarang, 100));
+            document.addEventListener('input', () => setTimeout(terapkanBadgeSekarang, 100));
         })();
-  
-        document.querySelectorAll('#produkContainer .product-card:not(.disabled)').forEach(card => {
+    document.querySelectorAll('#produkContainer .product-card:not(.disabled)').forEach(card => {
             card.addEventListener('click', function(e) {
                 e.preventDefault();
                 e.stopPropagation();
