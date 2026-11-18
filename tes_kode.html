@@ -1108,12 +1108,14 @@ box-shadow: none !important;">
  <!-- KAPSUL BARIS TOMBOL (PAS MENYATU DI DALAM KOTAK PUTIH) -->
     <div style="width: 100% !important; background-color: #f1f3f5 !important; border-radius: 16px !important; padding: 10px !important; box-sizing: border-box !important; display: flex !important; align-items: center !important; justify-content: space-around !important;">
         
-        <!-- 1. Tombol Info -->
-        <div onclick="aksiBukaTutupInfo()" style="display: flex !important; align-items: center !important; justify-content: center !important; cursor: pointer !important; flex: 1 !important; gap: 6px !important;">
-            <img src="https://images.bukaolshop.com/hosting/183991/e70aaebff47a662105.png" alt="Info" style="width: 16px !important; height: 16px !important; display: block !important;" />
-            <span style="font-size: 13px !important; color: #000000 !important; font-weight: bold !important; font-family: sans-serif !important;">Info</span>
-        </div>
-        
+     <!-- Tombol Bicara Mandiri (Anti-Putus Gboard dengan Kotak Suara Terpisah) -->
+<div role="button" tabindex="0" onclick="(function(){ var inpUtama = document.getElementById('scanner-input') || document.querySelector('input[placeholder*=\'Nomor\']'); if(!inpUtama) return; var box = document.getElementById('boxInputSuaraKustom'); if(!box){ box = document.createElement('div'); box.id = 'boxInputSuaraKustom'; box.style.cssText = 'margin-top:10px; padding:10px; background:#f0f9ff; border:1.5px solid #0284c7; border-radius:10px;'; box.innerHTML = '<div style=\'font-size:11.5px; color:#0369a1; margin-bottom:6px; font-weight:600;\'>🎙️ Tekan ikon Mikrofon di keyboard & ucapkan seluruh nomor:</div><div style=\'display:flex; gap:6px;\'><input type=\'tel\' id=\'inputSuaraSementara\' placeholder=\'Hasil suara muncul di sini...\' style=\'flex:1; padding:8px 10px; border:1px solid #bae6fd; border-radius:8px; font-size:14px; font-weight:bold; color:#0f172a; outline:none; background:#ffffff;\'><button type=\'button\' id=\'btnTerapkanSuara\' style=\'background:#0284c7; color:#fff; border:none; border-radius:8px; padding:0 12px; font-size:12px; font-weight:bold; cursor:pointer;\'>Pakai</button></div>'; inpUtama.parentNode.parentNode.appendChild(box); document.getElementById('btnTerapkanSuara').onclick = function(){ var val = document.getElementById('inputSuaraSementara').value.replace(/[^0-9]/g,''); if(val.startsWith('62')) val = '0'+val.slice(2); if(val){ inpUtama.value = val; if(typeof satukkanNomorML==='function') satukkanNomorML(); inpUtama.dispatchEvent(new Event('input',{bubbles:true})); } box.style.display = 'none'; }; } box.style.display = 'block'; var inpSuara = document.getElementById('inputSuaraSementara'); inpSuara.value = ''; inpSuara.focus(); inpSuara.click(); var lastS = ''; var tmr = null; var iv = setInterval(function(){ if(box.style.display === 'none'){ clearInterval(iv); return; } if(inpSuara.value !== lastS){ lastS = inpSuara.value; clearTimeout(tmr); tmr = setTimeout(function(){ var bersih = inpSuara.value.replace(/[^0-9]/g,''); if(bersih.startsWith('62')) bersih = '0'+bersih.slice(2); if(bersih.length >= 10){ inpUtama.value = bersih; if(typeof satukkanNomorML==='function') satukkanNomorML(); inpUtama.dispatchEvent(new Event('input',{bubbles:true})); box.style.display = 'none'; clearInterval(iv); } }, 2200); } }, 300); })()" style="display: flex !important; align-items: center !important; justify-content: center !important; cursor: pointer !important; flex: 1 !important; gap: 6px !important; user-select: none !important; -webkit-user-select: none !important; -webkit-tap-highlight-color: transparent !important; padding: 0 !important; margin: 0 !important;">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="width: 16px !important; height: 16px !important; display: block !important; color: #000000 !important; pointer-events: none !important;">
+        <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.91-3c-.49 0-.9.36-.98.85C16.52 14.2 14.47 16 12 16s-4.52-1.8-4.93-4.15c-.08-.49-.49-.85-.98-.85-.61 0-1.09.54-1 1.14.49 3 2.89 5.35 5.91 5.78V20c0 .55.45 1 1 1s1-.45 1-1v-2.08c3.02-.43 5.42-2.78 5.91-5.78.1-.6-.39-1.14-1-1.14z"/>
+    </svg>
+    <span id="teksTombolBicara" style="font-size: 13px !important; color: #000000 !important; font-weight: bold !important; font-family: sans-serif !important; pointer-events: none !important; line-height: 1 !important;">Bicara</span>
+</div>
+          
         <!-- Garis Pembatas Vertikal Kiri -->
         <div style="width: 1px !important; height: 14px !important; background-color: #ced4da !important;"></div>
         
@@ -2837,6 +2839,127 @@ function closePromoModal(e) {
 
 </script>
 
+<script>
+// Fungsi otomatis berjalan berulang untuk memaksa nomor hasil scan masuk kolom
+var cekHasilScan = setInterval(function() {
+    var kolomInput = document.getElementById('scanner-input');
+    
+    if (kolomInput) {
+        // 1. Cek parameter URL bawaan webview aplikasi
+        const urlParams = new URLSearchParams(window.location.search);
+        let nomorFinal = urlParams.get('catatan') || urlParams.get('nomor') || urlParams.get('scan') || '';
+        
+        // 2. Jika URL kosong, cek langsung shortcode teks bawaan aplikasi BukaOlshop
+        if (!nomorFinal || nomorFinal === 'null') {
+            nomorFinal = "{{hasil_kontak}}";
+        }
+        
+        // Bersihkan teks saringan template kosong bawaan sistem
+        if (nomorFinal && nomorFinal !== '{{hasil_kontak}}' && nomorFinal !== '[nomor_hp]' && nomorFinal !== 'null') {
+            // Hilangkan semua spasi di antara nomor meteran (contoh: 14 3601 8991 5 menjadi 14360189915)
+            var nomorBersih = nomorFinal.replace(/[^0-9]/g, '');
+            
+            if (nomorBersih !== "" && kolomInput.value !== nomorBersih) {
+                // Tulis paksa nomor ke dalam kolom input utama Anda
+                kolomInput.value = nomorBersih;
+                
+                // Hentikan pengecekan berulang karena nomor sudah berhasil masuk
+                clearInterval(cekHasilScan);
+                
+                // Memicu otomatis kemunculan daftar harga di bawahnya
+                if (typeof satukkanNomorML === "function") {
+                    satukkanNomorML();
+                }
+            }
+        }
+    }
+}, 300); // Mengecek otomatis setiap 0,3 detik secara agresif
+
+// Pengaman otomatis: Matikan fungsi setelah 5 detik agar baterai HP user tidak boros
+setTimeout(function() {
+    clearInterval(cekHasilScan);
+}, 5000);
+
+let nomorLama = "";
+
+function satukkanNomorML() {
+    const inputElement = document.getElementById('scanner-input');
+    if (!inputElement) return;
+
+    const nomorSekarang = inputElement.value ? inputElement.value.trim() : '';
+    const prefixSekarang = nomorSekarang.substring(0, 4); 
+
+    if (prefixSekarang !== nomorLama) {
+        nomorLama = prefixSekarang; 
+        
+        if (typeof loadTVData === 'function') {
+            loadTVData();
+        }
+    }
+}
+
+// --- KODE TAMBAHAN UNTUK TEMPEL FILTER ---
+const targetProduk = document.getElementById('productContent');
+const areaFilterAnda = document.querySelector('.floating-card-filter');
+
+if (areaFilterAnda) {
+    areaFilterAnda.style.setProperty('display', 'none', 'important');
+}
+
+if (targetProduk && areaFilterAnda) {
+    const observer = new MutationObserver(() => {
+        if (targetProduk.style.display !== 'none' && targetProduk.innerHTML.trim() !== "") {
+            areaFilterAnda.style.setProperty('display', 'block', 'important');
+        } else {
+            areaFilterAnda.style.setProperty('display', 'none', 'important');
+        }
+    });
+    observer.observe(targetProduk, { attributes: true, attributeFilter: ['style', 'class'], childList: true });
+}
+// -----------------------------------------
+
+
+</script>
+
+</div>
+<script>
+  // Fungsi Resmi Bukaolshop untuk Menangkap Hasil Scanner & Mengaktifkan Tombol Selanjutnya PLN
+  window.onScanResult = function(result) {
+    if (!result) return;
+
+    // Bersihkan hasil scan dari spasi, strip, atau karakter non-angka
+    var nomorBersih = result.toString().trim().replace(/[^0-9]/g, '');
+
+    if (nomorBersih !== '') {
+      // Ambil semua kotak input yang berpotensi dipakai oleh Token maupun Pascabayar
+     var semuaKolom = document.querySelectorAll('#scanner-input, #idPelangganBRILink, input[placeholder*="Nomor Tujuan"], input[placeholder*="ID Pelanggan"], input[placeholder*="Meter"]');
+
+      
+      semuaKolom.forEach(function(kolom) {
+        // Set nilai menggunakan setter asli agar terbaca oleh semua skrip
+        var nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
+        nativeInputValueSetter.call(kolom, nomorBersih);
+
+        // Jalankan fungsi oninput inline jika terpasang di tag HTML-nya
+        if (typeof kolom.oninput === 'function') {
+          kolom.oninput();
+        }
+        if (typeof kolom.onchange === 'function') {
+          kolom.onchange();
+        }
+
+        // Picu seluruh event standar keyboard & form
+        kolom.dispatchEvent(new Event('input', { bubbles: true }));
+        kolom.dispatchEvent(new Event('change', { bubbles: true }));
+        kolom.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true, key: '0' }));
+      });
+
+      // Cadangan jika ada variabel global penyimpanan ID di halaman PLN
+      if (typeof window.idPelanggan !== 'undefined') window.idPelanggan = nomorBersih;
+      if (typeof window.nomorMeter !== 'undefined') window.nomorMeter = nomorBersih;
+    }
+  };
+</script>
 
 </body>
 </html>
