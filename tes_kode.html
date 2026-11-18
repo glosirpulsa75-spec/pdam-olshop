@@ -2986,16 +2986,15 @@ function satukkanNomorML() {
 
     inpUtama.addEventListener('input', perbaruiTombolML);
     inpUtama.addEventListener('keyup', perbaruiTombolML);
-    setInterval(perbaruiTombolML, 250);
+   
   })();
 </script>
 <script>
-  // Penahan Nomor ID Anti-Kedip + Multi-Alur (Tenang 100% Tanpa Kedipan)
+  // Sinkronisasi Multi-Alur Murni (Tanpa Timer CSS yang Menyebabkan Kedipan)
   (function() {
-    let idTerkunci = '';
-    let sedangHapusManual = false;
-
-    function sinkronSemuaID(nilai) {
+    function salinKeBayangan() {
+      const inp = document.getElementById('scanner-input');
+      if (!inp) return;
       let bayangan = document.getElementById('idPlayer');
       if (!bayangan) {
         bayangan = document.createElement('input');
@@ -3003,124 +3002,25 @@ function satukkanNomorML() {
         bayangan.id = 'idPlayer';
         document.body.appendChild(bayangan);
       }
-      if (bayangan.value !== nilai) {
-        bayangan.value = nilai;
-      }
+      bayangan.value = inp.value.trim();
     }
 
-    function kunciTampilanStabil(adaIsi) {
-      const btnCekID = document.getElementById('btnCekID');
-      const btnHapusX = document.getElementById('btnHapusX');
-      if (adaIsi) {
-        if (btnCekID && btnCekID.style.display !== 'inline-flex') {
-          btnCekID.style.setProperty('display', 'inline-flex', 'important');
-        }
-        if (btnHapusX && btnHapusX.style.display !== 'inline-flex') {
-          btnHapusX.style.setProperty('display', 'inline-flex', 'important');
-        }
-      } else {
-        if (btnCekID && btnCekID.style.display !== 'none') {
-          btnCekID.style.setProperty('display', 'none', 'important');
-        }
-        if (btnHapusX && btnHapusX.style.display !== 'none') {
-          btnHapusX.style.setProperty('display', 'none', 'important');
-        }
-      }
-    }
-
-    // 1. Tangkap klik pada Cek ID, Tombol X, maupun Kartu Produk
-    document.addEventListener('click', function(e) {
-      const inp = document.getElementById('scanner-input');
-
-      if (e.target.closest('#btnCekID') && inp) {
-        const val = inp.value.trim();
-        if (val !== '') {
-          idTerkunci = val;
-          sedangHapusManual = false;
-          sinkronSemuaID(val);
-          kunciTampilanStabil(true);
-        }
-      }
-
-      if (e.target.closest('#btnHapusX') && inp) {
-        sedangHapusManual = true;
-        idTerkunci = '';
-        inp.value = '';
-        sinkronSemuaID('');
-        kunciTampilanStabil(false);
-        setTimeout(function() { sedangHapusManual = false; }, 400);
-      }
-
-      if (inp && inp.value.trim() !== '') {
-        idTerkunci = inp.value.trim();
-        sinkronSemuaID(idTerkunci);
-      }
-    }, true);
-
-    // 2. Tangkap ketikan manual / Backspace di keyboard HP
-    document.addEventListener('keydown', function(e) {
-      if (e.target && e.target.id === 'scanner-input') {
-        if (e.key === 'Backspace' || e.key === 'Delete') {
-          sedangHapusManual = true;
-          setTimeout(function() {
-            const inp = document.getElementById('scanner-input');
-            if (inp && inp.value.trim() === '') {
-              idTerkunci = '';
-              sinkronSemuaID('');
-              kunciTampilanStabil(false);
-            }
-            sedangHapusManual = false;
-          }, 120);
-        }
-      }
-    }, true);
-
-    // 3. Tangkap input baru (ketikan, suara, scan, favorite)
     document.addEventListener('input', function(e) {
-      if (e.target && e.target.id === 'scanner-input') {
-        const val = e.target.value.trim();
-        if (val !== '') {
-          idTerkunci = val;
-          sinkronSemuaID(val);
-          kunciTampilanStabil(true);
-        } else if (!sedangHapusManual && idTerkunci !== '') {
-          e.target.value = idTerkunci;
-          sinkronSemuaID(idTerkunci);
-          kunciTampilanStabil(true);
-        }
-      }
+      if (e.target && e.target.id === 'scanner-input') salinKeBayangan();
     }, true);
 
-    // 4. Penjaga super cepat (50ms) agar jika skrip lama mencoba menghapus, tertahan sebelum sempat berkedip di mata
-    setInterval(function() {
-      const inp = document.getElementById('scanner-input');
-      if (inp) {
-        const val = inp.value.trim();
-        if (val !== '') {
-          if (idTerkunci !== val) {
-            idTerkunci = val;
-            sinkronSemuaID(val);
-          }
-          kunciTampilanStabil(true);
-        } else if (idTerkunci !== '' && !sedangHapusManual) {
-          inp.value = idTerkunci;
-          sinkronSemuaID(idTerkunci);
-          kunciTampilanStabil(true);
-        } else {
-          kunciTampilanStabil(false);
-        }
+    document.addEventListener('click', function(e) {
+      salinKeBayangan();
+      const tombolLanjut = e.target.closest('button, a, div');
+      if (tombolLanjut && tombolLanjut.textContent && tombolLanjut.textContent.trim() === 'Lanjutkan') {
+        tombolLanjut.style.setProperty('pointer-events', 'auto', 'important');
+        tombolLanjut.style.setProperty('z-index', '99999', 'important');
       }
-
-      document.querySelectorAll('button, a, div').forEach(function(el) {
-        if (el.textContent && el.textContent.trim() === 'Lanjutkan' && el.offsetParent !== null) {
-          el.style.setProperty('pointer-events', 'auto', 'important');
-          el.style.setProperty('position', 'relative', 'important');
-          el.style.setProperty('z-index', '99999', 'important');
-        }
-      });
-    }, 50);
+    }, true);
   })();
 </script>
+
+<
 
 </body>
 </html>
