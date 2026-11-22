@@ -1575,38 +1575,18 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!inputElement) return allCategories && allCategories.length > 0 ? allCategories : null;
 
     const nomor = inputElement.value ? inputElement.value.trim() : '';
-    // 2. KONDISI AWAL (NOMOR KOSONG):
-    // Tetap kunci ke tampilan "Pulsa All Operator"
+       // 2. KONDISI AWAL (NOMOR KOSONG): Tetap kunci ke tampilan "Pulsa All Operator" sesuai gambar Anda
+     // // 2. KONDISI AWAL (NOMOR KOSONG):
+    // Tetap kunci ke tampilan "Pulsa All Operator" sesuai gambar Anda
     if (nomor.length < 4) {
-      const tAtas = document.getElementById('teks-operator-atas');
-      const lAtas = document.getElementById('logo-operator-atas');
-      
-      if (tAtas) tAtas.innerText = "Pulsa All Operator";
-      if (lAtas) lAtas.src = "https://bukaolshop.com";
+        const tAtas = document.getElementById('teks-operator-atas');
+        const lAtas = document.getElementById('logo-operator-atas');
+        if (tAtas) tAtas.innerText = "Pulsa All Operator";
+        if (lAtas) lAtas.src = "https://images.bukaolshop.com/hosting/183991/b2952631a563142153.png";
+        
+        const container = document.getElementById('produkContainer'); if (container) { const linkGambarAnimasi = "https://assets" + "://lottiefiles.com" + "lf20_t9gkkhqy.json"; container.innerHTML = '<div style="text-align: center; margin-top: 20px;"><lottie-player src="' + linkGambarAnimasi + '" background="transparent" speed="1" style="width: 250px; height: 250px; margin: 0 auto;" loop autoplay></lottie-player><p style="color: #999; font-size: 14px; margin-top: 10px;">Masukkan Nomor hp untuk melihat produk</p></div>';  }
 
-      const container = document.getElementById('produkContainer');
-      if (container) {
-        // Mengambil gambar ikon bawaan jika sudah ada di layar agar tidak hilang
-        const gambarBawaan = container.querySelector('img');
-        const linkIcon = gambarBawaan ? gambarBawaan.src : "https://bukaolshop.com";
-
-        // Paksa posisi container pas di tengah layar (menembus kolom grid)
-        container.style.setProperty('display', 'flex', 'important');
-        container.style.setProperty('flex-direction', 'column', 'important');
-        container.style.setProperty('align-items', 'center', 'important');
-        container.style.setProperty('justify-content', 'center', 'important');
-        container.style.setProperty('width', '100%', 'important');
-        container.style.setProperty('grid-column', '1 / -1', 'important');
-        container.style.setProperty('margin', '40px auto', 'important');
-
-        container.innerHTML = `
-          <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; text-align: center;">
-            <img src="${linkIcon}" style="width: 65px; height: 65px; object-fit: contain; margin-bottom: 12px;">
-            <p style="color: #999; font-size: 14px; margin: 0; white-space: nowrap;">Masukkan Nomor hp untuk melihat produk</p>
-          </div>
-        `;
-      }
-
+   
  
       const filterElement = document.getElementById('area-filter');
     if (filterElement) {
