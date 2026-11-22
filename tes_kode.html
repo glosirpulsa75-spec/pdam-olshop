@@ -691,12 +691,206 @@
         }
  
 
+@keyframes marqueeBanner {
+    0% { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(-100%, 0, 0); }
+}
+.floating-card {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: none !important;
 
+    border-radius: 10px;
+    padding: 20px;
+    margin: 10px 16px 16px 16px;
+    box-shadow: 0 20px 35px rgba(0, 0, 0, 0.12), 0 4px 10px rgba(0, 0, 0, 0.06) !important;
+
+    position: relative;
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+.floating-card-filter {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 16px;
+    padding: 6px 12px;
+    margin: -10px 16px 16px 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+    position: relative;
+    z-index: 998;
+}
+
+.floating-card-filter .view-toggle-container {
+    background: transparent !important;
+    border-top: none !important;
+    padding: 0 !important;
+}
+.input-group input {
+    width: 100%;
+    padding: 16px 40px 16px 16px;
+    border: 1.5px solid rgba(0, 0, 0, 0.08);
+    border-radius: 14px;
+    font-size: 15px;
+    background: rgba(255, 255, 255, 0.9);
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.input-group input:focus {
+    border-color: #007aff !important;
+    box-shadow: 0 0 12px rgba(0, 122, 255, 0.4) !important;
+}
+
+.header-2 {
+    background: rgba(255, 255, 255, 0.90) !important;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: 12px;
+    margin: 0px 16px 0 16px !important;
+    
+    /* 1. Menghilangkan garis tepi agar efek melayang lebih natural */
+    border: none !important;
+    
+    /* 2. Membuat efek bayangan 3D melayang yang lembut dan dalam */
+    box-shadow: 0 0px 0px rgba(0, 0, 0, 0.5), 
+                0 0px 0px rgba(0, 0, 0, 0.05) !important;     
+position: sticky !important;
+    top: 0px !important;
+    z-index: 9999 !important;
+
+}
+
+
+
+div.subcategory-tab-btn.active, 
+.subcategory-tab-btn.active {
+    background-color: #007aff !important;
+    color: #ffffff !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: 0 8px 20px rgba(0, 122, 255, 0.4) !important; justify-content: center !important; text-align: center !important; padding-left: 0 !important; padding-right: 0 !important;
+}
+
+.subcategory-tab-btn.active::after,
+.subcategory-tab-btn.active::before {
+    display: none !important;
+}
+/* Gaya Tombol Info Biru Melayang 3D */
+.info-toggle-btn {
+    background-color: #007aff !important;
+    color: #ffffff !important;
+    border: none !important;
+    outline: none !important;
+    border-radius: 20px !important;
+    padding: 6px 16px !important;
+    font-size: 13px !important;
+    font-weight: bold !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer;
+    box-shadow: 0 8px 16px rgba(0, 122, 255, 0.4) !important;
+    transition: all 0.3s ease;
+}
+
+#info-arrow {
+    margin-left: 6px;
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+/* Gaya Kotak Bar Teks Informasi */
+.info-content-box {
+    display: none; /* Sembunyi saat awal */
+    background: #ffffff !important;
+    border-radius: 12px !important;
+    padding: 12px !important;
+    margin-top: 10px !important;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 13px !important;
+    color: #333333 !important;
+    line-height: 1.5;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Class pemicu untuk menampilkan kotak info */
+.info-content-box.show {
+    display: block !important;
+}
+
+/* Memutar tanda panah menjadi ke bawah ketika dibuka */
+.arrow-rotate {
+    transform: rotate(180deg);
+}
+/* Desain Tombol Info Nempel, Kecil, dan Manis */
+.info-toggle-btn {
+    background: rgba(0, 122, 255, 0.08) !important; /* Latar biru transparan tipis */
+    color: #007aff !important; /* Warna teks biru tegas */
+    border: none !important;
+    outline: none !important;
+    border-radius: 12px !important; /* Lengkungan halus sudut boks */
+    padding: 4px 10px !important; /* Ukuran tombol mini/ramping */
+    font-size: 11px !important; /* Ukuran huruf kecil minimalis */
+    font-weight: 600 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer;
+    width: auto !important;
+    height: auto !important;
+    box-shadow: none !important; /* MENGHAPUS TOTAL EFEK MELAYANG 3D */
+    transition: all 0.2s ease;
+}
+
+/* Efek saat tombol ditekan */
+.info-toggle-btn:active {
+    background: rgba(0, 122, 255, 0.16) !important;
+    transform: scale(0.96);
+}
+
+#panah-info {
+    margin-left: 4px;
+    font-size: 10px !important;
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+/* Gaya Kotak Bar Teks Informasi */
+.info-content-box {
+    display: none; /* Sembunyi di awal halaman */
+    background: #ffffff !important;
+    border-radius: 12px !important;
+    padding: 12px !important;
+    margin-top: 10px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    font-size: 13px !important;
+    color: #333333 !important;
+    line-height: 1.5 !important;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06) !important;
+    clear: both !important;
+}
+
+/* Pemicu untuk memunculkan kotak */
+.info-content-box.buka-kotak {
+    display: block !important;
+}
+
+/* Memutar tanda panah menjadi ke bawah */
+.putar-panah {
+    transform: rotate(180deg);
+}
 
  </style>
 </head>
 <body>
-<body style=""> <!-- tag pembuka body asli Anda -->
+
 
 <div class="header-2"
 style="width: calc(100% - 20px) !important;
@@ -715,38 +909,40 @@ display: flex !important;
 align-items: center !important;">
 
 
+
+
+
+
+
+
 <div class="inner-category-box" style="display: flex !important; align-items: center !important; gap: 15px !important; width: 100% !important; box-sizing: border-box !important;">
 
-
- 
-
         <!-- Ikon Air Jernih -->
-        <img src="https://images.bukaolshop.com/hosting/183991/51c7692c9a6511971.png" alt="Icon" style="width: 75px; height: 75px; object-fit: contain; margin-right: 0px;">
+             <!-- Ikon Air Jernih -->
+        <img id="logo-operator-atas" src="https://images.bukaolshop.com/hosting/183991/b2952631a563142153.png" alt="Icon" style="width: 50px; height: 75px; object-fit: contain; margin-right: 0px;">
         <!-- Tulisan Teks Kategori -->
  <!-- Masukkan kode warna di dalam style seperti ini -->
-<div class="header-btn-KUOTA" style="background: linear-gradient(to right, #00a2ff, #006aff) !important; color: white !important; padding: 6px 18px !important; border-radius: 50px !important; box-shadow: 0 15px 15px rgba(0, 106, 255, 0.3) !important; display: inline-block !important; font-weight: bold !important; font-size: 13px !important; margin: 0 auto !important; transform: translateX(-35px) !important;">Mobile Legends</div>
+<div id="teks-operator-atas" class="header-btn-KUOTA" style="background: linear-gradient(to right, #00a2ff, #006aff) !important; color: white !important; padding: 6px 18px !important; border-radius: 50px !important; box-shadow: 0 15px 15px rgba(0, 106, 255, 0.3) !important; display: inline-block !important; font-weight: bold !important; font-size: 13px !important; margin: 0 auto !important; transform: translateX(-35px) !important;">Pulsa All Operator</div>
 
 
 
 
-
+       
    </div>
  
 </div>
 <div style="margin-top: 90px !important;">
 
-
 <div class="floating-card" style="border-radius: 0px !important; box-shadow: none !important; background: transparent !important; background-color: transparent !important;">
 
 <div class="input-wrapper"
 style="width: 94% !important;
-margin: -14px auto 0px auto !important;
+margin: 12px auto 0px auto !important;
 box-sizing: border-box !important;
 padding: 0 !important;
 border-radius: 0px !important;
 background: transparent !important;
 background-color: transparent !important;">
-
 
 <style>
   *:focus-within {
@@ -755,10 +951,9 @@ background-color: transparent !important;">
     outline: none !important;
   }
   #idPlayer:focus {
-    border-color: #007BFF !important;
+    border-color: #007bff !important;
     box-shadow: 0 0 4px rgba(0, 123, 255, 0.5) !important;
-    outline: none !important; text-align: left !important; 
-    padding-left: 0px !important;
+    outline: none !important;
   }  .input-box img, 
   #btnCekID img, 
   div[style*="display: flex"] img,
@@ -772,352 +967,47 @@ background-color: transparent !important;">
       visibility: visible !important;
   }
 
-/* Container Utama Pop-up Mengikuti Gaya Gambar Struk BRILink */
-.popup-style-brilink {
-  font-family: sans-serif;
-  background-color: #f1f5f9; /* Latar belakang abu-abu lembut */
-  border-radius: 24px 24px 0 0;
-  padding: 16px 20px 24px 20px;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 999;
-  max-height: 80vh; /* Batas tinggi maksimal pop-up layar HP */
-  display: flex;
-  flex-direction: column;
-  box-shadow: 0px -5px 20px rgba(0, 0, 0, 0.15);
-  box-sizing: border-box;
-}
-
-.drag-line {
-  width: 40px;
-  height: 4px;
-  background-color: #cbd5e1;
-  border-radius: 2px;
-  margin: 0 auto 16px auto;
-  flex-shrink: 0;
-}
-
-/* KOTAK PUTIH UTAMA YANG BISA DI-SCROLL */
-.modal-scroll-box {
-  flex: 1;
-  overflow-y: auto; /* Mengaktifkan fungsi gulir vertikal otomatis */
-  background-color: #ffffff; /* Kotak dalam berwarna putih bersih */
-  border-radius: 16px; /* Sudut kotak membulat halus */
-  padding: 20px 16px;
-  margin-bottom: 16px;
-  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.05);
-  scrollbar-width: none; /* Sembunyikan scrollbar bawaan biar rapi */
-}
-.modal-scroll-box::-webkit-scrollbar {
-  display: none;
-}
-
-/* Judul di dalam kotak putih */
-.box-title {
-  margin: 0 0 16px 0;
-  font-size: 15px;
-  font-weight: bold;
-  color: #334155;
-}
-
-/* Pengatur item baris */
-.detail-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 12px;
-  font-size: 14px;
-}
-.detail-item .label-text {
-  color: #64748b;
-}
-.detail-item .value-text {
-  font-weight: bold;
-  color: #1e293b;
-}
-
-/* Garis Putus-putus Pemisah Struk Transaksi */
-.divider-dash {
-  border-top: 1px dashed #cbd5e1;
-  margin: 12px 0 16px 0;
-}
-
-.bonus-color { color: #10b981; }
-
-/* Teks Kaki */
-.footer-note {
-  font-size: 11px;
-  color: #94a3b8;
-  text-align: center;
-  line-height: 1.4;
-  margin: 20px 0 0 0;
-}
-/* --- PERBAIKAN STYLING TOMBOL MENGIKUTI GAMBAR TARGET --- */
-.action-buttons {
-  display: flex;
-  gap: 16px; 
-  margin-top: 24px;
-  flex-shrink: 0;
-}
-
-.action-buttons .btn {
-  flex: 1;
-  padding: 16px 14px; 
-  border-radius: 16px; 
-  font-weight: bold;
-  font-size: 15px; 
-  cursor: pointer;
-  border: none;
-  transition: all 0.2s ease-in-out; 
-  font-family: sans-serif;
-}
-
-/* Tombol Batal (Gaya Putih Teks Biru) */
-.action-buttons .btn-cancel {
-  background-color: #ffffff;
-  color: #0066cc; 
-  border: 1.5px solid #cbd5e1; 
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.02);
-}
-
-.action-buttons .btn-cancel:active {
-  background-color: #f8fafc;
-  transform: scale(0.98);
-}
-
-/* Tombol PESAN SEKARANG (Gaya Biru Cerah Pekat dengan Bayangan) */
-.action-buttons .btn-confirm {
-  background-color: #0066cc; 
-  color: #ffffff;
-  box-shadow: 0px 4px 10px rgba(0, 102, 204, 0.2); 
-}
-
-.action-buttons .btn-confirm:active {
-  background-color: #0052a3;
-  transform: scale(0.98);
-}
-
-
-/* --- CSS KOTAK INFO PELANGGAN BERTEMA BRILINK DI DALAM POP-UP --- */
-.brilink-info-box {
-  width: 100%;
-  border-radius: 8px;
-  overflow: hidden;
-  border: 1px solid #cbd5e1;
-  margin-top: 14px;
-  background-color: #f8fafc; /* Latar abu-abu terang */
-  box-sizing: border-box;
-}
-
-/* Header Biru Gelap dengan Garis Oranye Tegas di Paling Atas */
-.brilink-info-header {
-  background-color: #00529c; /* Warna biru gelap BRILink asli */
-  color: #ffffff;
-  padding: 8px 12px;
-  font-size: 13px;
-  font-weight: bold;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-top: 4px solid #ff7a00; /* Garis Oranye tebal di atas header */
-}
-
-/* Isi Baris Nama Pelanggan */
-.brilink-info-body {
-  padding: 10px 12px;
-}
-
-.brilink-info-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 13px;
-}
-
-.brilink-info-label {
-  color: #64748b; /* Warna abu-abu teks label */
-}
-
-.brilink-info-value {
-  font-weight: bold;
-  color: #1e293b; /* Warna teks nama gelap tebal */
-  text-align: right;
-}
-/* --- CSS KOTAK KODE PROMO BERTEMA DANA TRANSPARAN --- */
-.promo-section-dana {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #f1f5f9; /* Mengikuti warna dasar struk agar netral */
-  padding: 10px 12px;
-  border-radius: 12px;
-  margin-top: 14px;
-  cursor: pointer;
-  border: 1px solid #e2e8f0;
-  box-sizing: border-box;
-}
-
-.promo-left-content {
-  display: flex;
-  align-items: center;
-  gap: 10px; /* Jarak antara ikon DANA dan kotak biru */
-}
-
-/* Pengatur Ukuran Ikon DANA Anda */
-.promo-dana-icon {
-  width: 50px;
-  height: 50px;
-  object-fit: contain;
-}
-
-/* Kotak Memanjang Biru Tipis Transparan Khas DANA */
-.promo-dana-badge {
-  background-color: rgba(17, 130, 238, 0.12); /* Biru DANA transparan tipis */
-  color: #1182ee; /* Warna teks biru tegas */
-  border: 1px solid rgba(17, 130, 238, 0.25); /* Border biru transparan */
-  padding: 6px 14px;
-  border-radius: 8px;
-  font-size: 12px;
-  font-weight: 800; /* Huruf tebal tegap */
-  letter-spacing: 0.5px;
-  font-family: sans-serif;
-  text-align: center;
-}
-
-.promo-arrow {
-  color: #94a3b8;
-  font-weight: bold;
-  font-size: 14px;
-}
-/* --- CSS KONTROL KODE PROMO BIAR MASUK BERSEMBUNYI DAN BISA MELUNCUR --- */
-.overlay-promo {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 9999; /* Ditinggikan maksimal agar berada di depan pop-up utama */
-  display: none; /* Menyembunyikan elemen agar tidak bocor polosan di halaman game */
-  align-items: flex-end;
-  box-sizing: border-box;
-}
-
-.modal-promo {
-  width: 100%;
-  background-color: #ffffff;
-  border-radius: 24px 24px 0 0;
-  padding: 16px 20px 30px 20px;
-  box-sizing: border-box;
-  animation: slideUpPromo 0.25s ease-out;
-}
-
-.promo-title { margin: 0 0 6px 0; font-size: 18px; font-weight: bold; color: #000000; font-family: sans-serif; }
-.promo-subtitle { margin: 0 0 20px 0; font-size: 14px; color: #757575; font-family: sans-serif; }
-
-.input-container-promo input {
-  width: 100%;
-  padding: 16px;
-  border: 2px solid #0066cc; /* Disesuaikan tema biru Pulsa Crom */
-  border-radius: 12px;
-  font-size: 16px;
-  font-weight: 600;
-  box-sizing: border-box;
-  outline: none;
-}
-
-.btn-check-promo {
-  width: 100%;
-  background-color: #0066cc;
-  color: #ffffff;
-  border: none;
-  padding: 16px;
-  font-size: 15px;
-  font-weight: bold;
-  border-radius: 12px;
-  margin-top: 20px;
-  cursor: pointer;
-}
-
-@keyframes slideUpPromo {
-  from { transform: translateY(100%); }
-  to { transform: translateY(0); }
-}
-
-
 </style>
 
-
-
-
-
-
-<!-- CARI TAG INI, LALU UBAH STYLE-NYA MENJADI SEPERTI DI BAWAH -->
-  <!-- Cukup hapus tulisan border: 1px solid #e0e0e0 !important; yang ada di dalam style-nya -->
-<div class="input-box" style="position: relative !important; width: 100% !important; margin-top: -10px !important; background-color: #ffffff !important; border-radius: 20px !important; padding: 16px !important; box-sizing: border-box !important; display: flex !important; flex-direction: column !important;">
-
+<!-- 1. KOTAK UTAMA YANG MEMBUNGKUS INPUT DAN MENU AKSI -->
+<div class="input-box" style="position: relative !important; width: 100% !important; 
+margin-top: -37px !important;
+background-color: #ffffff !important; border: 1px solid #e0e0e0 !important; border-radius: 20px !important; padding: 16px !important; box-sizing: border-box !important; display: flex !important; flex-direction: column !important;">
 
 <!-- KOTAK UTAMA FORM ATAS (KODE FINAL: IKON LENGKAP & RAMPING PRESTISI) -->
-   <div id="kotakFormUtama"
-style="width: 100% !important;
-background-color: #ffffff !important;
-border: 1px solid #d0d5dd !important;
-border-radius: 20px !important;
-padding: 14px !important;
-box-sizing: border-box !important;
-display: flex !important;
-flex-direction: column !important;
-gap: 14px !important;
-outline: none !important;
-box-shadow: none !important;">
+<div id="kotakFormUtama" style="width: 100% !important; background-color: #ffffff !important; border: 1px solid #e0e0e0 !important; border-radius: 24px !important; padding: 14px !important; box-sizing: border-box !important; display: flex !important; flex-direction: column !important; gap: 14px !important; transition: border-color 0.3s ease !important;">
 
-<div style="position: relative !important; width: 100% !important;">
-
-<!-- 1. Kotak Input ID Tunggal -->
-<a href="https://pulsachrome.bukaolshop.site/ambil_kontak" style="position: absolute !important; left: 6px !important; top: 50% !important; transform: translateY(-50%) !important; cursor: pointer !important; width: 35px !important; height: 32px !important; display: flex !important; align-items: center !important; justify-content: center !important; background: #f0f4f9 !important; border: 1px solid #e0e0e0 !important; border-radius: 8px !important; text-decoration: none !important; z-index: 10 !important;">
-    <img src="https://images.bukaolshop.com/hosting/183991/3b07e3dee8f5989244.png" style="width: 25px !important; height: 25px !important; display: block !important; object-fit: contain !important;" />
-</a>
- <input type="tel" name="scanner-input" id="scanner-input" class="{{hasil_kontak} {{hasil_scan}} scanner-input" placeholder="Masukkan ID (Server)" oninput="satukanNomorML()" onfocus="document.getElementById('kotakFormUtama').style.setProperty('border-color', '#007bff', 'important'); this.style.setProperty('border-color', '#007bff', 'important');" onblur="document.getElementById('kotakFormUtama').style.setProperty('border-color', '#e0e0e0', 'important'); this.style.setProperty('border-color', '#e0e0e0', 'important');" style="width: 100% !important; padding: 12px 45px 12px 50px !important; border: 1px solid #e0e0e0 !important; border-radius: 14px !important; outline: none !important; transition: border-color 0.3s ease !important; font-size: 15px !important; "> 
+<!-- KOLOM INPUT NOMOR UTAMA + IKON BUKU KONTAK -->
+    <div style="position: relative !important; width: 100% !important; display: block !important;">
+        <input type="tel" name="scanner-input" id="scanner-input" class="{{hasil_kontak} {{hasil_scan}} scanner-input" placeholder="Masukkan Nomor Tujuan" oninput="satukkanNomorML()" onfocus="document.getElementById('kotakFormUtama').style.setProperty('border-color', '#007bff', 'important'); this.style.setProperty('border-color', '#007bff', 'important');" onblur="document.getElementById('kotakFormUtama').style.setProperty('border-color', '#e0e0e0', 'important'); this.style.setProperty('border-color', '#e0e0e0', 'important');" style="width: 100% !important; padding: 12px 45px 12px 14px !important; border: 1px solid #e0e0e0 !important; border-radius: 14px !important; outline: none !important; transition: border-color 0.3s ease !important; font-size: 15px !important;">
         
-   
-       <!-- 2. Tombol Cek ID Biru Menyala Modern -->
-        <button type="button" id="btnCekID" onclick="cekIDPlayer()" style="position: absolute !important; right: 6px !important; top: 50% !important; transform: translateY(-50%) !important; background: linear-gradient(135deg, #007aff, #0056b3) !important; color: white !important; border: none !important; border-radius: 7px !important; padding: 4px 2px !important; font-size: 10px !important; font-weight: bold !important; white-space: nowrap !important; z-index: 10 !important; height: 26px !important; max-width: 55px !important; display: none; align-items: center !important; justify-content: center !important; gap: 2px !important; box-shadow: 0 2px 4px rgba(0,123,255,0.3) !important; cursor: pointer !important;">
+                       <!-- IKON BUKU KONTAK BAWAAN BUKAOLSHOP (AKTIF LURUS) -->
+        <a href="https://pulsachrome.bukaolshop.site/ambil_kontak?catatan={{hasil_kontak}}" style="position: absolute !important; right: 10px !important; top: 50% !important; transform: translateY(-50%) !important; cursor: pointer !important; width: 24px !important; height: 24px !important; display: flex !important; align-items: center !important; justify-content: center !important; text-decoration: none !important;">
+            <img src="https://images.bukaolshop.com/hosting/183991/3b07e3dee8f5989244.png" alt="Kontak" style="width: 25px !important; height: 25px !important; display: block !important;" />
+        </a>
 
-    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="4"></line><line x1="8" y1="2" x2="8" y2="4"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-    Cek ID
-</button>
+    
+</div>
+    
 
-     <!-- 3. Tombol "X" untuk Hapus Teks -->
-      <button type="button" id="btnHapusX" onclick="const inp=document.getElementById('idPlayer'); inp.value=''; inp.focus();" style="height: 24px !important; width: 24px !important; background-color: #e0e0e0 !important; color: #757575 !important; border: none !important; border-radius: 50% !important; font-size: 12px !important; font-weight: bold !important; cursor: pointer !important; display: none !important; align-items: center !important; justify-content: center !important; padding: 0 !important;">
-        ✕
-      </button>
-
-     </div>
- 
- <!-- KAPSUL BARIS TOMBOL (PAS MENYATU DI DALAM KOTAK PUTIH) -->
+    <!-- KAPSUL BARIS TOMBOL (PAS MENYATU DI DALAM KOTAK PUTIH) -->
     <div style="width: 100% !important; background-color: #f1f3f5 !important; border-radius: 16px !important; padding: 10px !important; box-sizing: border-box !important; display: flex !important; align-items: center !important; justify-content: space-around !important;">
-        
-       <!-- Tombol Bicara Mandiri (Anti-Putus Gboard dengan Kotak Suara Terpisah) -->
+    <!-- Tombol Bicara Mandiri (Anti-Putus Gboard dengan Kotak Suara Terpisah) -->
 <div role="button" tabindex="0" onclick="(function(){ var inpUtama = document.getElementById('scanner-input') || document.querySelector('input[placeholder*=\'Nomor\']'); if(!inpUtama) return; var box = document.getElementById('boxInputSuaraKustom'); if(!box){ box = document.createElement('div'); box.id = 'boxInputSuaraKustom'; box.style.cssText = 'margin-top:10px; padding:10px; background:#f0f9ff; border:1.5px solid #0284c7; border-radius:10px;'; box.innerHTML = '<div style=\'font-size:11.5px; color:#0369a1; margin-bottom:6px; font-weight:600;\'>🎙️ Tekan ikon Mikrofon di keyboard & ucapkan seluruh nomor:</div><div style=\'display:flex; gap:6px;\'><input type=\'tel\' id=\'inputSuaraSementara\' placeholder=\'Hasil suara muncul di sini...\' style=\'flex:1; padding:8px 10px; border:1px solid #bae6fd; border-radius:8px; font-size:14px; font-weight:bold; color:#0f172a; outline:none; background:#ffffff;\'><button type=\'button\' id=\'btnTerapkanSuara\' style=\'background:#0284c7; color:#fff; border:none; border-radius:8px; padding:0 12px; font-size:12px; font-weight:bold; cursor:pointer;\'>Pakai</button></div>'; inpUtama.parentNode.parentNode.appendChild(box); document.getElementById('btnTerapkanSuara').onclick = function(){ var val = document.getElementById('inputSuaraSementara').value.replace(/[^0-9]/g,''); if(val.startsWith('62')) val = '0'+val.slice(2); if(val){ inpUtama.value = val; if(typeof satukkanNomorML==='function') satukkanNomorML(); inpUtama.dispatchEvent(new Event('input',{bubbles:true})); } box.style.display = 'none'; }; } box.style.display = 'block'; var inpSuara = document.getElementById('inputSuaraSementara'); inpSuara.value = ''; inpSuara.focus(); inpSuara.click(); var lastS = ''; var tmr = null; var iv = setInterval(function(){ if(box.style.display === 'none'){ clearInterval(iv); return; } if(inpSuara.value !== lastS){ lastS = inpSuara.value; clearTimeout(tmr); tmr = setTimeout(function(){ var bersih = inpSuara.value.replace(/[^0-9]/g,''); if(bersih.startsWith('62')) bersih = '0'+bersih.slice(2); if(bersih.length >= 10){ inpUtama.value = bersih; if(typeof satukkanNomorML==='function') satukkanNomorML(); inpUtama.dispatchEvent(new Event('input',{bubbles:true})); box.style.display = 'none'; clearInterval(iv); } }, 2200); } }, 300); })()" style="display: flex !important; align-items: center !important; justify-content: center !important; cursor: pointer !important; flex: 1 !important; gap: 6px !important; user-select: none !important; -webkit-user-select: none !important; -webkit-tap-highlight-color: transparent !important; padding: 0 !important; margin: 0 !important;">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="width: 16px !important; height: 16px !important; display: block !important; color: #000000 !important; pointer-events: none !important;">
         <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.91-3c-.49 0-.9.36-.98.85C16.52 14.2 14.47 16 12 16s-4.52-1.8-4.93-4.15c-.08-.49-.49-.85-.98-.85-.61 0-1.09.54-1 1.14.49 3 2.89 5.35 5.91 5.78V20c0 .55.45 1 1 1s1-.45 1-1v-2.08c3.02-.43 5.42-2.78 5.91-5.78.1-.6-.39-1.14-1-1.14z"/>
     </svg>
     <span id="teksTombolBicara" style="font-size: 13px !important; color: #000000 !important; font-weight: bold !important; font-family: sans-serif !important; pointer-events: none !important; line-height: 1 !important;">Bicara</span>
 </div>
-
-        
+      
         <!-- Garis Pembatas Vertikal Kiri -->
         <div style="width: 1px !important; height: 14px !important; background-color: #ced4da !important;"></div>
-        
-           <!-- 2. Tombol Scan -->
+        <!-- 2. Tombol Scan -->
         <a href="https://pulsachrome.bukaolshop.site/scan_all" id="btnScanID" style="display: flex !important; align-items: center !important; justify-content: center !important; text-decoration: none !important; cursor: pointer !important; flex: 1 !important; gap: 6px !important;">
             <img src="https://images.bukaolshop.com/hosting/183991/203d42a9cfb3540740.png" alt="Scan" style="width: 16px !important; height: 16px !important; display: block !important;" />
             <span style="font-size: 13px !important; color: #000000 !important; font-weight: bold !important; font-family: sans-serif !important;">Scan</span>
         </a>
-
-        
+               
         <!-- Garis Pembatas Vertikal Kanan -->
         <div style="width: 1px !important; height: 14px !important; background-color: #ced4da !important;"></div>
         
@@ -1400,29 +1290,130 @@ function gunakanNomorFavorit(nomor) {
 
 </script>
  
-
-      
-        </div>
-      </div>
-
-    </div>
-
-  </div>
+</div>
+</div>
+</div>
+</div>
 </div>
 
-      
-   </div>
-<div class="floating-card-filter" style="background: transparent !important; box-shadow: none !important; border: none !important; padding-left: 0 !important; padding-right: 0 !important;">
+
+<style>
+/* CSS untuk mengaktifkan Grid 2 Kolom pada daftar produk */
+.layout-grid-dua {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+    padding: 10px !important;
+}
+/* 1. MENGHILANGKAN SEKAT BAWAAN AGAR KOTAK OTOMATIS MELOROT MENYATU */
+.input-wrapper, .floating-card {
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* 2. MEMBUAT PEMBUNGKUS LUAR MENJADI SATU KOTAK MELAYANG 3D MEWAH */
+.input-wrapper {
+    background: #ffffff !important;
+    border-radius: 20px !important;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04), 0 12px 28px -5px rgba(0, 123, 255, 0.09) !important;
+    border: 1px solid rgba(0, 123, 255, 0.06) !important;
+    margin: 15px 5px !important;
+    padding: 16px 14px !important;
+}
+
+/* 3. LAPISAN KE-2: MEMBUAT KOTAK KONTAK & FAVORIT CEKUNG INDAH DI DALAM */
+.menu {
+    background: #f4f8ff !important;
+    padding: 12px 8px !important;
+    border-radius: 14px !important;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02) !important;
+    border: none !important;
+    margin-top: 14px !important;
+    margin-bottom: 5px !important;
+}
+.floating-card-filter {
+    display: none !important;
+}
+
+</style>
+
+<script>
+setInterval(function() {
+    const idInput = document.getElementById('idPlayer');
+    const btnCek = document.getElementById('btnCekID');
+    const btnX = document.getElementById('btnHapusX');
+    const titik = document.getElementById('iconMenuTitik');
+    const fCard = document.querySelector('.floating-card-filter');
+
+    if (idInput && btnCek && btnX && titik) {
+        if (idInput.value.trim().length > 0) {
+            btnCek.style.setProperty('display', 'flex', 'important');
+            btnX.style.setProperty('display', 'flex', 'important');
+            titik.style.setProperty('display', 'none', 'important');
+            // PAKSA FILTER MUNCUL
+            if (fCard) fCard.classList.add('aktif');
+        } else {
+            btnCek.style.setProperty('display', 'none', 'important');
+            btnX.style.setProperty('display', 'none', 'important');
+            titik.style.setProperty('display', 'flex', 'important');
+            // SEMBUNYIKAN KEMBALI
+            if (fCard) fCard.classList.remove('aktif');
+        }
+    }
+}, 200);
+
+function changeLayout(mode) {
+    // Menargetkan langsung elemen konten produk Anda
+    const productContent = document.getElementById('productContent');
+    if (!productContent) return;
+    
+    // Mencari elemen pembungkus list paket (biasanya div pertama setelah tab menu di dalam main-card)
+    // Jika struktur produk Anda langsung di dalam main-card, script ini akan otomatis menyesuaikan
+    const mainCard = productContent.querySelector('.main-card');
+    if (!mainCard) return;
+    
+    // Menargetkan elemen terakhir di dalam main-card (tempat daftar paket dirender)
+    const currentContainer = mainCard.lastElementChild;
+    
+    const btnList = document.getElementById('btn-list-view');
+    const btnGrid = document.getElementById('btn-grid-view');
+
+    if (mode === 'grid') {
+        currentContainer.classList.add('layout-grid-dua');
+        btnGrid.style.backgroundColor = '#0076e4';
+        btnGrid.style.color = '#fff';
+        btnList.style.backgroundColor = '#e0e0e0';
+        btnList.style.color = '#333';
+    } else {
+        currentContainer.classList.remove('layout-grid-dua');
+        btnList.style.backgroundColor = '#0076e4';
+        btnList.style.color = '#fff';
+        btnGrid.style.backgroundColor = '#e0e0e0';
+        btnGrid.style.color = '#333';
+    }
+}
+document.addEventListener("DOMContentLoaded", () => {
+    const layoutTerakhir = localStorage.getItem('preferensiLayoutPulsa') || 'grid';
+    changeLayout(layoutTerakhir);
+});
+
+
+</script>
+<!-- AKHIR KODE TOMBOL GRID TAMBAHAN -->
+<div id="area-filter" class="floating-card-filter" style="background: transparent ! important; box-shadow: none ! important; border: none !important;">
+
 
 
 <!-- KODE TOMBOL GRID TAMBAHAN -->
- 
-   <div class="view-toggle-container" style="display: flex !important; justify-content: space-between !important; align-items: center !important; width: 100% !important; padding: 0 16px !important; margin: 15px auto 10px auto !important; box-sizing: border-box !important; position: relative !important; background: transparent !important;">
+   <div class="view-toggle-container" style="display: flex !important; justify-content: space-between !important; align-items: center !important; width: 100% !important; padding: 0 0px !important; margin: 20px auto 0 auto !important; box-sizing: border-box !important; position: relative !important; background: transparent !important;">
 
     <!-- 1. DROPDOWN KIRI (TERENDAH / TERMAHAL) -->
     <div style="position: relative;">
          <div id="text-urut" onclick="document.getElementById('dropdown-menu').style.display = document.getElementById('dropdown-menu').style.display === 'block' ? 'none' : 'block'" style="font-size: 14px; font-weight: bold; color: #333; cursor: pointer; user-select: none;">
-        Filter Produk <span style="font-size: 10px;">▼</span>
+        Terendah <span style="font-size: 10px;">▼</span>
     </div>
     <div id="dropdown-menu" style="display: none; position: absolute; top: 22px; left: 0; background: #fff; border: 1px solid #ccc; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); z-index: 99; min-width: 90px;">
         <!-- Pilihan Terendah -->
@@ -1458,8 +1449,8 @@ function gunakanNomorFavorit(nomor) {
     <!-- 2. TOMBOL GRID TENGAH & PENCARIAN KANAN -->
     <div style="display: flex; align-items: center; gap: 10px;">
         <!-- Tombol List & Grid Asli Anda -->
-        <button id="btn-list-view" class="btn-toggle active-toggle" onclick="changeLayout('list')" style="background: #0076e4; color: #fff; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-weight: bold;">☰</button>
-        <button id="btn-grid-view" class="btn-toggle" onclick="changeLayout('grid')" style="background: #e0e0e0; color: #333; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-weight: bold;">⊞</button>
+        <button id="btn-list-view" class="btn-toggle active-toggle" onclick="changeLayout('list')" style="background: #e0e0e0; color: #fff; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-weight: bold;">☰</button>
+        <button id="btn-grid-view" class="btn-toggle" onclick="changeLayout('grid')" style="background: #0076e4; color: #333; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-weight: bold;">⊞</button>
         
         <!-- Tombol Pencarian Kanan -->
         <div style="display: flex; align-items: center;">
@@ -1473,100 +1464,6 @@ function gunakanNomorFavorit(nomor) {
 </div>
 </div>
 
-<style>
-/* CSS untuk mengaktifkan Grid 2 Kolom pada daftar produk */
-.layout-grid-dua {
-    display: grid !important;
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 10px !important;
-    padding: 10px !important; 
-}
-
-
-/* 1. MENGHILANGKAN SEKAT BAWAAN AGAR KOTAK OTOMATIS MELOROT MENYATU */
-.input-wrapper, .floating-card {
-    background: transparent !important;
-    box-shadow: none !important;
-    border: none !important;
-    margin: 0 !important;
-    padding: 0 !important;
-}
-
-/* 2. MEMBUAT PEMBUNGKUS LUAR MENJADI SATU KOTAK MELAYANG 3D MEWAH */
-.input-wrapper {
-    background: #ffffff !important;
-    border-radius: 20px !important;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04), 0 12px 28px -5px rgba(0, 123, 255, 0.09) !important;
-    border: 1px solid rgba(0, 123, 255, 0.06) !important;
-    margin: 15px 5px !important;
-    padding: 16px 14px !important;
-}
-
-/* 3. LAPISAN KE-2: MEMBUAT KOTAK KONTAK & FAVORIT CEKUNG INDAH DI DALAM */
-.menu {
-    background: #f4f8ff !important;
-    padding: 12px 8px !important;
-    border-radius: 14px !important;
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02) !important;
-    border: none !important;
-    margin-top: 14px !important;
-    margin-bottom: 5px !important;
-}
-</style>
-
-<script>
-setInterval(function() {
-    const idInput = document.getElementById('idPlayer');
-    const btnCek = document.getElementById('btnCekID');
-    const btnX = document.getElementById('btnHapusX');
-    const titik = document.getElementById('iconMenuTitik');
-    
-    if (idInput && btnCek && btnX && titik) {
-        if (idInput.value.trim().length > 0) {
-            btnCek.style.setProperty('display', 'flex', 'important');
-            btnX.style.setProperty('display', 'flex', 'important');
-            titik.style.setProperty('display', 'none', 'important');
-        } else {
-            btnCek.style.setProperty('display', 'none', 'important');
-            btnX.style.setProperty('display', 'none', 'important');
-            titik.style.setProperty('display', 'flex', 'important');
-        }
-    }
-}, 200);
-
-function changeLayout(mode) {
-    // Menargetkan langsung elemen konten produk Anda
-    const productContent = document.getElementById('productContent');
-    if (!productContent) return;
-    
-    // Mencari elemen pembungkus list paket (biasanya div pertama setelah tab menu di dalam main-card)
-    // Jika struktur produk Anda langsung di dalam main-card, script ini akan otomatis menyesuaikan
-    const mainCard = productContent.querySelector('.main-card');
-    if (!mainCard) return;
-    
-    // Menargetkan elemen terakhir di dalam main-card (tempat daftar paket dirender)
-    const currentContainer = mainCard.lastElementChild;
-    
-    const btnList = document.getElementById('btn-list-view');
-    const btnGrid = document.getElementById('btn-grid-view');
-
-    if (mode === 'grid') {
-        currentContainer.classList.add('layout-grid-dua');
-        btnGrid.style.backgroundColor = '#0076e4';
-        btnGrid.style.color = '#fff';
-        btnList.style.backgroundColor = '#e0e0e0';
-        btnList.style.color = '#333';
-    } else {
-        currentContainer.classList.remove('layout-grid-dua');
-        btnList.style.backgroundColor = '#0076e4';
-        btnList.style.color = '#fff';
-        btnGrid.style.backgroundColor = '#e0e0e0';
-        btnGrid.style.color = '#333';
-    }
-}
-</script>
-<!-- AKHIR KODE TOMBOL GRID TAMBAHAN -->
-
 <div class="product-content" id="productContent">
     <div class="main-card">
         <div class="subcategory-tab-header" id="subcategoryTabMenu"></div>
@@ -1575,105 +1472,26 @@ function changeLayout(mode) {
 </div>
 
 <div id="transactionOverlay" class="overlay" onclick="closeTransactionPopup(event)">
-     <div class="popup popup-style-brilink">
-    <!-- Garis indikator seret atas -->
-    <div class="drag-line"></div>
-
-    <!-- KOTAK INI YANG BISA DI-SCROLL MANDIRI -->
-    <div class="modal-scroll-box">
-      <h3 class="box-title">Detail Transaksi</h3>
-      
-      <div class="detail-item">
-        <span class="label-text">Provider</span>
-        <span id="transMeta" class="value-text">Topup Dana</span>
-      </div>
-      <div class="detail-item">
-        <span class="label-text">Voucher</span>
-        <span id="transProductName" class="value-text">-</span>
-      </div>
-      <div class="detail-item">
-        <span class="label-text">Nomor Tujuan</span>
-        <span id="transTarget" class="value-text">-</span>
-      </div>
-      
-      <div class="divider-dash"></div> <!-- Garis putus-putus pemisah -->
-
-      <div class="detail-item">
-        <span class="label-text">Nominal</span>
-        <span id="transNominal" class="value-text">-</span>
-      </div>
-      <div class="detail-item">
-        <span class="label-text">Bonus</span>
-        <span class="value-text bonus-color">+1 Poin</span>
-      </div>
-      <div class="detail-item">
-        <span class="label-text">Pembayaran</span>
-        <span class="value-text">Stok Akun</span>
-      </div>
-
-      <!-- Fitur Punya kode promo -->
-           <!-- Fitur Kode Promo Bertema DANA Transparan -->
-      <div class="promo-section-dana" onclick="openPromoModal()">
-        <div class="promo-left-content">
-          <!-- Silakan ganti link src di bawah ini dengan gambar ikon DANA Anda -->
-          <img class="promo-dana-icon" src="https://images.bukaolshop.com/hosting/183991/51c7692c9a6511971.png" alt="Ikon DANA">
-          <div class="promo-dana-badge">Punya Kode Promo?</div>
+    <div class="popup">
+        <div class="drag-line"></div>
+        <div class="product-name-large" id="transProductName">-</div>
+        <div class="sub-meta" id="transMeta">Pulsa All Operator</div>
+        <div class="price-row">
+            <span class="price-label">Nominal Harga</span>
+            <span class="price-value" id="transNominal">-</span>
         </div>
-        <span class="promo-arrow">></span>
-      </div>
-
-
-   
-
-      <!-- Alert Box Hasil Cek ID -->
-             <!-- Kotak Hasil Cek ID Bertema BRILink (Oranye, Biru, Abu-abu) -->
-      <div id="transAlertBox" class="brilink-info-box" style="display: block;">
-        <div class="brilink-info-header">
-          <span>✓ Info Pelanggan</span>
-          <span>▼</span>
+        <div class="divider-line"></div>
+        <div class="description-header">
+            <img id="transIcon" class="desc-icon" src="https://cdn-icons-png.flaticon.com/128/9554/9554529.png" alt="icon produk">
+            <div class="desc-title">Deskripsi Produk</div>
         </div>
-        <div class="brilink-info-body">
-          <div class="brilink-info-row">
-            <span class="brilink-info-label">Nama</span>
-            <span id="transAlertName" class="brilink-info-value">Tidak bisa cek ID pelanggan</span>
-          </div>
+        <div class="description-text" id="transDescription">-</div>
+        <div class="action-buttons">
+            <button class="btn-later" onclick="closeTransactionPopupManual()">Nanti</button>
+            <button class="btn-buy" onclick="buyProduct()">Beli</button>
         </div>
-      </div>
-   
-      <!-- Teks kaki di dalam struk/kotak scroll -->
-      <p class="footer-note">Transaksi  Cepat Mudah Murah Dan Aman di Pulsa Crom</p>
     </div>
-
-    <!-- TOMBOL AKSI TETAP DI BAWAH (TIDAK IKUT TERGULIR) -->
-    <div class="action-buttons">
-      <button class="btn btn-cancel" onclick="closeTransactionPopupManual()">Nanti</button>
-      <button class="btn btn-confirm" onclick="buyProduct()">Lanjutkan</button>
-    </div>
-  </div>
 </div>
-
-
-<!-- Modal Kode Promo Baru -->
-<div id="promoOverlay" class="overlay-promo" onclick="closePromoModal(event)">
-  <div class="modal-promo">
-    <div class="drag-line"></div>
-    
-    <h3 class="promo-title">Kode Promo</h3>
-    <p class="promo-subtitle">Masukkan kode promo yang kamu punya</p>
-    
-    <div class="input-container-promo">
-      <input type="text" id="promoInput" placeholder="mis. PROMO50" autofocus>
-  <div id="promoMessage" style="font-size: 13px; margin-top: 8px; font-family: sans-serif; display: none;">
-</div>
- </div> 
-
-
-  
-    
-    <button class="btn-check-promo" onclick="applyPromoCode()">Cek & Gunakan</button>
-  </div>
-</div>
-
 
 <div id="favoritOverlay" class="overlay" onclick="closeFavoritPopup(event)">
     <div class="popup">
@@ -1701,7 +1519,7 @@ function changeLayout(mode) {
 <script>
     const token = "eyJhcHAiOiIxODM5OTEiLCJhdXRoIjoiMjAyNjA0MTIiLCJzaWduIjoiNFwvUkF2WVhZRGx3XC9vUnk3dFZwUFVBPT0ifQ==";
 
-    let allCategories = [];
+    let allCategories = [];olehi
     let currentSubCategories = [];
     let currentProducts = [];
     let productCache = {};
@@ -1714,10 +1532,10 @@ function changeLayout(mode) {
         const tabMenu = document.getElementById('subcategoryTabMenu');
         
         if (produkContainer) {
-            produkContainer.innerHTML = `<div class="loading-spinner"><div></div><p style="margin-top: 20px; color: #999;">Memuat data KUOTA...</p></div>`;
+            produkContainer.innerHTML = `<div class="loading-spinner"><div></div><p style="margin-top: 20px; color: #999;">Memuat data Pulsa...</p></div>`;
         }
         if (tabMenu) {
-            tabMenu.innerHTML = `<div style="padding: 10px; text-align: center; color: #999;"><div class="loading-spinner" style="padding: 20px;"><div></div><p style="margin-top: 10px;">Loading kategori KUOTA...</p></div></div>`;
+            tabMenu.innerHTML = `<div style="padding: 10px; text-align: center; color: #999;"><div class="loading-spinner" style="padding: 20px;"><div></div><p style="margin-top: 10px;">Loading kategori Pulsa...</p></div></div>`;
         }
         
         if (!token || token.trim() === '') {
@@ -1746,33 +1564,93 @@ function changeLayout(mode) {
     }
 
     function findTVCategory() {
-        const searchTerms = ["mobile legends",];
+    // 1. Ambil elemen input nomor HP dari aplikasi Anda
+    const inputElement = document.getElementById('scanner-input');
+    if (!inputElement) return allCategories && allCategories.length > 0 ? allCategories : null;
+
+    const nomor = inputElement.value ? inputElement.value.trim() : '';
+
+    // 2. KONDISI AWAL (NOMOR KOSONG): Tetap kunci ke tampilan "Pulsa All Operator" sesuai gambar Anda
+     // // 2. KONDISI AWAL (NOMOR KOSONG):
+    // Tetap kunci ke tampilan "Pulsa All Operator" sesuai gambar Anda
+    if (nomor.length < 4) {
+        const tAtas = document.getElementById('teks-operator-atas');
+        const lAtas = document.getElementById('logo-operator-atas');
+        if (tAtas) tAtas.innerText = "Pulsa All Operator";
+        if (lAtas) lAtas.src = "https://images.bukaolshop.com/hosting/183991/b2952631a563142153.png";
         
+        const container = document.getElementById('produkContainer'); if (container) { const linkGambarAnimasi = "https://assets" + "://lottiefiles.com" + "lf20_t9gkkhqy.json"; container.innerHTML = '<div style="text-align: center; margin-top: 20px;"><lottie-player src="' + linkGambarAnimasi + '" background="transparent" speed="1" style="width: 250px; height: 250px; margin: 0 auto;" loop autoplay></lottie-player><p style="color: #999; font-size: 14px; margin-top: 10px;">Masukkan Nomor hp untuk melihat produk</p></div>';  }
+
+      const filterElement = document.getElementById('area-filter');
+    if (filterElement) {
+        filterElement.style.setProperty('display', 'none', 'important');
+    }
+    return null;
+}
+ 
+
+
+
+   
+   
+
+// 3. Ambil 4 digit pertama nomor untuk mendeteksi operator
+    const prefix = nomor.substring(0, 4);
+    let operatorDipilih = "";
+    let logoResmi = "";
+    let namaOperatorTeks = "";
+
+    // 4. Daftar pembacaan awalan nomor & Link gambar logo resmi masing-masing operator
+    if (["0811", "0812", "0813", "0821", "0822", "0852", "0853", "0823"].includes(prefix)) {
+        operatorDipilih = "pulsa telkomsel";
+        namaOperatorTeks = "Pulsa Telkomsel";
+        logoResmi = "https://images.bukaolshop.com/hosting/183991/80c65c73fd81768885.png"; // Link logo resmi Telkomsel BukaOlshop
+    } else if (["0814", "0815", "0816", "0855", "0856", "0857", "0858"].includes(prefix)) {
+        operatorDipilih = "pulsa indosat";
+        namaOperatorTeks = "Pulsa Indosat";
+        logoResmi = "https://images.bukaolshop.com/hosting/183991/856fc5cef694485358.png";
+    } else if (["0817", "0818", "0819", "0859", "0877", "0878"].includes(prefix)) {
+        operatorDipilih = "pulsa xl";
+        namaOperatorTeks = "Pulsa XL";
+        logoResmi = "https://images.bukaolshop.com/hosting/183991/179074b08453380970.png";
+    } else if (["0831", "0832", "0833", "0838"].includes(prefix)) {
+        operatorDipilih = "pulsa axis";
+        namaOperatorTeks = "Pulsa Axis";
+        logoResmi = "https://images.bukaolshop.com/hosting/183991/a4e78aa13d9d333138.png";
+    } else if (["0895", "0896", "0897", "0898", "0899"].includes(prefix)) {
+        operatorDipilih = "pulsa tri";
+        namaOperatorTeks = "Pulsa Tri";
+        logoResmi = "https://images.bukaolshop.com/hosting/183991/6eb8e704c929433403.png";
+    } else if (["0881", "0882", "0883", "0884", "0885", "0886", "0887", "0888", "0889"].includes(prefix)) {
+        operatorDipilih = "pulsa smartfren";
+        namaOperatorTeks = "Pulsa Smartfren";
+        logoResmi = "https://images.bukaolshop.com/hosting/183991/b7318993e50a222813.png";
+    } else if (["0851"].includes(prefix)) {
+        operatorDipilih = "pulsa by.u";
+        namaOperatorTeks = "Pulsa by.U";
+        logoResmi = "https://images.bukaolshop.com/hosting/183991/0d934c63f209336473.png";
+    }
+
+    // 5. Eksekusi perubahan logo & teks secara otomatis saat nomor mulai cocok
+    if (operatorDipilih !== "") {
         for (const category of allCategories) {
             const catNameLower = (category.nama_kategori || '').toLowerCase();
-            for (const term of searchTerms) {
-                if (catNameLower.includes(term)) {
-                    category.nama_kategori = "Mobile Legends";
-                    return category;
-                }
+            if (catNameLower === operatorDipilih || catNameLower.includes(operatorDipilih)) {
+                
+                // JALUR PERUBAHAN OTOMATIS SAAT NOMOR DIKETIK
+                const tAtas = document.getElementById('teks-operator-atas');
+                const lAtas = document.getElementById('logo-operator-atas');
+                if (tAtas) tAtas.innerText = namaOperatorTeks;
+                if (lAtas) lAtas.src = logoResmi; // Mengganti gambar telepon menjadi logo operator resmi secara real-time
+
+                return category; 
             }
         }
-        
-        for (const category of allCategories) {
-            const catNameLower = (category.nama_kategori || '').toLowerCase(); 
-            {
-                category.nama_kategori = "Mobile Legends";
-                return category;
-            }
-        }
-        
-        if (allCategories.length > 0) {
-            allCategories[0].nama_kategori = "Mobile Legends";
-            return allCategories[0];
-        }
-        
-        return null;
     }
+
+    return null;
+}
+
 
     function getAllSubCategories() {
         let allSubCategories = [];
@@ -1799,7 +1677,7 @@ function changeLayout(mode) {
             
             if (allSubCategories.length === 0) {
                 const catId = tvCategory.id_kategori || tvCategory.id;
-                const catName = tvCategory.nama_kategori || tvCategory.name || "Mobile Legends";
+                const catName = tvCategory.nama_kategori || tvCategory.name || "Pulsa All Operator";
                 allSubCategories.push({
                     id: catId,
                     name: catName
@@ -1815,12 +1693,19 @@ function changeLayout(mode) {
         if (!tabMenu) return;
         if (subCategories.length === 0) {
     tabMenu.style.display = 'none';
-    tabMenu.innerHTML = `<div style="padding: 10px; text-align: center; color: #999;">Tidak ada sub kategori</div>`;
+    tabMenu.innerHTML = `<div style="padding: 10px; text-align: center; color: #999;"></div>`;
     const container = document.getElementById('produkContainer');
-    if (container) {
-        container.innerHTML = `<div style="text-align: center; padding: 40px; color: #999;">Tidak ada produk TV tersedia</div>`;
-    }
-    return;
+   if (container) {
+         container.innerHTML = `<div style="text-align: center; padding: 60px 20px; grid-column: 1 / -1; color: #999;">
+    <!-- Gambar animasi ditaruh di atas teks -->
+    <img src="https://images.bukaolshop.com/hosting/183991/933a1fab8bbb761955.png" style="width: 40px; height: 40px; margin: 0 auto 15px auto; display: block;" alt="Loading...">
+        
+<div style="font-size: 12px;">
+
+Masukan Nomor hp untuk melihat produk</div>
+  </div>`; 
+}
+   return;
 }
 
 if (subCategories.length === 1) {
@@ -1881,16 +1766,10 @@ if (subCategories.length === 1) {
             return;
         }
         
-        if (productCache[categoryId]) {
-            currentProducts = productCache[categoryId];
-            const sortedProducts = sortProductsByPriceAsc(currentProducts);
-            renderProductsToGrid(sortedProducts);
-            return;
-        }
-
+       
         const container = document.getElementById('produkContainer');
         if (container) {
-            container.innerHTML = `<div class="loading-spinner"><div></div><p style="margin-top: 20px; color: #999;">Memuat Produk Games....</p></div>`;
+            container.innerHTML = `<div class="loading-spinner"><div></div><p style="margin-top: 20px; color: #999;">Memuat Produk Pulsa....</p></div>`;
         }
 
         try {
@@ -1918,9 +1797,14 @@ if (subCategories.length === 1) {
             
             const sortedProducts = sortProductsByPriceAsc(currentProducts);
             renderProductsToGrid(sortedProducts);
-        } catch (error) {
+   const filterElement = document.getElementById('area-filter');
+if (filterElement) {
+    filterElement.style.setProperty('display', 'block', 'important');
+}
+   
+ } catch (error) {
             if (container) {
-                container.innerHTML = `<div style="text-align: center; padding: 40px; color: #999;">Gagal memuat paket TV</div>`;
+                container.innerHTML = `<div style="text-align: center; padding: 40px; color: #999;">Gagal memuat produk pulsa</div>`;
             }
         }
     }
@@ -1932,12 +1816,13 @@ if (subCategories.length === 1) {
         if (!products || products.length === 0) {
             container.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 40px; color: #999; font-size: 12px;">
                     <img src="https://cdn-icons-png.flaticon.com/128/7023/7023038.png" style="width: 80px; margin-bottom:10px;">
-                    <p>Produk KUOTA belum tersedia</p>
+                    <p>Produk pulsa belum tersedia</p>
                 </div>`;
             return;
         }
         
-        let html = '';
+        let html = container.innerHTML && !container.innerHTML.includes("Memuat Produk") && !container.innerHTML.includes("belum tersedia") ? container.innerHTML : '';
+
         
         products.forEach(product => {
             const productName = product.nama_produk || 'Produk TV';
@@ -2058,107 +1943,40 @@ let disabledAttr = (isOutOfStock || isGangguan) ? 'disabled' : '';
     }
 
     function showTransactionPopup(productCard) {
-    // --- KOREKSI TERBARU: MEMBACA NOMOR HP DARI HALAMAN UTAMA SECARA OTOMATIS ---
-    let customerId = "";
-    
-    // Mencari otomatis ke seluruh elemen input yang ada di halaman utama Anda
-    const semuaInputPage = document.querySelectorAll('input');
-    semuaInputPage.forEach(inp => {
-        // Mengambil isi input yang berupa nomor HP (panjang lebih dari 7 digit angka)
-        if (inp.value && inp.value.trim().length > 7 && !isNaN(inp.value.trim())) {
-            customerId = inp.value.trim();
-        }
-    });
+    const customerId = "BYPASS";
 
-    // Validasi aman: Jika nomor HP di halaman utama benar-benar kosong
-    if (!customerId) {
-        if (typeof showToast === "function") {
+        if (!customerId) {
             showToast('Masukkan ID Pelanggan terlebih dahulu!', 2000);
-        } else {
-            alert('Masukkan ID Pelanggan terlebih dahulu!');
+            return;
         }
-        return;
-    }
-    // --------------------------------------------------------------------------
-
-    // 2. Ambil data produk secara aman dari kartu yang diklik
-    const name = productCard ? productCard.getAttribute('data-product-name') : "-";
-    const price = productCard ? productCard.getAttribute('data-product-price') : "-";
-    const desc = productCard ? productCard.getAttribute('data-product-desc') : "dana";
-
-    // 3. Masukkan data produk ke dalam elemen Pop-up baru jika elemennya ada
-    const elName = document.getElementById('transProductName');
-    const elNominal = document.getElementById('transNominal');
-    const elDesc = document.getElementById('transDescription');
-    const elTarget = document.getElementById('transTarget');
-
-    if (elName) elName.innerText = name;
-    if (elNominal) elNominal.innerText = price;
-    if (elDesc) elDesc.innerHTML = desc || "dana";
-    if (elTarget) elTarget.innerText = customerId;
-        // --- SELIPKAN KODE INI DI BAWAH ELTARGET DI JAVASCRIPT GAME ---
-        const elProvider = document.getElementById('transMeta');
-        if (elProvider) elProvider.innerText = "Mobile Legends";
-
-       // 4. Jalankan Pengecekan Cek ID Otomatis di Pop-up
-    const popAlert = document.getElementById('transAlertBox');
-    const transAlertName = document.getElementById('transAlertName');
-    if (popAlert) {
-        popAlert.style.display = "block";
-        if (transAlertName) {
-            transAlertName.innerHTML = `⏳ Sedang memeriksa...`;
-            transAlertName.style.color = "#1a73e8"; // Warna biru loading
+        
+        const name = productCard.getAttribute('data-product-name');
+        const price = productCard.getAttribute('data-product-price');
+        const desc = productCard.getAttribute('data-product-desc');
+        
+        const formattedPrice = `Rp${parseInt(price).toLocaleString('id-ID')}`;
+        
+        document.getElementById('transProductName').innerText = name;
+        document.getElementById('transNominal').innerText = formattedPrice;
+        document.getElementById('transDescription').innerHTML = desc;
+        document.getElementById('transIcon').src = "https://cdn-icons-png.flaticon.com/128/9554/9554529.png";
+        
+       
+   
+    // Pemicu otomatis agar langsung melempar pembeli ke halaman Checkout BukaOlshop
+    setTimeout(function() {
+        // Coba pemicu tombol beli bawaan yang ada di pop-up kodingan Anda
+        const tombolBeliPop = document.querySelector('.btn-buy') || 
+                             document.querySelector('.btn-confirm-payment') || 
+                             document.querySelector('[onclick*="buyProduct"]');
+        if (tombolBeliPop) {
+            tombolBeliPop.click();
+        } else if (typeof buyProduct === 'function') {
+            buyProduct();
         }
-    }
+    }, 40); // Jeda aman 40 milidetik agar nomor HP selesai terbaca sempurna oleh sistem
 
-        // 5. Jalankan Request Cek ID Otomatis (URL Disamakan Persis dengan Contoh Sukses Anda)
-    let nomorID = customerId;
-    let zoneID = "";
-
-    // Memecah ID panjang secara cerdas
-    if (customerId.length >= 12) {
-        nomorID = customerId.substring(0, customerId.length - 4);
-        zoneID = customerId.substring(customerId.length - 4);
-    } else if (customerId.includes("(") && customerId.includes(")")) {
-        let parts = customerId.split("(");
-        nomorID = parts[0].trim();
-        zoneID = parts[1].replace(")", "").trim();
-    }
-
-    // MENGGUNAKAN PARAMETER ?id= DAN &server= SESUAI DENGAN GAMBAR CONTOH SUKSES ANDA
-    const apiUrl = "https://cekid-mitrascbo.devdani.my.id/trueid/game/mobilelegends/?id=" + nomorID + "&server=" + zoneID + "&key=b2cd7f878d43aa82";
-    
-    fetch(apiUrl)
-             .then(res => res.json())
-        .then(hasil => {
-            const transAlertName = document.getElementById('transAlertName');
-            if (transAlertName) {
-                if (hasil && hasil.name) {
-                    // JIKA SUKSES: Isi kolom nama di tabel mini dengan nama pelanggan asli
-                    transAlertName.innerHTML = `<strong>${hasil.name}</strong>`;
-                    transAlertName.style.color = "#1e293b"; // Teks warna gelap normal
-                } else {
-                    // JIKA RESPONS GAGAL
-                    transAlertName.innerText = "Tidak bisa cek ID pelanggan";
-                    transAlertName.style.color = "#c62828"; // Teks warna merah error
-                }
-            }
-        })
-        .catch(() => {
-            const transAlertName = document.getElementById('transAlertName');
-            if (transAlertName) {
-                transAlertName.innerText = "Tidak bisa cek ID pelanggan";
-                transAlertName.style.color = "#c62828";
-            }
-        });
-
-    // 6. Aktifkan/Tampilkan overlay Pop-up ke layar
-    const overlay = document.getElementById('transactionOverlay');
-    if (overlay) {
-        overlay.classList.add('active');
-    }
-}
-
+ }
 
     function closeTransactionPopup(e) {
         if (e && e.target && e.target.id === "transactionOverlay") {
@@ -2171,8 +1989,8 @@ let disabledAttr = (isOutOfStock || isGangguan) ? 'disabled' : '';
     }
 
     function buyProduct() {
-        const customerId = document.getElementById('idPlayer').value.trim();
-        
+         const customerId = document.getElementById('scanner-input').value.trim();
+       
         if (!customerId) {
             showToast('Masukkan ID Pelanggan terlebih dahulu!', 2000);
             return;
@@ -2337,7 +2155,11 @@ function toggleInfoBaru() {
     const kolomTeksIdPlayer = document.getElementById('idPlayer');
 
     if (kotakInputBukaolshop && kolomTeksIdPlayer) {
-        
+        kolomTeksIdPlayer.addEventListener('focus', function() {
+            kotakInputBukaolshop.style.setProperty('border', '1.5px solid #006aff', 'important');
+            kotakInputBukaolshop.style.setProperty('box-shadow', '0 0 8px rgba(0, 106, 255, 0.2)', 'important');
+        });
+
         kolomTeksIdPlayer.addEventListener('blur', function() {
             kotakInputBukaolshop.style.setProperty('border', '1px solid #e0e0e0', 'important');
             kotakInputBukaolshop.style.setProperty('box-shadow', 'none', 'important');
@@ -2347,10 +2169,9 @@ function toggleInfoBaru() {
 // KODE AKTIVASI CEK ID & KOTAK INFO DINAMIS
 // ==========================================
 (function() {
-    const inputId = document.getElementById('scanner-input');
+    const inputId = document.getElementById('idPlayer');
     const tombolCek = document.getElementById('btnCekID');
-    const inputBox = document.querySelector('.input-box') || inputId.parentElement;
-
+    const inputBox = document.querySelector('.input-box');
 
     if (!inputId || !tombolCek || !inputBox) return;
 
@@ -2359,7 +2180,7 @@ function toggleInfoBaru() {
     kotakInfo.id = 'kotakResponDinamis';
     kotakInfo.style.cssText = 'display: none !important; background: #ffffff !important; border: 1px solid #e0e0e0 !important; border-radius: 12px !important; padding: 12px !important; margin: 12px auto !important; width: 100% !important; box-sizing: border-box !important; box-shadow: 0 4px 12px rgba(0,0,0,0.05) !important;';
     kotakInfo.innerHTML = `
-        <div style="font-weight: bold !important; font-size: 13px !important; color: #333333 !important; margin-bottom: 8px !important; border-bottom: 1px dashed #e0e0e0 !important; padding-bottom: 4px !important;">🏄‍♂️ mobile legends 🏄‍♀️</div>
+        <div style="font-weight: bold !important; font-size: 13px !important; color: #333333 !important; margin-bottom: 8px !important; border-bottom: 1px dashed #e0e0e0 !important; padding-bottom: 4px !important;">ℹ️ Info Pelanggan</div>
         <table style="width: 100% !important; font-size: 13px !important; border-collapse: collapse !important;">
             <tr>
                 <td style="color: #666666 !important; padding: 4px 0 !important; width: 35% !important;">Respon</td>
@@ -2406,120 +2227,25 @@ function toggleInfoBaru() {
         tombolCek.disabled = true;
         if (kolomRespon) kolomRespon.innerHTML = '<span style="color: #666666 !important;">Sedang memeriksa id...</span>';
 
-// MEMISAHKAN ID USER DAN SERVER ML SECARA OTOMATIS (PINTAR)
-let nomorID = idUser;
-let zoneID = "";
-
-if (idUser.length > 0) {
-    // Jika total input adalah 15 digit (Contoh: 10 digit ID + 5 digit Server seperti akun di atas)
-    if (idUser.length === 15) {
-        nomorID = idUser.substring(0, 10);
-        zoneID = idUser.substring(10);
-    } 
-    // Jika total input adalah 14 digit (Contoh: 9 digit ID + 5 digit Server)
-    else if (idUser.length === 14) {
-        nomorID = idUser.substring(0, 9);
-        zoneID = idUser.substring(9);
-    }
-    // Jika total input adalah 13 digit (Contoh: 9 digit ID + 4 digit Server)
-    else if (idUser.length === 13) {
-        nomorID = idUser.substring(0, 9);
-        zoneID = idUser.substring(9);
-    }
-    // Jika total input adalah 12 digit (Contoh: 8 digit ID + 4 digit Server)
-    else if (idUser.length === 12) {
-        nomorID = idUser.substring(0, 8);
-        zoneID = idUser.substring(8);
-    }
-    // Pengaman jika panjangnya di luar standar standar, potong 4 digit terakhir
-    else if (idUser.length > 4) {
-        nomorID = idUser.substring(0, idUser.length - 4);
-        zoneID = idUser.substring(idUser.length - 4);
-    }
-}
-
         // INTEGRASI OPEN API (Menggunakan API Jombloapi sebagai jembatan tes gratis)
-        // Di kemudian hari, Anda tinggal mengganti URL di bawah ini sesuai dengan Open API
-fetch("https://cekid-mitrascbo.devdani.my.id/trueid/game/mobilelegends/?id=" + nomorID + "&server=" + zoneID + "&key=b2cd7f878d43aa82")
+        // Di kemudian hari, Anda tinggal mengganti URL di bawah ini sesuai dengan Open API berbayar Anda
+        fetch(`https://jombloapi.xyz{idUser}`)
+            .then(res => res.json())
+            .then(hasil => {
+                tombolCek.innerHTML = teksAsliTombol;
+                tombolCek.disabled = false;
 
-
-
-  .then(res => res.json())
-  .then(hasil => {
-      tombolCek.innerHTML = teksAsliTombol;
-      tombolCek.disabled = false;
-
-
-if (hasil && hasil.name) {
-          if (kolomRespon) {
-              // 1. Meruntuhkan dinding tabel pembatas kiri (Menghapus efek ganjal kata Respon)
-              let barisTabel = kolomRespon.closest('tr') || kolomRespon.parentElement;
-              if (barisTabel) {
-                  barisTabel.style.display = "flex";
-                  barisTabel.style.flexDirection = "column";
-                  barisTabel.style.width = "100%";
-              }
-
-              // 2. Sembunyikan label kata "Respon" asli bawaan jika masih mengintip
-              let teksRespon = barisTabel ? barisTabel.querySelector('td:first-child, th:first-child, .label') : null;
-              if (teksRespon) {
-                  teksRespon.style.display = "none";
-              }
-
-              // 3. Atur wadah utama agar memanjang penuh ke kiri dan kanan secara simetris
-              kolomRespon.style.display = "block";
-              kolomRespon.style.width = "100%";
-              kolomRespon.style.padding = "0";
-              
-              // 4. Memasukkan struktur HTML tema BRILink (Biru, Oranye, Panah Berputar)
-              kolomRespon.innerHTML = `
-                  <style>
-                      /* Animasi memutar tanda panah ketika kotak details di-klik buka/tutup */
-                      details.brilink-box summary span.panah-animasi {
-                          transition: transform 0.3s ease;
-                          display: inline-block;
-                      }
-                      details.brilink-box[open] summary span.panah-animasi {
-                          transform: rotate(180deg); /* Muter terbalik saat dibuka */
-                      }
-                      /* Menghilangkan segitiga bawaan browser */
-                      details.brilink-box summary::-webkit-details-marker { display: none; }
-                      details.brilink-box summary { list-style: none; }
-                  </style>
-
-                  <details open class="brilink-box" style="background-color: #f4f7fa !important; border: 1px solid #00529c; border-top: 5px solid #ff7900; border-radius: 8px; margin-top: 8px; width: 100%; box-sizing: border-box; overflow: hidden; box-shadow: 0 3px 6px rgba(0,0,0,0.06); font-family: sans-serif;">
-                      <summary style="display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background-color: #00529c; color: #ffffff !important; font-weight: bold; cursor: pointer;">
-                          <span style="display: flex; align-items: center; gap: 6px; color: #ffffff !important;">✔ Info Pelanggan</span>
-                          <span class="panah-animasi" style="font-size: 12px; color: #ffffff !important; font-weight: bold;">▲</span>
-                      </summary>
-                      <div style="padding: 14px 16px; color: #000000 !important; background-color: #f4f7fa !important;">
-                          <div style="display: flex; justify-content: space-between; margin-bottom: 10px; border-bottom: 1px dashed #d0d7de; padding-bottom: 8px;">
-                              <span style="font-weight: bold; color: #555555 !important;">ID Pelanggan</span>
-                              <span style="font-weight: bold; color: #00529c !important; font-size: 15px;">${idUser}</span>
-                          </div>
-                          <div style="display: flex; justify-content: space-between;">
-                              <span style="font-weight: bold; color: #555555 !important;">Nama</span>
-                              <span style="font-weight: bold; color: #000000 !important; font-size: 15px;">${hasil.name}</span>
-                          </div>
-                      </div>
-                  </details>
-              `;
-          }
-
-          // Otomatis salin ke catatan
-          const catatan = document.getElementById('catatan');
-          if (catatan) {
-              catatan.value = "Nick: " + hasil.name;
-          }
-      } else {
-          if (kolomRespon) {
-              kolomRespon.innerHTML = '<div style="border-top: 4px solid #ff7900; background-color: #ffebee; color: #c62828; padding: 12px; border-radius: 8px; font-weight: bold; margin-top: 8px; text-align: center;">ID Tidak Ditemukan!</div>';
-          }
-      }
-  })
-
-
-
+                if (hasil && hasil.data && hasil.data.username) {
+                    // JIKA BERHASIL: Nickname muncul di kotak info pelanggan
+                    if (kolomRespon) kolomRespon.innerHTML = hasil.data.username;
+                    
+                    // Otomatis salin nickname ke kolom catatan pesanan Bukaolshop
+                    const catatan = document.getElementById('catatan');
+                    if (catatan) catatan.value = `Nick: ${hasil.data.username}`;
+                } else {
+                    if (kolomRespon) kolomRespon.innerHTML = '<span style="color: red !important;">ID Tidak Ditemukan!</span>';
+                }
+            })
             .catch(() => {
                 tombolCek.innerHTML = teksAsliTombol;
                 tombolCek.disabled = false;
@@ -2528,307 +2254,60 @@ if (hasil && hasil.name) {
             });
     };
 })();
-function ambilKontakHP() {
-    const jalanPulang = window.location.origin + window.location.pathname;
-    window.location.href = "{{url_website_baru}}/ambil_kontak?kembali_ke=" + encodeURIComponent(jalanPulang);
-}
+</script>
 
-document.addEventListener("DOMContentLoaded", function () {
-    const urlParams = new URLSearchParams(window.location.search);
-    const nomorDariUrl = urlParams.get('nomor') || urlParams.get('phone') || urlParams.get('no') || urlParams.get('contact');
+<script>
+setInterval(function() {
+    const inputId = document.getElementById("idPlayer");
+    if (inputId) {
+        let nomor = inputId.value;
+        let sudahBerubah = false;
 
-    if (nomorDariUrl) {
-        if (typeof inputId !== 'undefined' && inputId) {
-            let cleanedNumber = nomorDariUrl.replace(/[^0-9]/g, '');
-            if (cleanedNumber.startsWith('62')) {
-                cleanedNumber = '0' + cleanedNumber.slice(2);
-            }
-            inputId.value = cleanedNumber;
+        if (nomor.startsWith("+62")) {
+            inputId.value = "0" + nomor.slice(3);
+            sudahBerubah = true;
+        } else if (nomor.startsWith("62")) {
+            inputId.value = "0" + nomor.slice(2);
+            sudahBerubah = true;
+        }
+
+        // Kuncinya di sini: Pemicu input hanyakan berjalan SATU KALI saat nomor diganti ke 0
+        if (sudahBerubah) {
             inputId.dispatchEvent(new Event('input', { bubbles: true }));
             inputId.dispatchEvent(new Event('change', { bubbles: true }));
         }
     }
+}, 500);
+</script>
+
+
+<script>
+var kotakBesar = document.querySelector('.input-box');
+var inputKecil = document.getElementById('idPlayer');
+if (kotakBesar && inputKecil) {
+  inputKecil.addEventListener('focus', function() {
+    setTimeout(function() {
+      kotakBesar.style.setProperty('border-color', '#e0e0e0', 'important');
+      kotakBesar.style.setProperty('box-shadow', 'none', 'important');
+    }, 10);
+  });
+}
+
 });
 
-
-</script>
-<script>
-setInterval(function() {
-  // 1. Target utama kolom nomor tujuan Anda yang tampil di layar
-  const inputTampilan = document.getElementById("idPlayer");
-  
-  if (inputTampilan) {
-    // 2. Trik Paksa: Cari input teks apa pun di halaman yang mendadak terisi oleh BukaOlshop
-    const semuaInput = document.getElementsByTagName("input");
-    for (let i = 0; i < semuaInput.length; i++) {
-         if (semuaInput[i].id !== "idPlayer" && semuaInput[i].id !== "inputNomorFav" && semuaInput[i].id !== "inputNamaFav" && semuaInput[i].value !== "" && semuaInput[i].value.length >= 9) {
-           // Pindahkan nomor dari input tersembunyi sistem ke input kustom Anda
-            inputTampilan.value = semuaInput[i].value;
-            // Kosongkan input sistem agar tidak memicu pengulangan (looping)
-            semuaInput[i].value = ""; 
-        }
-    }
-
-    let nomor = inputTampilan.value;
-    
-    // Bersihkan karakter spasi atau strip bawaan kontak HP Android/iOS
-    nomor = nomor.replace(/[^0-9+]/g, '');
-    if (inputTampilan.value !== nomor) {
-        inputTampilan.value = nomor;
-    }
-    
-    let sudahBerubah = false;
-
-    // OTOMATIS MENGUBAH 62 MENJADI FORMAT 0
-    if (nomor.startsWith("+62")) {
-       inputTampilan.value = "0" + nomor.slice(3);
-       sudahBerubah = true;
-    } else if (nomor.startsWith("62")) {
-       inputTampilan.value = "0" + nomor.slice(2);
-       sudahBerubah = true;
-    }
-
-    if (sudahBerubah) {
-       inputTampilan.dispatchEvent(new Event('input', { bubbles: true }));
-       inputTampilan.dispatchEvent(new Event('change', { bubbles: true }));
-    }
-  }
-}, 400); // Dipercepat menjadi 400ms agar respons transfer nomor lebih kilat
-</script>
-<style>
-/* 1. MENGATUR AREA GRID UTAMA AGAR MEMILIKI JARAK (GAP) ANTAR KOTAK */
-/* 1. GRID UTAMA MELEBAR PENUH */
-.layout-grid-dua {
-    display: grid !important;
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 10px !important;
-    padding: 10px 6px !important;
-    background-color: #f2f4f7 !important;
-}
-
-/* 2. KOTAK PRODUK 3D RINGKAS DAN MEMILIKI TINGGI SEJAJAR */
-.layout-grid-dua > div {
-    background: #ffffff !important;
-    border-radius: 12px !important;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06) !important;
-    border: none !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    overflow: hidden !important;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: stretch !important;
-    position: relative !important;
-    /* MEMAKSA TINGGI SETIAP KOTAK DALAM SATU BARIS AGAR SAMA RATA */
-    height: 100% !important; 
-}
-
-/* 3. UKURAN TINGGI GAMBAR PRODUK */
-.layout-grid-dua > div img {
-    width: 100% !important;
-    height: 140px !important;
-    object-fit: cover !important;
-    border-top-left-radius: 12px !important; 
-    border-top-right-radius: 12px !important;
-    margin: 0 !important;
-    display: block !important;
-}
-
-/* 4. AREA PEMBUNGKUS TEKS DIBAWAH GAMBAR */
-.layout-grid-dua > div > div, 
-.layout-grid-dua > div > span:not([style*="absolute"]),
-.layout-grid-dua > div > a {
-    padding: 10px !important;
-    display: flex !important;
-    flex-direction: column !important;
-    text-align: left !important;
-    /* MENJADIKAN AREA TEKS MEMENUHI SISA RUANG AGAR BISA DIDORONG */
-    flex-grow: 1 !important; 
-}
-
-/* 5. TEKS NAMA PRODUK */
-.layout-grid-dua > div font, 
-.layout-grid-dua > div strong, 
-.layout-grid-dua > div h3,
-.layout-grid-dua > div p {
-    font-size: 11.5px !important;
-    font-weight: bold !important;
-    color: #111111 !important;
-    line-height: 1.3 !important;
-    margin: 0 !important;
-    display: block !important;
-}
-
-/* 6. MEMAKSA TEKS HARGA MENJADI SEJAJAR RATA BAWAH SECARA OTOMATIS */
-.layout-grid-dua > div span[style*="color"], 
-.layout-grid-dua > div font[color],
-.layout-grid-dua > div .price,
-.layout-grid-dua > div span:last-child,
-.layout-grid-dua > div font:last-child,
-.layout-grid-dua > div div > span:nth-child(2) {
-    font-size: 12px !important;
-    font-weight: bold !important;
-    margin-top: auto !important; /* KUNCI UTAMA: MEMAKSA HARGA MEMENTOK KE BAWAH AGAR SEJAJAR */
-    padding-top: 8px !important; /* Memberi jarak aman dari judul di atasnya */
-    display: block !important;
-}
-
-/* 7. BADGE STOK UNGU MELAYANG */
-.layout-grid-dua > div span[style*="absolute"],
-.layout-grid-dua > div .badge-stok,
-.layout-grid-dua > div > span:first-of-type {
-    position: absolute !important;
-    bottom: 8px !important;
-    left: 50% !important;
-    transform: translateX(-50%) !important;
-    background-color: rgba(142, 68, 173, 0.85) !important;
-    color: #ffffff !important;
-    padding: 2px 10px !important;
-    border-radius: 20px !important;
-    font-size: 9px !important;
-    white-space: nowrap !important;
-    z-index: 10 !important;
-}
-/* MENGUBAH HARGA BIRU BAWAAN MENJADI ABU-ABU GELAP / HITAM ELEGAN */
-.layout-grid-dua > div a font,
-.layout-grid-dua > div a span,
-.layout-grid-dua > div [style*="color: blue"] font,
-.layout-grid-dua > div [style*="color: rgb(0, 0, 255)"],
-.layout-grid-dua > div font[color="blue"],
-.layout-grid-dua > div span[style*="color"] font,
-.layout-grid-dua > div a > span,
-.layout-grid-dua > div [style*="color"] {
-    color: #4a4a4a !important; /* Mengubah paksa warna biru menjadi abu-abu gelap premium */
-    font-size: 13px !important;
-    font-weight: bold !important;
-}
-
-/* MEMOTONG SISA JARAK KOSONG DI BAWAH KOTAK BIAR PAS PADAT */
-.layout-grid-dua > div > a, 
-.layout-grid-dua > div > div {
-    padding-bottom: 8px !important; /* Mengurangi ruang kosong paling bawah */
-}
-
-
-</style>
-<script>
-// ==========================================================
-// SCRIPT OTOMATIS MEMAKSA TAMPILAN LANGSUNG GRID 2 KOLOM
-// ==========================================================
-document.addEventListener("DOMContentLoaded", function() {
-    function aktifkanGridOtomatis() {
-        // 1. Cari ikon grid berdasarkan class bawaan aplikasi bukaOlshop
-        var tombolGrid = document.querySelector('.fa-th-large, .v-icon.grid, [class*="grid"], .bi-grid-3x3-gap, [id*="grid"]');
+// Fungsi Sakelar Buka Tutup Menu Info (Anti Gagal Sistem Bukaolshop)
+function aksiBukaTutupInfo() {
+    var area = document.getElementById("areaInfoTransaksi");
+    if (area.style.getPropertyValue('display') === 'none' || area.style.display === 'none') {
+        area.style.setProperty('display', 'block', 'important');
         
-        // 2. Jika tidak langsung ketemu, cari elemen tombol kedua di area filter
-        if (!tombolGrid) {
-            var tombolList = document.querySelector('.fa-bars, .fa-list, .v-icon.list, [class*="list"]');
-            if (tombolList && tombolList.parentElement) {
-                tombolGrid = tombolList.parentElement.nextElementSibling;
-            }
-        }
-
-        // 3. Eksekusi klik otomatis pada tombol grid jika ditemukan
-        if (tombolGrid) {
-            tombolGrid.click();
-            
-            // Tambahan cadangan jika tombol dibungkus elemen button atau link
-            var parentKlik = tombolGrid.closest('button') || tombolGrid.closest('a') || tombolGrid.parentElement;
-            if (parentKlik) {
-                parentKlik.click();
-            }
-        }
-    }
-
-    // Jalankan langsung saat halaman termuat
-    aktifkanGridOtomatis();
-    
-    // Jalankan ulang dengan jeda milidetik untuk mengantisipasi loading lambat dari sistem template
-    setTimeout(aktifkanGridOtomatis, 200);
-    setTimeout(aktifkanGridOtomatis, 500);
-    setTimeout(aktifkanGridOtomatis, 1000);
-});
-
-// --- FUNGSI MANDIRI CEK ID OTOMATIS DI POP-UP ---
-// --- FUNGSI MANDIRI CEK ID OTOMATIS DI POP-UP ---
-function jalankanCekIDOtomatisPop(nomorHp) {
-    const popAlert = document.getElementById('transAlertBox');
-    const transAlertName = document.getElementById('transAlertName');
-    if (!popAlert || !nomorHp || nomorHp === "-") return;
-
-    // 1. Tampilkan status loading di dalam kolom nama tabel BRILink mini
-    if (popAlert) popAlert.style.display = "block";
-    if (transAlertName) {
-        transAlertName.innerHTML = `⏳ Sedang memeriksa...`;
-        transAlertName.style.color = "#1a73e8"; // Teks warna biru loading
-    }
-
-    // 2. Jalankan request ke API Mas Dani secara mandiri
-    const apiUrl = "https://devdani.my.id" + nomorHp + "&key=b2cd7f878d43aa82";
-    
-    fetch(apiUrl)
-        .then(res => res.json())
-        .then(hasil => {
-            if (transAlertName) {
-                if (hasil && hasil.name) {
-                    // SUKSES: Masukkan nama asli ke kotak tabel mini
-                    transAlertName.innerHTML = `<strong>${hasil.name}</strong>`;
-                    transAlertName.style.color = "#1e293b"; // Warna teks gelap normal
-                } else {
-                    transAlertName.innerText = "Tidak bisa cek ID pelanggan";
-                    transAlertName.style.color = "#c62828"; // Warna teks merah error
-                }
-            }
-        })
-        .catch(() => {
-            if (transAlertName) {
-                transAlertName.innerText = "Tidak bisa cek ID pelanggan";
-                transAlertName.style.color = "#c62828";
-            }
-        });
-}
-
-function openPromoModal() {
-    const promoOverlay = document.getElementById('promoOverlay');
-    if (promoOverlay) {
-        promoOverlay.style.display = "flex";
-        setTimeout(() => {
-            document.getElementById('promoInput')?.focus();
-        }, 100);
+        // Otomatis menutup panel favorit jika sedang terbuka agar tidak tumpang tindih
+        var areaFav = document.getElementById("areaDaftarFavorit");
+        if (areaFav) areaFav.style.setProperty('display', 'none', 'important');
+    } else {
+        area.style.setProperty('display', 'none', 'important');
     }
 }
-
-function closePromoModal(e) {
-    if (e.target.id === "promoOverlay") {
-        document.getElementById('promoOverlay').style.display = "none";
-    }
-}
-
-   function applyPromoCode() {
-    const kodeInput = document.getElementById('promoInput');
-    const msgEl = document.getElementById('promoMessage');
-    const kode = kodeInput ? kodeInput.value.trim() : "";
-
-    if (!msgEl) return;
-
-    // Sembunyikan dan kosongkan pesan terlebih dahulu setiap tombol diklik
-    msgEl.style.display = "none";
-    msgEl.innerText = "";
-
-    if (kode === "") {
-        msgEl.innerText = "Silakan masukkan kode promo terlebih dahulu";
-        msgEl.style.color = "#c62828";
-        msgEl.style.display = "block";
-        return;
-    }
-
-    // Mengunci logika agar selalu memunculkan teks merah jika salah/sembarang kode
-    msgEl.innerText = "Kode promo tidak ditemukan";
-    msgEl.style.color = "#c62828"; // Warna merah error ala Gambar 4 orang lain
-    msgEl.style.display = "block";
-}
-   
-
 
 
 </script>
@@ -2891,157 +2370,67 @@ function satukkanNomorML() {
     }
 }
 
+// --- KODE TAMBAHAN UNTUK TEMPEL FILTER ---
+const targetProduk = document.getElementById('productContent');
+const areaFilterAnda = document.querySelector('.floating-card-filter');
 
+if (areaFilterAnda) {
+    areaFilterAnda.style.setProperty('display', 'none', 'important');
+}
 
-</script>
-
-<script>
-  // Jembatan otomatis & perapian posisi presisi kotak input Mobile Legends
-  (function() {
-    const inpUtama = document.getElementById('scanner-input');
-    const btnCekID = document.getElementById('btnCekID');
-    const btnHapusX = document.getElementById('btnHapusX');
-
-    if (!inpUtama) return;
-
-    // 1. Rapikan wadah kotak input agar menjadi patokan tengah yang presisi
-    const pembungkus = inpUtama.parentElement;
-    if (pembungkus) {
-      pembungkus.style.setProperty('position', 'relative', 'important');
-      pembungkus.style.setProperty('display', 'flex', 'important');
-      pembungkus.style.setProperty('align-items', 'center', 'important');
-    }
-
-    // 2. Rapikan kotak input (tinggi & ruang kiri-kanan agar tidak menabrak ikon dan tombol)
-    inpUtama.style.setProperty('height', '46px', 'important');
-    inpUtama.style.setProperty('padding', '0 105px 0 44px', 'important');
-    inpUtama.style.setProperty('box-sizing', 'border-box', 'important');
-    inpUtama.style.setProperty('line-height', '46px', 'important');
-
-    // 3. Kunci posisi Ikon Buku Kontak tepat di tengah vertikal sebelah kiri
-    const linkKontak = pembungkus ? pembungkus.querySelector('a[href*="ambil_kontak"]') : null;
-    if (linkKontak) {
-      linkKontak.style.setProperty('position', 'absolute', 'important');
-      linkKontak.style.setProperty('left', '10px', 'important');
-      linkKontak.style.setProperty('top', '50%', 'important');
-      linkKontak.style.setProperty('transform', 'translateY(-50%)', 'important');
-      linkKontak.style.setProperty('display', 'flex', 'important');
-      linkKontak.style.setProperty('align-items', 'center', 'important');
-      linkKontak.style.setProperty('z-index', '5', 'important');
-    }
-
-    // 4. Kunci posisi Tombol Biru "Cek ID" di ujung kanan dalam kotak input
-    if (btnCekID) {
-      btnCekID.style.setProperty('position', 'absolute', 'important');
-      btnCekID.style.setProperty('right', '8px', 'important');
-      btnCekID.style.setProperty('top', '50%', 'important');
-      btnCekID.style.setProperty('transform', 'translateY(-50%)', 'important');
-      btnCekID.style.setProperty('margin', '0', 'important');
-      btnCekID.style.setProperty('z-index', '6', 'important');
-    }
-
-    // 5. Kunci posisi Tombol Silang "X" rapi tepat di sebelah kiri tombol "Cek ID"
-    if (btnHapusX) {
-      btnHapusX.style.setProperty('position', 'absolute', 'important');
-      btnHapusX.style.setProperty('right', '78px', 'important');
-      btnHapusX.style.setProperty('top', '50%', 'important');
-      btnHapusX.style.setProperty('transform', 'translateY(-50%)', 'important');
-      btnHapusX.style.setProperty('margin', '0', 'important');
-      btnHapusX.style.setProperty('z-index', '6', 'important');
-
-      btnHapusX.onclick = function() {
-        inpUtama.value = '';
-        inpUtama.focus();
-        perbaruiTombolML();
-      };
-    }
-
-    // 6. Hubungkan cekIDPlayer() asli agar tetap membaca nilai dari scanner-input
-    if (typeof window.cekIDPlayer === 'function') {
-      const cekIDAsli = window.cekIDPlayer;
-      window.cekIDPlayer = function() {
-        let bayangan = document.getElementById('idPlayer');
-        if (!bayangan) {
-          bayangan = document.createElement('input');
-          bayangan.type = 'hidden';
-          bayangan.id = 'idPlayer';
-          document.body.appendChild(bayangan);
+if (targetProduk && areaFilterAnda) {
+    const observer = new MutationObserver(() => {
+        if (targetProduk.style.display !== 'none' && targetProduk.innerHTML.trim() !== "") {
+            areaFilterAnda.style.setProperty('display', 'block', 'important');
+        } else {
+            areaFilterAnda.style.setProperty('display', 'none', 'important');
         }
-        bayangan.value = inpUtama.value;
-        return cekIDAsli.apply(this, arguments);
-      };
-    }
+    });
+    observer.observe(targetProduk, { attributes: true, attributeFilter: ['style', 'class'], childList: true });
+}
+// -----------------------------------------
 
-    // 7. Tampilkan / sembunyikan tombol Cek ID dan X otomatis
-    function perbaruiTombolML() {
-      const isi = (inpUtama.value || '').trim();
-      if (isi.length > 0) {
-        if (btnCekID) btnCekID.style.setProperty('display', 'inline-flex', 'important');
-        if (btnHapusX) btnHapusX.style.setProperty('display', 'inline-flex', 'important');
-      } else {
-        if (btnCekID) btnCekID.style.setProperty('display', 'none', 'important');
-        if (btnHapusX) btnHapusX.style.setProperty('display', 'none', 'important');
-      }
-    }
 
-    inpUtama.addEventListener('input', perbaruiTombolML);
-    inpUtama.addEventListener('keyup', perbaruiTombolML);
-   
-  })();
 </script>
 
+</div>
 <script>
-  // Jembatan Satu Arah Aman (Tanpa Menghapus Input Lain)
-  (function() {
-    let terakhirDisalin = '';
+  // Fungsi Resmi Bukaolshop untuk Menangkap Hasil Scanner & Mengaktifkan Tombol Selanjutnya PLN
+  window.onScanResult = function(result) {
+    if (!result) return;
 
-    // 1. Pastikan elemen #idPlayer ada sebagai penerima dari Favorite/Kontak/Scan
-    function ambilBayangan() {
-      let el = document.getElementById('idPlayer');
-      if (!el) {
-        el = document.createElement('input');
-        el.type = 'hidden';
-        el.id = 'idPlayer';
-        document.body.appendChild(el);
-      }
-      return el;
+    // Bersihkan hasil scan dari spasi, strip, atau karakter non-angka
+    var nomorBersih = result.toString().trim().replace(/[^0-9]/g, '');
+
+    if (nomorBersih !== '') {
+      // Ambil semua kotak input yang berpotensi dipakai oleh Token maupun Pascabayar
+     var semuaKolom = document.querySelectorAll('#scanner-input, #idPelangganBRILink, input[placeholder*="Nomor Tujuan"], input[placeholder*="ID Pelanggan"], input[placeholder*="Meter"]');
+
+      
+      semuaKolom.forEach(function(kolom) {
+        // Set nilai menggunakan setter asli agar terbaca oleh semua skrip
+        var nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
+        nativeInputValueSetter.call(kolom, nomorBersih);
+
+        // Jalankan fungsi oninput inline jika terpasang di tag HTML-nya
+        if (typeof kolom.oninput === 'function') {
+          kolom.oninput();
+        }
+        if (typeof kolom.onchange === 'function') {
+          kolom.onchange();
+        }
+
+        // Picu seluruh event standar keyboard & form
+        kolom.dispatchEvent(new Event('input', { bubbles: true }));
+        kolom.dispatchEvent(new Event('change', { bubbles: true }));
+        kolom.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true, key: '0' }));
+      });
+
+      // Cadangan jika ada variabel global penyimpanan ID di halaman PLN
+      if (typeof window.idPelanggan !== 'undefined') window.idPelanggan = nomorBersih;
+      if (typeof window.nomorMeter !== 'undefined') window.nomorMeter = nomorBersih;
     }
-
-    // 2. Jika #idPlayer terisi angka baru dari Favorite/Kontak/Scan, salin ke #scanner-input TANPA mengosongkan apa pun
-    setInterval(function() {
-      const inp = document.getElementById('scanner-input');
-      const bayangan = ambilBayangan();
-      if (!inp) return;
-
-      const isiBaru = (bayangan.value || '').trim();
-      if (isiBaru !== '' && isiBaru !== terakhirDisalin) {
-        terakhirDisalin = isiBaru;
-        inp.value = isiBaru;
-        inp.dispatchEvent(new Event('input', { bubbles: true }));
-        inp.dispatchEvent(new Event('keyup', { bubbles: true }));
-      }
-    }, 200);
-
-    // 3. Jika user mengetik manual di #scanner-input, perbarui memori agar tidak tertimpa
-    document.addEventListener('input', function(e) {
-      if (e.target && e.target.id === 'scanner-input') {
-        const val = e.target.value.trim();
-        terakhirDisalin = val;
-        ambilBayangan().value = val;
-      }
-    }, true);
-
-    // 4. Jika tombol X diklik, bersihkan keduanya
-    document.addEventListener('click', function(e) {
-      if (e.target.closest('#btnHapusX')) {
-        const inp = document.getElementById('scanner-input');
-        if (inp) inp.value = '';
-        ambilBayangan().value = '';
-        terakhirDisalin = '';
-        if (inp) inp.dispatchEvent(new Event('input', { bubbles: true }));
-      }
-    }, true);
-  })();
+  };
 </script>
 
 </body>
