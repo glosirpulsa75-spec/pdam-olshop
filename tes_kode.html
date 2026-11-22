@@ -1704,7 +1704,8 @@ document.addEventListener("DOMContentLoaded", () => {
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
- const token = window.TOKEN_RAHASIA_PANEL || "";
+ const token = (document.getElementById('kunciPanelRahasia')?.dataset.t) || window.TOKEN_RAHASIA_PANEL || "";
+
 
     let allCategories = [];
     let currentSubCategories = [];
@@ -2115,7 +2116,8 @@ function showTransactionPopup(productCard) {
     }
 
     // 5. Kirim data ke API Pengecekan
-    const apiUrl = "https://cekid-mitrascbo.devdani.my.id/trueid/ewallet/dana/?hp=" + customerId + "&key=" + (window.KEY_CEK_ID || "");
+    const apiUrl = "https://cekid-mitrascbo.devdani.my.id/trueid/ewallet/dana/?hp=" + customerId + "&key=" + ((document.getElementById('kunciPanelRahasia')?.dataset.k) || window.KEY_CEK_ID || "")
+
     
     fetch(apiUrl)
               .then(res => res.json())
@@ -2399,7 +2401,8 @@ function toggleInfoBaru() {
 
         // INTEGRASI OPEN API (Menggunakan API Jombloapi sebagai jembatan tes gratis)
         // Di kemudian hari, Anda tinggal mengganti URL di bawah ini sesuai dengan Open API
-fetch("https://cekid-mitrascbo.devdani.my.id/trueid/ewallet/dana/?hp=" + idUser + "&key=" + (window.KEY_CEK_ID || "");
+fetch("https://cekid-mitrascbo.devdani.my.id/trueid/ewallet/dana/?hp=" + idUser + "&key=" + ((document.getElementById('kunciPanelRahasia')?.dataset.k) || window.KEY_CEK_ID || "")
+
 
   .then(res => res.json())
   .then(hasil => {
@@ -2568,7 +2571,8 @@ function jalankanCekIDOtomatisPop(nomorHp) {
     }
 
     // 2. Jalankan request ke API Mas Dani secara mandiri
-    const apiUrl = "https://devdani.my.id" + nomorHp + "&key=" + (window.KEY_CEK_ID || "");
+    const apiUrl = "https://devdani.my.id" + nomorHp + "&key=" + ((document.getElementById('kunciPanelRahasia')?.dataset.k) || window.KEY_CEK_ID || "")
+
     
     fetch(apiUrl)
         .then(res => res.json())
