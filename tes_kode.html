@@ -1710,18 +1710,34 @@ if (container) {
     tabMenu.innerHTML = `<div style="padding: 10px; text-align: center; color: #999;"></div>`;
     const container = document.getElementById('produkContainer');
    if (container) {
-  container.innerHTML = `<div style="text-align: center; padding: 120px; color: #999;">
-    <!-- Gambar animasi ditaruh di atas teks -->
-    <img src="https://images.bukaolshop.com/hosting/183991/933a1fab8bbb761955.png"
-" style="width: 40px; height: 40px; margin: 0 auto 15px auto; display: block;" alt="Loading...">
-        
-<div style="font-size: 12px;">
-
-Masukan Nomor hp untuk melihat produk</div>
-  </div>`;
-}
-   return;
-}
+          container.innerHTML = `
+          <div style="grid-column: 1 / -1; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 60px 20px; box-sizing: border-box;">
+            <style>
+              @keyframes melayangHp {
+                0%, 100% { transform: translateY(0px); }
+                50% { transform: translateY(-8px); }
+              }
+              @keyframes denyutLingkaran {
+                0%, 100% { transform: scale(0.95); opacity: 0.7; }
+                50% { transform: scale(1.1); opacity: 0.25; }
+              }
+            </style>
+            <div style="position: relative; width: 76px; height: 76px; display: flex; align-items: center; justify-content: center; margin-bottom: 14px;">
+              <div style="position: absolute; width: 100%; height: 100%; border-radius: 50%; background: #dbeafe; animation: denyutLingkaran 2s infinite ease-in-out;"></div>
+              <svg style="position: relative; z-index: 2; animation: melayangHp 2.2s infinite ease-in-out;" width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="#0284c7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="5" y="2" width="14" height="20" rx="2" ry="2" fill="#eff6ff"></rect>
+                <line x1="12" y1="18" x2="12.01" y2="18"></line>
+                <path d="M9 7h6M9 11h4" stroke="#38bdf8"></path>
+              </svg>
+            </div>
+            <div style="font-size: 14px; font-weight: 500; color: #64748b; max-width: 280px; line-height: 1.5; white-space: normal;">
+              Masukkan Nomor HP untuk melihat produk
+            </div>
+          </div>
+        `;
+      }
+      return;
+    }
 
 if (subCategories.length === 1) {
     tabMenu.style.setProperty('display', 'none', 'important');
